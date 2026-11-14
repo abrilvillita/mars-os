@@ -4,7 +4,7 @@
 
 **Challenge:** Interplanetary Survival Guide: Martian Map
 **Team name:** MARS OS
-**Team members:** [TODO]
+**Team members:** Abril Miranda Villa Márquez (team owner), Jorge Emilio Cornejo Murra
 
 ---
 
