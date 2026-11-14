@@ -10,6 +10,7 @@ import { TopBar } from './ui/TopBar';
 import './ui/styles.css';
 import { FeatureStatus } from './ui/FeatureStatus';
 import { DEMO_MODE } from './state/mode';
+import { API_BASE } from './api/apiBase';
 
 const CATALOGS = ['data/catalog/jezero.catalog.json'];
 
@@ -23,7 +24,7 @@ export default function App() {
   const start = () => {
     setState('loading');
     getMarsOS()
-      .init({ baseUrl: import.meta.env.BASE_URL, catalogs: CATALOGS, mode: DEMO_MODE ? 'demo' : 'production' })
+      .init({ baseUrl: import.meta.env.BASE_URL, catalogs: CATALOGS, mode: DEMO_MODE ? 'demo' : 'production', serviceBaseUrl: API_BASE })
       .then(() => setState('ready'))
       .catch((e: Error) => {
         setError(e.message);

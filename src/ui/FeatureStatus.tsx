@@ -5,6 +5,7 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getMarsOS } from '../api/MarsOS';
+import { api } from '../api/apiBase';
 
 type S = 'verified' | 'config' | 'simulation' | 'unavailable';
 
@@ -12,9 +13,10 @@ export function useBackendStatus() {
   const [s, setS] = useState<{ backend: boolean | null; ai: { configured: boolean; model: string | null; error: string | null } | null }>({ backend: null, ai: null });
   useEffect(() => {
     let alive = true;
-    fetch('/api/health')
+    // a free-tier host may need ~1 min to wake up: allow it
+    fetch(api('/api/health'), { signal: AbortSignal.timeout(75_000) })
       .then((r) => (r.ok ? r.json() : Promise.reject()))
-      .then(() => fetch('/api/ai/status').then((r) => r.json()))
+      .then(() => fetch(api('/api/ai/status')).then((r) => r.json()))
       .then((ai) => alive && setS({ backend: true, ai }))
       .catch(() => alive && setS({ backend: false, ai: null }));
     return () => {

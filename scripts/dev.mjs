@@ -10,7 +10,11 @@ const args = process.argv.slice(2);
 const portIdx = args.indexOf('--port');
 const port = portIdx >= 0 ? Number(args[portIdx + 1]) : 5173;
 
-const backend = spawn('npx tsx watch --clear-screen=false server/index.ts', { stdio: 'inherit', shell: true });
+const backend = spawn('npx tsx watch --clear-screen=false server/index.ts', {
+  stdio: 'inherit',
+  shell: true,
+  env: { ...process.env, MARS_OS_API_PORT: process.env.MARS_OS_API_PORT ?? '8787' },
+});
 backend.on('exit', (code) => {
   if (code) console.error(`[mars-os] backend exited with code ${code}`);
 });

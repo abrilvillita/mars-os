@@ -15,6 +15,7 @@ import { proposalWarnings } from '../../core/proposals/ProposalService';
 import { patchBBox } from '../../core/terrain/patches';
 import { pickText } from '../../i18n';
 import { DEMO_MODE } from '../../state/mode';
+import { api } from '../../api/apiBase';
 import { useUI } from '../../state/uiStore';
 import { ProvBadge } from '../common';
 import { useBackendStatus } from '../FeatureStatus';
@@ -133,7 +134,7 @@ function GeminiPanel() {
     setError(null);
     setSubmitted([]);
     try {
-      const res = await fetch('/api/ai/analyze', {
+      const res = await fetch(api('/api/ai/analyze'), {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ cellId: cell, clientEdits: os.terrain.activePatches().map((p) => p.id) }),

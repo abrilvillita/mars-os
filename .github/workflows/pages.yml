@@ -31,6 +31,8 @@ jobs:
       - run: npm run build
         env:
           VITE_BASE: /mars-os/
+          # URL of the hosted backend (repository variable MARS_OS_API_BASE); empty = no backend
+          VITE_API_BASE: ${{ vars.MARS_OS_API_BASE }}
       - run: cp dist/index.html dist/404.html
       - uses: actions/upload-pages-artifact@v3
         with:

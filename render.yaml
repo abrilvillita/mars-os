@@ -1,0 +1,21 @@
+# Render Blueprint for the MARS OS backend (on-demand MOLA elevation + Gemini analysis).
+# The web app itself is served by GitHub Pages; this service only answers /api/*.
+services:
+  - type: web
+    name: mars-os-api
+    runtime: node
+    plan: free
+    buildCommand: npm ci
+    startCommand: npx tsx server/index.ts
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+      - key: GEMINI_API_KEY
+        sync: false   # entered by the owner in the Render dashboard; never committed
+      - key: ALLOWED_ORIGINS
+        value: https://abrilvilla.dev,https://abrilvillita.github.io
+      - key: AI_PER_IP_PER_HOUR
+        value: "8"
+      - key: AI_GLOBAL_PER_DAY
+        value: "150"
