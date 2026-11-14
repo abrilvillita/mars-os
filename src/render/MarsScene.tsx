@@ -9,8 +9,9 @@ import { NodeGrid } from './overlays/NodeGrid';
 import { RegionLabels } from './overlays/RegionLabels';
 import { RoverLayer } from './overlays/RoverLayer';
 import { LocationMarkers } from './overlays/LocationMarkers';
+import { PlacesTraverse } from './overlays/PlacesTraverse';
 import { DustStorm } from './scene/DustStorm';
-import { Atmosphere, Moons, SkyAndHaze, StarField, SunGlare, TimeDriver } from './scene/Environment';
+import { Atmosphere, Moons, SkyAndHaze, SkyDome, StarField, SunGlare, TimeDriver } from './scene/Environment';
 import { renderBridge } from './bridge';
 import { useUI } from '../state/uiStore';
 
@@ -39,6 +40,7 @@ export function MarsScene() {
       <TimeDriver />
       <CameraRig />
       <SkyAndHaze />
+      {env.atmosphere && <SkyDome />}
       {env.stars && <StarField />}
       <SunGlare />
       <GlobeLayer />
@@ -46,6 +48,7 @@ export function MarsScene() {
       {env.moons && <Moons />}
       <DustStorm />
       <RoverLayer />
+      <PlacesTraverse />
       <NodeGrid />
       <RegionLabels />
       <LocationMarkers />

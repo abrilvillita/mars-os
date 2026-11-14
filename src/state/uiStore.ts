@@ -47,7 +47,7 @@ export interface WaypointSelection {
 interface UIState {
   baseLayerId: string;
   overlays: Record<string, LayerViewState>;
-  vectors: { traverse: boolean; waypoints: boolean; regions: boolean; graticule: boolean };
+  vectors: { traverse: boolean; placesTraverse: boolean; waypoints: boolean; regions: boolean; graticule: boolean };
   displayMode: DisplayMode;
   realLighting: boolean;
   exaggeration: number;
@@ -92,7 +92,7 @@ export const useUI = create<UIState>((set) => ({
     'layer.jezero.hirise': { on: true, opacity: 1 },
     'layer.geology.sim3292': { on: false, opacity: 0.55 },
   },
-  vectors: { traverse: true, waypoints: true, regions: true, graticule: false },
+  vectors: { traverse: true, placesTraverse: false, waypoints: true, regions: true, graticule: false },
   displayMode: 'imagery',
   realLighting: true,
   exaggeration: 3,

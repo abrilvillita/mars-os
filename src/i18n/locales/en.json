@@ -20,7 +20,8 @@
     "hirise": "HiRISE zone",
     "landing": "Landing site",
     "ground": "Ground view",
-    "goTo": "Go to"
+    "goTo": "Go to",
+    "groundHint": "Lowest view the imagery here supports: walking height only where HiRISE 25 cm exists"
   },
   "time": {
     "utc": "UTC",
@@ -74,7 +75,10 @@
     "instrument": "Instrument",
     "citation": "Citation",
     "openSource": "Open source page",
-    "elevation": "Elevation model"
+    "elevation": "Elevation model",
+    "traverseHint": "MMGIS map, to sol 2022 (cyan)",
+    "placesTraverse": "Archival traverse — PDS PLACES R16",
+    "placesHint": "Official localized positions, sols 14–1897 (green). Historical track, not a route recommendation."
   },
   "view": {
     "title": "View",

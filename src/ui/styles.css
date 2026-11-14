@@ -38,11 +38,13 @@ a { color: var(--cyan); }
 @keyframes pulse { 50% { transform: scale(0.9); opacity: 0.7; } }
 
 /* ── top bar ── */
-.topbar { position: absolute; top: 10px; left: 10px; right: 10px; display: flex; align-items: center; gap: 12px; padding: 7px 10px; background: var(--panel); backdrop-filter: blur(14px); border: 1px solid var(--line); border-radius: 12px; z-index: 20; }
-.brand { display: flex; align-items: center; gap: 9px; min-width: 170px; }
+.topbar { position: absolute; top: 10px; left: 10px; right: 10px; display: flex; flex-wrap: nowrap; align-items: center; gap: 10px; min-width: 0; white-space: nowrap; padding: 7px 10px; background: var(--panel); backdrop-filter: blur(14px); border: 1px solid var(--line); border-radius: 12px; z-index: 20; }
+.brand { display: flex; align-items: center; gap: 9px; flex: none; }
 .brand strong { display: block; letter-spacing: 0.22em; font-size: 14px; }
 .brand small { color: var(--muted); font-size: 11px; }
-.destinations { display: flex; gap: 4px; flex-wrap: wrap; }
+.destinations { display: flex; gap: 4px; flex-wrap: nowrap; }
+.dest-menu { display: none; }
+.ground-btn { white-space: nowrap; }
 .topbar button, .panel button, .modal button { background: rgba(255, 255, 255, 0.06); border: 1px solid var(--line); border-radius: 8px; padding: 5px 10px; cursor: pointer; transition: background 0.15s, border-color 0.15s; }
 .topbar button:hover, .panel button:hover { background: rgba(255, 255, 255, 0.12); border-color: var(--line-strong); }
 button.accent { border-color: #ff8a4c66; color: var(--accent-2); }
@@ -62,9 +64,9 @@ select option { background: var(--panel-solid); }
 .popover { position: absolute; top: calc(100% + 8px); right: 0; width: 290px; padding: 12px; background: var(--panel-solid); border: 1px solid var(--line-strong); border-radius: var(--radius); display: grid; gap: 6px; box-shadow: 0 12px 40px #000a; }
 
 /* ── panels ── */
-.panel { position: absolute; top: 70px; bottom: 64px; width: 330px; background: var(--panel); backdrop-filter: blur(14px); border: 1px solid var(--line); border-radius: 12px; z-index: 15; display: flex; flex-direction: column; transition: width 0.2s; }
+.panel { position: absolute; top: var(--top-offset, 70px); bottom: 64px; width: clamp(250px, 22vw, 330px); background: var(--panel); backdrop-filter: blur(14px); border: 1px solid var(--line); border-radius: 12px; z-index: 15; display: flex; flex-direction: column; transition: width 0.2s; }
 .panel.left { left: 10px; }
-.panel.right { right: 10px; width: 370px; }
+.panel.right { right: 10px; width: clamp(270px, 25vw, 370px); }
 .panel.collapsed { width: 26px; background: transparent; border-color: transparent; backdrop-filter: none; }
 .panel .collapse { position: absolute; top: 8px; width: 22px; height: 30px; padding: 0; z-index: 2; }
 .panel.left .collapse { right: -12px; }
@@ -224,10 +226,21 @@ table.wx th { color: var(--muted); font-weight: 500; }
 .modal-card { max-width: 520px; background: var(--panel-solid); border: 1px solid var(--line-strong); border-radius: 14px; padding: 20px 22px; }
 .modal-card h2 { margin-top: 0; letter-spacing: 0.2em; }
 
-@media (max-width: 1100px) {
+@media (max-width: 1500px) {
+  .brand small { display: none; }
+}
+@media (max-width: 1350px) {
   .destinations { display: none; }
-  .panel.right { width: 320px; }
-  .panel.left { width: 290px; }
+  .dest-menu { display: inline-block; }
+  .clock-main .season, .clock-main .season + .sep { display: none; }
+}
+@media (max-width: 1150px) {
+  .controls-hint { display: none; }
+  .clock-main .ls { display: none; }
+}
+@media (max-height: 760px) {
+  .panel { bottom: 56px; }
+  .hud { bottom: 22px; }
 }
 @media (max-width: 760px) {
   .clock-main span:not(.mono), .clock .sep { display: none; }
@@ -248,7 +261,7 @@ table.wx th { color: var(--muted); font-weight: 500; }
 .demo-banner { position: absolute; top: 0; left: 0; right: 0; z-index: 30; text-align: center; font-size: 12px; font-weight: 600; padding: 3px; color: #ffe0ec; background: repeating-linear-gradient(45deg, #6b1e3c, #6b1e3c 10px, #852749 10px, #852749 20px); }
 .demo-banner a { color: #fff; margin-left: 8px; }
 .app.demo .topbar { top: 26px; }
-.app.demo .panel { top: 86px; }
+
 .origin { display: inline-block; font-size: 11px; font-weight: 600; padding: 1px 8px; border-radius: 6px; width: fit-content; }
 .origin-ai { background: #7a4a00; color: #ffe2a8; }
 .origin-human { background: #2a5c66; color: #d3f6ff; }

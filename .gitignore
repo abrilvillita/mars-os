@@ -31,3 +31,4 @@ server/.cache/
 Chatgpt/*.tif
 Chatgpt/*.zip
 Chatgpt/*.bin
+Chatgpt/**/*.zip

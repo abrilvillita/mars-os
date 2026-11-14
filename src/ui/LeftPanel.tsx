@@ -141,7 +141,8 @@ export function LeftPanel() {
             ))}
           </Section>
           <Section title={t('layers.vectors')}>
-            <Toggle checked={s.vectors.traverse} onChange={(v) => s.set({ vectors: { ...s.vectors, traverse: v } })} label={t('layers.traverse')} />
+            <Toggle checked={s.vectors.traverse} onChange={(v) => s.set({ vectors: { ...s.vectors, traverse: v } })} label={t('layers.traverse')} hint={t('layers.traverseHint')} />
+            <Toggle checked={s.vectors.placesTraverse} onChange={(v) => s.set({ vectors: { ...s.vectors, placesTraverse: v } })} label={t('layers.placesTraverse')} hint={t('layers.placesHint')} />
             <Toggle checked={s.vectors.waypoints} onChange={(v) => s.set({ vectors: { ...s.vectors, waypoints: v } })} label={t('layers.waypoints')} />
             <Toggle checked={s.vectors.regions} onChange={(v) => s.set({ vectors: { ...s.vectors, regions: v } })} label={t('layers.regions')} />
           </Section>

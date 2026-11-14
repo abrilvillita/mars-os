@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getMarsOS } from './api/MarsOS';
 import { MarsScene } from './render/MarsScene';
@@ -20,6 +20,22 @@ export default function App() {
   const [state, setState] = useState<'loading' | 'ready' | 'error'>('loading');
   const [error, setError] = useState('');
   const [about, setAbout] = useState(false);
+  // panels start right below the top bar, whatever its real height (zoom, fonts, language)
+  const appRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = appRef.current;
+    const bar = el?.querySelector('.topbar');
+    if (!el || !bar) return;
+    const update = () => el.style.setProperty('--top-offset', `${Math.round(bar.getBoundingClientRect().bottom + 8)}px`);
+    const ro = new ResizeObserver(update);
+    ro.observe(bar);
+    window.addEventListener('resize', update);
+    update();
+    return () => {
+      ro.disconnect();
+      window.removeEventListener('resize', update);
+    };
+  }, [state]);
 
   const start = () => {
     setState('loading');
@@ -58,7 +74,7 @@ export default function App() {
     );
   }
   return (
-    <div className={`app ${DEMO_MODE ? 'demo' : ''}`}>
+    <div className={`app ${DEMO_MODE ? 'demo' : ''}`} ref={appRef}>
       {DEMO_MODE && (
         <div className="demo-banner" role="status">
           {t('demo.banner')} <a href={window.location.pathname}>{t('demo.exit')}</a>

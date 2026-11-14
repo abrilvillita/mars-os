@@ -3,7 +3,7 @@
   "schemaVersion": "1.0.0",
   "id": "catalog.jezero",
   "title": "MARS OS — Jezero Crater scientific catalog (seed)",
-  "generatedAt": "2026-11-14T19:30:00Z",
+  "generatedAt": "2026-11-14T21:00:00Z",
   "generator": "Claude (MARS OS viewer team) + ChatGPT (data team). CTX DEM metadata merged from the data-team delivery after verification against the PDS4 label and the USGS Astropedia page; values copied from provider metadata, nothing estimated.",
   "referenceSystem": {
     "body": "Mars",
@@ -370,6 +370,51 @@
       "provenance": "derived",
       "synthetic": false,
       "notes": "Served in 2°×2° crops by the MARS OS backend (HTTP Range reads of the PDS files; the PDS does not allow direct browser access). Coverage 88°S–88°N. Many 128 ppd cells are interpolated between MOLA tracks: 463 m is a grid spacing, not a guaranteed resolution."
+    },
+    {
+      "id": "src.usgs.sim3464.jezero",
+      "title": "Geologic Map of Jezero Crater and the Nili Planum Region, Mars",
+      "kind": "dataset",
+      "agency": "U.S. Geological Survey Astrogeology Science Center",
+      "mission": null,
+      "instrument": null,
+      "productId": "SIM 3464 geologic database",
+      "datasetId": null,
+      "doi": "10.3133/sim3464",
+      "url": "https://pubs.usgs.gov/sim/3464/sim3464_database.zip",
+      "landingPage": "https://pubs.usgs.gov/publication/sim3464",
+      "citation": "Sun, V.Z., and Stack, K.M., 2020, Geologic map of Jezero crater and the Nili Planum region, Mars: U.S. Geological Survey Scientific Investigations Map 3464, scale 1:75,000. https://doi.org/10.3133/sim3464.",
+      "license": "U.S. Geological Survey public data; review source terms and attribution",
+      "acquisition": null,
+      "publishedAt": "2020-12-02",
+      "accessedAt": "2026-11-14",
+      "provenance": "interpreted",
+      "synthetic": false,
+      "notes": "Official GIS database ZIP is about 349.3 MB. Map covers 1°×1° (~60×60 km), 76.8°–77.8°E and 17.7°–18.7°N; base map is a CTX mosaic at 6 m/pixel. Geologic interpretations are regional-scale at publication scale 1:75,000. USGS notes random offsets of roughly 100–200 m relative to the later controlled CTX mosaic used for surface operations. Do not render as a pixel-accurate overlay until reprojected and alignment is checked."
+    },
+    {
+      "id": "src.pds.places.best-interp.r16",
+      "title": "Mars2020 Observational Product - best_interp.csv",
+      "kind": "dataset",
+      "agency": "NASA Planetary Data System Geosciences Node",
+      "mission": "Mars 2020 Perseverance Rover",
+      "instrument": null,
+      "productId": "best_interp.csv",
+      "datasetId": "urn:nasa:pds:mars2020_rover_places:data_localizations:best_interp.csv::16.0",
+      "doi": null,
+      "url": "https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_rover_places/data_localizations/best_interp.csv",
+      "landingPage": "https://pds-geosciences.wustl.edu/missions/mars2020/places.htm",
+      "citation": "NASA Planetary Data System, Mars 2020 Rover PLACES Bundle, Release 16, data_localizations/best_interp.csv; accessed 2026-11-14.",
+      "license": "NASA PDS public data",
+      "acquisition": {
+        "start": "2021-02-18T20:44:27Z",
+        "end": "2026-06-21T23:27:41Z"
+      },
+      "publishedAt": "2026-08-11",
+      "accessedAt": "2026-11-14",
+      "provenance": "derived",
+      "synthetic": false,
+      "notes": "PDS4 product label identifies this exact product and version 16.0. Positions are rover localizations; planetocentric latitude and east-positive longitude in degrees, elevation in meters relative to product datum. The generated GeoJSON contains only ROVER rows, grouped by sol and ordered by SCLK; 33,370 position records across 523 sols, 14–1897, reduced to per-sol polylines. It is a historical rover track, not a recommended human route. Release 16 omits ROVER,n,0 rows from best_interp.csv; use SITE,n for position and telemetry.csv for orientation where required. Release notes show an inconsistent start-year text (2022) while the product label and bundle landing page say 2021; catalog uses the product-label timestamps."
     }
   ],
   "layers": [
@@ -1118,6 +1163,48 @@
       "synthetic": false,
       "defaultOpacity": 1,
       "notes": "Requires the MARS OS backend. Without it, the 4 ppd global grid is used and labelled as such."
+    },
+    {
+      "id": "layer.m20.places.r16.traverse",
+      "name": "Perseverance PLACES Release 16 localized traverse",
+      "label": {
+        "en": "Perseverance traverse — PLACES R16",
+        "es": "Recorrido de Perseverance — PLACES R16"
+      },
+      "kind": "traverse",
+      "sourceIds": [
+        "src.pds.places.best-interp.r16"
+      ],
+      "access": {
+        "protocol": "geojson",
+        "url": "data/traverse/m20-places-r16-traverse.geojson"
+      },
+      "valueEncoding": {
+        "type": "visual",
+        "description": "Per-sol polylines made from localized Perseverance ROVER positions in PLACES best_interp.csv; one feature per sol."
+      },
+      "resolution": {
+        "metersPerPixel": null
+      },
+      "coverage": {
+        "global": false,
+        "bbox": {
+          "west": 77.216785557,
+          "south": 18.421964035,
+          "east": 77.463133296,
+          "north": 18.499663477
+        }
+      },
+      "temporal": {
+        "start": "2021-02-18",
+        "end": "2026-06-21"
+      },
+      "uncertainty": null,
+      "attribution": "NASA Planetary Data System Geosciences Node; Mars 2020 Rover PLACES Release 16",
+      "provenance": "derived",
+      "synthetic": false,
+      "defaultOpacity": 1,
+      "notes": "Generated from rows with frame=ROVER, grouped by sol, ordered by SCLK, consecutive duplicates removed (data team, verified independently: 33,370 ROVER rows; 531 sols, of which 8 — sols 0, 13, 43, 1055, 1154, 1195, 1699, 1830 — have a single distinct position and cannot form a line, leaving 523 per-sol lines, sols 14–1897). Historical rover track, not a human route, safety map or guidance product. PLACES R16 omits ROVER,n,0 rows from best_interp.csv (use SITE,n). SHA-256 of the GeoJSON: 67c1bf67b95c4f53a169fd1526653f21ec419c9e22eb5da18ad1efd8cbdb170d."
     }
   ],
   "regions": [
@@ -1158,11 +1245,14 @@
         "layer.elevation.mola.jezero",
         "layer.m20.traverse",
         "layer.m20.waypoints",
-        "layer.elevation.ctx.jezero"
+        "layer.elevation.ctx.jezero",
+        "layer.m20.places.r16.traverse"
       ],
       "sourceIds": [
         "src.trek.nomenclature.jezero",
-        "src.usgs.ctx-dem.jezero-20m"
+        "src.usgs.ctx-dem.jezero-20m",
+        "src.pds.places.best-interp.r16",
+        "src.usgs.sim3464.jezero"
       ],
       "parentId": null,
       "description": {

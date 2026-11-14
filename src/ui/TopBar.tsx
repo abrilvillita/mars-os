@@ -4,6 +4,7 @@ import { LANGUAGES } from '../i18n';
 import { lmst, marsTime, missionSol, PERSEVERANCE, formatHours, seasonKey } from '../core/time/marsTime';
 import { renderBridge } from '../render/bridge';
 import { useUI } from '../state/uiStore';
+import { getMarsOS } from '../api/MarsOS';
 
 const SPEEDS = [1, 600, 3600, 8878] as const;
 
@@ -13,6 +14,24 @@ export const DESTINATIONS = {
   hirise: { lat: 18.488, lon: 77.403, distance: 22 },
   landing: { lat: 18.4446, lon: 77.4509, distance: 1.4, tilt: 62 },
 } as const;
+
+/**
+ * Ground view adapted to the imagery that exists at the target: walking height only where
+ * HiRISE (25 cm) exists; a low flyover where only CTX (6 m) or global mosaics (~232 m) exist —
+ * so the view never magnifies coarse data into a blur.
+ */
+export function groundViewFor(lat: number, lon: number) {
+  const os = getMarsOS();
+  const inside = (id: string) => {
+    const l = os.catalog.layer(id);
+    if (!l) return false;
+    const b = l.coverage.bbox;
+    return lat >= b.south && lat <= b.north && lon >= b.west && lon <= b.east;
+  };
+  if (inside('layer.jezero.hirise')) return { lat, lon, distance: 0.06, tilt: 80 };
+  if (inside('layer.jezero.ctx')) return { lat, lon, distance: 1.2, tilt: 74 };
+  return { lat, lon, distance: 14, tilt: 70 };
+}
 
 export function TopBar({ onAbout }: { onAbout: () => void }) {
   const { t, i18n } = useTranslation();
@@ -42,18 +61,32 @@ export function TopBar({ onAbout }: { onAbout: () => void }) {
         {(['planet', 'jezero', 'hirise', 'landing'] as const).map((k) => (
           <button key={k} onClick={() => fly(DESTINATIONS[k])}>{t(`nav.${k}`)}</button>
         ))}
-        <button className="accent" onClick={() => fly({ lat: cam.lat, lon: cam.lon, distance: 0.03, tilt: 84 })}>{t('nav.ground')}</button>
       </nav>
+      <select
+        className="dest-menu"
+        aria-label={t('nav.goTo')}
+        value=""
+        onChange={(e) => {
+          const k = e.target.value as keyof typeof DESTINATIONS;
+          if (k) fly(DESTINATIONS[k]);
+        }}
+      >
+        <option value="">{t('nav.goTo')} ▾</option>
+        {(['planet', 'jezero', 'hirise', 'landing'] as const).map((k) => (
+          <option key={k} value={k}>{t(`nav.${k}`)}</option>
+        ))}
+      </select>
+      <button className="accent ground-btn" title={t('nav.groundHint')} onClick={() => fly(groundViewFor(cam.lat, cam.lon))}>{t('nav.ground')}</button>
 
       <div className="clock">
         <button className="clock-main" onClick={() => setOpen(!open)} aria-expanded={open}>
           <span className="mono">{date.toISOString().slice(0, 16).replace('T', ' ')} UTC</span>
           <span className="sep">·</span>
-          <span>{t('time.sol')} <b>{sol}</b></span>
+          <span className="sol">{t('time.sol')} <b>{sol}</b></span>
           <span className="sep">·</span>
-          <span>Ls <b>{mt.ls.toFixed(1)}°</b></span>
-          <span className="sep">·</span>
-          <span>{t(`time.seasons.${seasonKey(mt.ls, cam.lat)}`)} ({t(`time.${hemi}`)})</span>
+          <span className="ls">Ls <b>{mt.ls.toFixed(1)}°</b></span>
+          <span className="sep ls">·</span>
+          <span className="season">{t(`time.seasons.${seasonKey(mt.ls, cam.lat)}`)} ({t(`time.${hemi}`)})</span>
         </button>
         <button className="icon" title={time.playing ? t('time.pause') : t('time.play')} onClick={() => set({ time: { ...time, playing: !time.playing } })}>
           {time.playing ? '❚❚' : '▶'}

@@ -1,0 +1,39 @@
+{
+  "title": "MARS OS data handoff — USGS SIM 3464 + Perseverance PLACES R16",
+  "createdAt": "2026-11-14",
+  "scientificStatus": "PLACES track derived and checksum-verified; SIM 3464 catalog metadata verified, GIS layer pending conversion",
+  "files": [
+    {
+      "path": "best_interp.csv",
+      "role": "original NASA PDS source file",
+      "source": "https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_rover_places/data_localizations/best_interp.csv",
+      "bytes": 8684070,
+      "sha256": "58fbc62f2676195a00b40b2da53a797a70284a8d2344b288c999d325b7ccb4cc"
+    },
+    {
+      "path": "m20-places-r16-traverse.geojson",
+      "role": "derived visualization data; one LineString per sol",
+      "generator": "CSV rows frame=ROVER; sort within sol by SCLK; lon, planetocentric_latitude; drop consecutive identical coordinates",
+      "bytes": 1015432,
+      "sha256": "67c1bf67b95c4f53a169fd1526653f21ec419c9e22eb5da18ad1efd8cbdb170d"
+    }
+  ],
+  "derivedTrack": {
+    "roversRows": 33370,
+    "featureCount": 523,
+    "firstSol": 14,
+    "lastSol": 1897,
+    "bbox": {
+      "west": 77.216785557,
+      "south": 18.421964035,
+      "east": 77.463133296,
+      "north": 18.499663477
+    }
+  },
+  "limitations": [
+    "GeoJSON represents the historical Perseverance traverse, not a safe astronaut route.",
+    "PLACES R16 omits ROVER,n,0 positions from best_interp.csv; see official release notes.",
+    "SIM 3464 regional geologic database has not been transformed into a browser-renderable map layer.",
+    "SIM 3464 has documented ~100–200 m random offsets relative to controlled CTX used for surface ops; do not imply pixel-level registration."
+  ]
+}

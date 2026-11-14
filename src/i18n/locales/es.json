@@ -20,7 +20,8 @@
     "hirise": "Zona HiRISE",
     "landing": "Sitio de aterrizaje",
     "ground": "Vista a ras de suelo",
-    "goTo": "Ir a"
+    "goTo": "Ir a",
+    "groundHint": "La vista más baja que permiten las imágenes de aquí: altura de caminata solo donde hay HiRISE de 25 cm"
   },
   "time": {
     "utc": "UTC",
@@ -74,7 +75,10 @@
     "instrument": "Instrumento",
     "citation": "Cita",
     "openSource": "Abrir página de la fuente",
-    "elevation": "Modelo de elevación"
+    "elevation": "Modelo de elevación",
+    "traverseHint": "Mapa MMGIS, hasta el sol 2022 (cian)",
+    "placesTraverse": "Recorrido de archivo — PDS PLACES R16",
+    "placesHint": "Posiciones oficiales localizadas, soles 14–1897 (verde). Trayecto histórico, no una ruta recomendada."
   },
   "view": {
     "title": "Vista",

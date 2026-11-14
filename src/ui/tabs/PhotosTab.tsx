@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { fetchRawImages, type RawImage } from '../../core/live/m20';
 import { formatLat, formatLon } from '../../core/geo/mars';
@@ -45,14 +46,15 @@ export function PhotosTab() {
           </button>
         ))}
       </div>
-      {big && (
+      {big && createPortal(
         <div className="lightbox" onClick={() => setBig(null)} role="dialog">
           <img src={big.large ?? big.medium} alt={big.instrument} />
           <div className="lightbox-meta">
             {big.instrument} · sol {big.sol} · {big.takenUtc} UTC · NASA/JPL-Caltech{' '}
             <a href={big.fullRes ?? big.large ?? big.medium} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()}>{t('photos.open')} ↗</a>
           </div>
-        </div>
+        </div>,
+        document.body,
       )}
     </div>
   );

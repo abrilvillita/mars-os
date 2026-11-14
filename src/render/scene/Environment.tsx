@@ -91,9 +91,7 @@ export function SkyAndHaze() {
     const sunElev = up.dot(sunDir); // sin of solar elevation at the camera
     const day = THREE.MathUtils.smoothstep(sunElev, -0.08, 0.25);
     const inside = THREE.MathUtils.smoothstep(-alt, -90, -6); // 0 above 90 km, 1 below 6 km
-    const sky = new THREE.Color(0.80, 0.60, 0.44).multiplyScalar(day);
-    // blue tint towards the sun near sunset
-    if (sunElev < 0.2 && sunElev > -0.1) sky.lerp(new THREE.Color(0.35, 0.45, 0.6).multiplyScalar(day + 0.2), 0.25);
+    const sky = SKY.horizon.clone().multiplyScalar(0.03 + 0.97 * day);
     bg.setRGB(0.004, 0.004, 0.012).lerp(sky, inside * (st.env.atmosphere ? 1 : 0));
     scene.background = bg;
     const g = renderBridge.globe?.globals;
@@ -105,6 +103,81 @@ export function SkyAndHaze() {
     }
   });
   return null;
+}
+
+/** Daytime Martian sky colours (visual approximation of rover sky images). */
+export const SKY = {
+  horizon: new THREE.Color(0.86, 0.66, 0.48),
+  zenith: new THREE.Color(0.55, 0.38, 0.29),
+  sunsetBlue: new THREE.Color(0.42, 0.58, 0.82),
+};
+
+/**
+ * Sky dome seen from inside the atmosphere: butterscotch gradient by day, darker towards the
+ * zenith, with the blue halo around the low Sun observed in rover sunset images. Fades out above
+ * ~90 km so space stays black. Visual effect (not a radiative-transfer model).
+ */
+export function SkyDome() {
+  const mat = useMemo(
+    () =>
+      new THREE.ShaderMaterial({
+        uniforms: {
+          uSun: { value: sunDir },
+          uUp: { value: new THREE.Vector3(0, 1, 0) },
+          uInside: { value: 0 },
+          uHorizon: { value: SKY.horizon },
+          uZenith: { value: SKY.zenith },
+          uBlue: { value: SKY.sunsetBlue },
+        },
+        vertexShader: /* glsl */ `
+          #include <common>
+          #include <logdepthbuf_pars_vertex>
+          varying vec3 vDir;
+          void main(){ vDir = normalize(position); vec4 w = modelMatrix*vec4(position,1.); gl_Position = projectionMatrix*viewMatrix*w;
+          #include <logdepthbuf_vertex>
+          }`,
+        fragmentShader: /* glsl */ `
+          #include <common>
+          #include <logdepthbuf_pars_fragment>
+          uniform vec3 uSun; uniform vec3 uUp; uniform float uInside; uniform vec3 uHorizon; uniform vec3 uZenith; uniform vec3 uBlue;
+          varying vec3 vDir;
+          void main(){
+            #include <logdepthbuf_fragment>
+            vec3 d = normalize(vDir);
+            float h = dot(d, uUp);                 // sine of view elevation
+            float sunH = dot(uSun, uUp);           // sine of solar elevation
+            float day = smoothstep(-0.12, 0.2, sunH);
+            vec3 col = mix(uHorizon, uZenith, smoothstep(0.0, 0.75, max(h, 0.0)));
+            float toSun = max(dot(d, uSun), 0.0);
+            float low = 1.0 - smoothstep(0.05, 0.45, sunH);   // stronger near sunrise/sunset
+            col = mix(col, uBlue, pow(toSun, 10.0) * (0.35 + 0.5 * low));
+            col += vec3(1.0, 0.95, 0.85) * pow(toSun, 900.0) * 2.0;  // sun disk
+            col *= mix(0.03, 1.0, day);
+            col = mix(col, uHorizon * 0.5 * day, smoothstep(0.0, -0.08, h)); // below the horizon line
+            gl_FragColor = vec4(mix(vec3(0.004, 0.004, 0.012), col, uInside), 1.0); // opaque: drawn first, terrain overwrites it
+            #include <colorspace_fragment>
+          }`,
+        side: THREE.BackSide,
+        transparent: false,
+        depthWrite: false,
+        depthTest: false,
+      }),
+    [],
+  );
+  const ref = useRef<THREE.Mesh>(null);
+  useFrame(({ camera }) => {
+    const st = useUI.getState();
+    if (!ref.current) return;
+    ref.current.position.copy(camera.position);
+    mat.uniforms.uUp.value.copy(camera.position).normalize();
+    mat.uniforms.uInside.value = st.env.atmosphere ? THREE.MathUtils.smoothstep(-st.camera.altitudeKm, -90, -6) : 0;
+    ref.current.visible = mat.uniforms.uInside.value > 0.001;
+  });
+  return (
+    <mesh ref={ref} material={mat} renderOrder={-10} frustumCulled={false}>
+      <sphereGeometry args={[50000, 48, 24]} />
+    </mesh>
+  );
 }
 
 export const stormState = { center: new THREE.Vector3(1, 0, 0), radiusRad: 0.18 };
@@ -190,7 +263,7 @@ function Moon({ m }: { m: (typeof MOONS)[number] }) {
           <meshStandardMaterial color="#6f655c" roughness={1} />
         </mesh>
         {(
-          <Html center style={{ pointerEvents: 'none' }}>
+          <Html center style={{ pointerEvents: 'none' }} zIndexRange={[5, 0]}>
             <div className="moon-label" ref={labelRef}>
               <span className="dot" /> {m.name}
               <small>{t('env.moonNote')}</small>
