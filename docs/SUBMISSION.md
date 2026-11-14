@@ -22,7 +22,10 @@ MARS OS is an interactive 3D Mars that combines data from several NASA missions 
 
 ## Link to Final Project
 
-[TODO: public URL of the running app and/or the public GitHub repository]
+- Live app (no login): https://abrilvilla.dev/mars-os/
+- Source code: https://github.com/abrilvillita/mars-os
+
+The public site is static, so Gemini analysis and on-demand 463 m elevation, which need the backend, appear as "unavailable" there. Everything else runs on the site. Run `npm run dev` for the full app (see README).
 
 ## Detailed Project Description
 
@@ -91,7 +94,7 @@ We used AI tools openly, and every AI-generated result was reviewed by the team:
 - IAU/USGS Gazetteer of Planetary Nomenclature (Jezero).
 - MEDA is developed with Centro de Astrobiología (CAB, CSIC-INTA, Spain).
 - Software: React, Three.js, React Three Fiber, drei, Zod, i18next, zustand, Turf, Vite.
-- Source code: [TODO: public GitHub URL]
+- Source code: https://github.com/abrilvillita/mars-os
 
 ## Pre-submission checklist
 

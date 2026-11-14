@@ -1,5 +1,7 @@
 # MARS OS
 
+**Live app:** https://abrilvilla.dev/mars-os/ (static build: the AI analysis and on-demand 463 m elevation need the backend, see below)
+
 **Living scientific atlas of Mars** for NASA Space Apps Challenge 2026, challenge *Interplanetary Survival Guide: Martian Map*.
 
 MARS OS is an interactive 3D Mars built on real NASA and USGS data. You can orbit the whole planet and then descend to walking height in Jezero Crater. Along the way you can turn on optical, thermal and geologic layers, follow Perseverance's real traverse, see the rover's raw photos from each stop, and edit small regions of the terrain through validated, revertible proposals that an AI engine can submit.

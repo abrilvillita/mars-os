@@ -53,6 +53,13 @@ Last updated: 2026-11-14 (v0.2.0). The same list is shown live in the app under 
 | Demo AI engine | Only at `?demo`. It keeps a **separate history** and shows a demo banner. Production rejects synthetic proposals. |
 | Atmosphere glow and star field | Visual only |
 
+## Deployments
+
+| Where | What works |
+|---|---|
+| https://abrilvilla.dev/mars-os/ (GitHub Pages, auto-deployed from `main`) | Everything except backend features. Gemini analysis and on-demand MOLA 463 m appear as unavailable there, with no simulation in their place. |
+| Local `npm run dev` with `.env.local` | Everything, including Gemini and on-demand elevation |
+
 ## Known limits
 
 - 20 m (CTX) and 463 m (MOLA) do **not** resolve rocks or small scarps. Nothing in MARS OS is a safety clearance.
