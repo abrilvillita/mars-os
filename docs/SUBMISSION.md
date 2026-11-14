@@ -3,7 +3,7 @@
 > Fill in every `[TODO]` before pasting into the Project page. All content on the Project page must be in English. Every statement below can be checked against `docs/STATUS.md`. Don't add claims that aren't there.
 
 **Challenge:** Interplanetary Survival Guide: Martian Map
-**Team name:** [TODO]
+**Team name:** MARS OS
 **Team members:** [TODO]
 
 ---
@@ -25,7 +25,7 @@ MARS OS is an interactive 3D Mars that combines data from several NASA missions 
 - Live app (no login): https://abrilvilla.dev/mars-os/
 - Source code: https://github.com/abrilvillita/mars-os
 
-The public site is static, so Gemini analysis and on-demand 463 m elevation, which need the backend, appear as "unavailable" there. Everything else runs on the site. Run `npm run dev` for the full app (see README).
+Everything runs online. The app is served by GitHub Pages and its backend (Gemini analysis, on-demand 463 m elevation) runs on Render. The free tier sleeps when idle, so the first AI or elevation request may take about a minute while the server wakes up.
 
 ## Detailed Project Description
 

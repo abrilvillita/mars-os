@@ -1,6 +1,6 @@
 # MARS OS
 
-**Live app:** https://abrilvilla.dev/mars-os/ (static build: the AI analysis and on-demand 463 m elevation need the backend, see below)
+**Live app:** https://abrilvilla.dev/mars-os/ (backend with Gemini on Render; the first AI request after idle may take about a minute to wake it)
 
 **Living scientific atlas of Mars** for NASA Space Apps Challenge 2026, challenge *Interplanetary Survival Guide: Martian Map*.
 

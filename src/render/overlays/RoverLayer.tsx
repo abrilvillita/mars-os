@@ -148,7 +148,7 @@ export function RoverLayer() {
       {showTraverse && line && <primitive object={line} />}
       {showWaypoints && wpPoints && !far && (
         <points geometry={wpPoints} renderOrder={6}>
-          <pointsMaterial color="#ffffff" size={5} sizeAttenuation={false} depthTest={false} transparent opacity={0.85} />
+          <pointsMaterial color="#ffffff" size={5} sizeAttenuation={false} depthTest transparent opacity={0.85} />
         </points>
       )}
       {selGeo && (

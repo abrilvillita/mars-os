@@ -209,7 +209,10 @@ export function CameraRig() {
     if (ready && rig.distance < 200) {
       const cl = camPos.clone().normalize();
       const cLat = Math.asin(cl.y) / DEG, cLon = Math.atan2(-cl.z, cl.x) / DEG;
-      const ground = MARS_RADIUS_KM + (os.terrainModel.height(cLat, cLon) * exaggeration) / 1000 + MIN_CLEARANCE_KM;
+      // stay above both the fine terrain and the coarser mesh that may be shown while finer tiles load
+      const hFine = os.terrainModel.height(cLat, cLon);
+      const hCoarse = os.terrainModel.height(cLat, cLon, 160);
+      const ground = MARS_RADIUS_KM + (Math.max(hFine, hCoarse) * exaggeration) / 1000 + MIN_CLEARANCE_KM;
       if (camPos.length() < ground) camPos.setLength(ground);
     }
 

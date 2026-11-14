@@ -57,7 +57,7 @@ Last updated: 2026-11-14 (v0.2.0). The same list is shown live in the app under 
 
 | Where | What works |
 |---|---|
-| https://abrilvilla.dev/mars-os/ (GitHub Pages, auto-deployed from `main`) | Everything except backend features. Gemini analysis and on-demand MOLA 463 m appear as unavailable there, with no simulation in their place. |
+| https://abrilvilla.dev/mars-os/ (GitHub Pages, auto-deployed from `main`) + backend https://mars-os-api.onrender.com (Render free tier, `render.yaml`) | **Everything.** Verified 2026-11-14 from the public site: on-demand MOLA 463 m at Gale, and a Gemini analysis (gemini-3.8-flash overloaded, gemini-3.6-flash answered in 34 s, 2 findings, 0 proposals). Ground view runs at 48 FPS on an Intel UHD 620. The backend sleeps after 15 min idle; the first request then takes about a minute. |
 | Local `npm run dev` with `.env.local` | Everything, including Gemini and on-demand elevation |
 
 ## Known limits
