@@ -1,0 +1,75 @@
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { getMarsOS } from './api/MarsOS';
+import { MarsScene } from './render/MarsScene';
+import { renderBridge } from './render/bridge';
+import { Hud } from './ui/Hud';
+import { LeftPanel } from './ui/LeftPanel';
+import { RightPanel } from './ui/RightPanel';
+import { TopBar } from './ui/TopBar';
+import './ui/styles.css';
+
+const CATALOGS = ['data/catalog/jezero.catalog.json'];
+
+export default function App() {
+  const { t } = useTranslation();
+  const [state, setState] = useState<'loading' | 'ready' | 'error'>('loading');
+  const [error, setError] = useState('');
+  const [about, setAbout] = useState(false);
+
+  const start = () => {
+    setState('loading');
+    getMarsOS()
+      .init({ baseUrl: import.meta.env.BASE_URL, catalogs: CATALOGS })
+      .then(() => setState('ready'))
+      .catch((e: Error) => {
+        setError(e.message);
+        setState('error');
+      });
+  };
+  useEffect(() => {
+    if (!getMarsOS().ready) start();
+    else setState('ready');
+    // opening shot: whole planet, Jezero facing the viewer
+    Object.assign(renderBridge.rig, { lat: 18.4, lon: 77.5, distance: 14000, heading: 0, tilt: 0 });
+  }, []);
+
+  if (state === 'error') {
+    return (
+      <div className="splash">
+        <h1>{t('loading.error')}</h1>
+        <pre>{error}</pre>
+        <button onClick={start}>{t('loading.retry')}</button>
+      </div>
+    );
+  }
+  if (state === 'loading') {
+    return (
+      <div className="splash">
+        <div className="spinner" />
+        <h1>MARS OS</h1>
+        <p>{t('loading.catalog')}</p>
+        <p className="muted">{t('loading.elevation')}</p>
+      </div>
+    );
+  }
+  return (
+    <div className="app">
+      <MarsScene />
+      <TopBar onAbout={() => setAbout(true)} />
+      <LeftPanel />
+      <RightPanel />
+      <Hud />
+      {about && (
+        <div className="modal" onClick={() => setAbout(false)}>
+          <div className="modal-card" onClick={(e) => e.stopPropagation()}>
+            <h2>MARS OS</h2>
+            <p>{t('app.aboutText')}</p>
+            <p className="small muted">NASA Space Apps Challenge 2026 — Interplanetary Survival Guide: Martian Map</p>
+            <button onClick={() => setAbout(false)}>{t('common.close')}</button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

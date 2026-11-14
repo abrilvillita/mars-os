@@ -1,0 +1,1501 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "id": {
+      "type": "string",
+      "maxLength": 160,
+      "pattern": "^[a-z0-9][a-z0-9._:/-]*$",
+      "description": "Stable identifier. Once published, an id always refers to the same entity."
+    },
+    "title": {
+      "type": "string"
+    },
+    "generatedAt": {
+      "type": "string",
+      "pattern": "^\\d{4}(-\\d{2}(-\\d{2}(T\\d{2}:\\d{2}(:\\d{2}(\\.\\d+)?)?(Z|[+-]\\d{2}:\\d{2})?)?)?)?$",
+      "description": "ISO-8601 date or UTC datetime. Reduced precision (YYYY or YYYY-MM) is allowed: never invent a day."
+    },
+    "generator": {
+      "type": "string",
+      "description": "Who/what produced this file (team member, script, model)"
+    },
+    "referenceSystem": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "string",
+          "const": "Mars"
+        },
+        "crs": {
+          "type": "string",
+          "enum": [
+            "IAU_2015:49900",
+            "EPSG:104905",
+            "IAU_2015:49910",
+            "other"
+          ],
+          "description": "IAU_2015:49900 = Mars 2000 sphere, planetocentric geographic (default). EPSG:104905 = ESRI GCS_Mars_2000_Sphere (Mars Trek EQ). IAU_2015:49910 = Mars equirectangular projection."
+        },
+        "radius_m": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Sphere radius used for rendering"
+        },
+        "latitudeType": {
+          "type": "string",
+          "const": "planetocentric"
+        },
+        "longitudeDirection": {
+          "type": "string",
+          "const": "east"
+        },
+        "longitudeDomain": {
+          "type": "string",
+          "const": "-180..180"
+        },
+        "verticalDatum": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "body",
+        "crs",
+        "radius_m",
+        "latitudeType",
+        "longitudeDirection",
+        "longitudeDomain",
+        "verticalDatum"
+      ]
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 160,
+            "pattern": "^[a-z0-9][a-z0-9._:/-]*$",
+            "description": "Stable identifier. Once published, an id always refers to the same entity."
+          },
+          "title": {
+            "type": "string",
+            "description": "Official product/dataset title. Do not translate."
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "dataset",
+              "tile_service",
+              "api",
+              "publication",
+              "map",
+              "mission_page"
+            ]
+          },
+          "agency": {
+            "description": "e.g. \"NASA/JPL-Caltech\", \"USGS Astrogeology\", \"ESA\"",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "mission": {
+            "description": "Official mission name, e.g. \"Mars Reconnaissance Orbiter\"",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "instrument": {
+            "description": "Official instrument name/acronym, e.g. \"HiRISE\"",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "productId": {
+            "description": "Archive product id / layer id",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "datasetId": {
+            "description": "PDS DATA_SET_ID or equivalent",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "doi": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Direct link to the data or service"
+          },
+          "landingPage": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "citation": {
+            "description": "Recommended citation text",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "license": {
+            "description": "Usage terms as stated by the provider",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "acquisition": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "start": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^\\d{4}(-\\d{2}(-\\d{2}(T\\d{2}:\\d{2}(:\\d{2}(\\.\\d+)?)?(Z|[+-]\\d{2}:\\d{2})?)?)?)?$",
+                        "description": "ISO-8601 date or UTC datetime. Reduced precision (YYYY or YYYY-MM) is allowed: never invent a day."
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "end": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^\\d{4}(-\\d{2}(-\\d{2}(T\\d{2}:\\d{2}(:\\d{2}(\\.\\d+)?)?(Z|[+-]\\d{2}:\\d{2})?)?)?)?$",
+                        "description": "ISO-8601 date or UTC datetime. Reduced precision (YYYY or YYYY-MM) is allowed: never invent a day."
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "start",
+                  "end"
+                ],
+                "description": "Acquisition / validity period; null bounds when unknown"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "publishedAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{4}(-\\d{2}(-\\d{2}(T\\d{2}:\\d{2}(:\\d{2}(\\.\\d+)?)?(Z|[+-]\\d{2}:\\d{2})?)?)?)?$",
+                "description": "ISO-8601 date or UTC datetime. Reduced precision (YYYY or YYYY-MM) is allowed: never invent a day."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "accessedAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{4}(-\\d{2}(-\\d{2}(T\\d{2}:\\d{2}(:\\d{2}(\\.\\d+)?)?(Z|[+-]\\d{2}:\\d{2})?)?)?)?$",
+                "description": "ISO-8601 date or UTC datetime. Reduced precision (YYYY or YYYY-MM) is allowed: never invent a day."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "When the team last verified the link"
+          },
+          "provenance": {
+            "type": "string",
+            "enum": [
+              "measured",
+              "derived",
+              "interpreted",
+              "modeled",
+              "generated",
+              "synthetic"
+            ]
+          },
+          "synthetic": {
+            "default": false,
+            "type": "boolean"
+          },
+          "notes": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "kind",
+          "agency",
+          "mission",
+          "instrument",
+          "productId",
+          "datasetId",
+          "doi",
+          "url",
+          "landingPage",
+          "citation",
+          "license",
+          "acquisition",
+          "publishedAt",
+          "accessedAt",
+          "provenance"
+        ],
+        "description": "A citable origin of data"
+      }
+    },
+    "layers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 160,
+            "pattern": "^[a-z0-9][a-z0-9._:/-]*$",
+            "description": "Stable identifier. Once published, an id always refers to the same entity."
+          },
+          "name": {
+            "type": "string",
+            "description": "Official product name. Never translated."
+          },
+          "label": {
+            "type": "object",
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "en"
+            ],
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Short UI label, translatable"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "imagery",
+              "elevation",
+              "shaded_relief",
+              "thermal",
+              "geology",
+              "mineralogy",
+              "atmosphere",
+              "radiation",
+              "traverse",
+              "waypoints",
+              "rover_images"
+            ]
+          },
+          "sourceIds": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 160,
+              "pattern": "^[a-z0-9][a-z0-9._:/-]*$",
+              "description": "Stable identifier. Once published, an id always refers to the same entity."
+            }
+          },
+          "access": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "protocol": {
+                    "type": "string",
+                    "const": "wmts"
+                  },
+                  "urlTemplate": {
+                    "type": "string",
+                    "description": "Placeholders {z} {row} {col}. Mars Trek EQ: root matrix is 2x1 tiles of 256 px."
+                  },
+                  "tileMatrixSet": {
+                    "type": "string",
+                    "enum": [
+                      "trek-eq-2x1"
+                    ],
+                    "description": "Equirectangular quadtree, z0 = 2 cols x 1 row"
+                  },
+                  "format": {
+                    "type": "string",
+                    "enum": [
+                      "image/jpeg",
+                      "image/png"
+                    ]
+                  },
+                  "tileSize": {
+                    "type": "integer",
+                    "exclusiveMinimum": 0,
+                    "maximum": 9007199254740991
+                  },
+                  "minZoom": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 9007199254740991
+                  },
+                  "maxZoom": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 9007199254740991
+                  },
+                  "fallback": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "urlTemplate": {
+                            "type": "string",
+                            "description": "Local copy, same placeholders"
+                          },
+                          "maxZoom": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 9007199254740991
+                          }
+                        },
+                        "required": [
+                          "urlTemplate",
+                          "maxZoom"
+                        ]
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "description": "Offline copy of the low zoom levels. Labelled with its true resolution in the UI."
+                  }
+                },
+                "required": [
+                  "protocol",
+                  "urlTemplate",
+                  "tileMatrixSet",
+                  "format",
+                  "tileSize",
+                  "minZoom",
+                  "maxZoom",
+                  "fallback"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "protocol": {
+                    "type": "string",
+                    "const": "raster_grid"
+                  },
+                  "url": {
+                    "type": "string",
+                    "description": "Binary grid file"
+                  },
+                  "encoding": {
+                    "type": "string",
+                    "enum": [
+                      "int16le",
+                      "float32le"
+                    ]
+                  },
+                  "width": {
+                    "type": "integer",
+                    "exclusiveMinimum": 0,
+                    "maximum": 9007199254740991
+                  },
+                  "height": {
+                    "type": "integer",
+                    "exclusiveMinimum": 0,
+                    "maximum": 9007199254740991
+                  },
+                  "gridExtent": {
+                    "type": "object",
+                    "properties": {
+                      "west": {
+                        "type": "number",
+                        "minimum": -180,
+                        "maximum": 360
+                      },
+                      "south": {
+                        "type": "number",
+                        "minimum": -90,
+                        "maximum": 90
+                      },
+                      "east": {
+                        "type": "number",
+                        "minimum": -180,
+                        "maximum": 360
+                      },
+                      "north": {
+                        "type": "number",
+                        "minimum": -90,
+                        "maximum": 90
+                      }
+                    },
+                    "required": [
+                      "west",
+                      "south",
+                      "east",
+                      "north"
+                    ],
+                    "description": "Outer edges of the grid (pixel-is-area), longitudes expressed in lonConvention"
+                  },
+                  "lonConvention": {
+                    "type": "string",
+                    "enum": [
+                      "-180-180",
+                      "0-360E"
+                    ]
+                  },
+                  "noData": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "protocol",
+                  "url",
+                  "encoding",
+                  "width",
+                  "height",
+                  "gridExtent",
+                  "lonConvention",
+                  "noData"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "protocol": {
+                    "type": "string",
+                    "const": "geojson"
+                  },
+                  "url": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "protocol",
+                  "url"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "protocol": {
+                    "type": "string",
+                    "const": "json_api"
+                  },
+                  "url": {
+                    "type": "string",
+                    "description": "Endpoint with optional {placeholders}"
+                  }
+                },
+                "required": [
+                  "protocol",
+                  "url"
+                ]
+              }
+            ]
+          },
+          "valueEncoding": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "const": "visual"
+                  },
+                  "description": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "type",
+                  "description"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "const": "physical"
+                  },
+                  "unit": {
+                    "type": "string"
+                  },
+                  "scale": {
+                    "type": "number"
+                  },
+                  "offset": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "type",
+                  "unit",
+                  "scale",
+                  "offset"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "const": "categorical"
+                  },
+                  "legendUrl": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "type",
+                  "legendUrl"
+                ]
+              }
+            ]
+          },
+          "resolution": {
+            "type": "object",
+            "properties": {
+              "metersPerPixel": {
+                "anyOf": [
+                  {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Nominal ground sampling distance"
+              },
+              "pixelsPerDegree": {
+                "anyOf": [
+                  {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "mapScale": {
+                "description": "e.g. \"1:20,000,000\" for vector maps",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "metersPerPixel"
+            ],
+            "description": "Native resolution of the ORIGINAL product (not of any resampled copy)"
+          },
+          "coverage": {
+            "type": "object",
+            "properties": {
+              "global": {
+                "type": "boolean"
+              },
+              "bbox": {
+                "type": "object",
+                "properties": {
+                  "west": {
+                    "type": "number",
+                    "minimum": -180,
+                    "maximum": 180,
+                    "description": "East-positive longitude, degrees, [-180,180]"
+                  },
+                  "south": {
+                    "type": "number",
+                    "minimum": -90,
+                    "maximum": 90,
+                    "description": "Planetocentric latitude, degrees"
+                  },
+                  "east": {
+                    "type": "number",
+                    "minimum": -180,
+                    "maximum": 180,
+                    "description": "East-positive longitude, degrees, [-180,180]"
+                  },
+                  "north": {
+                    "type": "number",
+                    "minimum": -90,
+                    "maximum": 90,
+                    "description": "Planetocentric latitude, degrees"
+                  }
+                },
+                "required": [
+                  "west",
+                  "south",
+                  "east",
+                  "north"
+                ],
+                "description": "Geographic bounding box. If west > east the box crosses the 180° meridian."
+              }
+            },
+            "required": [
+              "global",
+              "bbox"
+            ]
+          },
+          "temporal": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "start": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^\\d{4}(-\\d{2}(-\\d{2}(T\\d{2}:\\d{2}(:\\d{2}(\\.\\d+)?)?(Z|[+-]\\d{2}:\\d{2})?)?)?)?$",
+                        "description": "ISO-8601 date or UTC datetime. Reduced precision (YYYY or YYYY-MM) is allowed: never invent a day."
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "end": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^\\d{4}(-\\d{2}(-\\d{2}(T\\d{2}:\\d{2}(:\\d{2}(\\.\\d+)?)?(Z|[+-]\\d{2}:\\d{2})?)?)?)?$",
+                        "description": "ISO-8601 date or UTC datetime. Reduced precision (YYYY or YYYY-MM) is allowed: never invent a day."
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "start",
+                  "end"
+                ],
+                "description": "Acquisition / validity period; null bounds when unknown"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "uncertainty": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "horizontal_m": {
+                    "anyOf": [
+                      {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "description": "1-sigma horizontal uncertainty, meters; null if unknown"
+                  },
+                  "vertical_m": {
+                    "anyOf": [
+                      {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "description": "1-sigma vertical uncertainty, meters; null if unknown"
+                  },
+                  "notes": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "horizontal_m",
+                  "vertical_m"
+                ],
+                "description": "Known uncertainty. Use null when the source does not state it."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "attribution": {
+            "type": "string",
+            "description": "Text that must be shown when the layer is visible"
+          },
+          "provenance": {
+            "type": "string",
+            "enum": [
+              "measured",
+              "derived",
+              "interpreted",
+              "modeled",
+              "generated",
+              "synthetic"
+            ]
+          },
+          "synthetic": {
+            "default": false,
+            "type": "boolean"
+          },
+          "defaultOpacity": {
+            "default": 1,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "notes": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "label",
+          "kind",
+          "sourceIds",
+          "access",
+          "valueEncoding",
+          "resolution",
+          "coverage",
+          "temporal",
+          "uncertainty",
+          "attribution",
+          "provenance"
+        ],
+        "description": "A displayable/queryable data product"
+      }
+    },
+    "regions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 160,
+            "pattern": "^[a-z0-9][a-z0-9._:/-]*$",
+            "description": "Stable identifier. Once published, an id always refers to the same entity."
+          },
+          "name": {
+            "type": "string",
+            "description": "Official IAU / mission name when one exists (not translated)"
+          },
+          "label": {
+            "type": "object",
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "en"
+            ],
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Translations keyed by BCP-47 language code. \"en\" is required."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "landing_site",
+              "crater",
+              "study_area",
+              "coverage",
+              "traverse_area",
+              "hazard_zone"
+            ]
+          },
+          "crs": {
+            "type": "string",
+            "enum": [
+              "IAU_2015:49900",
+              "EPSG:104905",
+              "IAU_2015:49910",
+              "other"
+            ],
+            "description": "IAU_2015:49900 = Mars 2000 sphere, planetocentric geographic (default). EPSG:104905 = ESRI GCS_Mars_2000_Sphere (Mars Trek EQ). IAU_2015:49910 = Mars equirectangular projection."
+          },
+          "center": {
+            "type": "object",
+            "properties": {
+              "lat": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90,
+                "description": "Planetocentric latitude, degrees"
+              },
+              "lon": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180,
+                "description": "East-positive longitude, degrees, [-180,180]"
+              },
+              "elevation_m": {
+                "description": "Meters relative to MOLA areoid; null if unknown",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "lat",
+              "lon"
+            ],
+            "description": "Geographic position on Mars"
+          },
+          "bbox": {
+            "type": "object",
+            "properties": {
+              "west": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180,
+                "description": "East-positive longitude, degrees, [-180,180]"
+              },
+              "south": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90,
+                "description": "Planetocentric latitude, degrees"
+              },
+              "east": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180,
+                "description": "East-positive longitude, degrees, [-180,180]"
+              },
+              "north": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90,
+                "description": "Planetocentric latitude, degrees"
+              }
+            },
+            "required": [
+              "west",
+              "south",
+              "east",
+              "north"
+            ],
+            "description": "Geographic bounding box. If west > east the box crosses the 180° meridian."
+          },
+          "polygon": {
+            "anyOf": [
+              {
+                "minItems": 4,
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "prefixItems": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "number"
+                    }
+                  ],
+                  "items": false,
+                  "minItems": 2,
+                  "maxItems": 2
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Closed ring of [lon, lat] pairs; null when only a bbox is known"
+          },
+          "lod": {
+            "type": "object",
+            "properties": {
+              "minZoom": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "maxZoom": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991,
+                "description": "Deepest quadtree level justified by the best data here"
+              },
+              "recommendedZoom": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              }
+            },
+            "required": [
+              "minZoom",
+              "maxZoom",
+              "recommendedZoom"
+            ]
+          },
+          "layerIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 160,
+              "pattern": "^[a-z0-9][a-z0-9._:/-]*$",
+              "description": "Stable identifier. Once published, an id always refers to the same entity."
+            }
+          },
+          "sourceIds": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 160,
+              "pattern": "^[a-z0-9][a-z0-9._:/-]*$",
+              "description": "Stable identifier. Once published, an id always refers to the same entity."
+            }
+          },
+          "parentId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 160,
+                "pattern": "^[a-z0-9][a-z0-9._:/-]*$",
+                "description": "Stable identifier. Once published, an id always refers to the same entity."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "en": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "en"
+                ],
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "description": "Translations keyed by BCP-47 language code. \"en\" is required."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "provenance": {
+            "type": "string",
+            "enum": [
+              "measured",
+              "derived",
+              "interpreted",
+              "modeled",
+              "generated",
+              "synthetic"
+            ]
+          },
+          "synthetic": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "label",
+          "type",
+          "crs",
+          "center",
+          "bbox",
+          "polygon",
+          "lod",
+          "layerIds",
+          "sourceIds",
+          "parentId",
+          "description",
+          "provenance"
+        ],
+        "description": "Named, georeferenced area of interest with stable id"
+      }
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 160,
+            "pattern": "^[a-z0-9][a-z0-9._:/-]*$",
+            "description": "Stable identifier. Once published, an id always refers to the same entity."
+          },
+          "regionId": {
+            "type": "string",
+            "maxLength": 160,
+            "pattern": "^[a-z0-9][a-z0-9._:/-]*$",
+            "description": "Stable identifier. Once published, an id always refers to the same entity."
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "label": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "en": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "en"
+                ],
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "description": "Translations keyed by BCP-47 language code. \"en\" is required."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "waypoint",
+              "landing_point",
+              "sample_site",
+              "science_target",
+              "landmark",
+              "hazard"
+            ]
+          },
+          "position": {
+            "type": "object",
+            "properties": {
+              "lat": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90,
+                "description": "Planetocentric latitude, degrees"
+              },
+              "lon": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180,
+                "description": "East-positive longitude, degrees, [-180,180]"
+              },
+              "elevation_m": {
+                "description": "Meters relative to MOLA areoid; null if unknown",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "lat",
+              "lon"
+            ],
+            "description": "Geographic position on Mars"
+          },
+          "observedAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{4}(-\\d{2}(-\\d{2}(T\\d{2}:\\d{2}(:\\d{2}(\\.\\d+)?)?(Z|[+-]\\d{2}:\\d{2})?)?)?)?$",
+                "description": "ISO-8601 date or UTC datetime. Reduced precision (YYYY or YYYY-MM) is allowed: never invent a day."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "sol": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Mission sol when the feature was observed/visited"
+          },
+          "properties": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          "sourceIds": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 160,
+              "pattern": "^[a-z0-9][a-z0-9._:/-]*$",
+              "description": "Stable identifier. Once published, an id always refers to the same entity."
+            }
+          },
+          "uncertainty": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "horizontal_m": {
+                    "anyOf": [
+                      {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "description": "1-sigma horizontal uncertainty, meters; null if unknown"
+                  },
+                  "vertical_m": {
+                    "anyOf": [
+                      {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "description": "1-sigma vertical uncertainty, meters; null if unknown"
+                  },
+                  "notes": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "horizontal_m",
+                  "vertical_m"
+                ],
+                "description": "Known uncertainty. Use null when the source does not state it."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "provenance": {
+            "type": "string",
+            "enum": [
+              "measured",
+              "derived",
+              "interpreted",
+              "modeled",
+              "generated",
+              "synthetic"
+            ]
+          },
+          "synthetic": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "regionId",
+          "name",
+          "label",
+          "kind",
+          "position",
+          "observedAt",
+          "sol",
+          "properties",
+          "sourceIds",
+          "uncertainty",
+          "provenance"
+        ],
+        "description": "Point feature (waypoint, sample, landmark...)"
+      }
+    },
+    "referenceValues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 160,
+            "pattern": "^[a-z0-9][a-z0-9._:/-]*$",
+            "description": "Stable identifier. Once published, an id always refers to the same entity."
+          },
+          "label": {
+            "type": "object",
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "en"
+            ],
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Translations keyed by BCP-47 language code. \"en\" is required."
+          },
+          "quantity": {
+            "type": "string",
+            "description": "e.g. \"absorbed_dose_rate\""
+          },
+          "value": {
+            "type": "number"
+          },
+          "uncertainty": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "unit": {
+            "type": "string"
+          },
+          "location": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "lat": {
+                    "type": "number",
+                    "minimum": -90,
+                    "maximum": 90,
+                    "description": "Planetocentric latitude, degrees"
+                  },
+                  "lon": {
+                    "type": "number",
+                    "minimum": -180,
+                    "maximum": 180,
+                    "description": "East-positive longitude, degrees, [-180,180]"
+                  },
+                  "elevation_m": {
+                    "description": "Meters relative to MOLA areoid; null if unknown",
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "lat",
+                  "lon"
+                ],
+                "description": "Geographic position on Mars"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "period": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "start": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^\\d{4}(-\\d{2}(-\\d{2}(T\\d{2}:\\d{2}(:\\d{2}(\\.\\d+)?)?(Z|[+-]\\d{2}:\\d{2})?)?)?)?$",
+                        "description": "ISO-8601 date or UTC datetime. Reduced precision (YYYY or YYYY-MM) is allowed: never invent a day."
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "end": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^\\d{4}(-\\d{2}(-\\d{2}(T\\d{2}:\\d{2}(:\\d{2}(\\.\\d+)?)?(Z|[+-]\\d{2}:\\d{2})?)?)?)?$",
+                        "description": "ISO-8601 date or UTC datetime. Reduced precision (YYYY or YYYY-MM) is allowed: never invent a day."
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "start",
+                  "end"
+                ],
+                "description": "Acquisition / validity period; null bounds when unknown"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "sourceIds": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 160,
+              "pattern": "^[a-z0-9][a-z0-9._:/-]*$",
+              "description": "Stable identifier. Once published, an id always refers to the same entity."
+            }
+          },
+          "provenance": {
+            "type": "string",
+            "enum": [
+              "measured",
+              "derived",
+              "interpreted",
+              "modeled",
+              "synthetic"
+            ]
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "en": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "en"
+                ],
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "description": "Translations keyed by BCP-47 language code. \"en\" is required."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "label",
+          "quantity",
+          "value",
+          "uncertainty",
+          "unit",
+          "location",
+          "period",
+          "sourceIds",
+          "provenance",
+          "notes"
+        ]
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "id",
+    "title",
+    "generatedAt",
+    "generator",
+    "referenceSystem",
+    "sources",
+    "layers",
+    "regions",
+    "features",
+    "referenceValues"
+  ],
+  "description": "MARS OS scientific catalog: original data only (no AI proposals, no edits)"
+}

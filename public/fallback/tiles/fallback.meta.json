@@ -1,0 +1,9 @@
+{
+  "generatedAt": "2026-11-14T16:22:21.236Z",
+  "maxZoom": 2,
+  "source": "NASA/JPL-Caltech Mars Trek WMTS (EQ, EPSG::104905)",
+  "layers": [
+    "Mars_Viking_MDIM21_ClrMosaic_global_232m",
+    "Mars_MGS_MOLA_ClrShade_merge_global_463m"
+  ]
+}

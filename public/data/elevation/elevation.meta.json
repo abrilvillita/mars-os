@@ -1,0 +1,64 @@
+{
+  "generatedAt": "2026-11-14T16:22:14.950Z",
+  "generator": "scripts/fetch-mola.mjs",
+  "encoding": "int16 little-endian, row-major, north-up, pixel-is-area (sample centers at half-pixel offsets)",
+  "unit": "meter",
+  "verticalDatum": "MOLA areoid (MEGDR topography = radius - areoid)",
+  "grids": [
+    {
+      "id": "src.mola.megdr.4ppd",
+      "file": "mola_megdr_4ppd_global.i16",
+      "width": 1440,
+      "height": 720,
+      "pixelsPerDegree": 4,
+      "bbox": {
+        "west": 0,
+        "east": 360,
+        "south": -90,
+        "north": 90
+      },
+      "lonConvention": "0-360E",
+      "stats": {
+        "min": -8068,
+        "max": 21134
+      },
+      "pds": {
+        "productId": "MEGT90N000CB.IMG",
+        "dataSetId": "MGS-M-MOLA-5-MEGDR-L3-V1.0",
+        "url": "https://pds-geosciences.wustl.edu/mgs/mgs-m-mola-5-megdr-l3-v1/mgsl_300x/meg004/megt90n000cb.img",
+        "label": "https://pds-geosciences.wustl.edu/mgs/mgs-m-mola-5-megdr-l3-v1/mgsl_300x/meg004/megt90n000cb.lbl"
+      }
+    },
+    {
+      "id": "src.mola.megdr.32ppd.jezero",
+      "file": "mola_megdr_32ppd_jezero.i16",
+      "width": 192,
+      "height": 192,
+      "pixelsPerDegree": 32,
+      "bbox": {
+        "west": 74.5,
+        "east": 80.5,
+        "south": 15.5,
+        "north": 21.5
+      },
+      "lonConvention": "0-360E",
+      "stats": {
+        "min": -4372,
+        "max": 1490
+      },
+      "pds": {
+        "productId": "MEGT90N000FB.IMG",
+        "dataSetId": "MGS-M-MOLA-5-MEGDR-L3-V1.0",
+        "url": "https://pds-geosciences.wustl.edu/mgs/mgs-m-mola-5-megdr-l3-v1/mgsl_300x/meg032/megt90n000fb.img",
+        "label": "https://pds-geosciences.wustl.edu/mgs/mgs-m-mola-5-megdr-l3-v1/mgsl_300x/meg032/megt90n000fb.lbl"
+      },
+      "sanityCheck": {
+        "lat": 18.44462715,
+        "lon": 77.45088573,
+        "megdrValue": -2568,
+        "referenceElevGeoid": -2569.91,
+        "reference": "M20_waypoints.json sol 13"
+      }
+    }
+  ]
+}

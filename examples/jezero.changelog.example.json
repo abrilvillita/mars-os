@@ -1,0 +1,91 @@
+{
+  "$schema": "../schema/terrain-changelog.schema.json",
+  "schemaVersion": "1.0.0",
+  "catalogId": "catalog.jezero",
+  "headVersionId": "ver.0002",
+  "proposals": [
+    {
+      "id": "prop.demo.0001",
+      "createdAt": "2026-11-14T17:00:00Z",
+      "origin": { "kind": "ai", "id": "mars-os-ai-engine", "model": null, "version": "0.0.0-demo" },
+      "regionIds": ["region.jezero.hirise-coverage", "mars:eq:z12:x5928:y1590"],
+      "patches": [
+        {
+          "type": "radial",
+          "id": "patch.demo.0001",
+          "center": { "lat": 18.4446, "lon": 77.4509, "elevation_m": null },
+          "radius_m": 400,
+          "delta_m": -6,
+          "falloff": "gaussian"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "image",
+          "sourceId": null,
+          "url": null,
+          "description": {
+            "en": "SYNTHETIC EXAMPLE — illustrates the shape of an evidence record. Not a real observation.",
+            "es": "EJEMPLO SINTÉTICO — muestra la forma de un registro de evidencia. No es una observación real."
+          },
+          "retrievedAt": null,
+          "verified": false,
+          "synthetic": true
+        }
+      ],
+      "confidence": 0.42,
+      "risk": "medium",
+      "rationale": {
+        "en": "SYNTHETIC EXAMPLE: a shallow depression is suggested near the landing site.",
+        "es": "EJEMPLO SINTÉTICO: se sugiere una depresión poco profunda cerca del sitio de aterrizaje."
+      },
+      "status": "applied",
+      "review": {
+        "reviewer": { "kind": "human", "id": "team-member" },
+        "at": "2026-11-14T17:05:00Z",
+        "decision": "approved",
+        "comment": "Demo only"
+      },
+      "appliedVersionId": "ver.0002",
+      "synthetic": true
+    }
+  ],
+  "versions": [
+    {
+      "id": "ver.0001",
+      "parentId": null,
+      "createdAt": "2026-11-14T16:30:00Z",
+      "author": { "kind": "system", "id": "mars-os" },
+      "message": { "en": "Baseline: source elevation only (no edits)", "es": "Base: solo elevación de origen (sin ediciones)" },
+      "proposalId": null,
+      "regionIds": [],
+      "bbox": null,
+      "ops": [],
+      "restoredFrom": null
+    },
+    {
+      "id": "ver.0002",
+      "parentId": "ver.0001",
+      "createdAt": "2026-11-14T17:05:00Z",
+      "author": { "kind": "human", "id": "team-member" },
+      "message": { "en": "Apply prop.demo.0001 (synthetic)", "es": "Aplicar prop.demo.0001 (sintético)" },
+      "proposalId": "prop.demo.0001",
+      "regionIds": ["region.jezero.hirise-coverage"],
+      "bbox": { "west": 77.4381, "south": 18.4328, "east": 77.4637, "north": 18.4564 },
+      "ops": [
+        {
+          "op": "add_patch",
+          "patch": {
+            "type": "radial",
+            "id": "patch.demo.0001",
+            "center": { "lat": 18.4446, "lon": 77.4509, "elevation_m": null },
+            "radius_m": 400,
+            "delta_m": -6,
+            "falloff": "gaussian"
+          }
+        }
+      ],
+      "restoredFrom": null
+    }
+  ]
+}
