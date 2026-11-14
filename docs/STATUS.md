@@ -20,7 +20,7 @@ Last updated: 2026-11-14 (v0.2.0). The same list is shown live in the app under 
 | Feature | What to do |
 |---|---|
 | **Backend** (`server/`), which runs on-demand MOLA 463 m elevation anywhere on Mars and the Gemini proxy | Run `npm run dev`; it starts the backend and Vite together. Without the backend, the app falls back to the 14.8 km global grid and says so in the UI. |
-| **Gemini analysis** | Create `.env.local` with `GEMINI_API_KEY=...` (copy `.env.example`). The key stays on the server and is git-ignored. `/api/ai/status` reports the model that was selected. Without a key, the AI tab says "not configured" and **nothing is simulated in its place**. |
+| **Gemini analysis** | Create `.env.local` with `GEMINI_API_KEY=...` (copy `.env.example`). The key stays on the server and is git-ignored. `/api/ai/status` reports the model that was selected. Without a key, the AI tab says "not configured" and **nothing is simulated in its place**. **Verified 2026-11-14** with a free-tier key (see below). |
 
 ### Gemini: how authenticity is enforced
 
@@ -34,6 +34,15 @@ Last updated: 2026-11-14 (v0.2.0). The same list is shown live in the app under 
 4. Evidence records, source ids and URLs come from the catalog, not from the model. **Confidence is computed by rules** (agreement between independent products and rover data) and its basis is shown. The AI never reports it.
 5. Accepted drafts enter the queue as **pending**. AI proposals can never auto-apply; a person must approve them.
 6. Free-tier quota errors (HTTP 429) and any other failure are shown as errors.
+7. **Failover between real models.** If a model is overloaded (HTTP 503) or takes longer than 40 s, the next available Gemini model is tried. The response reports the model that answered and every failed attempt. If all of them fail, the user sees an error.
+
+**Verification run (2026-11-14), cell `mars:eq:z13:x11716:y3256` at the Perseverance landing site**
+
+- **Models:** gemini-3.8-flash timed out; gemini-3.6-flash and gemini-3.5-flash returned 503 (overloaded); **gemini-3.5-flash-lite** answered. Total 45 s.
+- **Evidence pack:** 81 nodes, 4 elevation products, 20 rover waypoints.
+- **Product differences:** CTX DEM vs MOLA 128 ppd: RMS 5 m, max 13.3 m. CTX vs global MOLA 4 ppd: up to 130 m, because the coarse grid smooths local relief.
+- **Gemini findings:** cited only pack refs (P1–P4, N*, W*). The rover waypoints agree with CTX/MOLA within about 2 m. It made **no geometry proposal**, which is the correct outcome when there is no localized discrepancy.
+- **Schema handling:** the API rejects some JSON-Schema keywords (`maxLength`, `additionalProperties`…), so Gemini receives a structural subset of the schema. Zod still enforces the full schema on every response.
 
 ## 🎭 Simulations (always labelled)
 

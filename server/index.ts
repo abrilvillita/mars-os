@@ -21,7 +21,7 @@ import { MarsCatalog, type AIAnalyzeResponse } from '../src/contract';
 import { ElevationService } from '../src/core/elevation/ElevationService';
 import { loadWaypoints, type Waypoint } from '../src/core/live/m20';
 import { buildEvidencePack, draftsToProposals } from './evidence';
-import { analyzeWithGemini, chooseModel, GeminiError } from './gemini';
+import { analyzeWithFailover, chooseModel, GeminiError } from './gemini';
 import { getMola128Crop } from './mola128';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -109,11 +109,10 @@ const server = createServer(async (req, res) => {
       const edits = Array.isArray(body.clientEdits) ? body.clientEdits.filter((x): x is string => typeof x === 'string') : [];
       const pack = await buildEvidencePack(body.cellId, catalog, elevation, waypoints, edits);
       if (pack.products.length === 0) return json(res, 422, { ok: false, error: 'No elevation data available for this cell' });
-      const model = await chooseModel(apiKey(), process.env.GEMINI_MODEL);
-      const analysis = await analyzeWithGemini(apiKey(), model, pack);
+      const { analysis, model, attempts } = await analyzeWithFailover(apiKey(), process.env.GEMINI_MODEL, pack);
       const { proposals, rejected } = draftsToProposals(pack, analysis, model, catalog);
       const out: AIAnalyzeResponse = {
-        ok: true, model, analyzedAt: new Date().toISOString(), cellId: body.cellId, analysis, proposals, rejected,
+        ok: true, model, attempts, analyzedAt: new Date().toISOString(), cellId: body.cellId, analysis, proposals, rejected,
         pack: {
           products: pack.products.map(({ ref, layerId, name, metersPerPixel }) => ({ ref, layerId, name, metersPerPixel })),
           nodeCount: pack.nodes.length,

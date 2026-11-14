@@ -41,6 +41,8 @@ export type AIProposalDraftT = z.infer<typeof AIProposalDraft>;
 export interface AIAnalyzeResponse {
   ok: true;
   model: string;
+  /** Models tried before `model` answered (overload / timeout), shown to the user. */
+  attempts: { model: string; error: string }[];
   analyzedAt: string;
   cellId: string;
   pack: EvidencePackSummary;
