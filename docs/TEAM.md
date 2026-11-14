@@ -15,7 +15,7 @@ This GitHub repository is the **single source of truth**. The assistants (Claude
 2. **Raw deliveries** go to `Chatgpt/` with a `download_manifest.json` (URL, bytes, SHA-256). Files over 50 MB are **git-ignored**. Record their URL so anyone can re-download them, and convert them with a script in `scripts/` (example: `npm run data:ctx`).
 3. **Never invent values.** Unknown means `null`. Simulated content is marked `synthetic: true`.
 4. **Status lives in `docs/STATUS.md`.** Update it when a feature moves between *verified*, *needs configuration* and *simulation*.
-5. **Requests between assistants** are written as GitHub Issues (or a short note in `docs/HANDOFF.md`) that the person coordinating can paste into the other assistant.
+5. **Requests between assistants** are written as GitHub Issues, or as a dated note in [`docs/HANDOFF.md`](HANDOFF.md) that the coordinator can paste into the other assistant.
 
 ## Current open hand-offs
 
