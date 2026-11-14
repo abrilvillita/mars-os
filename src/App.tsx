@@ -8,8 +8,11 @@ import { LeftPanel } from './ui/LeftPanel';
 import { RightPanel } from './ui/RightPanel';
 import { TopBar } from './ui/TopBar';
 import './ui/styles.css';
+import { FeatureStatus } from './ui/FeatureStatus';
+import { DEMO_MODE } from './state/mode';
 
 const CATALOGS = ['data/catalog/jezero.catalog.json'];
+
 
 export default function App() {
   const { t } = useTranslation();
@@ -20,7 +23,7 @@ export default function App() {
   const start = () => {
     setState('loading');
     getMarsOS()
-      .init({ baseUrl: import.meta.env.BASE_URL, catalogs: CATALOGS })
+      .init({ baseUrl: import.meta.env.BASE_URL, catalogs: CATALOGS, mode: DEMO_MODE ? 'demo' : 'production' })
       .then(() => setState('ready'))
       .catch((e: Error) => {
         setError(e.message);
@@ -54,7 +57,12 @@ export default function App() {
     );
   }
   return (
-    <div className="app">
+    <div className={`app ${DEMO_MODE ? 'demo' : ''}`}>
+      {DEMO_MODE && (
+        <div className="demo-banner" role="status">
+          {t('demo.banner')} <a href={window.location.pathname}>{t('demo.exit')}</a>
+        </div>
+      )}
       <MarsScene />
       <TopBar onAbout={() => setAbout(true)} />
       <LeftPanel />
@@ -65,7 +73,9 @@ export default function App() {
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
             <h2>MARS OS</h2>
             <p>{t('app.aboutText')}</p>
+            <FeatureStatus />
             <p className="small muted">NASA Space Apps Challenge 2026 — Interplanetary Survival Guide: Martian Map</p>
+            {!DEMO_MODE && <p className="small"><a href="?demo">{t('demo.enter')}</a></p>}
             <button onClick={() => setAbout(false)}>{t('common.close')}</button>
           </div>
         </div>

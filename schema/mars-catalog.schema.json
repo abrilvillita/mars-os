@@ -509,6 +509,187 @@
                 "properties": {
                   "protocol": {
                     "type": "string",
+                    "const": "raster_pyramid"
+                  },
+                  "url": {
+                    "type": "string",
+                    "description": "Folder containing pyramid.json and {level}/{row}_{col}.i16[.gz] tiles"
+                  },
+                  "encoding": {
+                    "type": "string",
+                    "const": "int16le"
+                  },
+                  "compression": {
+                    "type": "string",
+                    "enum": [
+                      "gzip",
+                      "none"
+                    ]
+                  },
+                  "scale": {
+                    "type": "number",
+                    "exclusiveMinimum": 0,
+                    "description": "meters = raw * scale + offset"
+                  },
+                  "offset": {
+                    "type": "number"
+                  },
+                  "noData": {
+                    "type": "integer",
+                    "minimum": -9007199254740991,
+                    "maximum": 9007199254740991
+                  },
+                  "tileSize": {
+                    "type": "integer",
+                    "exclusiveMinimum": 0,
+                    "maximum": 9007199254740991
+                  },
+                  "gridExtent": {
+                    "type": "object",
+                    "properties": {
+                      "west": {
+                        "type": "number",
+                        "minimum": -180,
+                        "maximum": 360
+                      },
+                      "south": {
+                        "type": "number",
+                        "minimum": -90,
+                        "maximum": 90
+                      },
+                      "east": {
+                        "type": "number",
+                        "minimum": -180,
+                        "maximum": 360
+                      },
+                      "north": {
+                        "type": "number",
+                        "minimum": -90,
+                        "maximum": 90
+                      }
+                    },
+                    "required": [
+                      "west",
+                      "south",
+                      "east",
+                      "north"
+                    ],
+                    "description": "Outer edges of the full-resolution grid (pixel-is-area)"
+                  },
+                  "lonConvention": {
+                    "type": "string",
+                    "enum": [
+                      "-180-180",
+                      "0-360E"
+                    ]
+                  },
+                  "levels": {
+                    "minItems": 1,
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "level": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 9007199254740991
+                        },
+                        "metersPerPixel": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        },
+                        "width": {
+                          "type": "integer",
+                          "exclusiveMinimum": 0,
+                          "maximum": 9007199254740991
+                        },
+                        "height": {
+                          "type": "integer",
+                          "exclusiveMinimum": 0,
+                          "maximum": 9007199254740991
+                        }
+                      },
+                      "required": [
+                        "level",
+                        "metersPerPixel",
+                        "width",
+                        "height"
+                      ]
+                    },
+                    "description": "Level 0 = native data; higher levels = block-averaged overviews (labelled with their coarser resolution)"
+                  }
+                },
+                "required": [
+                  "protocol",
+                  "url",
+                  "encoding",
+                  "compression",
+                  "scale",
+                  "offset",
+                  "noData",
+                  "tileSize",
+                  "gridExtent",
+                  "lonConvention",
+                  "levels"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "protocol": {
+                    "type": "string",
+                    "const": "raster_service"
+                  },
+                  "url": {
+                    "type": "string",
+                    "description": "MARS OS backend endpoint returning int16le crops, queried with ?lat0=&lon0= (south-west corner, degrees)"
+                  },
+                  "pixelsPerDegree": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  "cropDegrees": {
+                    "type": "number",
+                    "exclusiveMinimum": 0,
+                    "description": "Width/height of each crop in degrees"
+                  },
+                  "lonConvention": {
+                    "type": "string",
+                    "enum": [
+                      "-180-180",
+                      "0-360E"
+                    ]
+                  },
+                  "coverageLat": {
+                    "type": "array",
+                    "prefixItems": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ],
+                    "items": false,
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "description": "[min, max] latitude served"
+                  }
+                },
+                "required": [
+                  "protocol",
+                  "url",
+                  "pixelsPerDegree",
+                  "cropDegrees",
+                  "lonConvention",
+                  "coverageLat"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "protocol": {
+                    "type": "string",
                     "const": "geojson"
                   },
                   "url": {

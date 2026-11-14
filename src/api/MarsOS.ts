@@ -55,6 +55,13 @@ export interface NodeInfo {
 }
 
 const STORAGE_KEY = 'marsos.changelog.v1';
+const DEMO_STORAGE_KEY = 'marsos.demo.changelog.v1';
+
+/**
+ * production: real use. Simulated (synthetic) proposals are refused; history is stored apart.
+ * demo:       sandbox for training/presentations. Simulated engines allowed; separate history.
+ */
+export type MarsOSMode = 'production' | 'demo';
 const HUMAN: ActorT = { kind: 'human', id: 'local-user' };
 
 export class MarsOS {
@@ -67,6 +74,11 @@ export class MarsOS {
   /** Version being viewed (time travel). null = HEAD. */
   viewingVersionId: string | null = null;
   ready = false;
+  mode: MarsOSMode = 'production';
+
+  private get storageKey() {
+    return this.mode === 'demo' ? DEMO_STORAGE_KEY : STORAGE_KEY;
+  }
 
   constructor() {
     this.terrainModel = new TerrainModel(this.elevationService, this.bus);
@@ -79,9 +91,24 @@ export class MarsOS {
     this.bus.on('proposals:changed', () => this.persist());
   }
 
-  async init(opts: { baseUrl: string; catalogs: string[] }) {
+  private initPromise: Promise<void> | null = null;
+
+  /** Idempotent: concurrent or repeated calls share one initialization (React StrictMode runs effects twice). */
+  init(opts: { baseUrl: string; catalogs: string[]; mode?: MarsOSMode; serviceBaseUrl?: string }) {
+    if (!this.initPromise) {
+      this.initPromise = this.doInit(opts).catch((e) => {
+        this.initPromise = null; // allow retry after a failure
+        throw e;
+      });
+    }
+    return this.initPromise;
+  }
+
+  private async doInit(opts: { baseUrl: string; catalogs: string[]; mode?: MarsOSMode; serviceBaseUrl?: string }) {
+    this.mode = opts.mode ?? 'production';
+    this.proposalService.allowSynthetic = this.mode === 'demo';
     for (const c of opts.catalogs) await this.catalogService.load(opts.baseUrl + c);
-    await this.elevationService.loadFromLayers([...this.catalogService.layers.values()], opts.baseUrl);
+    await this.elevationService.loadFromLayers([...this.catalogService.layers.values()], opts.baseUrl, opts.serviceBaseUrl ?? '');
     this.restoreFromStorage();
     this.ready = true;
     this.syncTerrain('init');
@@ -167,7 +194,21 @@ export class MarsOS {
   readonly terrain = {
     heightAt: (lat: number, lon: number) => this.terrainModel.breakdown(lat, lon),
     activePatches: (): GeometryPatchT[] => this.terrainModel.activePatches(),
-    elevationGrids: () => this.elevationService.loaded.map(({ data: _d, ...meta }) => meta),
+    elevationGrids: () => this.elevationService.loaded,
+    /** Finest elevation resolution currently loaded at a point (m/px) and its source layer. */
+    resolutionAt: (lat: number, lon: number) => {
+      const s = this.elevationService.sample(lat, lon, 0);
+      return { metersPerPixel: s.metersPerPixel, layerId: s.layerId };
+    },
+    /** Request on-demand elevation detail (backend MOLA 128 ppd crops) around a point. */
+    ensureDetail: (lat: number, lon: number, radiusDeg = 0) => this.elevationService.ensureDetail(lat, lon, radiusDeg),
+    /** Status of on-demand elevation: null error = OK. */
+    onDemandStatus: () => ({
+      available: !!this.elevationService.service,
+      loadedCrops: this.elevationService.service?.loadedCount() ?? 0,
+      error: this.elevationService.service?.lastError ?? null,
+      pendingTiles: this.elevationService.pendingTiles(),
+    }),
   };
 
   // ───────────────────────── proposals ─────────────────────────
@@ -262,7 +303,7 @@ export class MarsOS {
   private persist() {
     if (!this.ready) return;
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.exportChangeLog()));
+      localStorage.setItem(this.storageKey, JSON.stringify(this.exportChangeLog()));
     } catch {
       /* storage unavailable: history stays in memory */
     }
@@ -270,10 +311,17 @@ export class MarsOS {
 
   private restoreFromStorage() {
     try {
-      const raw = localStorage.getItem(STORAGE_KEY);
+      const raw = localStorage.getItem(this.storageKey);
       if (!raw) return;
       const parsed = TerrainChangeLog.safeParse(JSON.parse(raw));
       if (!parsed.success) return;
+      // one-time cleanup: a production log that contains simulated content (from earlier prototype
+      // sessions) is moved to the demo sandbox instead of being mixed with real work
+      if (this.mode === 'production' && parsed.data.proposals.some((p) => p.synthetic)) {
+        if (!localStorage.getItem(DEMO_STORAGE_KEY)) localStorage.setItem(DEMO_STORAGE_KEY, raw);
+        localStorage.removeItem(STORAGE_KEY);
+        return;
+      }
       this.versionStore.load(parsed.data.versions, parsed.data.headVersionId);
       this.proposalService.load(parsed.data.proposals);
     } catch {

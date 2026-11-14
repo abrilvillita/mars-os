@@ -74,9 +74,19 @@ export function RoverLayer() {
   }, [os]);
 
   // re-drape when terrain changes near the traverse
-  useEffect(() => os.on('terrain:changed', ({ bbox }) => {
-    if (!bbox || (bbox.east > 77.1 && bbox.west < 77.8 && bbox.north > 18.2 && bbox.south < 18.8)) setRev((r) => r + 1);
-  }), [os]);
+  // re-drape when terrain (edits or newly loaded elevation tiles) changes near the traverse — debounced
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    const off = os.on('terrain:changed', ({ bbox }) => {
+      if (bbox && !(bbox.east > 77.1 && bbox.west < 77.8 && bbox.north > 18.2 && bbox.south < 18.8)) return;
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => setRev((v) => v + 1), 400);
+    });
+    return () => {
+      off();
+      if (timer) clearTimeout(timer);
+    };
+  }, [os]);
 
   const origin = useMemo(() => {
     const p = latLonToXYZ(18.45, 77.42, -2500 * exaggeration);

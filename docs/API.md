@@ -102,3 +102,17 @@ os.catalog.features(), os.catalog.referenceValues()
 3. For UI, add a tab in `src/ui/tabs/` and its strings in **every** `src/i18n/locales/*.json`.
 
 No change to the globe, the core or the contract is needed unless the module produces new persistent data. In that case, extend the Zod contract first, then regenerate the schemas.
+
+
+## Backend HTTP API (`server/index.ts`)
+
+| Endpoint | Purpose |
+|---|---|
+| `GET /api/health` | Liveness check |
+| `GET /api/elevation/mola128?lat0=&lon0=` | 2°×2° MOLA 128 ppd crop (256×256 int16 LE, meters). `lat0`/`lon0` are even integers, `lon0` in 0–358 °E. The crop is read from the PDS with HTTP Range and cached in `server/.cache`. |
+| `GET /api/ai/status` | `{ configured, model, error }` |
+| `POST /api/ai/analyze` `{ cellId, clientEdits? }` | Builds the evidence pack, calls Gemini, validates the answer and returns `AIAnalyzeResponse` (see `src/contract/ai.ts`). Proposals arrive as **pending**. |
+
+`os.terrain.resolutionAt(lat, lon)`, `os.terrain.ensureDetail(lat, lon, radiusDeg)` and `os.terrain.onDemandStatus()` expose progressive elevation detail to modules.
+
+Modes: `production` (default) refuses synthetic proposals. `demo` (`?demo` in the URL) allows the simulated engine and uses separate storage (`marsos.demo.changelog.v1`). AI-origin proposals are never auto-applied, whatever the policy.

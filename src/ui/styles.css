@@ -236,3 +236,30 @@ table.wx th { color: var(--muted); font-weight: 500; }
   .panel.right:not(.collapsed) { z-index: 16; }
   .controls-hint { display: none; }
 }
+
+/* ── pinned selection vs cursor preview ── */
+.cursor-strip { display: flex; gap: 8px; align-items: center; padding: 5px 8px; border: 1px dashed #5ce1ff55; border-radius: 8px; margin-bottom: 8px; color: #bfefff; }
+.cursor-tag { color: var(--cyan); }
+.pin-head { border: 1px solid #ff8a4c88; background: linear-gradient(180deg, #ff8a4c1f, transparent); border-radius: var(--radius); padding: 9px 10px; display: grid; gap: 4px; }
+.pin-head.locked { border-color: #ffc046; box-shadow: 0 0 0 1px #ffc04655 inset; }
+.pin-tag { color: var(--accent); }
+
+/* ── production pass ── */
+.demo-banner { position: absolute; top: 0; left: 0; right: 0; z-index: 30; text-align: center; font-size: 12px; font-weight: 600; padding: 3px; color: #ffe0ec; background: repeating-linear-gradient(45deg, #6b1e3c, #6b1e3c 10px, #852749 10px, #852749 20px); }
+.demo-banner a { color: #fff; margin-left: 8px; }
+.app.demo .topbar { top: 26px; }
+.app.demo .panel { top: 86px; }
+.origin { display: inline-block; font-size: 11px; font-weight: 600; padding: 1px 8px; border-radius: 6px; width: fit-content; }
+.origin-ai { background: #7a4a00; color: #ffe2a8; }
+.origin-human { background: #2a5c66; color: #d3f6ff; }
+.proposal.origin-ai { border-left-style: double; border-left-width: 5px; }
+.gemini .analysis { display: grid; gap: 6px; margin-top: 6px; }
+.finding { border-left: 2px solid #ffc046; padding: 2px 8px; }
+.data-support { border: 1px dashed var(--line-strong); border-radius: 8px; padding: 6px 8px; }
+.feature-status { width: 100%; border-collapse: collapse; font-size: 12px; margin: 8px 0; }
+.feature-status td { padding: 3px 4px; border-bottom: 1px solid var(--line); }
+.fs { font-size: 10.5px; font-weight: 700; padding: 1px 7px; border-radius: 999px; white-space: nowrap; }
+.fs-verified { background: #1f6f4a; color: #d8ffe9; }
+.fs-config { background: #6b5320; color: #fff0cc; }
+.fs-simulation { background: #6b1e3c; color: #ffe0ec; }
+.fs-unavailable { background: #5a2a2a; color: #ffc9c9; }

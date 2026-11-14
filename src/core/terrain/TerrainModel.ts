@@ -32,6 +32,8 @@ export class TerrainModel {
   constructor(elevation: ElevationService, bus: EventBus) {
     this.elevation = elevation;
     this.bus = bus;
+    // finer source data arrived (on-demand tile/crop): rebuild only that area
+    this.elevation.onRegionLoaded = (bbox, layerId) => this.bus.emit('terrain:changed', { bbox, reason: 'elevation-data:' + layerId });
   }
 
   /** Replace the applied patch set; emits change for the symmetric difference only. */
@@ -69,8 +71,9 @@ export class TerrainModel {
     };
   }
 
-  heightFast(lat: number, lon: number, rel: { active: CompiledPatch[]; preview: CompiledPatch[] }) {
-    let h = this.elevation.height(lat, lon), edit = 0, prev = 0;
+  /** wantMpp: resolution the caller needs (mesh vertex spacing) — lets pyramids pick a level. */
+  heightFast(lat: number, lon: number, rel: { active: CompiledPatch[]; preview: CompiledPatch[] }, wantMpp = 0) {
+    let h = this.elevation.height(lat, lon, wantMpp), edit = 0, prev = 0;
     for (const c of rel.active) edit += c.delta(lat, lon);
     for (const c of rel.preview) prev += c.delta(lat, lon);
     h += edit + prev;
@@ -78,8 +81,8 @@ export class TerrainModel {
   }
 
   /** Final height (source + applied + preview), no provenance. */
-  height(lat: number, lon: number) {
-    let h = this.elevation.height(lat, lon);
+  height(lat: number, lon: number, wantMpp = 0) {
+    let h = this.elevation.height(lat, lon, wantMpp);
     for (const c of this.active) h += c.delta(lat, lon);
     for (const c of this.preview) h += c.delta(lat, lon);
     return h;

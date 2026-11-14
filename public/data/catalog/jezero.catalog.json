@@ -69,7 +69,10 @@
       "landingPage": "https://pds-geosciences.wustl.edu/missions/mgs/megdr.html",
       "citation": "Smith, D. E., et al., MGS MOLA MEGDR, NASA Planetary Data System, MGS-M-MOLA-5-MEGDR-L3-V1.0.",
       "license": "NASA PDS public data",
-      "acquisition": { "start": "1997-09-15T19:10:00Z", "end": "2001-06-30T11:10:40Z" },
+      "acquisition": {
+        "start": "1997-09-15T19:10:00Z",
+        "end": "2001-06-30T11:10:40Z"
+      },
       "publishedAt": "2003-04-03",
       "accessedAt": "2026-11-14",
       "provenance": "derived",
@@ -89,7 +92,10 @@
       "landingPage": "https://pds-geosciences.wustl.edu/missions/mgs/megdr.html",
       "citation": "Smith, D. E., et al., MGS MOLA MEGDR, NASA Planetary Data System, MGS-M-MOLA-5-MEGDR-L3-V1.0.",
       "license": "NASA PDS public data",
-      "acquisition": { "start": "1997-09-15T19:10:00Z", "end": "2001-06-30T11:10:40Z" },
+      "acquisition": {
+        "start": "1997-09-15T19:10:00Z",
+        "end": "2001-06-30T11:10:40Z"
+      },
       "publishedAt": null,
       "accessedAt": "2026-11-14",
       "provenance": "derived",
@@ -311,20 +317,73 @@
       "landingPage": null,
       "citation": "Hassler, D. M., et al. (2014), Science 343(6169), 1244797.",
       "license": null,
-      "acquisition": { "start": "2012-08-07", "end": "2013-06-01" },
+      "acquisition": {
+        "start": "2012-08-07",
+        "end": "2013-06-01"
+      },
       "publishedAt": "2014-01-24",
       "accessedAt": "2026-11-14",
       "provenance": "measured",
       "synthetic": false
+    },
+    {
+      "id": "src.usgs.ctx-dem.jezero-20m",
+      "title": "M20_JezeroCrater_CTXDEM_20m (Jezero crater CTX DEM mosaic, 20 m/pixel)",
+      "kind": "dataset",
+      "agency": "USGS Astrogeology / NASA-JPL (Mars 2020 TRN / Science Investigation Maps)",
+      "mission": "Mars Reconnaissance Orbiter",
+      "instrument": "CTX",
+      "productId": "M20_JezeroCrater_CTXDEM_20m",
+      "datasetId": null,
+      "doi": null,
+      "url": "https://planetarymaps.usgs.gov/mosaic/mars2020_trn/CTX/ScienceInvestigationMaps_JPL/M20_JezeroCrater_CTXDEM_20m.tif",
+      "landingPage": "https://planetarymaps.usgs.gov/mosaic/mars2020_trn/CTX/ScienceInvestigationMaps_JPL/",
+      "citation": "USGS Astrogeology Science Center / NASA-JPL, Mars 2020 Jezero CTX DEM 20 m (PDS4 label M20_JezeroCrater_CTXDEM_20m.xml).",
+      "license": "NASA/USGS public data",
+      "acquisition": null,
+      "publishedAt": "2021-10-14",
+      "accessedAt": "2026-11-14",
+      "provenance": "derived",
+      "synthetic": false,
+      "notes": "Downloaded and SHA-256 verified by the data team (ba7f706ea1b5d63a562f28a7dcf7a7f3c79bce7f048e6974b57e8a33c30d1ba2). PDS4 label start/stop dates are nil (mosaic of many observations). Label sphere radius 3,396,190 m; the USGS product page lists 3,396,160 m (unreconciled, 30 m, negligible at this scale). Sanity check: -2567.36 m at Perseverance waypoint RMC 3_0 vs rover-reported -2569.91 m."
+    },
+    {
+      "id": "src.pds.mola.megdr.128ppd",
+      "title": "MGS MOLA Mission Experiment Gridded Data Record, 128 pixels/degree (MEGT**N/S***HB.IMG tiles)",
+      "kind": "dataset",
+      "agency": "NASA PDS Geosciences Node / GSFC",
+      "mission": "Mars Global Surveyor",
+      "instrument": "MOLA",
+      "productId": "MEGT*HB.IMG",
+      "datasetId": "MGS-M-MOLA-5-MEGDR-L3-V1.0",
+      "doi": null,
+      "url": "https://pds-geosciences.wustl.edu/mgs/mgs-m-mola-5-megdr-l3-v1/mgsl_300x/meg128/",
+      "landingPage": "https://pds-geosciences.wustl.edu/missions/mgs/megdr.html",
+      "citation": "Smith, D. E., et al., MGS MOLA MEGDR, NASA Planetary Data System, MGS-M-MOLA-5-MEGDR-L3-V1.0.",
+      "license": "NASA PDS public data",
+      "acquisition": {
+        "start": "1997-09-15T19:10:00Z",
+        "end": "2001-06-30T11:10:40Z"
+      },
+      "publishedAt": null,
+      "accessedAt": "2026-11-14",
+      "provenance": "derived",
+      "synthetic": false,
+      "notes": "Served in 2°×2° crops by the MARS OS backend (HTTP Range reads of the PDS files; the PDS does not allow direct browser access). Coverage 88°S–88°N. Many 128 ppd cells are interpolated between MOLA tracks: 463 m is a grid spacing, not a guaranteed resolution."
     }
   ],
   "layers": [
     {
       "id": "layer.viking.color",
       "name": "Viking VIS, Global Color Mosaic",
-      "label": { "en": "Visible color (global)", "es": "Color visible (global)" },
+      "label": {
+        "en": "Visible color (global)",
+        "es": "Color visible (global)"
+      },
       "kind": "imagery",
-      "sourceIds": ["src.trek.viking.mdim21"],
+      "sourceIds": [
+        "src.trek.viking.mdim21"
+      ],
       "access": {
         "protocol": "wmts",
         "urlTemplate": "https://trek.nasa.gov/tiles/Mars/EQ/Mars_Viking_MDIM21_ClrMosaic_global_232m/1.0.0/default/default028mm/{z}/{row}/{col}.jpg",
@@ -333,11 +392,28 @@
         "tileSize": 256,
         "minZoom": 0,
         "maxZoom": 7,
-        "fallback": { "urlTemplate": "fallback/tiles/Mars_Viking_MDIM21_ClrMosaic_global_232m/{z}/{row}/{col}.jpg", "maxZoom": 2 }
+        "fallback": {
+          "urlTemplate": "fallback/tiles/Mars_Viking_MDIM21_ClrMosaic_global_232m/{z}/{row}/{col}.jpg",
+          "maxZoom": 2
+        }
       },
-      "valueEncoding": { "type": "visual", "description": "Color mosaic for visual context; not radiometrically calibrated for analysis." },
-      "resolution": { "metersPerPixel": 232, "pixelsPerDegree": null },
-      "coverage": { "global": true, "bbox": { "west": -180, "south": -90, "east": 180, "north": 90 } },
+      "valueEncoding": {
+        "type": "visual",
+        "description": "Color mosaic for visual context; not radiometrically calibrated for analysis."
+      },
+      "resolution": {
+        "metersPerPixel": 232,
+        "pixelsPerDegree": null
+      },
+      "coverage": {
+        "global": true,
+        "bbox": {
+          "west": -180,
+          "south": -90,
+          "east": 180,
+          "north": 90
+        }
+      },
       "temporal": null,
       "uncertainty": null,
       "attribution": "NASA/JPL-Caltech/USGS — Viking MDIM 2.1 via Mars Trek",
@@ -348,9 +424,14 @@
     {
       "id": "layer.mola.shade",
       "name": "MGS MOLA, Global Color Hillshade",
-      "label": { "en": "Elevation hillshade", "es": "Relieve sombreado" },
+      "label": {
+        "en": "Elevation hillshade",
+        "es": "Relieve sombreado"
+      },
       "kind": "shaded_relief",
-      "sourceIds": ["src.trek.mola.clrshade"],
+      "sourceIds": [
+        "src.trek.mola.clrshade"
+      ],
       "access": {
         "protocol": "wmts",
         "urlTemplate": "https://trek.nasa.gov/tiles/Mars/EQ/Mars_MGS_MOLA_ClrShade_merge_global_463m/1.0.0/default/default028mm/{z}/{row}/{col}.jpg",
@@ -359,11 +440,28 @@
         "tileSize": 256,
         "minZoom": 0,
         "maxZoom": 7,
-        "fallback": { "urlTemplate": "fallback/tiles/Mars_MGS_MOLA_ClrShade_merge_global_463m/{z}/{row}/{col}.jpg", "maxZoom": 2 }
+        "fallback": {
+          "urlTemplate": "fallback/tiles/Mars_MGS_MOLA_ClrShade_merge_global_463m/{z}/{row}/{col}.jpg",
+          "maxZoom": 2
+        }
       },
-      "valueEncoding": { "type": "visual", "description": "Color-coded elevation with hillshade. Colors are for display; use the MEGDR grid for numeric elevation." },
-      "resolution": { "metersPerPixel": 463, "pixelsPerDegree": null },
-      "coverage": { "global": true, "bbox": { "west": -180, "south": -90, "east": 180, "north": 90 } },
+      "valueEncoding": {
+        "type": "visual",
+        "description": "Color-coded elevation with hillshade. Colors are for display; use the MEGDR grid for numeric elevation."
+      },
+      "resolution": {
+        "metersPerPixel": 463,
+        "pixelsPerDegree": null
+      },
+      "coverage": {
+        "global": true,
+        "bbox": {
+          "west": -180,
+          "south": -90,
+          "east": 180,
+          "north": 90
+        }
+      },
       "temporal": null,
       "uncertainty": null,
       "attribution": "NASA/JPL-Caltech/GSFC — MGS MOLA via Mars Trek",
@@ -374,9 +472,14 @@
     {
       "id": "layer.themis.day",
       "name": "MO THEMIS-IR Day, Global Mosaic",
-      "label": { "en": "Thermal infrared — day", "es": "Infrarrojo térmico — día" },
+      "label": {
+        "en": "Thermal infrared — day",
+        "es": "Infrarrojo térmico — día"
+      },
       "kind": "thermal",
-      "sourceIds": ["src.trek.themis.dayir"],
+      "sourceIds": [
+        "src.trek.themis.dayir"
+      ],
       "access": {
         "protocol": "wmts",
         "urlTemplate": "https://trek.nasa.gov/tiles/Mars/EQ/THEMIS_DayIR_ControlledMosaics_100m_v2_oct2018/1.0.0/default/default028mm/{z}/{row}/{col}.png",
@@ -387,9 +490,23 @@
         "maxZoom": 9,
         "fallback": null
       },
-      "valueEncoding": { "type": "visual", "description": "Relative brightness of a controlled mosaic: bright = warmer in daytime. Not absolute temperature." },
-      "resolution": { "metersPerPixel": 100, "pixelsPerDegree": null },
-      "coverage": { "global": false, "bbox": { "west": -180, "south": -65, "east": 180, "north": 65 } },
+      "valueEncoding": {
+        "type": "visual",
+        "description": "Relative brightness of a controlled mosaic: bright = warmer in daytime. Not absolute temperature."
+      },
+      "resolution": {
+        "metersPerPixel": 100,
+        "pixelsPerDegree": null
+      },
+      "coverage": {
+        "global": false,
+        "bbox": {
+          "west": -180,
+          "south": -65,
+          "east": 180,
+          "north": 65
+        }
+      },
       "temporal": null,
       "uncertainty": null,
       "attribution": "NASA/JPL-Caltech/Arizona State University — THEMIS via Mars Trek",
@@ -400,9 +517,14 @@
     {
       "id": "layer.themis.night",
       "name": "MO THEMIS-IR Night, Global Mosaic",
-      "label": { "en": "Thermal infrared — night", "es": "Infrarrojo térmico — noche" },
+      "label": {
+        "en": "Thermal infrared — night",
+        "es": "Infrarrojo térmico — noche"
+      },
       "kind": "thermal",
-      "sourceIds": ["src.trek.themis.nightir"],
+      "sourceIds": [
+        "src.trek.themis.nightir"
+      ],
       "access": {
         "protocol": "wmts",
         "urlTemplate": "https://trek.nasa.gov/tiles/Mars/EQ/THEMIS_NightIR_ControlledMosaics_100m_v2_oct2018/1.0.0/default/default028mm/{z}/{row}/{col}.png",
@@ -413,9 +535,23 @@
         "maxZoom": 9,
         "fallback": null
       },
-      "valueEncoding": { "type": "visual", "description": "Relative nighttime brightness: bright = retains heat (rocky / high thermal inertia). Not absolute temperature." },
-      "resolution": { "metersPerPixel": 100, "pixelsPerDegree": null },
-      "coverage": { "global": false, "bbox": { "west": -180, "south": -65, "east": 180, "north": 65 } },
+      "valueEncoding": {
+        "type": "visual",
+        "description": "Relative nighttime brightness: bright = retains heat (rocky / high thermal inertia). Not absolute temperature."
+      },
+      "resolution": {
+        "metersPerPixel": 100,
+        "pixelsPerDegree": null
+      },
+      "coverage": {
+        "global": false,
+        "bbox": {
+          "west": -180,
+          "south": -65,
+          "east": 180,
+          "north": 65
+        }
+      },
       "temporal": null,
       "uncertainty": null,
       "attribution": "NASA/JPL-Caltech/Arizona State University — THEMIS via Mars Trek",
@@ -426,9 +562,14 @@
     {
       "id": "layer.geology.sim3292",
       "name": "Geologic Map of Mars (SIM 3292)",
-      "label": { "en": "Geologic units", "es": "Unidades geológicas" },
+      "label": {
+        "en": "Geologic units",
+        "es": "Unidades geológicas"
+      },
       "kind": "geology",
-      "sourceIds": ["src.usgs.sim3292"],
+      "sourceIds": [
+        "src.usgs.sim3292"
+      ],
       "access": {
         "protocol": "wmts",
         "urlTemplate": "https://trek.nasa.gov/mars/trekarcgis/rest/services/SIM3292_Global_Geology/MapServer/WMTS/tile/1.0.0/SIM3292_Global_Geology/default/default028mm/{z}/{row}/{col}.png",
@@ -439,9 +580,24 @@
         "maxZoom": 11,
         "fallback": null
       },
-      "valueEncoding": { "type": "categorical", "legendUrl": "https://pubs.usgs.gov/sim/3292/" },
-      "resolution": { "metersPerPixel": null, "pixelsPerDegree": null, "mapScale": "1:20,000,000" },
-      "coverage": { "global": true, "bbox": { "west": -180, "south": -90, "east": 180, "north": 90 } },
+      "valueEncoding": {
+        "type": "categorical",
+        "legendUrl": "https://pubs.usgs.gov/sim/3292/"
+      },
+      "resolution": {
+        "metersPerPixel": null,
+        "pixelsPerDegree": null,
+        "mapScale": "1:20,000,000"
+      },
+      "coverage": {
+        "global": true,
+        "bbox": {
+          "west": -180,
+          "south": -90,
+          "east": 180,
+          "north": 90
+        }
+      },
       "temporal": null,
       "uncertainty": null,
       "attribution": "Tanaka et al. (2014), USGS SIM 3292 — via Mars Trek",
@@ -453,9 +609,14 @@
     {
       "id": "layer.jezero.ctx",
       "name": "MRO CTX, Jezero Mosaic, Controlled",
-      "label": { "en": "CTX 6 m (Jezero)", "es": "CTX 6 m (Jezero)" },
+      "label": {
+        "en": "CTX 6 m (Jezero)",
+        "es": "CTX 6 m (Jezero)"
+      },
       "kind": "imagery",
-      "sourceIds": ["src.trek.jezero.ctx"],
+      "sourceIds": [
+        "src.trek.jezero.ctx"
+      ],
       "access": {
         "protocol": "wmts",
         "urlTemplate": "https://trek.nasa.gov/tiles/Mars/EQ/JEZ_ctx_B_soc_008_orthoMosaic_6m_Eqc_latTs0_lon0/1.0.0/default/default028mm/{z}/{row}/{col}.png",
@@ -466,9 +627,23 @@
         "maxZoom": 13,
         "fallback": null
       },
-      "valueEncoding": { "type": "visual", "description": "Panchromatic orthomosaic" },
-      "resolution": { "metersPerPixel": 6, "pixelsPerDegree": null },
-      "coverage": { "global": false, "bbox": { "west": 77.1604655, "south": 18.2110274, "east": 77.6991776, "north": 18.7211945 } },
+      "valueEncoding": {
+        "type": "visual",
+        "description": "Panchromatic orthomosaic"
+      },
+      "resolution": {
+        "metersPerPixel": 6,
+        "pixelsPerDegree": null
+      },
+      "coverage": {
+        "global": false,
+        "bbox": {
+          "west": 77.1604655,
+          "south": 18.2110274,
+          "east": 77.6991776,
+          "north": 18.7211945
+        }
+      },
       "temporal": null,
       "uncertainty": null,
       "attribution": "NASA/JPL-Caltech/MSSS — CTX via Mars Trek",
@@ -479,9 +654,14 @@
     {
       "id": "layer.jezero.hirise",
       "name": "MRO HiRISE, Jezero Mosaic, Controlled",
-      "label": { "en": "HiRISE 25 cm (Jezero)", "es": "HiRISE 25 cm (Jezero)" },
+      "label": {
+        "en": "HiRISE 25 cm (Jezero)",
+        "es": "HiRISE 25 cm (Jezero)"
+      },
       "kind": "imagery",
-      "sourceIds": ["src.trek.jezero.hirise"],
+      "sourceIds": [
+        "src.trek.jezero.hirise"
+      ],
       "access": {
         "protocol": "wmts",
         "urlTemplate": "https://trek.nasa.gov/tiles/Mars/EQ/JEZ_hirise_soc_006_orthoMosaic_25cm_Eqc_latTs0_lon0_first_dd/1.0.0/default/default028mm/{z}/{row}/{col}.png",
@@ -492,9 +672,23 @@
         "maxZoom": 17,
         "fallback": null
       },
-      "valueEncoding": { "type": "visual", "description": "Panchromatic orthomosaic" },
-      "resolution": { "metersPerPixel": 0.25, "pixelsPerDegree": null },
-      "coverage": { "global": false, "bbox": { "west": 77.2229331, "south": 18.3067994, "east": 77.583964, "north": 18.669315 } },
+      "valueEncoding": {
+        "type": "visual",
+        "description": "Panchromatic orthomosaic"
+      },
+      "resolution": {
+        "metersPerPixel": 0.25,
+        "pixelsPerDegree": null
+      },
+      "coverage": {
+        "global": false,
+        "bbox": {
+          "west": 77.2229331,
+          "south": 18.3067994,
+          "east": 77.583964,
+          "north": 18.669315
+        }
+      },
       "temporal": null,
       "uncertainty": null,
       "attribution": "NASA/JPL-Caltech/University of Arizona — HiRISE via Mars Trek",
@@ -505,23 +699,52 @@
     {
       "id": "layer.elevation.mola.global",
       "name": "MOLA MEGDR 4 ppd (MEGT90N000CB)",
-      "label": { "en": "Elevation grid — global", "es": "Malla de elevación — global" },
+      "label": {
+        "en": "Elevation grid — global",
+        "es": "Malla de elevación — global"
+      },
       "kind": "elevation",
-      "sourceIds": ["src.pds.mola.megdr.4ppd"],
+      "sourceIds": [
+        "src.pds.mola.megdr.4ppd"
+      ],
       "access": {
         "protocol": "raster_grid",
         "url": "data/elevation/mola_megdr_4ppd_global.i16",
         "encoding": "int16le",
         "width": 1440,
         "height": 720,
-        "gridExtent": { "west": 0, "south": -90, "east": 360, "north": 90 },
+        "gridExtent": {
+          "west": 0,
+          "south": -90,
+          "east": 360,
+          "north": 90
+        },
         "lonConvention": "0-360E",
         "noData": null
       },
-      "valueEncoding": { "type": "physical", "unit": "m", "scale": 1, "offset": 0 },
-      "resolution": { "metersPerPixel": 14818, "pixelsPerDegree": 4 },
-      "coverage": { "global": true, "bbox": { "west": -180, "south": -90, "east": 180, "north": 90 } },
-      "temporal": { "start": "1997-09-15", "end": "2001-06-30" },
+      "valueEncoding": {
+        "type": "physical",
+        "unit": "m",
+        "scale": 1,
+        "offset": 0
+      },
+      "resolution": {
+        "metersPerPixel": 14818,
+        "pixelsPerDegree": 4
+      },
+      "coverage": {
+        "global": true,
+        "bbox": {
+          "west": -180,
+          "south": -90,
+          "east": 180,
+          "north": 90
+        }
+      },
+      "temporal": {
+        "start": "1997-09-15",
+        "end": "2001-06-30"
+      },
       "uncertainty": null,
       "attribution": "MGS MOLA Science Team / NASA PDS",
       "provenance": "derived",
@@ -531,23 +754,52 @@
     {
       "id": "layer.elevation.mola.jezero",
       "name": "MOLA MEGDR 32 ppd (MEGT90N000FB) — Jezero crop",
-      "label": { "en": "Elevation grid — Jezero", "es": "Malla de elevación — Jezero" },
+      "label": {
+        "en": "Elevation grid — Jezero",
+        "es": "Malla de elevación — Jezero"
+      },
       "kind": "elevation",
-      "sourceIds": ["src.pds.mola.megdr.32ppd"],
+      "sourceIds": [
+        "src.pds.mola.megdr.32ppd"
+      ],
       "access": {
         "protocol": "raster_grid",
         "url": "data/elevation/mola_megdr_32ppd_jezero.i16",
         "encoding": "int16le",
         "width": 192,
         "height": 192,
-        "gridExtent": { "west": 74.5, "south": 15.5, "east": 80.5, "north": 21.5 },
+        "gridExtent": {
+          "west": 74.5,
+          "south": 15.5,
+          "east": 80.5,
+          "north": 21.5
+        },
         "lonConvention": "0-360E",
         "noData": null
       },
-      "valueEncoding": { "type": "physical", "unit": "m", "scale": 1, "offset": 0 },
-      "resolution": { "metersPerPixel": 1852, "pixelsPerDegree": 32 },
-      "coverage": { "global": false, "bbox": { "west": 74.5, "south": 15.5, "east": 80.5, "north": 21.5 } },
-      "temporal": { "start": "1997-09-15", "end": "2001-06-30" },
+      "valueEncoding": {
+        "type": "physical",
+        "unit": "m",
+        "scale": 1,
+        "offset": 0
+      },
+      "resolution": {
+        "metersPerPixel": 1852,
+        "pixelsPerDegree": 32
+      },
+      "coverage": {
+        "global": false,
+        "bbox": {
+          "west": 74.5,
+          "south": 15.5,
+          "east": 80.5,
+          "north": 21.5
+        }
+      },
+      "temporal": {
+        "start": "1997-09-15",
+        "end": "2001-06-30"
+      },
       "uncertainty": null,
       "attribution": "MGS MOLA Science Team / NASA PDS",
       "provenance": "derived",
@@ -558,14 +810,38 @@
     {
       "id": "layer.m20.traverse",
       "name": "Mars 2020 Traverse Path",
-      "label": { "en": "Perseverance traverse", "es": "Ruta de Perseverance" },
+      "label": {
+        "en": "Perseverance traverse",
+        "es": "Ruta de Perseverance"
+      },
       "kind": "traverse",
-      "sourceIds": ["src.m20.mmgis.traverse"],
-      "access": { "protocol": "geojson", "url": "https://mars.nasa.gov/mmgis-maps/M20/Layers/json/M20_traverse.json" },
-      "valueEncoding": { "type": "visual", "description": null },
-      "resolution": { "metersPerPixel": null },
-      "coverage": { "global": false, "bbox": { "west": 77.2, "south": 18.3, "east": 77.6, "north": 18.6 } },
-      "temporal": { "start": "2021-02-18", "end": null },
+      "sourceIds": [
+        "src.m20.mmgis.traverse"
+      ],
+      "access": {
+        "protocol": "geojson",
+        "url": "https://mars.nasa.gov/mmgis-maps/M20/Layers/json/M20_traverse.json"
+      },
+      "valueEncoding": {
+        "type": "visual",
+        "description": null
+      },
+      "resolution": {
+        "metersPerPixel": null
+      },
+      "coverage": {
+        "global": false,
+        "bbox": {
+          "west": 77.2,
+          "south": 18.3,
+          "east": 77.6,
+          "north": 18.6
+        }
+      },
+      "temporal": {
+        "start": "2021-02-18",
+        "end": null
+      },
       "uncertainty": null,
       "attribution": "NASA/JPL-Caltech",
       "provenance": "derived",
@@ -576,14 +852,38 @@
     {
       "id": "layer.m20.waypoints",
       "name": "Mars 2020 Waypoints",
-      "label": { "en": "Rover stops", "es": "Paradas del rover" },
+      "label": {
+        "en": "Rover stops",
+        "es": "Paradas del rover"
+      },
       "kind": "waypoints",
-      "sourceIds": ["src.m20.mmgis.waypoints"],
-      "access": { "protocol": "geojson", "url": "https://mars.nasa.gov/mmgis-maps/M20/Layers/json/M20_waypoints.json" },
-      "valueEncoding": { "type": "visual", "description": null },
-      "resolution": { "metersPerPixel": null },
-      "coverage": { "global": false, "bbox": { "west": 77.2, "south": 18.3, "east": 77.6, "north": 18.6 } },
-      "temporal": { "start": "2021-02-18", "end": null },
+      "sourceIds": [
+        "src.m20.mmgis.waypoints"
+      ],
+      "access": {
+        "protocol": "geojson",
+        "url": "https://mars.nasa.gov/mmgis-maps/M20/Layers/json/M20_waypoints.json"
+      },
+      "valueEncoding": {
+        "type": "visual",
+        "description": null
+      },
+      "resolution": {
+        "metersPerPixel": null
+      },
+      "coverage": {
+        "global": false,
+        "bbox": {
+          "west": 77.2,
+          "south": 18.3,
+          "east": 77.6,
+          "north": 18.6
+        }
+      },
+      "temporal": {
+        "start": "2021-02-18",
+        "end": null
+      },
       "uncertainty": null,
       "attribution": "NASA/JPL-Caltech",
       "provenance": "derived",
@@ -593,14 +893,38 @@
     {
       "id": "layer.m20.raw-images",
       "name": "Mars 2020 Raw Images",
-      "label": { "en": "Rover photos", "es": "Fotos del rover" },
+      "label": {
+        "en": "Rover photos",
+        "es": "Fotos del rover"
+      },
       "kind": "rover_images",
-      "sourceIds": ["src.m20.raw-images"],
-      "access": { "protocol": "json_api", "url": "https://mars.nasa.gov/rss/api/?feed=raw_images&category=mars2020&feedtype=json&sol={sol}" },
-      "valueEncoding": { "type": "visual", "description": "Raw, unprocessed images" },
-      "resolution": { "metersPerPixel": null },
-      "coverage": { "global": false, "bbox": { "west": 77.2, "south": 18.3, "east": 77.6, "north": 18.6 } },
-      "temporal": { "start": "2021-02-18", "end": null },
+      "sourceIds": [
+        "src.m20.raw-images"
+      ],
+      "access": {
+        "protocol": "json_api",
+        "url": "https://mars.nasa.gov/rss/api/?feed=raw_images&category=mars2020&feedtype=json&sol={sol}"
+      },
+      "valueEncoding": {
+        "type": "visual",
+        "description": "Raw, unprocessed images"
+      },
+      "resolution": {
+        "metersPerPixel": null
+      },
+      "coverage": {
+        "global": false,
+        "bbox": {
+          "west": 77.2,
+          "south": 18.3,
+          "east": 77.6,
+          "north": 18.6
+        }
+      },
+      "temporal": {
+        "start": "2021-02-18",
+        "end": null
+      },
       "uncertainty": null,
       "attribution": "NASA/JPL-Caltech",
       "provenance": "measured",
@@ -610,34 +934,235 @@
     {
       "id": "layer.m20.meda",
       "name": "Mars 2020 MEDA weather",
-      "label": { "en": "Surface weather (MEDA)", "es": "Clima en superficie (MEDA)" },
+      "label": {
+        "en": "Surface weather (MEDA)",
+        "es": "Clima en superficie (MEDA)"
+      },
       "kind": "atmosphere",
-      "sourceIds": ["src.m20.meda.weather"],
-      "access": { "protocol": "json_api", "url": "https://mars.nasa.gov/rss/api/?feed=weather&category=mars2020&feedtype=json" },
-      "valueEncoding": { "type": "physical", "unit": "degC / Pa", "scale": 1, "offset": 0 },
-      "resolution": { "metersPerPixel": null },
-      "coverage": { "global": false, "bbox": { "west": 77.2, "south": 18.3, "east": 77.6, "north": 18.6 } },
-      "temporal": { "start": "2021-02-18", "end": null },
+      "sourceIds": [
+        "src.m20.meda.weather"
+      ],
+      "access": {
+        "protocol": "json_api",
+        "url": "https://mars.nasa.gov/rss/api/?feed=weather&category=mars2020&feedtype=json"
+      },
+      "valueEncoding": {
+        "type": "physical",
+        "unit": "degC / Pa",
+        "scale": 1,
+        "offset": 0
+      },
+      "resolution": {
+        "metersPerPixel": null
+      },
+      "coverage": {
+        "global": false,
+        "bbox": {
+          "west": 77.2,
+          "south": 18.3,
+          "east": 77.6,
+          "north": 18.6
+        }
+      },
+      "temporal": {
+        "start": "2021-02-18",
+        "end": null
+      },
       "uncertainty": null,
       "attribution": "NASA/JPL-Caltech/CAB(CSIC-INTA)",
       "provenance": "measured",
       "synthetic": false,
       "defaultOpacity": 1
+    },
+    {
+      "id": "layer.elevation.ctx.jezero",
+      "name": "M20_JezeroCrater_CTXDEM_20m",
+      "label": {
+        "en": "Elevation — CTX DEM 20 m (Jezero)",
+        "es": "Elevación — DEM CTX 20 m (Jezero)"
+      },
+      "kind": "elevation",
+      "sourceIds": [
+        "src.usgs.ctx-dem.jezero-20m"
+      ],
+      "access": {
+        "protocol": "raster_pyramid",
+        "url": "data/elevation/ctx-jezero-20m",
+        "encoding": "int16le",
+        "compression": "gzip",
+        "scale": 0.25,
+        "offset": 0,
+        "noData": -32768,
+        "tileSize": 256,
+        "gridExtent": {
+          "west": 76.99743706146,
+          "east": 78.5825633240882,
+          "south": 17.5805199105448,
+          "north": 19.2901870068662
+        },
+        "lonConvention": "-180-180",
+        "levels": [
+          {
+            "level": 0,
+            "metersPerPixel": 20,
+            "width": 4456,
+            "height": 5067
+          },
+          {
+            "level": 1,
+            "metersPerPixel": 40,
+            "width": 2228,
+            "height": 2534
+          },
+          {
+            "level": 2,
+            "metersPerPixel": 80,
+            "width": 1114,
+            "height": 1267
+          },
+          {
+            "level": 3,
+            "metersPerPixel": 160,
+            "width": 557,
+            "height": 634
+          },
+          {
+            "level": 4,
+            "metersPerPixel": 320,
+            "width": 279,
+            "height": 317
+          },
+          {
+            "level": 5,
+            "metersPerPixel": 640,
+            "width": 140,
+            "height": 159
+          }
+        ]
+      },
+      "valueEncoding": {
+        "type": "physical",
+        "unit": "m",
+        "scale": 0.25,
+        "offset": 0
+      },
+      "resolution": {
+        "metersPerPixel": 20,
+        "pixelsPerDegree": null
+      },
+      "coverage": {
+        "global": false,
+        "bbox": {
+          "west": 76.99743706146,
+          "south": 17.5805199105448,
+          "east": 78.5825633240882,
+          "north": 19.2901870068662
+        }
+      },
+      "temporal": null,
+      "uncertainty": null,
+      "attribution": "USGS Astrogeology / NASA-JPL — CTX DEM 20 m",
+      "provenance": "derived",
+      "synthetic": false,
+      "defaultOpacity": 1,
+      "notes": "Loaded on demand per tile. Levels 1–5 are block-averaged overviews (40–640 m) used only when zoomed out. 20 m does not resolve rocks or small scarps; not a safety clearance."
+    },
+    {
+      "id": "layer.elevation.mola.128ppd",
+      "name": "MOLA MEGDR 128 ppd (on demand)",
+      "label": {
+        "en": "Elevation — MOLA 463 m (any region, on demand)",
+        "es": "Elevación — MOLA 463 m (cualquier región, bajo demanda)"
+      },
+      "kind": "elevation",
+      "sourceIds": [
+        "src.pds.mola.megdr.128ppd"
+      ],
+      "access": {
+        "protocol": "raster_service",
+        "url": "/api/elevation/mola128",
+        "pixelsPerDegree": 128,
+        "cropDegrees": 2,
+        "lonConvention": "0-360E",
+        "coverageLat": [
+          -88,
+          88
+        ]
+      },
+      "valueEncoding": {
+        "type": "physical",
+        "unit": "m",
+        "scale": 1,
+        "offset": 0
+      },
+      "resolution": {
+        "metersPerPixel": 463,
+        "pixelsPerDegree": 128
+      },
+      "coverage": {
+        "global": true,
+        "bbox": {
+          "west": -180,
+          "south": -88,
+          "east": 180,
+          "north": 88
+        }
+      },
+      "temporal": {
+        "start": "1997-09-15",
+        "end": "2001-06-30"
+      },
+      "uncertainty": null,
+      "attribution": "MGS MOLA Science Team / NASA PDS",
+      "provenance": "derived",
+      "synthetic": false,
+      "defaultOpacity": 1,
+      "notes": "Requires the MARS OS backend. Without it, the 4 ppd global grid is used and labelled as such."
     }
   ],
   "regions": [
     {
       "id": "region.jezero",
       "name": "Jezero",
-      "label": { "en": "Jezero Crater", "es": "Cráter Jezero" },
+      "label": {
+        "en": "Jezero Crater",
+        "es": "Cráter Jezero"
+      },
       "type": "crater",
       "crs": "IAU_2015:49900",
-      "center": { "lat": 18.4082, "lon": 77.68734927, "elevation_m": null },
-      "bbox": { "west": 75.1537692, "south": 15.9058484, "east": 78.8717121, "north": 19.4453003 },
+      "center": {
+        "lat": 18.4082,
+        "lon": 77.68734927,
+        "elevation_m": null
+      },
+      "bbox": {
+        "west": 75.1537692,
+        "south": 15.9058484,
+        "east": 78.8717121,
+        "north": 19.4453003
+      },
       "polygon": null,
-      "lod": { "minZoom": 0, "maxZoom": 17, "recommendedZoom": 9 },
-      "layerIds": ["layer.viking.color", "layer.mola.shade", "layer.themis.day", "layer.themis.night", "layer.geology.sim3292", "layer.jezero.ctx", "layer.jezero.hirise", "layer.elevation.mola.jezero", "layer.m20.traverse", "layer.m20.waypoints"],
-      "sourceIds": ["src.trek.nomenclature.jezero"],
+      "lod": {
+        "minZoom": 0,
+        "maxZoom": 17,
+        "recommendedZoom": 9
+      },
+      "layerIds": [
+        "layer.viking.color",
+        "layer.mola.shade",
+        "layer.themis.day",
+        "layer.themis.night",
+        "layer.geology.sim3292",
+        "layer.jezero.ctx",
+        "layer.jezero.hirise",
+        "layer.elevation.mola.jezero",
+        "layer.m20.traverse",
+        "layer.m20.waypoints",
+        "layer.elevation.ctx.jezero"
+      ],
+      "sourceIds": [
+        "src.trek.nomenclature.jezero"
+      ],
       "parentId": null,
       "description": {
         "en": "Ancient lake basin with a preserved delta, explored by Perseverance since 2021. Center from the IAU nomenclature index; bbox from the Mars Trek Perseverance bookmark.",
@@ -649,15 +1174,36 @@
     {
       "id": "region.jezero.hirise-coverage",
       "name": "MRO HiRISE, Jezero Mosaic, Controlled — coverage",
-      "label": { "en": "High-resolution zone (HiRISE 25 cm)", "es": "Zona de alta resolución (HiRISE 25 cm)" },
+      "label": {
+        "en": "High-resolution zone (HiRISE 25 cm)",
+        "es": "Zona de alta resolución (HiRISE 25 cm)"
+      },
       "type": "coverage",
       "crs": "IAU_2015:49900",
-      "center": { "lat": 18.48805745, "lon": 77.40344855, "elevation_m": null },
-      "bbox": { "west": 77.2229331, "south": 18.3067994, "east": 77.583964, "north": 18.669315 },
+      "center": {
+        "lat": 18.48805745,
+        "lon": 77.40344855,
+        "elevation_m": null
+      },
+      "bbox": {
+        "west": 77.2229331,
+        "south": 18.3067994,
+        "east": 77.583964,
+        "north": 18.669315
+      },
       "polygon": null,
-      "lod": { "minZoom": 10, "maxZoom": 17, "recommendedZoom": 14 },
-      "layerIds": ["layer.jezero.hirise", "layer.jezero.ctx"],
-      "sourceIds": ["src.trek.jezero.hirise"],
+      "lod": {
+        "minZoom": 10,
+        "maxZoom": 17,
+        "recommendedZoom": 14
+      },
+      "layerIds": [
+        "layer.jezero.hirise",
+        "layer.jezero.ctx"
+      ],
+      "sourceIds": [
+        "src.trek.jezero.hirise"
+      ],
       "parentId": "region.jezero",
       "description": {
         "en": "Footprint of the 25 cm HiRISE orthomosaic. Only here can the terrain be inspected at walking scale.",
@@ -669,15 +1215,36 @@
     {
       "id": "region.m20.landing",
       "name": "Octavia E. Butler Landing",
-      "label": { "en": "Perseverance landing site", "es": "Sitio de aterrizaje de Perseverance" },
+      "label": {
+        "en": "Perseverance landing site",
+        "es": "Sitio de aterrizaje de Perseverance"
+      },
       "type": "landing_site",
       "crs": "IAU_2015:49900",
-      "center": { "lat": 18.44462715, "lon": 77.45088573, "elevation_m": -2569.91 },
-      "bbox": { "west": 77.43, "south": 18.43, "east": 77.47, "north": 18.46 },
+      "center": {
+        "lat": 18.44462715,
+        "lon": 77.45088573,
+        "elevation_m": -2569.91
+      },
+      "bbox": {
+        "west": 77.43,
+        "south": 18.43,
+        "east": 77.47,
+        "north": 18.46
+      },
       "polygon": null,
-      "lod": { "minZoom": 12, "maxZoom": 17, "recommendedZoom": 15 },
-      "layerIds": ["layer.jezero.hirise", "layer.m20.waypoints"],
-      "sourceIds": ["src.m20.mmgis.waypoints"],
+      "lod": {
+        "minZoom": 12,
+        "maxZoom": 17,
+        "recommendedZoom": 15
+      },
+      "layerIds": [
+        "layer.jezero.hirise",
+        "layer.m20.waypoints"
+      ],
+      "sourceIds": [
+        "src.m20.mmgis.waypoints"
+      ],
       "parentId": "region.jezero.hirise-coverage",
       "description": {
         "en": "Center = first Perseverance waypoint (RMC 3_0, sol 13). The bbox is a display window chosen by the team, not a mission boundary.",
@@ -692,13 +1259,27 @@
       "id": "feature.m20.waypoint.3-0",
       "regionId": "region.m20.landing",
       "name": "RMC 3_0",
-      "label": { "en": "First recorded rover position", "es": "Primera posición registrada del rover" },
+      "label": {
+        "en": "First recorded rover position",
+        "es": "Primera posición registrada del rover"
+      },
       "kind": "landing_point",
-      "position": { "lat": 18.44462715, "lon": 77.45088572, "elevation_m": -2569.91 },
+      "position": {
+        "lat": 18.44462715,
+        "lon": 77.45088572,
+        "elevation_m": -2569.91
+      },
       "observedAt": null,
       "sol": 13,
-      "properties": { "site": 3, "drive": 0, "elev_radii": -4253.47, "radius_m": 3391936.53 },
-      "sourceIds": ["src.m20.mmgis.waypoints"],
+      "properties": {
+        "site": 3,
+        "drive": 0,
+        "elev_radii": -4253.47,
+        "radius_m": 3391936.53
+      },
+      "sourceIds": [
+        "src.m20.mmgis.waypoints"
+      ],
       "uncertainty": null,
       "provenance": "derived",
       "synthetic": false
@@ -707,14 +1288,26 @@
   "referenceValues": [
     {
       "id": "ref.rad.gale.dose-rate",
-      "label": { "en": "Surface dose equivalent rate (Gale Crater, MSL RAD)", "es": "Tasa de dosis equivalente en superficie (cráter Gale, MSL RAD)" },
+      "label": {
+        "en": "Surface dose equivalent rate (Gale Crater, MSL RAD)",
+        "es": "Tasa de dosis equivalente en superficie (cráter Gale, MSL RAD)"
+      },
       "quantity": "dose_equivalent_rate",
       "value": 0.64,
       "uncertainty": 0.12,
       "unit": "mSv/day",
-      "location": { "lat": -4.59, "lon": 137.44, "elevation_m": null },
-      "period": { "start": "2012-08-07", "end": "2013-06-01" },
-      "sourceIds": ["src.msl.rad.hassler2014"],
+      "location": {
+        "lat": -4.59,
+        "lon": 137.44,
+        "elevation_m": null
+      },
+      "period": {
+        "start": "2012-08-07",
+        "end": "2013-06-01"
+      },
+      "sourceIds": [
+        "src.msl.rad.hassler2014"
+      ],
       "provenance": "measured",
       "notes": {
         "en": "Measured at Gale Crater (not Jezero) between Aug 2012 and Jun 2013, near the maximum of solar cycle 24. Location shown is the approximate Bradbury Landing area. Reference value only, not a live reading.",

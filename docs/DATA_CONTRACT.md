@@ -76,6 +76,8 @@ Required: `id, title, kind (dataset|tile_service|api|publication|map|mission_pag
 | `kind` | `imagery, elevation, shaded_relief, thermal, geology, mineralogy, atmosphere, radiation, traverse, waypoints, rover_images` |
 | `access.protocol = "wmts"` | `urlTemplate` with `{z} {row} {col}`; `tileMatrixSet: "trek-eq-2x1"` (zoom 0 = 2 cols × 1 row of 256 px tiles, as in Mars Trek EQ); `minZoom/maxZoom` taken from the service's `WMTSCapabilities.xml`; optional `fallback` (local copy of low zooms) |
 | `access.protocol = "raster_grid"` | Binary grid: `url, encoding (int16le|float32le), width, height, gridExtent (pixel-is-area edges, in lonConvention), lonConvention ("-180-180"|"0-360E"), noData` |
+| `access.protocol = "raster_pyramid"` | On-demand tiles `{url}/{level}/{row}_{col}.i16.gz`. `int16le` × `scale` + `offset`, `noData`, `tileSize`, `gridExtent`, and `levels[]` (level 0 = native data, others are labelled block-averaged overviews). Example: the CTX DEM 20 m. |
+| `access.protocol = "raster_service"` | Crops served by the MARS OS backend (`url?lat0=&lon0=`), with `pixelsPerDegree`, `cropDegrees` and `coverageLat`. Example: MOLA 128 ppd. |
 | `access.protocol = "geojson"` / `"json_api"` | `url` (with `{placeholders}` for APIs) |
 | `valueEncoding` | `visual` (picture for display, **not numeric**), `physical` (`unit, scale, offset`), or `categorical` (`legendUrl`). Example: Mars Trek "DEM" PNG tiles are 8-bit stretched images, so they are `visual`. Numeric elevation must come from a `raster_grid`. |
 | `resolution` | Native resolution of the **original** product: `metersPerPixel`, `pixelsPerDegree`, or `mapScale` for vector maps |
@@ -125,7 +127,7 @@ Limits: |delta| ≤ 2000 m (validator), radius ≤ 200 km, ≤ 64 patches per pr
 
 ### ChangeProposal
 
-`id, createdAt, origin {kind: ai|human|ingest|system, id, model?, version?}, regionIds (catalog regions and/or cell ids), patches[], evidence[] (≥1), confidence 0..1, risk low|medium|high, rationale (LocalizedText), status, review|null, appliedVersionId|null, synthetic`.
+`id, createdAt, origin {kind: ai|human|ingest|system, id, model?, version?}, regionIds (catalog regions and/or cell ids), patches[], evidence[] (≥1), confidence 0..1, confidenceBasis? (LocalizedText explaining how confidence was computed; for AI proposals it is rule-based by MARS OS, never self-reported), risk low|medium|high, rationale (LocalizedText), status, review|null, appliedVersionId|null, synthetic`.
 
 Evidence: `kind (dataset|image|publication|report|news|rover_observation|user_note), sourceId|null, url|null, description (LocalizedText), retrievedAt, verified (true only if cross-checked against an authoritative product), synthetic`.
 

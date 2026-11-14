@@ -1,0 +1,32 @@
+{
+  "created": "2026-11-14",
+  "region": "Jezero Crater",
+  "assets": [
+    {
+      "file": "M20_JezeroCrater_CTXDEM_20m.tif",
+      "status": "downloaded_verified",
+      "bytes": 90345300,
+      "sha256": "ba7f706ea1b5d63a562f28a7dcf7a7f3c79bce7f048e6974b57e8a33c30d1ba2",
+      "source": "https://planetarymaps.usgs.gov/mosaic/mars2020_trn/CTX/ScienceInvestigationMaps_JPL/M20_JezeroCrater_CTXDEM_20m.tif"
+    },
+    {
+      "file": "M20_JezeroCrater_CTXDEM_20m.xml",
+      "status": "downloaded_verified",
+      "bytes": 8786,
+      "sha256": "ddf03b3de30ffee3d04baea2c8ebdf4558b5490a84989440c7447658c2f62732",
+      "source": "https://planetarymaps.usgs.gov/mosaic/mars2020_trn/CTX/ScienceInvestigationMaps_JPL/M20_JezeroCrater_CTXDEM_20m.xml"
+    },
+    {
+      "file": "JEZ_hirise_soc_006_DTM_MOLAtopography_DeltaGeoid_1m_Eqc_latTs0_lon0_blend40.tif",
+      "status": "not_downloaded",
+      "size_label": "1.8 GB",
+      "source": "https://planetarymaps.usgs.gov/mosaic/mars2020_trn/HiRISE/JEZ_hirise_soc_006_DTM_MOLAtopography_DeltaGeoid_1m_Eqc_latTs0_lon0_blend40.tif"
+    },
+    {
+      "file": "MSR_TRN_HiRISE_soc_003_USGS_release_aug2024_mosaics.zip",
+      "status": "not_downloaded",
+      "size_label": "5.3 GB",
+      "source": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Mars/MSR_TRN_HiRISE_soc_003_USGS_release_aug2024/MSR_TRN_HiRISE_soc_003_USGS_release_aug2024_mosaics.zip"
+    }
+  ]
+}

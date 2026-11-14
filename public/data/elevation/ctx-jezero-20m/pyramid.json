@@ -1,0 +1,77 @@
+{
+  "generatedAt": "2026-11-14T18:41:57.617Z",
+  "generator": "scripts/build-ctx-pyramid.mjs",
+  "source": {
+    "file": "M20_JezeroCrater_CTXDEM_20m.tif",
+    "sha256": "ba7f706ea1b5d63a562f28a7dcf7a7f3c79bce7f048e6974b57e8a33c30d1ba2",
+    "url": "https://planetarymaps.usgs.gov/mosaic/mars2020_trn/CTX/ScienceInvestigationMaps_JPL/M20_JezeroCrater_CTXDEM_20m.tif"
+  },
+  "encoding": {
+    "type": "int16le",
+    "scale": 0.25,
+    "offset": 0,
+    "noData": -32768,
+    "compression": "gzip",
+    "tileSize": 256
+  },
+  "gridExtent": {
+    "west": 76.99743706146,
+    "east": 78.5825633240882,
+    "south": 17.5805199105448,
+    "north": 19.2901870068662
+  },
+  "levels": [
+    {
+      "level": 0,
+      "metersPerPixel": 20,
+      "width": 4456,
+      "height": 5067
+    },
+    {
+      "level": 1,
+      "metersPerPixel": 40,
+      "width": 2228,
+      "height": 2534
+    },
+    {
+      "level": 2,
+      "metersPerPixel": 80,
+      "width": 1114,
+      "height": 1267
+    },
+    {
+      "level": 3,
+      "metersPerPixel": 160,
+      "width": 557,
+      "height": 634
+    },
+    {
+      "level": 4,
+      "metersPerPixel": 320,
+      "width": 279,
+      "height": 317
+    },
+    {
+      "level": 5,
+      "metersPerPixel": 640,
+      "width": 140,
+      "height": 159
+    }
+  ],
+  "stats": {
+    "validPixels": 22564575,
+    "min_m": -3504.645263671875,
+    "max_m": -475.8408203125
+  },
+  "sanityCheck": {
+    "lat": 18.44462715,
+    "lon": 77.45088573,
+    "ctxValue_m": -2567.35693359375,
+    "roverReportedElevGeoid_m": -2569.91,
+    "reference": "M20_waypoints.json RMC 3_0 (sol 13)"
+  },
+  "totals": {
+    "files": 489,
+    "gzBytes": 34502272
+  }
+}

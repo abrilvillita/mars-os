@@ -69,6 +69,7 @@ export const ChangeProposal = z.object({
   patches: z.array(GeometryPatch).min(1),
   evidence: z.array(Evidence).min(1),
   confidence: z.number().min(0).max(1),
+  confidenceBasis: LocalizedText.nullable().optional().describe('How confidence was computed (e.g. rule-based from data agreement — never self-reported by an AI)'),
   risk: z.enum(['low', 'medium', 'high']).describe('Impact on mission safety if the change is wrong'),
   rationale: LocalizedText,
   status: ProposalStatus,

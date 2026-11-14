@@ -18,6 +18,16 @@ export interface HoverInfo {
   distanceKm: number;
 }
 
+/** A location fixed by clicking the terrain. Cursor movement never overwrites it. */
+export interface PinnedLocation {
+  lat: number;
+  lon: number;
+  distanceKm: number;
+  cellId: string;
+  cellZoom: number;
+  pinnedAt: number;
+}
+
 export interface CameraTarget {
   lat: number;
   lon: number;
@@ -48,7 +58,12 @@ interface UIState {
   panelsOpen: { left: boolean; right: boolean };
 
   hover: HoverInfo | null;
-  pick: HoverInfo | null;
+  /** Fixed selection (persists while the cursor moves or panels scroll). */
+  pick: PinnedLocation | null;
+  /** When true, clicks on the terrain do not replace the pinned location. */
+  pinLocked: boolean;
+  /** One-shot: the next terrain click replaces the pin even if locked. */
+  repinArmed: boolean;
   selectedCellId: string | null;
   cellZoom: number;
   nodeGridSize: number;
@@ -89,6 +104,8 @@ export const useUI = create<UIState>((set) => ({
 
   hover: null,
   pick: null,
+  pinLocked: false,
+  repinArmed: false,
   selectedCellId: null,
   cellZoom: 12,
   nodeGridSize: 9,

@@ -46,6 +46,8 @@ const MAX_ABS_DELTA_M = 2000;
 
 export class ProposalService {
   private proposals = new Map<string, ChangeProposalT>();
+  /** Simulated proposals are only accepted in demo mode. */
+  allowSynthetic = false;
   policy: ApprovalPolicy = { mode: 'manual', autoMinConfidence: 0.9, autoMaxRisk: 'low', autoRequireVerifiedEvidence: true };
 
   private history: VersionStore;
@@ -82,6 +84,8 @@ export class ProposalService {
     const p = parsed.data;
     const errors: string[] = [], warnings: string[] = [];
     if (this.proposals.has(p.id)) errors.push(`Duplicate proposal id ${p.id}`);
+    if (!this.allowSynthetic && (p.synthetic || p.evidence.some((e) => e.synthetic)))
+      errors.push('Simulated proposals are only accepted in demo mode');
     if (p.patches.length > MAX_PATCHES) errors.push(`Too many patches (${p.patches.length} > ${MAX_PATCHES})`);
     const regionBoxes = p.regionIds.map((id) => [id, this.regionBBox(id)] as const);
     for (const [id, b] of regionBoxes) if (!b) errors.push(`Unknown region or cell id: ${id}`);
@@ -115,6 +119,7 @@ export class ProposalService {
     const pol = this.policy;
     const riskRank = { low: 0, medium: 1, high: 2 } as const;
     if (p.synthetic || warnings.includes('synthetic')) return false;
+    if (p.origin.kind === 'ai') return false; // AI changes ALWAYS need a human reviewer
     if (p.confidence < pol.autoMinConfidence) return false;
     if (riskRank[p.risk] > riskRank[pol.autoMaxRisk]) return false;
     if (pol.autoRequireVerifiedEvidence && warnings.includes('no_verified_evidence')) return false;

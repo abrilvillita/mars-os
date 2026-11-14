@@ -245,11 +245,12 @@ export class Globe extends THREE.Group {
     const P = new Float32Array(E * E * 3);
     const ex = this.exaggeration;
     const tmp = [0, 0, 0];
+    const wantMpp = tileWidthM(t.key) / SEG; // ask elevation pyramids for a matching level only
     for (let j = 0; j < E; j++) {
       const lat = Math.max(-90, Math.min(90, b.north - (j - 1) * dLat));
       for (let i = 0; i < E; i++) {
         const lon = b.west + (i - 1) * dLon;
-        const { h, edit, prev } = this.terrain.heightFast(lat, lon > 180 ? lon - 360 : lon < -180 ? lon + 360 : lon, rel);
+        const { h, edit, prev } = this.terrain.heightFast(lat, lon > 180 ? lon - 360 : lon < -180 ? lon + 360 : lon, rel, wantMpp);
         const k = j * E + i;
         H[k] = h; ED[k] = edit; PV[k] = prev;
         latLonToXYZ(lat, lon, h * ex, tmp);

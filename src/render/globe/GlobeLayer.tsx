@@ -61,6 +61,7 @@ export function GlobeLayer() {
 
   // pointer: hover (throttled) and click picking
   const lastFrame = useRef(performance.now());
+  const lastDetail = useRef(0);
   const down = useRef<{ x: number; y: number } | null>(null);
   const lastHover = useRef(0);
   useEffect(() => {
@@ -105,17 +106,26 @@ export function GlobeLayer() {
           return;
         }
       }
-      // 3) surface point → select editable cell
+      // 3) surface point → pin location + select editable cell (unless the pin is locked)
+      if (st.pinLocked && !st.repinArmed) return;
       const p = pick(e.clientX, e.clientY);
       if (!p) return;
       const z = st.cellZoom;
       const id = cellId(tileAt(p.lat, p.lon, z));
-      st.set({ pick: p, selectedCellId: id, selectedNodeIds: [] });
+      st.set({
+        pick: { lat: p.lat, lon: p.lon, distanceKm: p.distanceKm, cellId: id, cellZoom: z, pinnedAt: Date.now() },
+        repinArmed: false,
+        selectedCellId: id,
+        selectedNodeIds: [],
+      });
     };
+    const onLeave = () => ui.getState().set({ hover: null }); // preview only; the pin is untouched
+    el.addEventListener('pointerleave', onLeave);
     el.addEventListener('pointerdown', onDown);
     el.addEventListener('pointermove', onMove);
     el.addEventListener('pointerup', onUp);
     return () => {
+      el.removeEventListener('pointerleave', onLeave);
       el.removeEventListener('pointerdown', onDown);
       el.removeEventListener('pointermove', onMove);
       el.removeEventListener('pointerup', onUp);
@@ -167,6 +177,14 @@ export function GlobeLayer() {
     const hi = st.vectors.regions && st.camera.distance < 900 ? os.regions.get('region.jezero.hirise-coverage') : null;
     if (hi) g.uHiBox.value.set(hi.bbox.west, hi.bbox.south, hi.bbox.east, hi.bbox.north);
     else g.uHiBox.value.set(0, 0, 0, 0);
+    // progressive detail: when close to the surface (or a location is pinned), request
+    // on-demand elevation (MOLA 128 ppd via backend) for that area — anywhere on Mars
+    const nowD = performance.now();
+    if (nowD - lastDetail.current > 600) {
+      lastDetail.current = nowD;
+      if (st.camera.distance < 1500) os.terrain.ensureDetail(st.camera.lat, st.camera.lon, Math.min(2, st.camera.distance / 120));
+      if (st.pick) os.terrain.ensureDetail(st.pick.lat, st.pick.lon, 0);
+    }
     const t0 = performance.now();
     globe.update(camera as THREE.PerspectiveCamera, size.height);
     const st2 = renderBridge.stats;

@@ -8,6 +8,7 @@ import { GlobeLayer } from './globe/GlobeLayer';
 import { NodeGrid } from './overlays/NodeGrid';
 import { RegionLabels } from './overlays/RegionLabels';
 import { RoverLayer } from './overlays/RoverLayer';
+import { LocationMarkers } from './overlays/LocationMarkers';
 import { DustStorm } from './scene/DustStorm';
 import { Atmosphere, Moons, SkyAndHaze, StarField, SunGlare, TimeDriver } from './scene/Environment';
 import { renderBridge } from './bridge';
@@ -47,6 +48,7 @@ export function MarsScene() {
       <RoverLayer />
       <NodeGrid />
       <RegionLabels />
+      <LocationMarkers />
     </Canvas>
   );
 }

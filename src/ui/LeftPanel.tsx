@@ -112,7 +112,7 @@ export function LeftPanel() {
   const os = getMarsOS();
   const s = useUI();
   const layers = (ids: string[]) => ids.map((id) => os.catalog.layer(id)).filter((l): l is LayerT => !!l);
-  const elev = layers(['layer.elevation.mola.global', 'layer.elevation.mola.jezero']);
+  const elev = layers(['layer.elevation.ctx.jezero', 'layer.elevation.mola.128ppd', 'layer.elevation.mola.jezero', 'layer.elevation.mola.global']);
 
   return (
     <aside className={`panel left ${s.panelsOpen.left ? '' : 'collapsed'}`}>

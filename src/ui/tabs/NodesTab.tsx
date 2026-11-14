@@ -66,6 +66,24 @@ export function NodesTab() {
           {sample && (
             <KV k={t('nodes.spacing')}>{fmtM(sample.spacingM.ew)} × {fmtM(sample.spacingM.ns)}</KV>
           )}
+          {(() => {
+            // progressive detail: report what the data at this cell actually supports
+            const c = { lat: (cell.bbox.north + cell.bbox.south) / 2, lon: (cell.bbox.east + cell.bbox.west) / 2 };
+            const r = os.terrain.resolutionAt(c.lat, c.lon);
+            const st = os.terrain.onDemandStatus();
+            if (!r.metersPerPixel) return null;
+            const n = Math.max(2, Math.min(33, Math.floor(cell.widthM / r.metersPerPixel) + 1));
+            const best = [5, 9, 17, 33].filter((g) => g <= Math.max(5, n)).pop()!;
+            const src = os.catalog.layer(r.layerId);
+            return (
+              <div className="data-support">
+                <p className="small">{t('nodes.dataSupports', { src: src?.name ?? r.layerId, res: fmtM(r.metersPerPixel), n })}</p>
+                {best !== s.nodeGridSize && <button className="link" onClick={() => s.set({ nodeGridSize: best, selectedNodeIds: [] })}>{t('nodes.snap')} ({best}×{best})</button>}
+                {st.pendingTiles > 0 && <p className="small muted">{t('nodes.loadingDetail')}</p>}
+                {st.error && <p className="small warn">{t('nodes.detailError', { err: st.error })}</p>}
+              </div>
+            );
+          })()}
           {sample?.interpolated && <p className="warn-box">{t('nodes.interpolatedWarn', { res: fmtM(sample.sourceMetersPerPixel) })}</p>}
 
           <p className="hint">{t('nodes.selectHint')}</p>

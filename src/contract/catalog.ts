@@ -66,6 +66,32 @@ export const LayerAccess = z.discriminatedUnion('protocol', [
     noData: z.number().nullable(),
   }),
   z.object({
+    protocol: z.literal('raster_pyramid'),
+    url: z.string().describe('Folder containing pyramid.json and {level}/{row}_{col}.i16[.gz] tiles'),
+    encoding: z.literal('int16le'),
+    compression: z.enum(['gzip', 'none']),
+    scale: z.number().positive().describe('meters = raw * scale + offset'),
+    offset: z.number(),
+    noData: z.number().int(),
+    tileSize: z.number().int().positive(),
+    gridExtent: z
+      .object({ west: z.number().min(-180).max(360), south: z.number().min(-90).max(90), east: z.number().min(-180).max(360), north: z.number().min(-90).max(90) })
+      .describe('Outer edges of the full-resolution grid (pixel-is-area)'),
+    lonConvention: z.enum(['-180-180', '0-360E']),
+    levels: z
+      .array(z.object({ level: z.number().int().min(0), metersPerPixel: z.number().positive(), width: z.number().int().positive(), height: z.number().int().positive() }))
+      .min(1)
+      .describe('Level 0 = native data; higher levels = block-averaged overviews (labelled with their coarser resolution)'),
+  }),
+  z.object({
+    protocol: z.literal('raster_service'),
+    url: z.string().describe('MARS OS backend endpoint returning int16le crops, queried with ?lat0=&lon0= (south-west corner, degrees)'),
+    pixelsPerDegree: z.number().positive(),
+    cropDegrees: z.number().positive().describe('Width/height of each crop in degrees'),
+    lonConvention: z.enum(['-180-180', '0-360E']),
+    coverageLat: z.tuple([z.number(), z.number()]).describe('[min, max] latitude served'),
+  }),
+  z.object({
     protocol: z.literal('geojson'),
     url: z.string(),
   }),
