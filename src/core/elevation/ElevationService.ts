@@ -314,7 +314,11 @@ export class ServiceSampler implements Sampler {
         })
         .catch((e: Error) => {
           this.crops.set(key, 'failed');
-          this.lastError = e.message;
+          if (/HTTP 404/.test(e.message)) {
+            // static deployment (e.g. GitHub Pages): no MARS OS backend — stop asking, say so
+            this.available = false;
+            this.lastError = 'MARS OS backend not available in this deployment (static site)';
+          } else this.lastError = e.message;
         });
     }
   }
