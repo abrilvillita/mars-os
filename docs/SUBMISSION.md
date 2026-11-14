@@ -18,7 +18,8 @@ MARS OS is an interactive 3D Mars that combines data from several NASA missions 
 
 ## Link to Project Demo
 
-[TODO: public link to slides (≤ 7 slides) or video (≤ 30 s, English subtitles)]
+- Slide deck (7 slides, English): https://abrilvilla.dev/mars-os/deck/
+- PDF version: https://abrilvilla.dev/mars-os/deck/MARS_OS_demo_deck.pdf
 
 ## Link to Final Project
 

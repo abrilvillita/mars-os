@@ -294,3 +294,7 @@ table.wx th { color: var(--muted); font-weight: 500; }
 }
 @media (max-width: 1350px) { .clock-main .sep.ls { display: none; } }
 @media (max-width: 1150px) { .clock-main .sol + .sep { display: none; } }
+
+/* presentation mode (?ui=0): only the 3D view */
+body.presentation .topbar, body.presentation .panel, body.presentation .hud, body.presentation .controls-hint,
+body.presentation .attribution, body.presentation .demo-banner { display: none !important; }

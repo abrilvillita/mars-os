@@ -106,10 +106,11 @@ export function SkyAndHaze() {
 }
 
 /** Daytime Martian sky colours (visual approximation of rover sky images). */
+// authored as sRGB (as seen in rover images) and converted to the linear space the shaders use
 export const SKY = {
-  horizon: new THREE.Color(0.86, 0.66, 0.48),
-  zenith: new THREE.Color(0.55, 0.38, 0.29),
-  sunsetBlue: new THREE.Color(0.42, 0.58, 0.82),
+  horizon: new THREE.Color().setRGB(0.79, 0.6, 0.45, THREE.SRGBColorSpace),
+  zenith: new THREE.Color().setRGB(0.47, 0.33, 0.27, THREE.SRGBColorSpace),
+  sunsetBlue: new THREE.Color().setRGB(0.45, 0.6, 0.8, THREE.SRGBColorSpace),
 };
 
 /**

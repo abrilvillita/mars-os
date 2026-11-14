@@ -11,6 +11,7 @@ import './ui/styles.css';
 import { FeatureStatus } from './ui/FeatureStatus';
 import { DEMO_MODE } from './state/mode';
 import { API_BASE } from './api/apiBase';
+import { applyDeepLink } from './state/deepLink';
 
 const CATALOGS = ['data/catalog/jezero.catalog.json'];
 
@@ -52,6 +53,7 @@ export default function App() {
     else setState('ready');
     // opening shot: whole planet, Jezero facing the viewer
     Object.assign(renderBridge.rig, { lat: 18.4, lon: 77.5, distance: 14000, heading: 0, tilt: 0 });
+    applyDeepLink(); // shareable views (?lat=&lon=&dist=&tilt=&pin=…)
   }, []);
 
   if (state === 'error') {
