@@ -27,6 +27,7 @@ import { VersionStore } from '../core/history/VersionStore';
 import { ProposalService, type ApprovalPolicy } from '../core/proposals/ProposalService';
 import { TerrainModel } from '../core/terrain/TerrainModel';
 import { patchBBox } from '../core/terrain/patches';
+import { DEFAULT_ASSUMPTIONS, planRoutes, sampleGrid, type LatLonPt, type RouteAssumptions, type RouteResult, type TerrainSampler } from '../core/routes/RoutePlanner';
 
 export interface CellInfo {
   id: string;
@@ -243,6 +244,36 @@ export class MarsOS {
       appliedVersionId: null,
       synthetic: false,
     }),
+  };
+
+  // ───────────────────────── routes ─────────────────────────
+  readonly routes = {
+    defaults: (): RouteAssumptions => ({ ...DEFAULT_ASSUMPTIONS }),
+    /**
+     * Compare the shortest and the low-slope walking route between two points on the CURRENT
+     * terrain (source elevation + approved edits). Waits for on-demand elevation tiles first,
+     * so the finest available data is used; the result states its grid spacing and data limits.
+     */
+    plan: async (start: LatLonPt, end: LatLonPt, assumptions: RouteAssumptions = DEFAULT_ASSUMPTIONS): Promise<RouteResult> => {
+      const es = this.elevationService;
+      const sampler: TerrainSampler = {
+        height: (lat, lon, wantMpp) => this.terrainModel.height(lat, lon, wantMpp),
+        resolution: (lat, lon) => es.sample(lat, lon, 0).metersPerPixel ?? 14818,
+      };
+      es.ensureDetail(start.lat, start.lon, 0);
+      es.ensureDetail(end.lat, end.lon, 0);
+      let grid = sampleGrid(start, end, sampler);
+      for (let pass = 0; pass < 3; pass++) {
+        // first passes trigger on-demand tile loads; repeat until the grid spacing is stable
+        await es.whenIdle(15000);
+        const next = sampleGrid(start, end, sampler);
+        const stable = Math.abs(next.cellM - grid.cellM) < 0.5;
+        grid = next;
+        if (stable && es.pendingTiles() === 0) break;
+      }
+      const patchIds = this.terrainModel.patchesFor(grid.bbox).active.map((c) => c.patch.id);
+      return planRoutes(start, end, grid, assumptions, patchIds);
+    },
   };
 
   // ───────────────────────── history ─────────────────────────

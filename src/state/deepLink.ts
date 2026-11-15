@@ -9,10 +9,12 @@
  *   &places=1                     (shows the PDS PLACES traverse)
  *   &panels=0                     (hides both side panels)
  *   &ui=0                         (presentation mode: only the planet, no interface)
+ *   &route=lat,lon;lat,lon        (compares routes A → B; opens the Routes tab)
  */
 import { cellId, tileAt } from '../core/geo/tiling';
 import { renderBridge } from '../render/bridge';
 import { useUI, type DisplayMode, type RightTab } from './uiStore';
+import { useRoutes } from './routeStore';
 
 const num = (v: string | null) => (v !== null && v.trim() !== '' && isFinite(+v) ? +v : null);
 
@@ -48,4 +50,9 @@ export function applyDeepLink(search = window.location.search) {
   if (q.get('places') === '1') st.set({ vectors: { ...useUI.getState().vectors, placesTraverse: true } });
   if (q.get('panels') === '0') st.set({ panelsOpen: { left: false, right: false } });
   if (q.get('ui') === '0') document.body.classList.add('presentation');
+  const route = q.get('route')?.split(';').map((s) => s.split(',').map(Number));
+  if (route && route.length === 2 && route.every((p) => p.length === 2 && p.every(isFinite))) {
+    useRoutes.getState().set({ start: { lat: route[0][0], lon: route[0][1] }, end: { lat: route[1][0], lon: route[1][1] } });
+    if (!tab) st.set({ rightTab: 'routes' });
+  }
 }

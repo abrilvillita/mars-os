@@ -140,25 +140,25 @@
     </div>
   </section>
 
-  <!-- 5 · INTERACTIVE TERRAIN -->
+  <!-- 5 · PLAN A MARSWALK -->
   <section class="slide">
     <div class="pad">
-      <div class="kicker">Interactive terrain</div>
-      <h2>A planet you can <em>edit without falsifying it</em>.</h2>
-      <div class="cols" style="grid-template-columns: 1.25fr 1fr">
-        <img class="shot" src="img/nodes.png" alt="Editable node grid over HiRISE imagery at the Perseverance landing site" style="object-position: 48% 45%" />
-        <div style="display:flex; flex-direction:column; gap:1em; min-height:0">
-          <ul style="font-size:.92em">
-            <li>Every region is a <b>stable cell</b> (e.g. <span class="mono">mars:eq:z12:x5858:y1628</span>) with a grid of <b>nodes</b>.</li>
-            <li>Changes are <b>local patches</b> on top of NASA data. Original data is never overwritten, and only the affected tiles are rebuilt.</li>
-            <li>The grid states how many nodes the data actually supports here (20 m DEM → ~33×33).</li>
+      <div class="kicker">Plan a Marswalk</div>
+      <h2>Two routes, real slopes, and <em>a clear reason to choose</em>.</h2>
+      <div class="cols" style="grid-template-columns: 1.3fr 1fr">
+        <div class="shotbox"><img src="img/routes.png" alt="Shortest route (orange) crossing a small crater rim and low-slope route (violet) going around it, near the Perseverance landing site" style="width:100%; height:100%; object-fit:cover; object-position:48% 30%; transform:scale(1.55); transform-origin:48% 40%" /></div>
+        <div style="display:flex; flex-direction:column; gap:.9em; min-height:0">
+          <table style="font-size:1.12em">
+            <tr><th>Landing site → sol 400 stop</th><th style="color:#ff8a4c">Shortest</th><th style="color:#b18cff">Low-slope</th></tr>
+            <tr><td>Length</td><td>1.37 km</td><td>1.37 km</td></tr>
+            <tr><td>Max slope</td><td><b>11.6°</b></td><td><b>4.6°</b></td></tr>
+            <tr><td>Climb</td><td>+38 m</td><td>+24 m</td></tr>
+          </table>
+          <ul style="font-size:.9em">
+            <li>A* on the <b>measured slope</b> of the 20 m CTX DEM, applied to the current terrain, including approved edits.</li>
+            <li><b>What if?</b> When a person approves a new +30 m obstacle on the path, the low-slope route <b>re-routes by +71 m</b> and explains which edit caused it.</li>
+            <li>Slope limits are <b>editable planning assumptions</b>. Walk time is labelled as an Earth heuristic, and cells finer than the data are flagged.</li>
           </ul>
-          <div class="flow" style="font-size:.85em">
-            <div class="step"><b>Proposal</b>evidence, risk, region</div><div class="arrow">→</div>
-            <div class="step"><b>Validation</b>schema + data checks</div><div class="arrow">→</div>
-            <div class="step"><b>Human approval</b>preview first</div><div class="arrow">→</div>
-            <div class="step"><b>Version history</b>time travel, restore, revert</div>
-          </div>
         </div>
       </div>
     </div>

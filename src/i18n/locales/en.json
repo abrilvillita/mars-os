@@ -117,7 +117,8 @@
     "ai": "AI",
     "history": "History",
     "environment": "Environment",
-    "photos": "Photos"
+    "photos": "Photos",
+    "routes": "Routes"
   },
   "inspect": {
     "cursor": "Cursor",
@@ -376,6 +377,53 @@
       "config": "Needs configuration",
       "simulation": "Simulation",
       "unavailable": "Unavailable now"
+    }
+  },
+  "routes": {
+    "intro": "Compare two walking routes between A and B on the current terrain: the shortest one and the one with gentlest slopes. Values come from the elevation data; limits are your planning assumptions.",
+    "notSet": "not set",
+    "pickMap": "Pick on map",
+    "clickMap": "Click the terrain…",
+    "usePin": "Use pinned",
+    "example": "Example: landing site → sol 400 stop",
+    "compute": "Compare routes",
+    "computing": "Computing (loading elevation tiles)…",
+    "assumptions": "Planning assumptions",
+    "assumptionsNote": "Editable assumptions for this prototype, not validated EVA rules.",
+    "maxSlopeA": "Not walkable above",
+    "cautionA": "Caution above",
+    "weightA": "Low-slope route: slope avoidance",
+    "kinds": {
+      "shortest": "Shortest",
+      "lowSlope": "Low-slope"
+    },
+    "length": "Length",
+    "gainLoss": "Climb / descent",
+    "maxSlope": "Max slope",
+    "meanSlope": "Mean slope",
+    "caution": "Steeper than caution",
+    "dataLimited": "Coarse elevation data",
+    "time": "Walk time (Tobler, Earth)",
+    "profile": "Elevation profile",
+    "recTitle": "Recommendation",
+    "rec": {
+      "lowSlope": "Take the low-slope route: it is only {{extra}}% longer and its steepest section is {{slope}}° gentler ({{lowMax}}° vs {{shortMax}}°).",
+      "tradeoff": "Trade-off: the low-slope route is {{extra}}% longer but {{slope}}° gentler at its steepest point ({{lowMax}}° vs {{shortMax}}°). Choose by suit, load and time budget.",
+      "similar": "Both routes are similar in steepness (max {{shortMax}}° vs {{lowMax}}°): the shortest route is the reasonable choice."
+    },
+    "recBasis": "Computed from measured elevation on a {{cell}} m grid, by fixed rules (no AI).",
+    "dataWarn": "Part of a route crosses terrain where only coarse elevation data exists: slopes there are smoothed and may be underestimated.",
+    "rocks": "A {{cell}} m grid cannot show rocks, small scarps or loose sand: inspect HiRISE imagery along the route before relying on it.",
+    "changed": "Routes recalculated: the terrain changed",
+    "changeAdded": "New terrain edits in the area",
+    "changeRemoved": "Edits removed / reverted",
+    "changePreview": "A pending proposal preview is shown — not an approved change.",
+    "basis": "Grid {{cell}} m · {{w}}×{{h}} cells · current terrain (source data + approved edits).",
+    "disclaimer": "Prototype decision aid. It is not a safety clearance for crewed traverses.",
+    "errors": {
+      "no_path": "No walkable route under the current assumptions (max {{max}}°). Raise the limit or move A/B.",
+      "too_far": "A and B are more than 25 km apart: choose closer points.",
+      "same_point": "A and B are too close together."
     }
   }
 }

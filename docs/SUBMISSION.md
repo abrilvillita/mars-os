@@ -44,6 +44,12 @@ Everything runs online. The app is served by GitHub Pages and its backend (Gemin
   - Raw photos for each sol.
   - MEDA surface weather, with its date.
   - A cited radiation reference value (MSL RAD).
+- **Marswalk route comparator.**
+  - Pick A and B. MARS OS computes the shortest route and the low-slope route on the measured slope of the 20 m CTX DEM, applied to the current terrain, including approved edits.
+  - It compares length, maximum and mean slope, climb, steep sections, the share of the route on coarse data, and walking time (an Earth heuristic, labelled as such).
+  - It gives a rule-based recommendation.
+  - When the terrain changes, for example when a new obstacle is approved, the routes are recalculated and the app explains which edit changed them. In our test, the low-slope route detoured 71 m around an approved +30 m obstacle.
+  - Slope limits are editable planning assumptions, not validated EVA rules.
 - **A persistent inspector.** Clicking the terrain pins coordinates, elevation (with source product and resolution), the editable cell and nearest node, and the provenance of the imagery.
 - **An editable terrain with a safety net.**
   - The planet is divided into quadtree cells with permanent IDs; each cell has a grid of nodes.

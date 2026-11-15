@@ -8,8 +8,9 @@ import { HistoryTab } from './tabs/HistoryTab';
 import { InspectTab } from './tabs/InspectTab';
 import { NodesTab } from './tabs/NodesTab';
 import { PhotosTab } from './tabs/PhotosTab';
+import { RoutesTab } from './tabs/RoutesTab';
 
-const TABS: RightTab[] = ['inspect', 'nodes', 'ai', 'history', 'environment', 'photos'];
+const TABS: RightTab[] = ['inspect', 'routes', 'nodes', 'ai', 'history', 'environment', 'photos'];
 
 export function RightPanel() {
   const { t } = useTranslation();
@@ -35,6 +36,7 @@ export function RightPanel() {
           </div>
           <div className="panel-scroll">
             {tab === 'inspect' && <InspectTab />}
+            {tab === 'routes' && <RoutesTab />}
             {tab === 'nodes' && <NodesTab />}
             {tab === 'ai' && <AITab />}
             {tab === 'history' && <HistoryTab />}

@@ -11,6 +11,7 @@ Last updated: 2026-11-14 (v0.2.0). The same list is shown live in the app under 
 | **Jezero elevation at 20 m** | USGS/JPL CTX DEM (provided by the data team, SHA-256 verified), loaded on demand as a 6-level pyramid | Value at waypoint RMC 3_0 is −2567.4 m; the rover reported −2569.9 m |
 | Pinned inspector | Coordinates, elevation (with source and resolution), cell, nearest node, imagery provenance | Browser test: pin → move cursor → scroll panel → values unchanged |
 | Editable cells and nodes anywhere | Node heights are flagged *interpolated* when the node spacing is finer than the data | Gale crater: 463 m data, 1.3 km nodes, not interpolated |
+| **Route comparator (Marswalk)** | Shortest vs low-slope route (A*) on the measured slope of the current terrain: source DEM plus approved edits. It recalculates automatically when the terrain changes and explains why. Slope limits are editable assumptions; walking time uses Tobler's Earth hiking function and is labelled as a model estimate | Landing site → sol 400 stop: 1.37 km both; max slope 11.6° vs 4.6°. An approved +30 m obstacle made the low-slope route detour by +71 m. Computed in 0.3 s on a 20 m grid |
 | Proposals, approval and history | Pending → Approved/Applied, or Rejected / Reverted. Append-only versions, time travel, restore, export/import | API test |
 | Perseverance | Traverse and waypoints (MMGIS), raw photos per sol, MEDA weather (dated; latest 2024-04-27) | Live endpoints |
 | Mars time and sun | Mars24 (Allison & McEwen 2000) | Sols 1127 and 1133 match MEDA |

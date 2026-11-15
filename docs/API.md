@@ -116,3 +116,15 @@ No change to the globe, the core or the contract is needed unless the module pro
 `os.terrain.resolutionAt(lat, lon)`, `os.terrain.ensureDetail(lat, lon, radiusDeg)` and `os.terrain.onDemandStatus()` expose progressive elevation detail to modules.
 
 Modes: `production` (default) refuses synthetic proposals. `demo` (`?demo` in the URL) allows the simulated engine and uses separate storage (`marsos.demo.changelog.v1`). AI-origin proposals are never auto-applied, whatever the policy.
+
+
+## Routes (Marswalk comparator)
+
+```ts
+const r = await os.routes.plan({ lat: 18.4446, lon: 77.4509 }, { lat: 18.4619, lon: 77.4361 }, os.routes.defaults());
+// r.routes: [{ kind: 'shortest' | 'lowSlope', points: [{ lat, lon, h, slopeDeg, dataMpp }], stats: { lengthM, gainM, lossM,
+//   maxSlopeDeg, meanSlopeDeg, cautionShare, dataLimitedShare, coarsestDataM, toblerHours } }]
+// r.cellM: grid spacing (never finer than the elevation data), r.patchIds: approved edits inside the analysed area
+```
+
+The planner samples `terrainModel.height()`, so approved edits change routes. It waits for on-demand elevation tiles first. Shareable link: `?route=lat,lon;lat,lon`.

@@ -10,6 +10,7 @@ import { patchBBox } from '../../core/terrain/patches';
 import { cellId, parseCellId, tileAt, tileBBox } from '../../core/geo/tiling';
 import { latLonToXYZ, xyzToLatLon, MARS_RADIUS_KM } from '../../core/geo/mars';
 import { useUI } from '../../state/uiStore';
+import { useRoutes } from '../../state/routeStore';
 import { renderBridge } from '../bridge';
 import { Globe } from './Globe';
 import { MODE_INDEX } from './tileShader';
@@ -106,7 +107,14 @@ export function GlobeLayer() {
           return;
         }
       }
-      // 3) surface point → pin location + select editable cell (unless the pin is locked)
+      // 3) route comparator waiting for a point (A or B)?
+      const rs = useRoutes.getState();
+      if (rs.pickMode) {
+        const p = pick(e.clientX, e.clientY);
+        if (p) rs.set({ [rs.pickMode]: { lat: p.lat, lon: p.lon }, pickMode: rs.pickMode === 'start' && !rs.end ? 'end' : null, changeNote: null } as never);
+        return;
+      }
+      // 4) surface point → pin location + select editable cell (unless the pin is locked)
       if (st.pinLocked && !st.repinArmed) return;
       const p = pick(e.clientX, e.clientY);
       if (!p) return;

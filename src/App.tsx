@@ -9,6 +9,7 @@ import { RightPanel } from './ui/RightPanel';
 import { TopBar } from './ui/TopBar';
 import './ui/styles.css';
 import { FeatureStatus } from './ui/FeatureStatus';
+import { RouteController } from './ui/RouteController';
 import { DEMO_MODE } from './state/mode';
 import { API_BASE } from './api/apiBase';
 import { applyDeepLink } from './state/deepLink';
@@ -83,6 +84,7 @@ export default function App() {
         </div>
       )}
       <MarsScene />
+      <RouteController />
       <TopBar onAbout={() => setAbout(true)} />
       <LeftPanel />
       <RightPanel />
