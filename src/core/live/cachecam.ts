@@ -36,6 +36,7 @@ export async function fetchCacheCamImages(sol: number) {
   const res = await fetch(`https://mars.nasa.gov/rss/api/?feed=raw_images&category=mars2020&feedtype=json&search=CACHECAM&sol=${sol}`);
   if (!res.ok) throw new Error('HTTP ' + res.status);
   const j = await res.json();
+  const seen = new Set<string>();
   return (j.images ?? [])
     .filter((i: { camera?: { instrument?: string }; sol: number }) => i.camera?.instrument === 'CACHECAM' && Number(i.sol) === sol)
     .map((i: Record<string, any>) => ({
@@ -45,5 +46,7 @@ export async function fetchCacheCamImages(sol: number) {
       medium: i.image_files?.medium as string,
       large: (i.image_files?.large ?? null) as string | null,
       fullRes: (i.image_files?.full_res ?? null) as string | null,
-    }));
+    }))
+    // the feed lists several products of the same exposure: keep one per capture time
+    .filter((im: { takenUtc: string }) => (seen.has(im.takenUtc) ? false : (seen.add(im.takenUtc), true)));
 }

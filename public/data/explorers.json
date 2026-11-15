@@ -1,0 +1,65 @@
+{
+  "note": "Surface explorers of Mars. Fixed landing coordinates come from the cited NASA/NSSDCA pages (longitude east, -180..180). Curiosity, Perseverance and Ingenuity positions and paths are loaded live from NASA's MMGIS feeds. Photos: NASA Image and Video Library (NASA/JPL-Caltech).",
+  "explorers": [
+    {
+      "id": "viking1", "name": "Viking 1", "kind": "lander", "agency": "NASA", "landed": "1976-07-20", "ended": "1982-11",
+      "lat": 22.27, "lon": -47.95, "precision": "0.01°",
+      "coordSource": "https://nssdc.gsfc.nasa.gov/planetary/viking.html",
+      "photo": { "id": "PIA00563", "title": "First color image from Viking Lander 1", "src": "https://images-assets.nasa.gov/image/PIA00563/PIA00563~orig.jpg" }
+    },
+    {
+      "id": "viking2", "name": "Viking 2", "kind": "lander", "agency": "NASA", "landed": "1976-09-03", "ended": "1980-04",
+      "lat": 47.64, "lon": 134.29, "precision": "0.01°",
+      "coordSource": "https://nssdc.gsfc.nasa.gov/planetary/viking.html",
+      "photo": { "id": "PIA04023", "title": "Viking Lander 2 anniversary", "src": "https://images-assets.nasa.gov/image/PIA04023/PIA04023~orig.jpg" }
+    },
+    {
+      "id": "pathfinder", "name": "Pathfinder + Sojourner", "kind": "rover", "agency": "NASA", "landed": "1997-07-04", "ended": "1997-09",
+      "lat": 19.33, "lon": -33.55, "precision": "0.01°",
+      "coordSource": "https://nssdc.gsfc.nasa.gov/planetary/marsland.html",
+      "photo": { "id": "PIA04318", "title": "Sojourner sits near the “Rock Garden”", "src": "https://images-assets.nasa.gov/image/PIA04318/PIA04318~orig.jpg" }
+    },
+    {
+      "id": "spirit", "name": "Spirit", "kind": "rover", "agency": "NASA", "landed": "2004-01-04", "ended": "2010-03",
+      "lat": -14.5692, "lon": 175.4729, "precision": "0.0001°", "drivenKm": 7.73,
+      "coordSource": "https://science.nasa.gov/mission/mer-spirit/",
+      "photo": { "id": "PIA16442", "title": "Spirit in the McMurdo panorama", "src": "https://images-assets.nasa.gov/image/PIA16442/PIA16442~medium.jpg" }
+    },
+    {
+      "id": "opportunity", "name": "Opportunity", "kind": "rover", "agency": "NASA", "landed": "2004-01-25", "ended": "2019-02",
+      "lat": -1.9483, "lon": -5.52583, "precision": "0.0001°", "drivenKm": 45.16,
+      "coordSource": "https://science.nasa.gov/mission/mer-opportunity/",
+      "photo": { "id": "PIA22222", "title": "Opportunity’s first selfie", "src": "https://images-assets.nasa.gov/image/PIA22222/PIA22222~medium.jpg" }
+    },
+    {
+      "id": "phoenix", "name": "Phoenix", "kind": "lander", "agency": "NASA", "landed": "2008-05-25", "ended": "2008-11",
+      "lat": 68.22, "lon": -125.75, "precision": "0.01°",
+      "coordSource": "https://science.nasa.gov/mission/mars-phoenix/",
+      "photo": { "id": "PIA10701", "title": "Phoenix lander on the Martian surface", "src": "https://images-assets.nasa.gov/image/PIA10701/PIA10701~orig.jpg" }
+    },
+    {
+      "id": "curiosity", "name": "Curiosity", "kind": "rover", "agency": "NASA", "landed": "2012-08-06", "ended": null,
+      "live": "msl", "lat": -4.589467, "lon": 137.441633, "precision": "MMGIS",
+      "coordSource": "https://mars.nasa.gov/mmgis-maps/MSL/Layers/json/MSL_waypoints.json",
+      "photo": { "id": "PIA23240", "title": "Curiosity’s selfie at “Aberlady” and “Kilmarie”", "src": "https://images-assets.nasa.gov/image/PIA23240/PIA23240~medium.jpg" }
+    },
+    {
+      "id": "insight", "name": "InSight", "kind": "lander", "agency": "NASA", "landed": "2018-11-26", "ended": "2022-12",
+      "lat": 4.5, "lon": 135.9, "precision": "≈0.1°",
+      "coordSource": "https://science.nasa.gov/mission/insight/",
+      "photo": { "id": "PIA22876", "title": "InSight’s first selfie", "src": "https://images-assets.nasa.gov/image/PIA22876/PIA22876~medium.jpg" }
+    },
+    {
+      "id": "perseverance", "name": "Perseverance", "kind": "rover", "agency": "NASA", "landed": "2021-02-18", "ended": null,
+      "live": "m20", "lat": 18.44462715, "lon": 77.45088573, "precision": "MMGIS",
+      "coordSource": "https://mars.nasa.gov/mmgis-maps/M20/Layers/json/M20_waypoints.json",
+      "photo": { "id": "PIA24542", "title": "Perseverance’s selfie with Ingenuity", "src": "https://images-assets.nasa.gov/image/PIA24542/PIA24542~medium.jpg" }
+    },
+    {
+      "id": "ingenuity", "name": "Ingenuity", "kind": "helicopter", "agency": "NASA", "landed": "2021-02-18", "ended": "2024-01",
+      "live": "heli", "lat": 18.44486301, "lon": 77.45101915, "precision": "MMGIS",
+      "coordSource": "https://mars.nasa.gov/mmgis-maps/M20/Layers/json/m20_heli_waypoints.json",
+      "photo": { "id": "PIA24665", "title": "Perseverance’s SuperCam views Ingenuity", "src": "https://images-assets.nasa.gov/image/PIA24665/PIA24665~medium.jpg" }
+    }
+  ]
+}

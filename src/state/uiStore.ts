@@ -5,7 +5,7 @@
 import { create } from 'zustand';
 
 export type DisplayMode = 'imagery' | 'hypsometric' | 'slope' | 'edits';
-export type RightTab = 'inspect' | 'routes' | 'nodes' | 'ai' | 'history' | 'environment' | 'photos';
+export type RightTab = 'inspect' | 'routes' | 'nodes' | 'ai' | 'history' | 'environment' | 'photos' | 'explorers';
 
 export interface LayerViewState {
   on: boolean;
@@ -47,7 +47,7 @@ export interface WaypointSelection {
 interface UIState {
   baseLayerId: string;
   overlays: Record<string, LayerViewState>;
-  vectors: { traverse: boolean; placesTraverse: boolean; waypoints: boolean; regions: boolean; graticule: boolean; minerals: boolean; crism: boolean; samples: boolean };
+  vectors: { traverse: boolean; placesTraverse: boolean; waypoints: boolean; regions: boolean; graticule: boolean; minerals: boolean; crism: boolean; samples: boolean; explorers: boolean };
   displayMode: DisplayMode;
   realLighting: boolean;
   /** Helmet visor HUD overlay (training view). */
@@ -79,7 +79,10 @@ interface UIState {
 
   waypoint: WaypointSelection | null;
   /** Sol whose CacheCam (sample-handling) images are shown in the Photos tab. */
-  cachecamSol: number | null;
+  /** Selected Perseverance sample (NASA sample number). */
+  sampleN: number | null;
+  /** Selected surface explorer (Mars explorers layer). */
+  explorerId: string | null;
 
   flyTo: (CameraTarget & { nonce: number }) | null;
   camera: { lat: number; lon: number; distance: number; altitudeKm: number; tilt: number; heading: number };
@@ -96,7 +99,7 @@ export const useUI = create<UIState>((set) => ({
     'layer.jezero.hirise': { on: true, opacity: 1 },
     'layer.geology.sim3292': { on: false, opacity: 0.55 },
   },
-  vectors: { traverse: true, placesTraverse: false, waypoints: true, regions: true, graticule: false, minerals: false, crism: false, samples: true },
+  vectors: { traverse: true, placesTraverse: false, waypoints: true, regions: true, graticule: false, minerals: false, crism: false, samples: true, explorers: true },
   displayMode: 'imagery',
   realLighting: true,
   hud: false,
@@ -123,7 +126,8 @@ export const useUI = create<UIState>((set) => ({
   env: { dustStorm: false, stormIntensity: 0.6, atmosphere: true, moons: true, stars: true },
 
   waypoint: null,
-  cachecamSol: null,
+  sampleN: null,
+  explorerId: null,
 
   flyTo: null,
   camera: { lat: 18.4, lon: 77.5, distance: 12000, altitudeKm: 12000, tilt: 0, heading: 0 },

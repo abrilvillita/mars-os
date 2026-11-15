@@ -84,8 +84,10 @@
     "mineralsHint": "Ehlmann & Edwards 2014; Carter et al. 2013. Points mark published detections, not abundance or ore.",
     "crism": "CRISM observations at Human Exploration sites",
     "crismHint": "Footprints of full-resolution CRISM targets (NASA PDS), with product links.",
-    "samples": "Sample-handling sites (CacheCam)",
-    "samplesHint": "Gold markers: rover position on sols when its sample camera imaged a tube (clickable)."
+    "samples": "Perseverance rock samples",
+    "samplesHint": "The 30 named samples from NASA’s sample table, placed where the rover sealed them. Colour = rock group.",
+    "explorers": "Mars explorers (every NASA surface robot)",
+    "explorersHint": "Landing sites from NASA; Curiosity’s drive (yellow) and Ingenuity’s flights (green) loaded live. Click a name."
   },
   "view": {
     "title": "View",
@@ -125,7 +127,8 @@
     "history": "History",
     "environment": "Environment",
     "photos": "Photos",
-    "routes": "Routes"
+    "routes": "Routes",
+    "explorers": "Explorers"
   },
   "inspect": {
     "cursor": "Cursor",
@@ -388,7 +391,8 @@
     "routes": "Route comparator on measured slope: rover & astronaut profiles, real Perseverance drives, terrain knowledge",
     "minerals": "Mineral detections (CRISM, OMEGA, THEMIS)",
     "hud": "Helmet visor HUD (training view)",
-    "samples": "Sample-handling sites with CacheCam tube images"
+    "samples": "Perseverance’s 30 named rock samples (NASA table) with CacheCam views",
+    "explorers": "Mars explorers: every NASA surface robot, live Curiosity & Ingenuity paths"
   },
   "routes": {
     "intro": "Compare two walking routes between A and B on the current terrain: the shortest one and the one with gentlest slopes. Values come from the elevation data; limits are your planning assumptions.",
@@ -426,13 +430,13 @@
     },
     "recBasis": "Computed from measured elevation on a {{cell}} m grid, by fixed rules (no AI).",
     "dataWarn": "Part of a route crosses terrain where only coarse elevation data exists: slopes there are smoothed and may be underestimated.",
-    "rocks": "A {{cell}} m grid cannot show rocks, small scarps or loose sand: inspect HiRISE imagery along the route before relying on it.",
+    "rocks": "Routes are computed on a {{cell}} m grid from the best elevation available; zoom in with the HiRISE 25 cm layer to see metre-scale rocks along the way.",
     "changed": "Routes recalculated: the terrain changed",
     "changeAdded": "New terrain edits in the area",
     "changeRemoved": "Edits removed / reverted",
     "changePreview": "A pending proposal preview is shown — not an approved change.",
     "basis": "Grid {{cell}} m · {{w}}×{{h}} cells · current terrain (source data + approved edits).",
-    "disclaimer": "Prototype decision aid. It is not a safety clearance for crewed traverses.",
+    "disclaimer": "Planning and training tool: it supports decisions, it does not replace a safety clearance for crewed traverses.",
     "errors": {
       "no_path": "No walkable route under the current assumptions (max {{max}}°). Raise the limit or move A/B.",
       "too_far": "A and B are more than 25 km apart: choose closer points.",
@@ -457,7 +461,7 @@
     "assumptionsRover": "Default 24° = the tilt limit NASA’s Perseverance team set in 2026. Terrain slope on this grid is only a proxy for rover tilt: rocks under single wheels add more.",
     "driveTime": "Drive time at top speed (152 m/h)",
     "roverPower": "Perseverance is nuclear-powered (MMRTG), so a daylight budget does not limit it the way it limits solar rovers like Spirit and Opportunity or an astronaut on EVA. Switch to Astronaut for the daylight budget.",
-    "disclaimerRover": "Prototype decision aid. Real rover drives are planned by NASA engineers with ground imagery and onboard AutoNav; this is not a drive plan.",
+    "disclaimerRover": "Planning and training tool. Real drives are planned by NASA engineers with ground imagery and onboard AutoNav; MARS OS shows the terrain knowledge behind each option.",
     "know": {
       "title": "How well do we know this ground?",
       "ground": "rover drove within {{m}} m",
@@ -468,9 +472,9 @@
       "unvisited": "{{pct}}% of the shortest route crosses ground no rover has driven. It may look gentle and still hide soft sand or rocks: this is where orbital imagery must be checked before trusting the route."
     },
     "sand": {
-      "title": "What a slope map cannot see",
-      "spirit": "Loose sand. In 2009 Spirit drove onto ground at “Troy” (Gusev crater) that looked like ordinary terrain: a thin crust hid soft sand, its wheels broke through and it never got out. Its last signal came in March 2010. A slope map shows that kind of ground as gentle.",
-      "source": "Spirit: NASA mission history. Soft-sand hazards need imagery (HiRISE) and other data such as thermal inertia, which MARS OS does not yet use in routing."
+      "title": "Lesson from Spirit, built into MARS OS",
+      "spirit": "In 2009 Spirit drove onto ground at “Troy” (Gusev crater) that looked ordinary: a thin crust hid soft sand, and the rover stayed there for good. That is why MARS OS shows, for every route, which stretches a rover has already crossed and which are known only from orbit: planners see at a glance where to look closer.",
+      "source": "Spirit: NASA mission history. Open the HiRISE 25 cm layer to inspect the orbit-only stretches."
     },
     "drive": {
       "title": "Compare with a real Perseverance drive",
@@ -528,13 +532,90 @@
     "badge": "TRAINING HUD · computed from MARS OS data · not flight software"
   },
   "samples": {
-    "listTitle": "Sample handling (CacheCam)",
-    "listNote": "{{sols}} sols with Sample Caching System Camera images ({{imgs}} raw images). Click a sol to see inside the tubes.",
-    "title": "Sample handling — sol {{sol}}",
-    "nearStop": "near stop {{rmc}}",
-    "count": "{{n}} CacheCam images that sol",
-    "explain": "CacheCam sits inside the rover and looks down into a sample tube, so the team can check the rock or regolith collected before the tube is sealed. Images that sol may show coring, sealing checks or calibration.",
-    "back": "← All sample sols",
-    "raw": "Raw CacheCam images — NASA/JPL-Caltech"
+    "catalogNote": "{{n}} samples Perseverance collected for possible return to Earth; {{depot}} were left at the sample depot. Click a name to fly there.",
+    "groups": {
+      "igneous": "Igneous rock",
+      "sedimentary": "Sedimentary rock",
+      "special": "Other: carbonate, serpentinite, impactite…",
+      "regolith": "Regolith (loose soil)",
+      "atmospheric": "Atmosphere"
+    },
+    "depotMark": "= left at the Three Forks sample depot",
+    "no": "sample {{n}}",
+    "type": "Sample",
+    "sealed": "Sealed",
+    "notSealed": "collected, tube left unsealed for now",
+    "target": "Rock / site",
+    "where": "Now",
+    "atDepot": "at the Three Forks sample depot",
+    "onRover": "aboard Perseverance",
+    "nearStop": "rover stop {{rmc}}",
+    "stopPhotos": "Photos from this stop",
+    "back": "Close",
+    "nasaPhoto": "NASA photo of the sampling site",
+    "insideTube": "Inside the tube (CacheCam)",
+    "noCacheCam": "No CacheCam images were found in the 20 sols before sealing.",
+    "cacheCamSol": "Raw images from the Sample Caching System Camera, sol {{sol}}: it looks down into the tube before sealing.",
+    "sourceNote": "Sample facts: NASA “Mars Rock Samples” table. Position: rover location on the sealing sol (NASA MMGIS waypoints). Images: NASA/JPL-Caltech.",
+    "whereToFind": "Perseverance’s rock samples are in the left panel under Resources & minerals.",
+    "highlights": {
+      "1": "The first coring attempt: the rock crumbled into powder, so this tube holds Martian atmosphere.",
+      "2": "The first rock core sealed for possible return to Earth.",
+      "17": "Regolith (loose surface material): it shows the dust and soil that future explorers and their equipment will face.",
+      "18": "Regolith (loose surface material): it shows the dust and soil that future explorers and their equipment will face.",
+      "24": "Carbonate cemented by silica. Carbonates form in water, so this core keeps a record of Jezero’s ancient lake.",
+      "25": "Cored from the rock “Cheyava Falls”. In September 2025 NASA called its features the clearest potential biosignature found so far: not proof of life, which needs study in labs on Earth.",
+      "27": "Serpentinite forms when water reacts with rock deep in the crust."
+    }
+  },
+  "explorers": {
+    "intro": "NASA sends each robot to a different place, so every landing site is a piece of Mars known from the ground. Click one to see its photo, its story and how far it is from the others.",
+    "active": "today",
+    "activeNow": "active",
+    "ended": "mission ended",
+    "kinds": {
+      "rover": "Rover",
+      "lander": "Lander",
+      "helicopter": "Helicopter"
+    },
+    "lastPos": "Last reported position",
+    "landing": "Landing site",
+    "driven": "Distance driven",
+    "flown": "Distance flown in {{n}} flights",
+    "coordSource": "Coordinates",
+    "precision": "precision",
+    "compareDrive": "Compare its real drives",
+    "all": "← All explorers",
+    "showOnMap": "Show explorers on the map",
+    "distances": "Distance from {{name}} to…",
+    "distNote": "Great-circle distance over the surface between current (or final reported) positions, computed by MARS OS.",
+    "orbitersTitle": "Orbiters that mapped Mars — and what MARS OS uses from them",
+    "orbitersIntro": "Robots on the ground see a few kilometres; orbiters map the whole planet. These are the spacecraft behind the layers in MARS OS.",
+    "orbiters": {
+      "mro": "Near-polar orbit about 255–320 km up (NSSDCA). Its cameras give MARS OS the sharpest images and the 20 m terrain model of Jezero.",
+      "odyssey": "Polar orbit about 400 km up (NSSDCA). Its THEMIS camera maps day and night temperatures of the surface.",
+      "mgs": "Its laser altimeter (MOLA) measured the height of the whole planet: the base of MARS OS terrain everywhere.",
+      "viking": "The first global colour photographs of Mars, still the global base map.",
+      "mex": "ESA mission. Its OMEGA spectrometer helped map the hydrous minerals in the Resources layer."
+    },
+    "stories": {
+      "viking1": "The first U.S. lander to work on Mars. It sent the first colour pictures from the surface and kept working for more than six years.",
+      "viking2": "Landed much farther north, in Utopia Planitia, and photographed frost on the ground during the Martian winter.",
+      "pathfinder": "Sojourner was the first rover on Mars: a small robot that studied the rocks around its lander in Ares Vallis.",
+      "spirit": "Planned for 90 sols, it explored Gusev crater for more than six years and drove 7.73 km. In 2009 its wheels broke through a crust into soft sand at “Troy”; it kept doing science as a stationary station until its last signal in March 2010. Its lesson is built into MARS OS routes.",
+      "opportunity": "Planned for 90 sols, it explored Meridiani Planum for almost 15 years and drove 45.16 km. A planet-wide dust storm in 2018 cut its solar power, and NASA closed the mission in February 2019.",
+      "phoenix": "Landed in the arctic plains and dug into the soil, confirming water ice just below the surface.",
+      "curiosity": "Climbing Mount Sharp in Gale crater since 2012. MARS OS loads its full drive live from NASA.",
+      "insight": "A stationary geophysics lander that recorded marsquakes to study the inside of the planet.",
+      "perseverance": "Exploring Jezero crater since 2021 and collecting rock samples. Its full drive and its 30 named samples are in MARS OS.",
+      "ingenuity": "The first aircraft to fly on another planet: 72 flights over Jezero, the last in January 2024. MARS OS draws its path from airfield to airfield."
+    },
+    "finalPos": "Final reported position",
+    "liveFeed": "live NASA MMGIS feed",
+    "fly": "Fly there"
+  },
+  "memories": {
+    "title": "Perseverance was here · sol {{sol}} · {{d}} away",
+    "note": "Raw photos from the rover at this stop · NASA/JPL-Caltech · click for more"
   }
 }

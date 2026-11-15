@@ -54,7 +54,9 @@ Everything runs online. The app is served by GitHub Pages and its backend (Gemin
   - It gives a rule-based recommendation.
   - When the terrain changes, for example when a new obstacle is approved, the routes are recalculated and the app explains which edit changed them. In our test, the low-slope route detoured 71 m around an approved +30 m obstacle.
   - Slope limits are editable planning assumptions, not validated EVA rules or a rover drive plan.
-- **Inside the sample tubes.** Gold markers show where Perseverance handled samples, on the 75 sols with CacheCam images. One click shows the raw CacheCam photos looking down into the tube, so a crew can see what the rover collected and where.
+- **Perseverance's rock samples.** All 30 named samples from NASA's sample table (for example Montdenier, Comet Geyser, Sapphire Canyon) appear on the map where the rover sealed them, coloured by rock group. Each one shows its NASA photo, rock type, size, whether it is in the Three Forks depot or aboard the rover, and the CacheCam images looking down into its tube.
+- **Mars explorers.** Every NASA robot that reached the surface, from Viking 1 to Ingenuity, with its NASA photo, its story (including how Spirit got stuck at Troy), distance driven and the distance to every other explorer. Curiosity's full drive and Ingenuity's 72 flights load live from NASA. NASA sends each robot to a different place, so together they map Mars from the ground; an orbiters panel shows which spacecraft produced each layer of the map.
+- **"Perseverance was here."** Walking near a real rover stop in the visor HUD shows the photos the rover took there.
 - **Resources and minerals.**
   - Orbital detections of carbonates, clays, silica, sulfates and chlorides (Ehlmann & Edwards 2014), and of hydrous minerals (Carter et al. 2013), served by NASA Mars Trek. All 6,220 points are downloaded completely.
   - CRISM observation footprints at Human Exploration sites, each linked to its PDS product.
@@ -102,6 +104,11 @@ We used AI tools openly, and every AI-generated result was reviewed by the team:
 | Mars 2020 Science Investigation CTX DEM Mosaic (20 m) | Mars Reconnaissance Orbiter, CTX | USGS / NASA PDS, urn:nasa:pds:mars2020_ctx_basemap_2021 |
 | Perseverance traverse and waypoints | Mars 2020 | NASA/JPL MMGIS location map |
 | Perseverance raw images, including CacheCam (Sample Caching System Camera) | Mars 2020 | https://mars.nasa.gov/mars2020/multimedia/raw-images/ |
+| Mars Rock Samples table | Mars 2020 | https://science.nasa.gov/mission/mars-2020-perseverance/mars-rock-samples/ |
+| Curiosity traverse and waypoints (MMGIS) | MSL | https://mars.nasa.gov/mmgis-maps/MSL/Layers/json/MSL_traverse.json |
+| Ingenuity flight waypoints (MMGIS) | Mars 2020 | https://mars.nasa.gov/mmgis-maps/M20/Layers/json/m20_heli_waypoints.json |
+| Landing sites (Viking, Pathfinder, Spirit, Opportunity, Phoenix, InSight) | NSSDCA / NASA | https://nssdc.gsfc.nasa.gov/planetary/marsland.html |
+| Explorer photos | NASA Image and Video Library | https://images.nasa.gov/ |
 | MEDA surface weather | Mars 2020, MEDA | NASA/JPL feed |
 | RAD surface dose-equivalent rate (reference value) | Mars Science Laboratory, RAD | Hassler et al. 2014, Science, doi:10.1126/science.1244797 |
 

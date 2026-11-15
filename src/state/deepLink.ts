@@ -11,7 +11,7 @@
  *   &panels=0                     (hides both side panels)
  *   &ui=0                         (presentation mode: only the planet, no interface)
  *   &hud=1                        (helmet visor HUD; with &route=… it guides along the low-slope route)
- *   &cachecam=196                 (opens the CacheCam sample-handling images of a sol)
+ *   &sample=25                   (opens Perseverance sample No. 25 with its NASA photo and CacheCam views)
  *   &walk=1                       (with &hud=1&route=…: walks the route automatically)
  *   &route=lat,lon;lat,lon        (compares routes A → B; opens the Routes tab)
  *   &profile=astronaut            (route profile; default rover)
@@ -47,7 +47,7 @@ export function applyDeepLink(search = window.location.search) {
   const base = q.get('base');
   if (base && /^layer\.[a-z0-9._-]+$/.test(base)) st.set({ baseLayerId: base });
   const tab = q.get('tab') as RightTab | null;
-  if (tab && ['inspect', 'routes', 'nodes', 'ai', 'history', 'environment', 'photos'].includes(tab)) st.set({ rightTab: tab });
+  if (tab && ['inspect', 'routes', 'nodes', 'ai', 'history', 'environment', 'photos', 'explorers'].includes(tab)) st.set({ rightTab: tab });
   const pin = q.get('pin')?.split(',').map(Number);
   if (pin && pin.length === 2 && pin.every(isFinite)) {
     const id = cellId(tileAt(pin[0], pin[1], st.cellZoom));
@@ -57,8 +57,10 @@ export function applyDeepLink(search = window.location.search) {
   if (q.get('minerals') === '1') st.set({ vectors: { ...useUI.getState().vectors, minerals: true, crism: true } });
   if (q.get('panels') === '0') st.set({ panelsOpen: { left: false, right: false } });
   if (q.get('ui') === '0') document.body.classList.add('presentation');
-  const cc = num(q.get('cachecam'));
-  if (cc !== null) st.set({ cachecamSol: cc, rightTab: 'photos', vectors: { ...useUI.getState().vectors, samples: true } });
+  const exp = q.get('explorer');
+  if (exp && /^[a-z0-9]+$/.test(exp)) st.set({ explorerId: exp, rightTab: 'explorers' });
+  const cc = num(q.get('sample'));
+  if (cc !== null) st.set({ sampleN: cc, rightTab: 'photos', vectors: { ...useUI.getState().vectors, samples: true } });
   if (q.get('hud') === '1') st.set({ hud: true, panelsOpen: { left: false, right: false } });
   if (q.get('profile') === 'astronaut' || q.get('profile') === 'rover') {
     const p = q.get('profile') as 'rover' | 'astronaut';

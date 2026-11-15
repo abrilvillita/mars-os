@@ -84,8 +84,10 @@
     "mineralsHint": "Ehlmann y Edwards 2014; Carter et al. 2013. Los puntos marcan detecciones publicadas, no abundancia ni yacimientos.",
     "crism": "Observaciones CRISM en sitios de exploración humana",
     "crismHint": "Huellas de observaciones CRISM de resolución completa (NASA PDS), con enlace al producto.",
-    "samples": "Sitios de manejo de muestras (CacheCam)",
-    "samplesHint": "Marcadores dorados: posición del rover en los soles en que su cámara de muestras fotografió un tubo (clic)."
+    "samples": "Muestras de roca de Perseverance",
+    "samplesHint": "Las 30 muestras con nombre de la tabla oficial de NASA, colocadas donde el rover las selló. Color = grupo de roca.",
+    "explorers": "Exploradores de Marte (todos los robots de NASA en la superficie)",
+    "explorersHint": "Sitios de aterrizaje de NASA; el recorrido de Curiosity (amarillo) y los vuelos de Ingenuity (verde) se cargan en vivo. Haz clic en un nombre."
   },
   "view": {
     "title": "Vista",
@@ -125,7 +127,8 @@
     "history": "Historial",
     "environment": "Entorno",
     "photos": "Fotos",
-    "routes": "Rutas"
+    "routes": "Rutas",
+    "explorers": "Exploradores"
   },
   "inspect": {
     "cursor": "Cursor",
@@ -388,7 +391,8 @@
     "routes": "Comparador de rutas sobre pendiente medida: perfiles rover y astronauta, trayectos reales de Perseverance, conocimiento del terreno",
     "minerals": "Detecciones minerales (CRISM, OMEGA, THEMIS)",
     "hud": "Visor HUD del casco (vista de entrenamiento)",
-    "samples": "Sitios de manejo de muestras con imágenes CacheCam"
+    "samples": "Las 30 muestras con nombre de Perseverance (tabla NASA) con vistas CacheCam",
+    "explorers": "Exploradores de Marte: todos los robots de NASA, rutas en vivo de Curiosity e Ingenuity"
   },
   "routes": {
     "intro": "Compara dos rutas a pie entre A y B sobre el terreno actual: la más corta y la de pendientes más suaves. Los valores salen de los datos de elevación; los límites son tus supuestos de planificación.",
@@ -426,13 +430,13 @@
     },
     "recBasis": "Calculado con elevación medida en una cuadrícula de {{cell}} m, con reglas fijas (sin IA).",
     "dataWarn": "Parte de una ruta cruza terreno con datos de elevación gruesos: ahí las pendientes están suavizadas y pueden estar subestimadas.",
-    "rocks": "Una cuadrícula de {{cell}} m no muestra rocas, escarpes pequeños ni arena suelta: revisa las imágenes HiRISE a lo largo de la ruta antes de confiar en ella.",
+    "rocks": "Las rutas se calculan en una malla de {{cell}} m con la mejor elevación disponible; acércate con la capa HiRISE de 25 cm para ver rocas de un metro a lo largo del camino.",
     "changed": "Rutas recalculadas: el terreno cambió",
     "changeAdded": "Nuevas ediciones del terreno en la zona",
     "changeRemoved": "Ediciones quitadas / revertidas",
     "changePreview": "Se muestra la vista previa de una propuesta pendiente — no es un cambio aprobado.",
     "basis": "Cuadrícula de {{cell}} m · {{w}}×{{h}} celdas · terreno actual (datos de origen + ediciones aprobadas).",
-    "disclaimer": "Ayuda de decisión en prototipo. No es una autorización de seguridad para recorridos con tripulación.",
+    "disclaimer": "Herramienta de planificación y entrenamiento: apoya decisiones, no sustituye una autorización de seguridad para recorridos con tripulación.",
     "errors": {
       "no_path": "No hay ruta transitable con los supuestos actuales (máx. {{max}}°). Sube el límite o mueve A/B.",
       "too_far": "A y B están a más de 25 km: elige puntos más cercanos.",
@@ -457,7 +461,7 @@
     "assumptionsRover": "Por defecto 24° = el límite de inclinación que fijó el equipo de Perseverance de la NASA en 2026. La pendiente del terreno en esta malla solo aproxima la inclinación del rover: las rocas bajo una sola rueda la aumentan.",
     "driveTime": "Tiempo de manejo a velocidad máxima (152 m/h)",
     "roverPower": "Perseverance funciona con energía nuclear (MMRTG), así que la luz del día no lo limita como a los rovers solares Spirit y Opportunity o a un astronauta en EVA. Cambia a Astronauta para ver el presupuesto de luz.",
-    "disclaimerRover": "Prototipo de apoyo a decisiones. Los trayectos reales los planean ingenieros de la NASA con imágenes desde el suelo y AutoNav a bordo; esto no es un plan de manejo.",
+    "disclaimerRover": "Herramienta de planificación y entrenamiento. Los trayectos reales los planean ingenieros de la NASA con imágenes desde el suelo y AutoNav a bordo; MARS OS muestra el conocimiento del terreno detrás de cada opción.",
     "know": {
       "title": "¿Qué tan bien conocemos este terreno?",
       "ground": "el rover pasó a ≤ {{m}} m",
@@ -468,9 +472,9 @@
       "unvisited": "El {{pct}}% de la ruta más corta cruza terreno por el que ningún rover ha pasado. Puede verse suave y aun así ocultar arena blanda o rocas: ahí hay que revisar imágenes orbitales antes de confiar en la ruta."
     },
     "sand": {
-      "title": "Lo que un mapa de pendientes no ve",
-      "spirit": "Arena suelta. En 2009 Spirit entró en un terreno llamado “Troy” (cráter Gusev) que parecía normal: una costra delgada ocultaba arena blanda, sus ruedas la rompieron y nunca salió. Su última señal llegó en marzo de 2010. Un mapa de pendientes muestra ese tipo de terreno como suave.",
-      "source": "Spirit: historia de la misión, NASA. Los riesgos de arena blanda requieren imágenes (HiRISE) y otros datos como la inercia térmica, que MARS OS aún no usa para calcular rutas."
+      "title": "La lección de Spirit, integrada en MARS OS",
+      "spirit": "En 2009 Spirit entró en un terreno llamado “Troy” (cráter Gusev) que parecía normal: una costra delgada ocultaba arena blanda y el rover se quedó ahí para siempre. Por eso MARS OS muestra, en cada ruta, qué tramos ya cruzó un rover y cuáles solo se conocen desde órbita: quien planea ve de inmediato dónde mirar con más detalle.",
+      "source": "Spirit: historia de la misión, NASA. Abre la capa HiRISE de 25 cm para revisar los tramos conocidos solo desde órbita."
     },
     "drive": {
       "title": "Comparar con un trayecto real de Perseverance",
@@ -528,13 +532,90 @@
     "badge": "HUD DE ENTRENAMIENTO · calculado con datos de MARS OS · no es software de vuelo"
   },
   "samples": {
-    "listTitle": "Manejo de muestras (CacheCam)",
-    "listNote": "{{sols}} soles con imágenes de la cámara del sistema de muestras ({{imgs}} imágenes crudas). Haz clic en un sol para ver dentro de los tubos.",
-    "title": "Manejo de muestras — sol {{sol}}",
-    "nearStop": "cerca de la parada {{rmc}}",
-    "count": "{{n}} imágenes de CacheCam ese sol",
-    "explain": "CacheCam está dentro del rover y mira hacia el interior de un tubo de muestra, para que el equipo revise la roca o el regolito recogido antes de sellarlo. Las imágenes de ese sol pueden mostrar perforación, revisiones de sellado o calibración.",
-    "back": "← Todos los soles de muestras",
-    "raw": "Imágenes crudas de CacheCam — NASA/JPL-Caltech"
+    "catalogNote": "{{n}} muestras que Perseverance recolectó para un posible regreso a la Tierra; {{depot}} quedaron en el depósito de muestras. Haz clic en un nombre para volar ahí.",
+    "groups": {
+      "igneous": "Roca ígnea",
+      "sedimentary": "Roca sedimentaria",
+      "special": "Otras: carbonato, serpentinita, impactita…",
+      "regolith": "Regolito (suelo suelto)",
+      "atmospheric": "Atmósfera"
+    },
+    "depotMark": "= dejada en el depósito de muestras Three Forks",
+    "no": "muestra {{n}}",
+    "type": "Muestra",
+    "sealed": "Sellada",
+    "notSealed": "recolectada, tubo sin sellar por ahora",
+    "target": "Roca / sitio",
+    "where": "Ahora",
+    "atDepot": "en el depósito de muestras Three Forks",
+    "onRover": "a bordo de Perseverance",
+    "nearStop": "parada del rover {{rmc}}",
+    "stopPhotos": "Fotos de esta parada",
+    "back": "Cerrar",
+    "nasaPhoto": "Foto de NASA del sitio de muestreo",
+    "insideTube": "Dentro del tubo (CacheCam)",
+    "noCacheCam": "No hay imágenes CacheCam en los 20 soles antes del sellado.",
+    "cacheCamSol": "Imágenes crudas de la cámara del sistema de muestras, sol {{sol}}: mira dentro del tubo antes de sellarlo.",
+    "sourceNote": "Datos de la muestra: tabla “Mars Rock Samples” de NASA. Posición: ubicación del rover el sol del sellado (waypoints MMGIS de NASA). Imágenes: NASA/JPL-Caltech.",
+    "whereToFind": "Las muestras de roca de Perseverance están en el panel izquierdo, en Recursos y minerales.",
+    "highlights": {
+      "1": "El primer intento de muestreo: la roca se deshizo en polvo, así que este tubo guarda atmósfera marciana.",
+      "2": "El primer núcleo de roca sellado para un posible regreso a la Tierra.",
+      "17": "Regolito (material suelto de la superficie): muestra el polvo y el suelo que enfrentarán futuros exploradores y sus equipos.",
+      "18": "Regolito (material suelto de la superficie): muestra el polvo y el suelo que enfrentarán futuros exploradores y sus equipos.",
+      "24": "Carbonato cementado con sílice. Los carbonatos se forman en agua, así que este núcleo guarda un registro del antiguo lago de Jezero.",
+      "25": "Extraída de la roca “Cheyava Falls”. En septiembre de 2025 la NASA llamó a sus rasgos la posible biofirma más clara encontrada hasta ahora: no es prueba de vida, eso requiere estudiarla en laboratorios en la Tierra.",
+      "27": "La serpentinita se forma cuando el agua reacciona con la roca en lo profundo de la corteza."
+    }
+  },
+  "explorers": {
+    "intro": "La NASA envía cada robot a un lugar distinto, así que cada sitio de aterrizaje es un pedazo de Marte conocido desde el suelo. Haz clic en uno para ver su foto, su historia y qué tan lejos está de los demás.",
+    "active": "hoy",
+    "activeNow": "activo",
+    "ended": "misión terminada",
+    "kinds": {
+      "rover": "Rover",
+      "lander": "Módulo de aterrizaje",
+      "helicopter": "Helicóptero"
+    },
+    "lastPos": "Última posición reportada",
+    "landing": "Sitio de aterrizaje",
+    "driven": "Distancia recorrida",
+    "flown": "Distancia volada en {{n}} vuelos",
+    "coordSource": "Coordenadas",
+    "precision": "precisión",
+    "compareDrive": "Comparar sus trayectos reales",
+    "all": "← Todos los exploradores",
+    "showOnMap": "Mostrar exploradores en el mapa",
+    "distances": "Distancia de {{name}} a…",
+    "distNote": "Distancia sobre la superficie (círculo máximo) entre las posiciones actuales (o las últimas reportadas), calculada por MARS OS.",
+    "orbitersTitle": "Orbitadores que mapearon Marte — y lo que MARS OS usa de ellos",
+    "orbitersIntro": "Los robots en el suelo ven unos pocos kilómetros; los orbitadores mapean el planeta entero. Estas son las naves detrás de las capas de MARS OS.",
+    "orbiters": {
+      "mro": "Órbita casi polar a unos 255–320 km de altura (NSSDCA). Sus cámaras dan a MARS OS las imágenes más nítidas y el modelo de terreno de 20 m de Jezero.",
+      "odyssey": "Órbita polar a unos 400 km de altura (NSSDCA). Su cámara THEMIS mide la temperatura de la superficie de día y de noche.",
+      "mgs": "Su altímetro láser (MOLA) midió la altura de todo el planeta: la base del terreno de MARS OS en cualquier lugar.",
+      "viking": "Las primeras fotografías globales a color de Marte, que siguen siendo el mapa base global.",
+      "mex": "Misión de la ESA. Su espectrómetro OMEGA ayudó a mapear los minerales hidratados de la capa de Recursos."
+    },
+    "stories": {
+      "viking1": "El primer módulo estadounidense que funcionó en Marte. Envió las primeras fotos a color desde la superficie y siguió trabajando más de seis años.",
+      "viking2": "Aterrizó mucho más al norte, en Utopia Planitia, y fotografió escarcha sobre el suelo durante el invierno marciano.",
+      "pathfinder": "Sojourner fue el primer rover en Marte: un robot pequeño que estudió las rocas alrededor de su módulo en Ares Vallis.",
+      "spirit": "Planeado para 90 soles, exploró el cráter Gusev durante más de seis años y recorrió 7.73 km. En 2009 sus ruedas rompieron una costra y se hundieron en arena blanda en “Troy”; siguió haciendo ciencia como estación fija hasta su última señal en marzo de 2010. Su lección está integrada en las rutas de MARS OS.",
+      "opportunity": "Planeado para 90 soles, exploró Meridiani Planum casi 15 años y recorrió 45.16 km. Una tormenta de polvo global en 2018 cortó su energía solar y la NASA cerró la misión en febrero de 2019.",
+      "phoenix": "Aterrizó en las llanuras árticas y excavó el suelo, confirmando hielo de agua justo debajo de la superficie.",
+      "curiosity": "Escalando el monte Sharp en el cráter Gale desde 2012. MARS OS carga su recorrido completo en vivo desde NASA.",
+      "insight": "Un módulo fijo de geofísica que registró sismos marcianos para estudiar el interior del planeta.",
+      "perseverance": "Explorando el cráter Jezero desde 2021 y recolectando muestras de roca. Su recorrido completo y sus 30 muestras con nombre están en MARS OS.",
+      "ingenuity": "La primera aeronave que voló en otro planeta: 72 vuelos sobre Jezero, el último en enero de 2024. MARS OS dibuja su trayecto de aeródromo en aeródromo."
+    },
+    "finalPos": "Última posición reportada (final)",
+    "liveFeed": "feed en vivo NASA MMGIS",
+    "fly": "Volar ahí"
+  },
+  "memories": {
+    "title": "Perseverance estuvo aquí · sol {{sol}} · a {{d}}",
+    "note": "Fotos crudas del rover en esta parada · NASA/JPL-Caltech · clic para ver más"
   }
 }

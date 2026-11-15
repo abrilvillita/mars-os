@@ -95,7 +95,7 @@ export function GlobeLayer() {
       if (st.vectors.samples && st.camera.distance <= 400) {
         const s = pickNearestSample(sx, sy, 10);
         if (s) {
-          st.set({ cachecamSol: s.sol, waypoint: null, rightTab: 'photos', panelsOpen: { ...st.panelsOpen, right: true } });
+          st.set({ sampleN: s.n, waypoint: null, rightTab: 'photos', panelsOpen: { ...st.panelsOpen, right: true } });
           return;
         }
       }
@@ -103,7 +103,7 @@ export function GlobeLayer() {
       if (st.vectors.waypoints) {
         const w = pickNearestWaypoint(sx, sy, 9);
         if (w) {
-          st.set({ waypoint: { sol: w.sol, rmc: w.rmc, lat: w.lat, lon: w.lon }, cachecamSol: null, rightTab: 'photos', panelsOpen: { ...st.panelsOpen, right: true } });
+          st.set({ waypoint: { sol: w.sol, rmc: w.rmc, lat: w.lat, lon: w.lon }, sampleN: null, rightTab: 'photos', panelsOpen: { ...st.panelsOpen, right: true } });
           return;
         }
       }

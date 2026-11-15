@@ -243,7 +243,7 @@ function SlopeBlindSpots({ cell }: { cell: number }) {
   const { t } = useTranslation();
   return (
     <div className="card sand">
-      <div className="card-title">⚠ {t('routes.sand.title')}</div>
+      <div className="card-title">🛞 {t('routes.sand.title')}</div>
       <p className="small">{t('routes.sand.spirit')}</p>
       <p className="small">{t('routes.rocks', { cell })}</p>
       <p className="note">{t('routes.sand.source')}</p>

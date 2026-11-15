@@ -6,11 +6,11 @@ import { formatLat, formatLon } from '../../core/geo/mars';
 import { roverData } from '../../render/overlays/RoverLayer';
 import { useUI } from '../../state/uiStore';
 import { ProvBadge, fmtM } from '../common';
-import { CacheCamPanel, SampleSolList } from './SamplesPanel';
+import { SampleDetail } from './SamplesPanel';
 
 export function PhotosTab() {
-  const cc = useUI((s) => s.cachecamSol);
-  return cc !== null ? <CacheCamPanel sol={cc} /> : <WaypointPhotos />;
+  const n = useUI((s) => s.sampleN);
+  return n !== null ? <SampleDetail n={n} /> : <WaypointPhotos />;
 }
 
 function WaypointPhotos() {
@@ -31,7 +31,7 @@ function WaypointPhotos() {
   if (!wp) return (
     <>
       <p className="empty">{t('photos.pick')}</p>
-      <SampleSolList />
+      <p className="small muted">{t('samples.whereToFind')}</p>
     </>
   );
   const meta = roverData.waypoints.find((w) => w.rmc === wp.rmc);

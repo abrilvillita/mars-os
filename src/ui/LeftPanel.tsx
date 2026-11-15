@@ -5,6 +5,7 @@ import type { LayerT } from '../contract';
 import { pickText } from '../i18n';
 import { useUI, type DisplayMode } from '../state/uiStore';
 import { ProvBadge, Section, Segmented, Toggle, fmtM } from './common';
+import { SampleCatalog } from './tabs/SamplesPanel';
 
 const BASE_IDS = ['layer.viking.color', 'layer.mola.shade', 'layer.themis.day', 'layer.themis.night'];
 const OVERLAY_IDS = ['layer.jezero.ctx', 'layer.jezero.hirise', 'layer.geology.sim3292'];
@@ -144,10 +145,12 @@ export function LeftPanel() {
             <Toggle checked={s.vectors.traverse} onChange={(v) => s.set({ vectors: { ...s.vectors, traverse: v } })} label={t('layers.traverse')} hint={t('layers.traverseHint')} />
             <Toggle checked={s.vectors.placesTraverse} onChange={(v) => s.set({ vectors: { ...s.vectors, placesTraverse: v } })} label={t('layers.placesTraverse')} hint={t('layers.placesHint')} />
             <Toggle checked={s.vectors.waypoints} onChange={(v) => s.set({ vectors: { ...s.vectors, waypoints: v } })} label={t('layers.waypoints')} />
-            <Toggle checked={s.vectors.samples} onChange={(v) => s.set({ vectors: { ...s.vectors, samples: v } })} label={t('layers.samples')} hint={t('layers.samplesHint')} />
+            <Toggle checked={s.vectors.explorers} onChange={(v) => s.set({ vectors: { ...s.vectors, explorers: v } })} label={t('layers.explorers')} hint={t('layers.explorersHint')} />
             <Toggle checked={s.vectors.regions} onChange={(v) => s.set({ vectors: { ...s.vectors, regions: v } })} label={t('layers.regions')} />
           </Section>
           <Section title={t('layers.resources')}>
+            <Toggle checked={s.vectors.samples} onChange={(v) => s.set({ vectors: { ...s.vectors, samples: v } })} label={t('layers.samples')} hint={t('layers.samplesHint')} />
+            {s.vectors.samples && <SampleCatalog />}
             <Toggle checked={s.vectors.minerals} onChange={(v) => s.set({ vectors: { ...s.vectors, minerals: v } })} label={t('layers.minerals')} hint={t('layers.mineralsHint')} />
             {s.vectors.minerals && (
               <div className="legend chips">
