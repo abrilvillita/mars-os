@@ -409,7 +409,8 @@
     "rec": {
       "lowSlope": "Toma la ruta de menor pendiente: solo es {{extra}}% más larga y su tramo más empinado es {{slope}}° más suave ({{lowMax}}° vs {{shortMax}}°).",
       "tradeoff": "Compromiso: la ruta de menor pendiente es {{extra}}% más larga pero {{slope}}° más suave en su punto más empinado ({{lowMax}}° vs {{shortMax}}°). Decide según traje, carga y tiempo disponible.",
-      "similar": "Ambas rutas tienen pendientes parecidas (máx. {{shortMax}}° vs {{lowMax}}°): la más corta es la opción razonable."
+      "similar": "Ambas rutas tienen pendientes parecidas (máx. {{shortMax}}° vs {{lowMax}}°): la más corta es la opción razonable.",
+      "lowSlopeSame": "Toma la ruta de menor pendiente: prácticamente la misma distancia, y su tramo más empinado es {{slope}}° más suave ({{lowMax}}° vs {{shortMax}}°)."
     },
     "recBasis": "Calculado con elevación medida en una cuadrícula de {{cell}} m, con reglas fijas (sin IA).",
     "dataWarn": "Parte de una ruta cruza terreno con datos de elevación gruesos: ahí las pendientes están suavizadas y pueden estar subestimadas.",

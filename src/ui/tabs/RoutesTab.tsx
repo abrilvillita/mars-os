@@ -106,7 +106,8 @@ function Recommendation({ result }: { result: RouteResult }) {
   const extra = (lo.lengthM - sh.lengthM) / Math.max(1, sh.lengthM);
   const slopeGain = sh.maxSlopeDeg - lo.maxSlopeDeg;
   let key: string;
-  if (slopeGain >= 2 && extra <= 0.3) key = 'routes.rec.lowSlope';
+  if (slopeGain >= 2 && extra < 0.01) key = 'routes.rec.lowSlopeSame';
+  else if (slopeGain >= 2 && extra <= 0.3) key = 'routes.rec.lowSlope';
   else if (slopeGain >= 2) key = 'routes.rec.tradeoff';
   else key = 'routes.rec.similar';
   return (

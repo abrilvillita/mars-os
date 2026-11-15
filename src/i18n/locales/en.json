@@ -409,7 +409,8 @@
     "rec": {
       "lowSlope": "Take the low-slope route: it is only {{extra}}% longer and its steepest section is {{slope}}° gentler ({{lowMax}}° vs {{shortMax}}°).",
       "tradeoff": "Trade-off: the low-slope route is {{extra}}% longer but {{slope}}° gentler at its steepest point ({{lowMax}}° vs {{shortMax}}°). Choose by suit, load and time budget.",
-      "similar": "Both routes are similar in steepness (max {{shortMax}}° vs {{lowMax}}°): the shortest route is the reasonable choice."
+      "similar": "Both routes are similar in steepness (max {{shortMax}}° vs {{lowMax}}°): the shortest route is the reasonable choice.",
+      "lowSlopeSame": "Take the low-slope route: practically the same length, and its steepest section is {{slope}}° gentler ({{lowMax}}° vs {{shortMax}}°)."
     },
     "recBasis": "Computed from measured elevation on a {{cell}} m grid, by fixed rules (no AI).",
     "dataWarn": "Part of a route crosses terrain where only coarse elevation data exists: slopes there are smoothed and may be underestimated.",
