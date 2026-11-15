@@ -5,28 +5,36 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { distanceM } from '../core/geo/mars';
-import { fetchRawImages, type RawImage, type Waypoint } from '../core/live/m20';
+import { fetchRawImages, type RawImage } from '../core/live/m20';
+import { fetchMslImages } from '../core/live/msl';
+import { ensureExplorers, explorersState } from '../core/live/explorers';
 import { ensureRoverData, roverData } from '../render/overlays/RoverLayer';
 import { useUI } from '../state/uiStore';
 import { fmtM } from './common';
 
 const REACH_M = 150;
+type Stop = { mission: 'm20' | 'msl'; sol: number; rmc: string; lat: number; lon: number };
 
 export function RoverMemories() {
   const { t } = useTranslation();
   const cam = useUI((s) => s.camera);
-  const [near, setNear] = useState<{ w: Waypoint; d: number } | null>(null);
+  const [near, setNear] = useState<{ w: Stop; d: number } | null>(null);
   const [imgs, setImgs] = useState<RawImage[] | null>(null);
 
   useEffect(() => {
     ensureRoverData();
+    ensureExplorers(import.meta.env.BASE_URL);
   }, []);
 
   // nearest stop within reach (cheap: ~700 stops, only near Jezero)
   useEffect(() => {
-    if (cam.distance > 3 || Math.abs(cam.lat - 18.45) > 0.6 || Math.abs(cam.lon - 77.4) > 0.6) return setNear(null);
-    let best: { w: Waypoint; d: number } | null = null;
-    for (const w of roverData.waypoints) {
+    if (cam.distance > 3) return setNear(null);
+    const atJezero = Math.abs(cam.lat - 18.45) < 0.6 && Math.abs(cam.lon - 77.4) < 0.6;
+    const atGale = Math.abs(cam.lat + 4.7) < 0.8 && Math.abs(cam.lon - 137.4) < 0.8;
+    if (!atJezero && !atGale) return setNear(null);
+    const list: Stop[] = atJezero ? roverData.waypoints.map((w) => ({ mission: 'm20' as const, sol: w.sol, rmc: w.rmc, lat: w.lat, lon: w.lon })) : (explorersState.msl?.stops ?? []).map((w) => ({ mission: 'msl' as const, ...w }));
+    let best: { w: Stop; d: number } | null = null;
+    for (const w of list) {
       if (Math.abs(w.lat - cam.lat) > 0.01 || Math.abs(w.lon - cam.lon) > 0.01) continue;
       const d = distanceM(cam.lat, cam.lon, w.lat, w.lon);
       if (d <= REACH_M && (!best || d < best.d)) best = { w, d };
@@ -39,7 +47,7 @@ export function RoverMemories() {
     setImgs(null);
     if (!near) return;
     let alive = true;
-    const id = setTimeout(() => fetchRawImages(near.w.sol, 4).then((r) => alive && setImgs(r)).catch(() => alive && setImgs([])), 400);
+    const id = setTimeout(() => (near.w.mission === 'msl' ? fetchMslImages(near.w.sol, 4) : fetchRawImages(near.w.sol, 4)).then((r) => alive && setImgs(r)).catch(() => alive && setImgs([])), 400);
     return () => {
       alive = false;
       clearTimeout(id);
@@ -49,11 +57,11 @@ export function RoverMemories() {
   if (!near) return null;
   return (
     <div className="rover-memories">
-      <div className="rm-title">📸 {t('memories.title', { sol: near.w.sol, d: fmtM(near.d) })}</div>
+      <div className="rm-title">📸 {t('memories.title', { rover: near.w.mission === 'msl' ? 'Curiosity' : 'Perseverance', sol: near.w.sol, d: fmtM(near.d) })}</div>
       <div className="rm-strip">
         {!imgs && <span className="muted small">{t('photos.loading')}</span>}
         {imgs?.map((im) => (
-          <button key={im.id} title={`${im.instrument} · ${im.takenUtc}`} onClick={() => useUI.getState().set({ waypoint: { sol: near.w.sol, rmc: near.w.rmc, lat: near.w.lat, lon: near.w.lon }, sampleN: null, rightTab: 'photos', panelsOpen: { ...useUI.getState().panelsOpen, right: true } })}>
+          <button key={im.id} title={`${im.instrument} · ${im.takenUtc}`} onClick={() => useUI.getState().set({ waypoint: { mission: near.w.mission, sol: near.w.sol, rmc: near.w.rmc, lat: near.w.lat, lon: near.w.lon }, sampleN: null, rightTab: 'photos', panelsOpen: { ...useUI.getState().panelsOpen, right: true } })}>
             <img src={im.small} alt={im.instrument} loading="lazy" />
           </button>
         ))}

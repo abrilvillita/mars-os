@@ -21,6 +21,8 @@ export interface Explorer {
   trekPath?: string;
   coordSource: string;
   photo: { id: string; title: string; src: string } | null;
+  science?: { page: string; instruments: string[]; findings: { en: string; es: string }[] };
+  nominal?: { lat: number; lon: number; source: string };
 }
 
 export interface LivePath {
@@ -30,6 +32,8 @@ export interface LivePath {
   /** Last reported position. */
   last: { lat: number; lon: number; sol: number } | null;
   count?: number;
+  /** Rover stops (last reported position per sol), when the feed has them. */
+  stops?: { sol: number; rmc: string; lat: number; lon: number }[];
 }
 
 export const explorersState: {
@@ -66,7 +70,9 @@ async function loadMsl(): Promise<LivePath> {
   const wps = (wp.features ?? []).map((f: { properties: Record<string, number> }) => f.properties).filter((p: Record<string, number>) => isFinite(p.lat) && isFinite(p.lon));
   wps.sort((a: Record<string, number>, b: Record<string, number>) => a.sol - b.sol || (a.dist_total_m ?? 0) - (b.dist_total_m ?? 0));
   const last = wps[wps.length - 1];
-  return { points, km: last?.dist_total_m ? last.dist_total_m / 1000 : null, last: last ? { lat: +last.lat, lon: +last.lon, sol: +last.sol } : null };
+  const perSol = new Map<number, { sol: number; rmc: string; lat: number; lon: number }>();
+  for (const w of wps) perSol.set(+w.sol, { sol: +w.sol, rmc: String((w as Record<string, unknown>).RMC ?? ''), lat: +w.lat, lon: +w.lon });
+  return { points, km: last?.dist_total_m ? last.dist_total_m / 1000 : null, last: last ? { lat: +last.lat, lon: +last.lon, sol: +last.sol } : null, stops: [...perSol.values()] };
 }
 
 async function loadHeli(): Promise<LivePath> {

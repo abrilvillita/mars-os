@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { fetchRawImages, type RawImage } from '../../core/live/m20';
+import { fetchMslImages } from '../../core/live/msl';
 import { formatLat, formatLon } from '../../core/geo/mars';
 import { roverData } from '../../render/overlays/RoverLayer';
 import { useUI } from '../../state/uiStore';
@@ -25,7 +26,7 @@ function WaypointPhotos() {
     if (!wp) return;
     setImgs(null);
     setErr(false);
-    fetchRawImages(wp.sol, 36).then(setImgs).catch(() => setErr(true));
+    (wp.mission === 'msl' ? fetchMslImages(wp.sol, 36) : fetchRawImages(wp.sol, 36)).then(setImgs).catch(() => setErr(true));
   }, [wp]);
 
   if (!wp) return (
@@ -34,12 +35,13 @@ function WaypointPhotos() {
       <p className="small muted">{t('samples.whereToFind')}</p>
     </>
   );
-  const meta = roverData.waypoints.find((w) => w.rmc === wp.rmc);
+  const meta = wp.mission === 'msl' ? null : roverData.waypoints.find((w) => w.rmc === wp.rmc);
+  const rover = wp.mission === 'msl' ? 'Curiosity' : 'Perseverance';
 
   return (
     <div className="photos">
       <div className="card">
-        <div className="card-title">{t('photos.stop', { rmc: wp.rmc, sol: wp.sol })}</div>
+        <div className="card-title">{rover} · {t('photos.stop', { rmc: wp.rmc, sol: wp.sol })}</div>
         <div className="mono small">{formatLat(wp.lat, 5)} {formatLon(wp.lon, 5)}</div>
         {meta?.elevGeoid_m !== null && meta?.elevGeoid_m !== undefined && <div className="small">{t('photos.elev')}: {fmtM(meta.elevGeoid_m, 2)}</div>}
         {meta?.note && <div className="small muted">{meta.note}</div>}

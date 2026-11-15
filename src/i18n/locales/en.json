@@ -616,10 +616,19 @@
     "liveFeed": "live NASA MMGIS feed",
     "fly": "Fly there",
     "finalPathEnd": "Final position (end of NASA traverse)",
-    "pathSource": "traverse and final position"
+    "pathSource": "traverse and final position",
+    "findings": "Findings",
+    "instruments": "Instruments",
+    "sciSource": "Source",
+    "stops": "Expedition stops ({{n}})",
+    "hardware": "landing hardware",
+    "stopsSource": "Stops, descriptions and images: NASA Mars Trek (positions located on HiRISE images).",
+    "stopSource": "Description and image",
+    "dataService": "position data service",
+    "backTo": "← Back to the mission"
   },
   "memories": {
-    "title": "Perseverance was here · sol {{sol}} · {{d}} away",
+    "title": "{{rover}} was here · sol {{sol}} · {{d}} away",
     "note": "Raw photos from the rover at this stop · NASA/JPL-Caltech · click for more"
   },
   "ice": {

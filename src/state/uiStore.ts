@@ -38,6 +38,8 @@ export interface CameraTarget {
 }
 
 export interface WaypointSelection {
+  /** Rover whose stop this is (default Perseverance). */
+  mission?: 'm20' | 'msl';
   sol: number;
   rmc: string;
   lat: number;
@@ -83,6 +85,8 @@ interface UIState {
   sampleN: number | null;
   /** Selected surface explorer (Mars explorers layer). */
   explorerId: string | null;
+  /** Selected expedition stop (index in expeditions.json). */
+  stopIdx: number | null;
 
   flyTo: (CameraTarget & { nonce: number }) | null;
   camera: { lat: number; lon: number; distance: number; altitudeKm: number; tilt: number; heading: number };
@@ -128,6 +132,7 @@ export const useUI = create<UIState>((set) => ({
   waypoint: null,
   sampleN: null,
   explorerId: null,
+  stopIdx: null,
 
   flyTo: null,
   camera: { lat: 18.4, lon: 77.5, distance: 12000, altitudeKm: 12000, tilt: 0, heading: 0 },

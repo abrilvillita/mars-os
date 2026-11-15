@@ -17,6 +17,7 @@ import { MODE_INDEX } from './tileShader';
 import { pickNearestWaypoint } from '../overlays/RoverLayer';
 import { pickNearestNode } from '../overlays/NodeGrid';
 import { pickNearestSample } from '../overlays/SamplesLayer';
+import { pickNearestMslStop } from '../overlays/ExplorersLayer';
 
 const BASE_URL = import.meta.env.BASE_URL;
 
@@ -104,6 +105,14 @@ export function GlobeLayer() {
         const w = pickNearestWaypoint(sx, sy, 9);
         if (w) {
           st.set({ waypoint: { sol: w.sol, rmc: w.rmc, lat: w.lat, lon: w.lon }, sampleN: null, rightTab: 'photos', panelsOpen: { ...st.panelsOpen, right: true } });
+          return;
+        }
+      }
+      // 1b) Curiosity stop?
+      if (st.vectors.explorers) {
+        const m = pickNearestMslStop(sx, sy, 8);
+        if (m) {
+          st.set({ waypoint: { mission: 'msl', sol: m.sol, rmc: m.rmc, lat: m.lat, lon: m.lon }, sampleN: null, rightTab: 'photos', panelsOpen: { ...st.panelsOpen, right: true } });
           return;
         }
       }

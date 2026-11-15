@@ -8,14 +8,40 @@
       "agency": "NASA",
       "landed": "1976-07-20",
       "ended": "1982-11",
-      "lat": 22.27,
-      "lon": -47.95,
-      "precision": "0.01°",
-      "coordSource": "https://nssdc.gsfc.nasa.gov/planetary/viking.html",
+      "lat": 22.271848,
+      "lon": -47.95217,
+      "precision": "HiRISE-located hardware (NASA Mars Trek)",
+      "coordSource": "https://trek.nasa.gov/mars/trekarcgis/rest/services/viking_waypoints/MapServer",
       "photo": {
         "id": "PIA00563",
         "title": "First color image from Viking Lander 1",
         "src": "https://images-assets.nasa.gov/image/PIA00563/PIA00563~orig.jpg"
+      },
+      "nominal": {
+        "lat": 22.27,
+        "lon": -47.95,
+        "source": "https://nssdc.gsfc.nasa.gov/planetary/viking.html"
+      },
+      "science": {
+        "page": "https://science.nasa.gov/mission/viking-1/",
+        "instruments": [
+          "Cameras",
+          "Biology experiments",
+          "Gas chromatograph–mass spectrometer",
+          "X-ray fluorescence spectrometer",
+          "Meteorology station",
+          "Seismometer"
+        ],
+        "findings": [
+          {
+            "en": "First long-term weather record from the surface of another planet: daily temperature, pressure and wind.",
+            "es": "Primer registro meteorológico prolongado desde la superficie de otro planeta: temperatura, presión y viento diarios."
+          },
+          {
+            "en": "Its biology experiments were designed to look for life in the soil; their results did not give clear evidence of life.",
+            "es": "Sus experimentos biológicos buscaban vida en el suelo; los resultados no dieron evidencia clara de vida."
+          }
+        ]
       }
     },
     {
@@ -25,14 +51,40 @@
       "agency": "NASA",
       "landed": "1976-09-03",
       "ended": "1980-04",
-      "lat": 47.64,
-      "lon": 134.29,
-      "precision": "0.01°",
-      "coordSource": "https://nssdc.gsfc.nasa.gov/planetary/viking.html",
+      "lat": 47.667278,
+      "lon": 134.280961,
+      "precision": "HiRISE-located hardware (NASA Mars Trek)",
+      "coordSource": "https://trek.nasa.gov/mars/trekarcgis/rest/services/viking2_waypoints/MapServer",
       "photo": {
         "id": "PIA04023",
         "title": "Viking Lander 2 anniversary",
         "src": "https://images-assets.nasa.gov/image/PIA04023/PIA04023~orig.jpg"
+      },
+      "nominal": {
+        "lat": 47.64,
+        "lon": 134.29,
+        "source": "https://nssdc.gsfc.nasa.gov/planetary/viking.html"
+      },
+      "science": {
+        "page": "https://science.nasa.gov/mission/viking-2/",
+        "instruments": [
+          "Cameras",
+          "Biology experiments",
+          "Gas chromatograph–mass spectrometer",
+          "X-ray fluorescence spectrometer",
+          "Meteorology station",
+          "Seismometer"
+        ],
+        "findings": [
+          {
+            "en": "Measured the weather much farther north than Viking 1 and imaged frost on the ground in winter.",
+            "es": "Midió el clima mucho más al norte que Viking 1 y fotografió escarcha sobre el suelo en invierno."
+          },
+          {
+            "en": "Together the two landers recorded how surface pressure rises and falls through the Martian year.",
+            "es": "Entre los dos módulos registraron cómo sube y baja la presión de la superficie a lo largo del año marciano."
+          }
+        ]
       }
     },
     {
@@ -42,14 +94,38 @@
       "agency": "NASA",
       "landed": "1997-07-04",
       "ended": "1997-09",
-      "lat": 19.33,
-      "lon": -33.55,
-      "precision": "0.01°",
-      "coordSource": "https://nssdc.gsfc.nasa.gov/planetary/marsland.html",
+      "lat": 19.097232,
+      "lon": -33.253923,
+      "precision": "HiRISE-located hardware (NASA Mars Trek)",
+      "coordSource": "https://trek.nasa.gov/mars/trekarcgis/rest/services/sojourner_waypoints/MapServer",
       "photo": {
         "id": "PIA04318",
         "title": "Sojourner sits near the “Rock Garden”",
         "src": "https://images-assets.nasa.gov/image/PIA04318/PIA04318~orig.jpg"
+      },
+      "nominal": {
+        "lat": 19.33,
+        "lon": -33.55,
+        "source": "https://nssdc.gsfc.nasa.gov/planetary/marsland.html"
+      },
+      "science": {
+        "page": "https://science.nasa.gov/mission/mars-pathfinder/",
+        "instruments": [
+          "Lander camera",
+          "Sojourner cameras",
+          "Alpha Proton X-ray Spectrometer (APXS)",
+          "Atmospheric structure / meteorology package"
+        ],
+        "findings": [
+          {
+            "en": "Sojourner’s APXS measured the chemistry of rocks and dust around the lander, the first rock analyses by a rover.",
+            "es": "El APXS de Sojourner midió la química de rocas y polvo alrededor del módulo: los primeros análisis de rocas hechos por un rover."
+          },
+          {
+            "en": "Rounded pebbles and conglomerates suggested they formed in running water during a warmer past.",
+            "es": "Guijarros redondeados y conglomerados sugirieron que se formaron en agua corriente durante un pasado más cálido."
+          }
+        ]
       }
     },
     {
@@ -59,17 +135,43 @@
       "agency": "NASA",
       "landed": "2004-01-04",
       "ended": "2010-03",
-      "lat": -14.5692,
-      "lon": 175.4729,
-      "precision": "0.0001°",
+      "lat": -14.571893,
+      "lon": 175.47848,
+      "precision": "HiRISE-located hardware (NASA Mars Trek)",
       "drivenKm": 7.73,
-      "coordSource": "https://science.nasa.gov/mission/mer-spirit/",
+      "coordSource": "https://trek.nasa.gov/mars/trekarcgis/rest/services/spirit_waypoints/MapServer",
       "photo": {
         "id": "PIA16442",
         "title": "Spirit in the McMurdo panorama",
         "src": "https://images-assets.nasa.gov/image/PIA16442/PIA16442~medium.jpg"
       },
-      "trekPath": "spirit_path"
+      "trekPath": "spirit_path",
+      "nominal": {
+        "lat": -14.5692,
+        "lon": 175.4729,
+        "source": "https://science.nasa.gov/mission/mer-spirit/"
+      },
+      "science": {
+        "page": "https://science.nasa.gov/mission/mer-spirit/",
+        "instruments": [
+          "Pancam",
+          "Miniature Thermal Emission Spectrometer (Mini-TES)",
+          "Mössbauer spectrometer",
+          "APXS",
+          "Microscopic Imager",
+          "Rock Abrasion Tool (RAT)"
+        ],
+        "findings": [
+          {
+            "en": "Its arm carried a mini-laboratory: it ground rocks with the RAT and read their iron minerals and chemistry with the Mössbauer and APXS spectrometers.",
+            "es": "Su brazo llevaba un minilaboratorio: raspaba rocas con el RAT y leía sus minerales de hierro y su química con los espectrómetros Mössbauer y APXS."
+          },
+          {
+            "en": "In 2007 its dragging wheel unearthed nearly pure silica near Home Plate, a sign of hot water in the past.",
+            "es": "En 2007 su rueda arrastrada descubrió sílice casi pura cerca de Home Plate, señal de agua caliente en el pasado."
+          }
+        ]
+      }
     },
     {
       "id": "opportunity",
@@ -78,17 +180,43 @@
       "agency": "NASA",
       "landed": "2004-01-25",
       "ended": "2019-02",
-      "lat": -1.9483,
-      "lon": -5.52583,
-      "precision": "0.0001°",
+      "lat": -1.948173,
+      "lon": -5.52552,
+      "precision": "HiRISE-located hardware (NASA Mars Trek)",
       "drivenKm": 45.16,
-      "coordSource": "https://science.nasa.gov/mission/mer-opportunity/",
+      "coordSource": "https://trek.nasa.gov/mars/trekarcgis/rest/services/opportunity_waypoints/MapServer",
       "photo": {
         "id": "PIA22222",
         "title": "Opportunity’s first selfie",
         "src": "https://images-assets.nasa.gov/image/PIA22222/PIA22222~medium.jpg"
       },
-      "trekPath": "opportunity_path"
+      "trekPath": "opportunity_path",
+      "nominal": {
+        "lat": -1.9483,
+        "lon": -5.52583,
+        "source": "https://science.nasa.gov/mission/mer-opportunity/"
+      },
+      "science": {
+        "page": "https://science.nasa.gov/mission/mer-opportunity/",
+        "instruments": [
+          "Pancam",
+          "Mini-TES",
+          "Mössbauer spectrometer",
+          "APXS",
+          "Microscopic Imager",
+          "Rock Abrasion Tool (RAT)"
+        ],
+        "findings": [
+          {
+            "en": "With the same mini-laboratory on its arm, it found that the rocks of Meridiani Planum were once soaked in liquid water, including small hematite spheres (“blueberries”) that formed in water.",
+            "es": "Con el mismo minilaboratorio en su brazo descubrió que las rocas de Meridiani Planum estuvieron empapadas de agua líquida, incluidas pequeñas esferas de hematita (“arándanos”) que se formaron en agua."
+          },
+          {
+            "en": "It read the history of the planet in the layered walls of Eagle, Endurance, Victoria and Endeavour craters, and ended in Perseverance Valley, a gully carved by fluid.",
+            "es": "Leyó la historia del planeta en las paredes en capas de los cráteres Eagle, Endurance, Victoria y Endeavour, y terminó en Perseverance Valley, un barranco excavado por un fluido."
+          }
+        ]
+      }
     },
     {
       "id": "phoenix",
@@ -97,14 +225,38 @@
       "agency": "NASA",
       "landed": "2008-05-25",
       "ended": "2008-11",
-      "lat": 68.22,
-      "lon": -125.75,
-      "precision": "0.01°",
-      "coordSource": "https://science.nasa.gov/mission/mars-phoenix/",
+      "lat": 68.218504,
+      "lon": -125.754675,
+      "precision": "HiRISE-located hardware (NASA Mars Trek)",
+      "coordSource": "https://trek.nasa.gov/mars/trekarcgis/rest/services/phoenix_waypoints/MapServer",
       "photo": {
         "id": "PIA10701",
         "title": "Phoenix lander on the Martian surface",
         "src": "https://images-assets.nasa.gov/image/PIA10701/PIA10701~orig.jpg"
+      },
+      "nominal": {
+        "lat": 68.22,
+        "lon": -125.75,
+        "source": "https://science.nasa.gov/mission/mars-phoenix/"
+      },
+      "science": {
+        "page": "https://science.nasa.gov/mission/mars-phoenix/",
+        "instruments": [
+          "Robotic arm and camera",
+          "Thermal and Evolved Gas Analyzer (TEGA)",
+          "Microscopy, Electrochemistry and Conductivity Analyzer (MECA)",
+          "Meteorological station with lidar"
+        ],
+        "findings": [
+          {
+            "en": "Confirmed water ice just below the surface of the arctic plains.",
+            "es": "Confirmó hielo de agua justo debajo de la superficie de las llanuras árticas."
+          },
+          {
+            "en": "Found perchlorate in the soil: a possible energy source for microbes and a potential resource for humans, and a hazard to plan for.",
+            "es": "Encontró perclorato en el suelo: una posible fuente de energía para microbios y un posible recurso para humanos, y también un riesgo a considerar."
+          }
+        ]
       }
     },
     {
@@ -123,6 +275,30 @@
         "id": "PIA23240",
         "title": "Curiosity’s selfie at “Aberlady” and “Kilmarie”",
         "src": "https://images-assets.nasa.gov/image/PIA23240/PIA23240~medium.jpg"
+      },
+      "science": {
+        "page": "https://science.nasa.gov/mission/msl-curiosity/",
+        "instruments": [
+          "Mastcam",
+          "ChemCam (laser)",
+          "APXS",
+          "MAHLI",
+          "CheMin",
+          "SAM",
+          "RAD (radiation)",
+          "REMS (weather)",
+          "DAN"
+        ],
+        "findings": [
+          {
+            "en": "Found chemical and mineral evidence of past habitable environments in Gale crater.",
+            "es": "Encontró evidencia química y mineral de ambientes habitables en el pasado en el cráter Gale."
+          },
+          {
+            "en": "Found organic molecules in ancient rocks, and measures radiation (RAD) and weather (REMS) every sol: data for future crews.",
+            "es": "Encontró moléculas orgánicas en rocas antiguas y mide radiación (RAD) y clima (REMS) cada sol: datos para futuras tripulaciones."
+          }
+        ]
       }
     },
     {
@@ -132,14 +308,34 @@
       "agency": "NASA",
       "landed": "2018-11-26",
       "ended": "2022-12",
-      "lat": 4.5,
-      "lon": 135.9,
-      "precision": "≈0.1°",
-      "coordSource": "https://science.nasa.gov/mission/insight/",
+      "lat": 4.5024,
+      "lon": 135.62345,
+      "precision": "HiRISE-located hardware (NASA Mars Trek)",
+      "coordSource": "https://trek.nasa.gov/mars/trekarcgis/rest/services/InSight_waypoints/MapServer",
       "photo": {
         "id": "PIA22876",
         "title": "InSight’s first selfie",
         "src": "https://images-assets.nasa.gov/image/PIA22876/PIA22876~medium.jpg"
+      },
+      "nominal": {
+        "lat": 4.5,
+        "lon": 135.9,
+        "source": "https://science.nasa.gov/mission/insight/"
+      },
+      "science": {
+        "page": "https://science.nasa.gov/mission/insight/",
+        "instruments": [
+          "SEIS seismometer",
+          "HP3 heat probe",
+          "RISE radio science",
+          "Weather sensors"
+        ],
+        "findings": [
+          {
+            "en": "Recorded marsquakes for four years and used them to map the inside of the planet: crust, mantle and core.",
+            "es": "Registró sismos marcianos durante cuatro años y los usó para mapear el interior del planeta: corteza, manto y núcleo."
+          }
+        ]
       }
     },
     {
@@ -158,6 +354,28 @@
         "id": "PIA24542",
         "title": "Perseverance’s selfie with Ingenuity",
         "src": "https://images-assets.nasa.gov/image/PIA24542/PIA24542~medium.jpg"
+      },
+      "science": {
+        "page": "https://science.nasa.gov/mission/mars-2020-perseverance/",
+        "instruments": [
+          "Mastcam-Z",
+          "SuperCam",
+          "PIXL",
+          "SHERLOC",
+          "MOXIE",
+          "MEDA (weather)",
+          "RIMFAX (ground radar)"
+        ],
+        "findings": [
+          {
+            "en": "MOXIE produced oxygen from the carbon dioxide of the Martian air, a test for future crews.",
+            "es": "MOXIE produjo oxígeno a partir del dióxido de carbono del aire marciano, una prueba para futuras tripulaciones."
+          },
+          {
+            "en": "Collected 30 named samples; in 2025 NASA called the features of the “Cheyava Falls” rock the clearest potential biosignature found so far.",
+            "es": "Recolectó 30 muestras con nombre; en 2025 la NASA llamó a los rasgos de la roca “Cheyava Falls” la posible biofirma más clara encontrada hasta ahora."
+          }
+        ]
       }
     },
     {
@@ -176,6 +394,19 @@
         "id": "PIA24665",
         "title": "Perseverance’s SuperCam views Ingenuity",
         "src": "https://images-assets.nasa.gov/image/PIA24665/PIA24665~medium.jpg"
+      },
+      "science": {
+        "page": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/",
+        "instruments": [
+          "Navigation camera (down-looking)",
+          "Colour camera (horizon)"
+        ],
+        "findings": [
+          {
+            "en": "First powered, controlled flight on another planet, in April 2021, and 72 flights in total: it also scouted terrain ahead of Perseverance.",
+            "es": "Primer vuelo propulsado y controlado en otro planeta, en abril de 2021, y 72 vuelos en total: también exploró el terreno por delante de Perseverance."
+          }
+        ]
       }
     }
   ]

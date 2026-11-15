@@ -12,10 +12,15 @@ import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js';
 import { getMarsOS } from '../../api/MarsOS';
 import { latLonToXYZ, MARS_RADIUS_KM } from '../../core/geo/mars';
 import { currentPosition, ensureExplorers, explorersState, type Explorer } from '../../core/live/explorers';
+import { expeditions, loadExpeditions, type ExpeditionStop } from '../../core/live/expeditions';
+import { renderBridge } from '../bridge';
 import { useUI } from '../../state/uiStore';
 import { ensureRoverData, roverData } from './RoverLayer';
 
-export const KIND_ICON = { rover: '🤖', lander: '🛬', helicopter: '🚁' } as const;
+export const KIND_ICON = { rover: 'R', lander: 'L', helicopter: 'H' } as const;
+export function KindDot({ kind }: { kind: keyof typeof KIND_ICON }) {
+  return <span className={`kind-dot kd-${kind}`} aria-hidden>{KIND_ICON[kind]}</span>;
+}
 
 export function useExplorers() {
   const [, setRev] = useState(0);
@@ -25,6 +30,7 @@ export function useExplorers() {
     roverData.listeners.add(l);
     ensureExplorers(import.meta.env.BASE_URL);
     ensureRoverData();
+    loadExpeditions(import.meta.env.BASE_URL).then(l);
     return () => {
       explorersState.listeners.delete(l);
       roverData.listeners.delete(l);
@@ -72,7 +78,7 @@ function Label({ e }: { e: Explorer }) {
   return (
     <Html position={pos} center zIndexRange={[11, 0]}>
       <button ref={el} style={{ display: 'none' }} className={`explorer-label k-${e.kind} ${e.ended ? 'ended' : 'active'} ${sel ? 'sel' : ''}`} onClick={() => selectExplorer(e.id)}>
-        {KIND_ICON[e.kind]} {e.name} <span>{e.landed.slice(0, 4)}</span>
+        <KindDot kind={e.kind} /> {e.name} <span>{e.landed.slice(0, 4)}</span>
       </button>
     </Html>
   );
@@ -108,6 +114,83 @@ function PathLine({ points, color, width, maxDist }: { points: { lat: number; lo
   return line ? <primitive object={line} /> : null;
 }
 
+export function selectStop(idx: number, fly = true) {
+  const st = useUI.getState();
+  const s = expeditions.doc?.stops[idx];
+  if (!s) return;
+  st.set({ stopIdx: idx, explorerId: s.mission, rightTab: 'explorers', panelsOpen: { ...st.panelsOpen, right: true } });
+  if (fly) st.requestFlyTo({ lat: s.lat, lon: s.lon, distance: s.hardware ? 1.5 : 4, tilt: 45 });
+}
+
+/** Named expedition stops of every mission (NASA Mars Trek), labelled when the camera is near. */
+function StopLabel({ s, idx }: { s: ExpeditionStop; idx: number }) {
+  const os = getMarsOS();
+  const ex = useUI((st) => st.exaggeration);
+  const sel = useUI((st) => st.stopIdx === idx);
+  const pos = useMemo(() => {
+    const v = latLonToXYZ(s.lat, s.lon, ((os.ready ? os.terrainModel.height(s.lat, s.lon) : 0) + 20) * ex);
+    return new THREE.Vector3(v[0], v[1], v[2]);
+  }, [s, ex, os]);
+  const el = useRef<HTMLButtonElement>(null);
+  useFrame(({ camera }) => {
+    const c = useUI.getState().camera;
+    const facing = pos.clone().normalize().dot(camera.position.clone().normalize()) > MARS_RADIUS_KM / camera.position.length() - 0.002;
+    const close = Math.abs(c.lat - s.lat) < 3 && c.distance < (s.hardware ? 25 : 220);
+    if (el.current) el.current.style.display = facing && close ? '' : 'none';
+  });
+  return (
+    <Html position={pos} center zIndexRange={[10, 0]}>
+      <button ref={el} style={{ display: 'none' }} className={`stop-label ${s.hardware ? 'hw' : ''} ${sel ? 'sel' : ''}`} onClick={() => selectStop(idx, false)}>
+        {s.name}
+      </button>
+    </Html>
+  );
+}
+
+/** Screen-space pick of the nearest Curiosity stop (MMGIS, one per sol). */
+export function pickNearestMslStop(sx: number, sy: number, maxPx: number) {
+  const stops = explorersState.msl?.stops;
+  const cam = useUI.getState().camera;
+  if (!stops || !renderBridge.project || cam.distance > 400 || Math.abs(cam.lat + 4.7) > 2 || Math.abs(cam.lon - 137.4) > 2) return null;
+  const os = getMarsOS();
+  let best: (typeof stops)[number] | null = null, bestD = maxPx;
+  for (const w of stops) {
+    const p = renderBridge.project(w.lat, w.lon, os.terrainModel.height(w.lat, w.lon) + 4);
+    if (!p) continue;
+    const d = Math.hypot(p.x - sx, p.y - sy);
+    if (d < bestD) { bestD = d; best = w; }
+  }
+  return best;
+}
+
+function MslStops() {
+  const os = getMarsOS();
+  const ex = useUI((s) => s.exaggeration);
+  const stops = explorersState.msl?.stops;
+  const geo = useMemo(() => {
+    if (!stops) return null;
+    const pos = new Float32Array(stops.length * 3);
+    const tmp = [0, 0, 0];
+    stops.forEach((w, i) => {
+      latLonToXYZ(w.lat, w.lon, (os.terrainModel.height(w.lat, w.lon) + 4) * ex, tmp);
+      pos.set(tmp, i * 3);
+    });
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    return g;
+  }, [stops, ex, os]);
+  const ref = useRef<THREE.Points>(null);
+  useFrame(() => {
+    if (ref.current) ref.current.visible = useUI.getState().camera.distance < 400;
+  });
+  if (!geo) return null;
+  return (
+    <points ref={ref} geometry={geo} renderOrder={7}>
+      <pointsMaterial color="#ffd23f" size={6} sizeAttenuation={false} transparent opacity={0.95} />
+    </points>
+  );
+}
+
 export function ExplorersLayer() {
   const on = useUI((s) => s.vectors.explorers);
   const st = useExplorers();
@@ -119,6 +202,8 @@ export function ExplorersLayer() {
       {st.msl && <PathLine points={st.msl.points} color={0xffd23f} width={2.5} maxDist={2500} />}
       {Object.entries(st.paths).map(([id, p]) => <PathLine key={id} points={p.points} color={0xffa94d} width={2.2} maxDist={2500} />)}
       {st.heli && <PathLine points={st.heli.points} color={0x9cff6b} width={1.8} maxDist={300} />}
+      <MslStops />
+      {expeditions.doc?.stops.map((s, i) => (s.mission === 'perseverance' && !s.hardware ? null : <StopLabel key={i} s={s} idx={i} />))}
     </>
   );
 }
