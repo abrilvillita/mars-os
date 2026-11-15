@@ -16,7 +16,8 @@
     "dev:web": "vite",
     "server": "tsx server/index.ts",
     "start": "vite build && tsx server/index.ts --serve-dist",
-    "data:ctx": "node scripts/build-ctx-pyramid.mjs"
+    "data:ctx": "node scripts/build-ctx-pyramid.mjs",
+    "data:cachecam": "node scripts/build-cachecam-index.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.9",

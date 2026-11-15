@@ -478,6 +478,27 @@
       "provenance": "derived",
       "synthetic": false,
       "notes": "42 footprints; each links to its product page on the PDS Orbital Data Explorer."
+    },
+    {
+      "id": "src.m20.cachecam",
+      "title": "Mars 2020 raw images — Sample Caching System Camera (CacheCam)",
+      "kind": "api",
+      "agency": "NASA/JPL-Caltech",
+      "mission": "Mars 2020",
+      "instrument": "CacheCam",
+      "productId": null,
+      "datasetId": null,
+      "doi": null,
+      "url": "https://mars.nasa.gov/rss/api/?feed=raw_images&category=mars2020&feedtype=json&search=CACHECAM",
+      "landingPage": "https://mars.nasa.gov/mars2020/multimedia/raw-images/",
+      "citation": "NASA/JPL-Caltech. Raw, unprocessed images.",
+      "license": "NASA images; see provider terms",
+      "acquisition": null,
+      "publishedAt": null,
+      "accessedAt": "2026-11-14",
+      "provenance": "measured",
+      "synthetic": false,
+      "notes": "Per-sol index (4,249 images, 75 sols, sols 88–2018) built by scripts/build-cachecam-index.mjs; positions from the MMGIS waypoint file."
     }
   ],
   "layers": [
@@ -1385,6 +1406,49 @@
       "synthetic": false,
       "defaultOpacity": 1,
       "notes": "Footprint polygons of CRISM full-resolution targeted observations; each record carries the PDS product id."
+    },
+    {
+      "id": "layer.m20.cachecam",
+      "name": "Perseverance sample-handling activity (CacheCam)",
+      "label": {
+        "en": "Sample-handling sites (CacheCam)",
+        "es": "Sitios de manejo de muestras (CacheCam)"
+      },
+      "kind": "rover_images",
+      "sourceIds": [
+        "src.m20.cachecam",
+        "src.m20.mmgis.waypoints"
+      ],
+      "access": {
+        "protocol": "json_api",
+        "url": "data/m20/cachecam-index.json"
+      },
+      "valueEncoding": {
+        "type": "visual",
+        "description": "Raw images inside sample tubes"
+      },
+      "resolution": {
+        "metersPerPixel": null
+      },
+      "coverage": {
+        "global": false,
+        "bbox": {
+          "west": 77.2,
+          "south": 18.3,
+          "east": 77.6,
+          "north": 18.6
+        }
+      },
+      "temporal": {
+        "start": "2021-05-20",
+        "end": null
+      },
+      "uncertainty": null,
+      "attribution": "NASA/JPL-Caltech",
+      "provenance": "measured",
+      "synthetic": false,
+      "defaultOpacity": 1,
+      "notes": "One marker per sol with CacheCam images (sample handling: coring, sealing, inspection, calibration) — not one sample per sol."
     }
   ],
   "regions": [
@@ -1429,7 +1493,8 @@
         "layer.m20.places.r16.traverse",
         "layer.minerals.aqueous",
         "layer.minerals.hydrous",
-        "layer.crism.humex"
+        "layer.crism.humex",
+        "layer.m20.cachecam"
       ],
       "sourceIds": [
         "src.trek.nomenclature.jezero",

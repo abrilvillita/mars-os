@@ -83,7 +83,9 @@
     "minerals": "Detecciones minerales (espectroscopía orbital)",
     "mineralsHint": "Ehlmann y Edwards 2014; Carter et al. 2013. Los puntos marcan detecciones publicadas, no abundancia ni yacimientos.",
     "crism": "Observaciones CRISM en sitios de exploración humana",
-    "crismHint": "Huellas de observaciones CRISM de resolución completa (NASA PDS), con enlace al producto."
+    "crismHint": "Huellas de observaciones CRISM de resolución completa (NASA PDS), con enlace al producto.",
+    "samples": "Sitios de manejo de muestras (CacheCam)",
+    "samplesHint": "Marcadores dorados: posición del rover en los soles en que su cámara de muestras fotografió un tubo (clic)."
   },
   "view": {
     "title": "Vista",
@@ -385,7 +387,8 @@
     },
     "routes": "Comparador de rutas sobre pendiente medida (+ luz solar)",
     "minerals": "Detecciones minerales (CRISM, OMEGA, THEMIS)",
-    "hud": "Visor HUD del casco (vista de entrenamiento)"
+    "hud": "Visor HUD del casco (vista de entrenamiento)",
+    "samples": "Sitios de manejo de muestras con imágenes CacheCam"
   },
   "routes": {
     "intro": "Compara dos rutas a pie entre A y B sobre el terreno actual: la más corta y la de pendientes más suaves. Los valores salen de los datos de elevación; los límites son tus supuestos de planificación.",
@@ -481,5 +484,15 @@
     "restart": "↺ Desde A",
     "noRoute": "Sin ruta: compara rutas en la pestaña Rutas.",
     "badge": "HUD DE ENTRENAMIENTO · calculado con datos de MARS OS · no es software de vuelo"
+  },
+  "samples": {
+    "listTitle": "Manejo de muestras (CacheCam)",
+    "listNote": "{{sols}} soles con imágenes de la cámara del sistema de muestras ({{imgs}} imágenes crudas). Haz clic en un sol para ver dentro de los tubos.",
+    "title": "Manejo de muestras — sol {{sol}}",
+    "nearStop": "cerca de la parada {{rmc}}",
+    "count": "{{n}} imágenes de CacheCam ese sol",
+    "explain": "CacheCam está dentro del rover y mira hacia el interior de un tubo de muestra, para que el equipo revise la roca o el regolito recogido antes de sellarlo. Las imágenes de ese sol pueden mostrar perforación, revisiones de sellado o calibración.",
+    "back": "← Todos los soles de muestras",
+    "raw": "Imágenes crudas de CacheCam — NASA/JPL-Caltech"
   }
 }

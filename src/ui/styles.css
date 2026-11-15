@@ -344,3 +344,4 @@ body.presentation .attribution, body.presentation .demo-banner { display: none !
 .hv-title { font-weight: 800; letter-spacing: .12em; font-size: 11px; color: #b18cff; }
 .hv-badge { position: absolute; left: 50%; bottom: 72px; transform: translateX(-50%); font-size: 10px; letter-spacing: .12em; opacity: .75; white-space: nowrap; }
 body.visor-on .controls-hint { display: none; }
+.sol-chips { display: flex; flex-wrap: wrap; gap: 4px; } .sol-chips .chip { cursor: pointer; background: rgba(255, 199, 51, .08); border-color: #ffc73366; font-family: var(--mono); }

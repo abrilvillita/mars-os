@@ -11,6 +11,7 @@
  *   &panels=0                     (hides both side panels)
  *   &ui=0                         (presentation mode: only the planet, no interface)
  *   &hud=1                        (helmet visor HUD; with &route=… it guides along the low-slope route)
+ *   &cachecam=196                 (opens the CacheCam sample-handling images of a sol)
  *   &walk=1                       (with &hud=1&route=…: walks the route automatically)
  *   &route=lat,lon;lat,lon        (compares routes A → B; opens the Routes tab)
  */
@@ -54,6 +55,8 @@ export function applyDeepLink(search = window.location.search) {
   if (q.get('minerals') === '1') st.set({ vectors: { ...useUI.getState().vectors, minerals: true, crism: true } });
   if (q.get('panels') === '0') st.set({ panelsOpen: { left: false, right: false } });
   if (q.get('ui') === '0') document.body.classList.add('presentation');
+  const cc = num(q.get('cachecam'));
+  if (cc !== null) st.set({ cachecamSol: cc, rightTab: 'photos', vectors: { ...useUI.getState().vectors, samples: true } });
   if (q.get('hud') === '1') st.set({ hud: true, panelsOpen: { left: false, right: false } });
   const route = q.get('route')?.split(';').map((s) => s.split(',').map(Number));
   if (route && route.length === 2 && route.every((p) => p.length === 2 && p.every(isFinite))) {

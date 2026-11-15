@@ -83,7 +83,9 @@
     "minerals": "Mineral detections (orbital spectroscopy)",
     "mineralsHint": "Ehlmann & Edwards 2014; Carter et al. 2013. Points mark published detections, not abundance or ore.",
     "crism": "CRISM observations at Human Exploration sites",
-    "crismHint": "Footprints of full-resolution CRISM targets (NASA PDS), with product links."
+    "crismHint": "Footprints of full-resolution CRISM targets (NASA PDS), with product links.",
+    "samples": "Sample-handling sites (CacheCam)",
+    "samplesHint": "Gold markers: rover position on sols when its sample camera imaged a tube (clickable)."
   },
   "view": {
     "title": "View",
@@ -385,7 +387,8 @@
     },
     "routes": "Route comparator on measured slope (+ daylight budget)",
     "minerals": "Mineral detections (CRISM, OMEGA, THEMIS)",
-    "hud": "Helmet visor HUD (training view)"
+    "hud": "Helmet visor HUD (training view)",
+    "samples": "Sample-handling sites with CacheCam tube images"
   },
   "routes": {
     "intro": "Compare two walking routes between A and B on the current terrain: the shortest one and the one with gentlest slopes. Values come from the elevation data; limits are your planning assumptions.",
@@ -481,5 +484,15 @@
     "restart": "↺ From A",
     "noRoute": "No route: compare routes in the Routes tab.",
     "badge": "TRAINING HUD · computed from MARS OS data · not flight software"
+  },
+  "samples": {
+    "listTitle": "Sample handling (CacheCam)",
+    "listNote": "{{sols}} sols with Sample Caching System Camera images ({{imgs}} raw images). Click a sol to see inside the tubes.",
+    "title": "Sample handling — sol {{sol}}",
+    "nearStop": "near stop {{rmc}}",
+    "count": "{{n}} CacheCam images that sol",
+    "explain": "CacheCam sits inside the rover and looks down into a sample tube, so the team can check the rock or regolith collected before the tube is sealed. Images that sol may show coring, sealing checks or calibration.",
+    "back": "← All sample sols",
+    "raw": "Raw CacheCam images — NASA/JPL-Caltech"
   }
 }

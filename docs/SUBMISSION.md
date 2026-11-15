@@ -50,6 +50,7 @@ Everything runs online. The app is served by GitHub Pages and its backend (Gemin
   - It gives a rule-based recommendation.
   - When the terrain changes, for example when a new obstacle is approved, the routes are recalculated and the app explains which edit changed them. In our test, the low-slope route detoured 71 m around an approved +30 m obstacle.
   - Slope limits are editable planning assumptions, not validated EVA rules.
+- **Inside the sample tubes.** Gold markers show where Perseverance handled samples, on the 75 sols with CacheCam images. One click shows the raw CacheCam photos looking down into the tube, so a crew can see what the rover collected and where.
 - **Resources and minerals.**
   - Orbital detections of carbonates, clays, silica, sulfates and chlorides (Ehlmann & Edwards 2014), and of hydrous minerals (Carter et al. 2013), served by NASA Mars Trek. All 6,220 points are downloaded completely.
   - CRISM observation footprints at Human Exploration sites, each linked to its PDS product.
@@ -96,7 +97,7 @@ We used AI tools openly, and every AI-generated result was reviewed by the team:
 | CTX Jezero controlled mosaic (6 m) | Mars Reconnaissance Orbiter, CTX | NASA Mars Trek |
 | Mars 2020 Science Investigation CTX DEM Mosaic (20 m) | Mars Reconnaissance Orbiter, CTX | USGS / NASA PDS, urn:nasa:pds:mars2020_ctx_basemap_2021 |
 | Perseverance traverse and waypoints | Mars 2020 | NASA/JPL MMGIS location map |
-| Perseverance raw images | Mars 2020 | https://mars.nasa.gov/mars2020/multimedia/raw-images/ |
+| Perseverance raw images, including CacheCam (Sample Caching System Camera) | Mars 2020 | https://mars.nasa.gov/mars2020/multimedia/raw-images/ |
 | MEDA surface weather | Mars 2020, MEDA | NASA/JPL feed |
 | RAD surface dose-equivalent rate (reference value) | Mars Science Laboratory, RAD | Hassler et al. 2014, Science, doi:10.1126/science.1244797 |
 

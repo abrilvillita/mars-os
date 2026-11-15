@@ -6,8 +6,14 @@ import { formatLat, formatLon } from '../../core/geo/mars';
 import { roverData } from '../../render/overlays/RoverLayer';
 import { useUI } from '../../state/uiStore';
 import { ProvBadge, fmtM } from '../common';
+import { CacheCamPanel, SampleSolList } from './SamplesPanel';
 
 export function PhotosTab() {
+  const cc = useUI((s) => s.cachecamSol);
+  return cc !== null ? <CacheCamPanel sol={cc} /> : <WaypointPhotos />;
+}
+
+function WaypointPhotos() {
   const { t } = useTranslation();
   const wp = useUI((s) => s.waypoint);
   const fly = useUI((s) => s.requestFlyTo);
@@ -22,7 +28,12 @@ export function PhotosTab() {
     fetchRawImages(wp.sol, 36).then(setImgs).catch(() => setErr(true));
   }, [wp]);
 
-  if (!wp) return <p className="empty">{t('photos.pick')}</p>;
+  if (!wp) return (
+    <>
+      <p className="empty">{t('photos.pick')}</p>
+      <SampleSolList />
+    </>
+  );
   const meta = roverData.waypoints.find((w) => w.rmc === wp.rmc);
 
   return (

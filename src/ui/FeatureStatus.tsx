@@ -41,6 +41,7 @@ export function FeatureStatus() {
     ['featureStatus.routes', 'verified'],
     ['featureStatus.minerals', 'verified'],
     ['featureStatus.hud', 'verified'],
+    ['featureStatus.samples', 'verified'],
     ['featureStatus.onDemand', st.backend === false ? 'unavailable' : onDemand.error ? 'unavailable' : 'verified'],
     ['featureStatus.gemini', st.ai?.configured && st.ai.model ? 'verified' : st.backend === false ? 'unavailable' : 'config'],
     ['featureStatus.storm', 'simulation'],

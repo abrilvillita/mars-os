@@ -16,6 +16,7 @@ import { Globe } from './Globe';
 import { MODE_INDEX } from './tileShader';
 import { pickNearestWaypoint } from '../overlays/RoverLayer';
 import { pickNearestNode } from '../overlays/NodeGrid';
+import { pickNearestSample } from '../overlays/SamplesLayer';
 
 const BASE_URL = import.meta.env.BASE_URL;
 
@@ -90,11 +91,19 @@ export function GlobeLayer() {
       const r = el.getBoundingClientRect();
       const sx = e.clientX - r.left, sy = e.clientY - r.top;
       const st = ui.getState();
+      // 0) sample-handling (CacheCam) site?
+      if (st.vectors.samples && st.camera.distance <= 400) {
+        const s = pickNearestSample(sx, sy, 10);
+        if (s) {
+          st.set({ cachecamSol: s.sol, waypoint: null, rightTab: 'photos', panelsOpen: { ...st.panelsOpen, right: true } });
+          return;
+        }
+      }
       // 1) rover waypoint?
       if (st.vectors.waypoints) {
         const w = pickNearestWaypoint(sx, sy, 9);
         if (w) {
-          st.set({ waypoint: { sol: w.sol, rmc: w.rmc, lat: w.lat, lon: w.lon }, rightTab: 'photos', panelsOpen: { ...st.panelsOpen, right: true } });
+          st.set({ waypoint: { sol: w.sol, rmc: w.rmc, lat: w.lat, lon: w.lon }, cachecamSol: null, rightTab: 'photos', panelsOpen: { ...st.panelsOpen, right: true } });
           return;
         }
       }
