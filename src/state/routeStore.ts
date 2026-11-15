@@ -1,23 +1,29 @@
 /** View state of the route comparator (the planning logic lives in core/routes + MarsOS.routes). */
 import { create } from 'zustand';
-import { DEFAULT_ASSUMPTIONS, type LatLonPt, type RouteAssumptions, type RouteResult } from '../core/routes/RoutePlanner';
+import { PROFILE_ASSUMPTIONS, type LatLonPt, type Route, type RouteAssumptions, type RouteResult, type TravelerProfile } from '../core/routes/RoutePlanner';
+import type { RealDrive } from '../core/routes/realDrive';
 
 export interface RouteChangeNote {
   at: string;
   addedPatchIds: string[];
   removedPatchIds: string[];
   previewActive: boolean;
-  deltas: { kind: 'shortest' | 'lowSlope'; lengthM: number; maxSlopeDeg: number; gainM: number }[];
+  deltas: { kind: 'shortest' | 'lowSlope' | 'actual'; lengthM: number; maxSlopeDeg: number; gainM: number }[];
 }
 
 interface RouteState {
   start: LatLonPt | null;
   end: LatLonPt | null;
   pickMode: 'start' | 'end' | null;
+  profile: TravelerProfile;
   assumptions: RouteAssumptions;
   status: 'idle' | 'computing' | 'done' | 'error';
   result: RouteResult | null;
   changeNote: RouteChangeNote | null;
+  /** A real Perseverance drive whose endpoints are A and B (null = free A/B). */
+  realDrive: RealDrive | null;
+  /** That drive measured with the same rules as the computed routes. */
+  actualRoute: Route | null;
   set: (p: Partial<RouteState>) => void;
 }
 
@@ -25,9 +31,12 @@ export const useRoutes = create<RouteState>((set) => ({
   start: null,
   end: null,
   pickMode: null,
-  assumptions: { ...DEFAULT_ASSUMPTIONS },
+  profile: 'rover',
+  assumptions: { ...PROFILE_ASSUMPTIONS.rover },
   status: 'idle',
   result: null,
   changeNote: null,
+  realDrive: null,
+  actualRoute: null,
   set: (p) => set(p),
 }));

@@ -11,12 +11,24 @@ import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js';
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js';
 import { getMarsOS } from '../../api/MarsOS';
 import { distanceM, latLonToXYZ } from '../../core/geo/mars';
-import { loadTraverse, loadWaypoints, type Waypoint } from '../../core/live/m20';
+import { loadTraverse, loadWaypoints, type TraverseSegment, type Waypoint } from '../../core/live/m20';
 import { useUI } from '../../state/uiStore';
 import { renderBridge } from '../bridge';
 
-export const roverData: { waypoints: Waypoint[]; status: 'idle' | 'loading' | 'ready' | 'error'; traverseKm: number } = {
+export const roverData: {
+  waypoints: Waypoint[];
+  /** Drive segments as published (one or more per sol). */
+  segments: TraverseSegment[];
+  /** Whole traverse flattened, ≥ 3 m spacing (for "near the rover's path" queries). */
+  track: { lat: number; lon: number }[];
+  status: 'idle' | 'loading' | 'ready' | 'error';
+  traverseKm: number;
+  listeners: Set<() => void>;
+} = {
   waypoints: [],
+  segments: [],
+  track: [],
+  listeners: new Set(),
   status: 'idle',
   traverseKm: 0,
 };
@@ -37,6 +49,49 @@ export function pickNearestWaypoint(sx: number, sy: number, maxPx: number): Wayp
   return best;
 }
 
+let loading: Promise<void> | null = null;
+
+/**
+ * Load Perseverance's traverse + waypoints once (idempotent). Waits for MarsOS to be ready,
+ * so callers (layer, route comparator, deep links) never race the catalog.
+ */
+export function ensureRoverData(): Promise<void> {
+  if (loading) return loading;
+  const os = getMarsOS();
+  loading = (os.ready ? Promise.resolve() : new Promise<void>((res) => {
+    const t = setInterval(() => os.ready && (clearInterval(t), res()), 100);
+  })).then(async () => {
+    const tr = os.catalog.layer('layer.m20.traverse');
+    const wp = os.catalog.layer('layer.m20.waypoints');
+    if (!tr || tr.access.protocol !== 'geojson' || !wp || wp.access.protocol !== 'geojson') throw new Error('no rover layers');
+    roverData.status = 'loading';
+    const [segs, wps] = await Promise.all([loadTraverse(tr.access.url), loadWaypoints(wp.access.url)]);
+    // flatten + thin to ≥ 3 m spacing
+    const out: { lat: number; lon: number }[] = [];
+    let total = 0;
+    for (const sg of [...segs].sort((x, y) => x.sol - y.sol)) for (const [lon, lat] of sg.coords) {
+      const last = out[out.length - 1];
+      if (last) {
+        const d = distanceM(last.lat, last.lon, lat, lon);
+        if (d < 3) continue;
+        total += d;
+      }
+      out.push({ lat, lon });
+    }
+    roverData.waypoints = wps;
+    roverData.segments = segs;
+    roverData.track = out;
+    roverData.traverseKm = total / 1000;
+    roverData.status = 'ready';
+    roverData.listeners.forEach((l) => l());
+  }).catch(() => {
+    roverData.status = 'error';
+    loading = null; // allow a retry
+    roverData.listeners.forEach((l) => l());
+  });
+  return loading;
+}
+
 export function RoverLayer() {
   const os = getMarsOS();
   const showTraverse = useUI((s) => s.vectors.traverse);
@@ -47,30 +102,11 @@ export function RoverLayer() {
   const [rev, setRev] = useState(0);
 
   useEffect(() => {
-    const tr = os.catalog.layer('layer.m20.traverse');
-    const wp = os.catalog.layer('layer.m20.waypoints');
-    if (!tr || tr.access.protocol !== 'geojson' || !wp || wp.access.protocol !== 'geojson') return;
-    roverData.status = 'loading';
-    Promise.all([loadTraverse(tr.access.url), loadWaypoints(wp.access.url)])
-      .then(([segs, wps]) => {
-        // flatten + thin to ≥ 3 m spacing
-        const out: { lat: number; lon: number }[] = [];
-        let total = 0;
-        for (const s of segs.sort((a, b) => a.sol - b.sol)) for (const [lon, lat] of s.coords) {
-          const last = out[out.length - 1];
-          if (last) {
-            const d = distanceM(last.lat, last.lon, lat, lon);
-            if (d < 3) continue;
-            total += d;
-          }
-          out.push({ lat, lon });
-        }
-        roverData.waypoints = wps;
-        roverData.traverseKm = total / 1000;
-        roverData.status = 'ready';
-        setPts(out);
-      })
-      .catch(() => (roverData.status = 'error'));
+    let alive = true;
+    ensureRoverData().then(() => alive && roverData.status === 'ready' && setPts(roverData.track));
+    return () => {
+      alive = false;
+    };
   }, [os]);
 
   // re-drape when terrain changes near the traverse

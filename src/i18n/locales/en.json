@@ -385,7 +385,7 @@
       "simulation": "Simulation",
       "unavailable": "Unavailable now"
     },
-    "routes": "Route comparator on measured slope (+ daylight budget)",
+    "routes": "Route comparator on measured slope: rover & astronaut profiles, real Perseverance drives, terrain knowledge",
     "minerals": "Mineral detections (CRISM, OMEGA, THEMIS)",
     "hud": "Helmet visor HUD (training view)",
     "samples": "Sample-handling sites with CacheCam tube images"
@@ -406,7 +406,8 @@
     "weightA": "Low-slope route: slope avoidance",
     "kinds": {
       "shortest": "Shortest",
-      "lowSlope": "Low-slope"
+      "lowSlope": "Low-slope",
+      "actual": "Real drive"
     },
     "length": "Length",
     "gainLoss": "Climb / descent",
@@ -446,6 +447,47 @@
       "tight": "Tight: only {{left}} of daylight left for a round trip of about {{walk}}. Start earlier or shorten the walk.",
       "night": "It is night at A now. Use the time controls to plan for the next daylight window.",
       "note": "Mars24 sun position; geometric sunrise/sunset — ignores terrain shadows, refraction and twilight. Round trip = 2 × the longer route, at the Earth-heuristic pace."
+    },
+    "profileLabel": "Who travels the route",
+    "profiles": {
+      "rover": "🤖 Rover (Perseverance-class)",
+      "astronaut": "👩‍🚀 Astronaut (future EVA)"
+    },
+    "introRover": "Today Mars is explored by robots. Compare two drives between A and B on the current terrain: the shortest and the one with gentlest slopes, using Perseverance’s published limits. Values come from elevation data; limits are assumptions you can edit.",
+    "assumptionsRover": "Default 24° = the tilt limit NASA’s Perseverance team set in 2026. Terrain slope on this grid is only a proxy for rover tilt: rocks under single wheels add more.",
+    "driveTime": "Drive time at top speed (152 m/h)",
+    "roverPower": "Perseverance is nuclear-powered (MMRTG), so a daylight budget does not limit it the way it limits solar rovers like Spirit and Opportunity or an astronaut on EVA. Switch to Astronaut for the daylight budget.",
+    "disclaimerRover": "Prototype decision aid. Real rover drives are planned by NASA engineers with ground imagery and onboard AutoNav; this is not a drive plan.",
+    "know": {
+      "title": "How well do we know this ground?",
+      "ground": "rover drove within {{m}} m",
+      "orbital": "20 m orbital DEM",
+      "coarse": "coarse orbital data only",
+      "loading": "Loading Perseverance’s traverse…",
+      "note": "Rover-visited = within 50 m of Perseverance’s published traverse (NASA MMGIS). 20 m DEM = CTX stereo elevation. Coarse = MOLA only: slopes there are smoothed. Ground that no robot has crossed is the least known.",
+      "unvisited": "{{pct}}% of the shortest route crosses ground no rover has driven. It may look gentle and still hide soft sand or rocks: this is where orbital imagery must be checked before trusting the route."
+    },
+    "sand": {
+      "title": "What a slope map cannot see",
+      "spirit": "Loose sand. In 2009 Spirit drove onto ground at “Troy” (Gusev crater) that looked like ordinary terrain: a thin crust hid soft sand, its wheels broke through and it never got out. Its last signal came in March 2010. A slope map shows that kind of ground as gentle.",
+      "source": "Spirit: NASA mission history. Soft-sand hazards need imagery (HiRISE) and other data such as thermal inertia, which MARS OS does not yet use in routing."
+    },
+    "drive": {
+      "title": "Compare with a real Perseverance drive",
+      "intro": "Load the path Perseverance really drove between two sols (NASA’s published traverse). A and B are set to its start and end, and the real drive is measured with the same rules as the computed routes.",
+      "presets": {
+        "first": "First drives (sols 13–100)",
+        "rapid": "Rapid traverse (sols 380–420)"
+      },
+      "from": "From sol",
+      "to": "to sol",
+      "load": "Load drive",
+      "none": "No drive found for that sol range. Try sols where the rover moved.",
+      "loaded": "Sols {{from}}–{{to}}: {{n}} drive segments, {{len}} published path ({{a}} → {{b}}).",
+      "insightTitle": "Real drive vs computed (sols {{from}}–{{to}})",
+      "insight": "Perseverance drove {{real}}; the shortest computed route is {{short}} ({{extra}}% difference). Steepest section on this grid: real drive {{realMax}}°, shortest {{shortMax}}°, low-slope {{lowMax}}°.",
+      "why": "Why they differ: rover planners also avoid hazards a slope map cannot show (sand ripples, rocks, wheel damage risk), stop at science targets, and drive where images from the ground confirm it is safe. A longer real path is not a worse one.",
+      "basis": "All three measured on the same grid and current terrain. No AI involved."
     }
   },
   "minerals": {
@@ -467,7 +509,7 @@
   "hud2": {
     "toggle": "Visor HUD",
     "toggleHint": "Helmet visor HUD (training view)",
-    "openFromRoutes": "Walk it in the visor HUD",
+    "openFromRoutes": "Follow it in the visor HUD",
     "elev": "Elev",
     "slope": "Slope",
     "lts": "LTST",

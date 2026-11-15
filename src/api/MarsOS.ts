@@ -27,7 +27,7 @@ import { VersionStore } from '../core/history/VersionStore';
 import { ProposalService, type ApprovalPolicy } from '../core/proposals/ProposalService';
 import { TerrainModel } from '../core/terrain/TerrainModel';
 import { patchBBox } from '../core/terrain/patches';
-import { DEFAULT_ASSUMPTIONS, planRoutes, sampleGrid, type LatLonPt, type RouteAssumptions, type RouteResult, type TerrainSampler } from '../core/routes/RoutePlanner';
+import { DEFAULT_ASSUMPTIONS, measurePath, planRoutes, sampleGrid, type LatLonPt, type RouteAssumptions, type Route, type RouteResult, type TerrainSampler } from '../core/routes/RoutePlanner';
 
 export interface CellInfo {
   id: string;
@@ -256,10 +256,7 @@ export class MarsOS {
      */
     plan: async (start: LatLonPt, end: LatLonPt, assumptions: RouteAssumptions = DEFAULT_ASSUMPTIONS): Promise<RouteResult> => {
       const es = this.elevationService;
-      const sampler: TerrainSampler = {
-        height: (lat, lon, wantMpp) => this.terrainModel.height(lat, lon, wantMpp),
-        resolution: (lat, lon) => es.sample(lat, lon, 0).metersPerPixel ?? 14818,
-      };
+      const sampler = this.routeSampler();
       es.ensureDetail(start.lat, start.lon, 0);
       es.ensureDetail(end.lat, end.lon, 0);
       let grid = sampleGrid(start, end, sampler);
@@ -274,7 +271,21 @@ export class MarsOS {
       const patchIds = this.terrainModel.patchesFor(grid.bbox).active.map((c) => c.patch.id);
       return planRoutes(start, end, grid, assumptions, patchIds);
     },
+    /**
+     * Measure a given path (e.g. Perseverance's real drive) with the same rules and grid spacing
+     * as a computed comparison, so the numbers are comparable.
+     */
+    measure: (path: LatLonPt[], cellM: number, assumptions: RouteAssumptions = DEFAULT_ASSUMPTIONS): Route =>
+      measurePath(path, this.routeSampler(), cellM, assumptions),
   };
+
+  private routeSampler(): TerrainSampler {
+    const es = this.elevationService;
+    return {
+      height: (lat, lon, wantMpp) => this.terrainModel.height(lat, lon, wantMpp),
+      resolution: (lat, lon) => es.sample(lat, lon, 0).metersPerPixel ?? 14818,
+    };
+  }
 
   // ───────────────────────── history ─────────────────────────
   readonly history = {

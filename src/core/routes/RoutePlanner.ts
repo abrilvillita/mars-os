@@ -11,6 +11,7 @@
  *   - slopes, lengths, elevation gain/loss → computed from the elevation products (real data)
  *   - slope limits and weights            → editable PLANNING ASSUMPTIONS (not validated EVA rules)
  *   - walking time                         → Tobler's hiking function (Earth heuristic), labelled as such
+ *   - rover drive time                     → lower bound at Perseverance's top speed (152 m/h, NASA)
  *   - data limits                          → share of the route where the elevation source is coarser than 20 m
  */
 import type { BBoxT } from '../../contract';
@@ -32,6 +33,23 @@ export interface RouteAssumptions {
 
 export const DEFAULT_ASSUMPTIONS: RouteAssumptions = { maxSlopeDeg: 25, cautionSlopeDeg: 15, slopeWeight: 6 };
 
+/** Who travels the route. Only the defaults and the time estimate differ. */
+export type TravelerProfile = 'rover' | 'astronaut';
+
+/**
+ * Rover: 24° = the tilt limit NASA's Perseverance team set in 2026 ("Tracks Along the Longest
+ * Drive on Another World", science.nasa.gov, Oct 2026). Terrain slope on a 20 m grid is only a
+ * proxy for vehicle tilt (rocks under single wheels add more), so it stays an assumption.
+ * Astronaut: unvalidated planning numbers (no public EVA slope rule is used).
+ */
+export const PROFILE_ASSUMPTIONS: Record<TravelerProfile, RouteAssumptions> = {
+  rover: { maxSlopeDeg: 24, cautionSlopeDeg: 15, slopeWeight: 6 },
+  astronaut: { ...DEFAULT_ASSUMPTIONS },
+};
+
+/** Perseverance top speed on flat hard ground: 4.2 cm/s = 152 m/h (NASA). Real drives are slower. */
+export const ROVER_TOP_SPEED_M_PER_H = 152;
+
 export interface RouteStats {
   lengthM: number;
   gainM: number;
@@ -42,10 +60,12 @@ export interface RouteStats {
   dataLimitedShare: number; // fraction of length where elevation source is coarser than 20 m
   coarsestDataM: number;
   toblerHours: number;
+  /** Driving time at Perseverance's top speed: a lower bound, never a forecast. */
+  roverHours: number;
 }
 
 export interface Route {
-  kind: 'shortest' | 'lowSlope';
+  kind: 'shortest' | 'lowSlope' | 'actual';
   points: (LatLonPt & { h: number; slopeDeg: number; dataMpp: number })[];
   stats: RouteStats;
 }
@@ -225,16 +245,17 @@ function astar(g: PreparedGrid, s: number, t: number, kind: Route['kind'], a: Ro
   return path.reverse();
 }
 
-function statsFor(g: PreparedGrid, path: number[], a: RouteAssumptions): Route {
+type PathPt = { lat: number; lon: number; h: number; mpp: number };
+
+function statsForPoints(src: PathPt[], a: RouteAssumptions): Omit<Route, 'kind'> {
   const pts: Route['points'] = [];
   let len = 0, gain = 0, loss = 0, maxS = 0, slopeLen = 0, caution = 0, limited = 0, coarsest = 0, hours = 0;
-  for (let q = 0; q < path.length; q++) {
-    const k = path[q], i = k % g.w, j = Math.floor(k / g.w);
-    const lat = g.latOf(j), lon = g.lonOf(i), hgt = g.heights[k], mpp = g.dataMpp[k];
+  for (let q = 0; q < src.length; q++) {
+    const { lat, lon, h: hgt, mpp } = src[q];
     let slope = 0;
     if (q > 0) {
       const p = pts[q - 1];
-      const run = distanceM(p.lat, p.lon, lat, lon);
+      const run = Math.max(1e-6, distanceM(p.lat, p.lon, lat, lon));
       const dh = hgt - p.h;
       slope = Math.atan(Math.abs(dh) / run) / DEG;
       len += run;
@@ -250,7 +271,6 @@ function statsFor(g: PreparedGrid, path: number[], a: RouteAssumptions): Route {
     pts.push({ lat, lon, h: hgt, slopeDeg: slope, dataMpp: mpp });
   }
   return {
-    kind: 'shortest',
     points: pts,
     stats: {
       lengthM: len, gainM: gain, lossM: loss, maxSlopeDeg: maxS,
@@ -259,8 +279,44 @@ function statsFor(g: PreparedGrid, path: number[], a: RouteAssumptions): Route {
       dataLimitedShare: len ? limited / len : 0,
       coarsestDataM: coarsest,
       toblerHours: hours,
+      roverHours: len / ROVER_TOP_SPEED_M_PER_H,
     },
   };
+}
+
+function statsFor(g: PreparedGrid, path: number[], a: RouteAssumptions) {
+  return statsForPoints(
+    path.map((k) => {
+      const i = k % g.w, j = Math.floor(k / g.w);
+      return { lat: g.latOf(j), lon: g.lonOf(i), h: g.heights[k], mpp: g.dataMpp[k] };
+    }),
+    a,
+  );
+}
+
+/**
+ * Measure a GIVEN path (e.g. the drive Perseverance really made) with the same rules as the
+ * computed routes: resampled at the grid spacing, heights from the current terrain model.
+ */
+export function measurePath(path: LatLonPt[], terrain: TerrainSampler, cellM: number, a: RouteAssumptions): Route {
+  const out: PathPt[] = [];
+  const add = (lat: number, lon: number) => out.push({ lat, lon, h: terrain.height(lat, lon, cellM), mpp: terrain.resolution(lat, lon) });
+  if (path.length) add(path[0].lat, path[0].lon);
+  let carry = 0;
+  for (let k = 1; k < path.length; k++) {
+    const p = path[k - 1], q = path[k];
+    const d = distanceM(p.lat, p.lon, q.lat, q.lon);
+    let at = cellM - carry;
+    while (at <= d) {
+      const f = at / d;
+      add(p.lat + (q.lat - p.lat) * f, p.lon + (q.lon - p.lon) * f);
+      at += cellM;
+    }
+    carry = d - (at - cellM);
+  }
+  const last = path[path.length - 1];
+  if (last && carry > 1) add(last.lat, last.lon);
+  return { ...statsForPoints(out, a), kind: 'actual' };
 }
 
 export function planRoutes(start: LatLonPt, end: LatLonPt, g: PreparedGrid, a: RouteAssumptions, patchIds: string[]): RouteResult {

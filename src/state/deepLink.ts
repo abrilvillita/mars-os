@@ -14,6 +14,8 @@
  *   &cachecam=196                 (opens the CacheCam sample-handling images of a sol)
  *   &walk=1                       (with &hud=1&route=…: walks the route automatically)
  *   &route=lat,lon;lat,lon        (compares routes A → B; opens the Routes tab)
+ *   &profile=astronaut            (route profile; default rover)
+ *   &drive=340,360                (loads Perseverance's real drive between two sols as A → B)
  */
 import { cellId, tileAt } from '../core/geo/tiling';
 import { renderBridge } from '../render/bridge';
@@ -45,7 +47,7 @@ export function applyDeepLink(search = window.location.search) {
   const base = q.get('base');
   if (base && /^layer\.[a-z0-9._-]+$/.test(base)) st.set({ baseLayerId: base });
   const tab = q.get('tab') as RightTab | null;
-  if (tab && ['inspect', 'nodes', 'ai', 'history', 'environment', 'photos'].includes(tab)) st.set({ rightTab: tab });
+  if (tab && ['inspect', 'routes', 'nodes', 'ai', 'history', 'environment', 'photos'].includes(tab)) st.set({ rightTab: tab });
   const pin = q.get('pin')?.split(',').map(Number);
   if (pin && pin.length === 2 && pin.every(isFinite)) {
     const id = cellId(tileAt(pin[0], pin[1], st.cellZoom));
@@ -58,6 +60,15 @@ export function applyDeepLink(search = window.location.search) {
   const cc = num(q.get('cachecam'));
   if (cc !== null) st.set({ cachecamSol: cc, rightTab: 'photos', vectors: { ...useUI.getState().vectors, samples: true } });
   if (q.get('hud') === '1') st.set({ hud: true, panelsOpen: { left: false, right: false } });
+  if (q.get('profile') === 'astronaut' || q.get('profile') === 'rover') {
+    const p = q.get('profile') as 'rover' | 'astronaut';
+    import('../core/routes/RoutePlanner').then(({ PROFILE_ASSUMPTIONS }) => useRoutes.getState().set({ profile: p, assumptions: { ...PROFILE_ASSUMPTIONS[p] } }));
+  }
+  const drive = q.get('drive')?.split(',').map(Number);
+  if (drive && drive.length === 2 && drive.every(isFinite)) {
+    if (!tab) st.set({ rightTab: 'routes' });
+    import('../ui/tabs/RoutesTab').then(({ loadRealDrive }) => loadRealDrive(drive[0], drive[1]));
+  }
   const route = q.get('route')?.split(';').map((s) => s.split(',').map(Number));
   if (route && route.length === 2 && route.every((p) => p.length === 2 && p.every(isFinite))) {
     useRoutes.getState().set({ start: { lat: route[0][0], lon: route[0][1] }, end: { lat: route[1][0], lon: route[1][1] } });

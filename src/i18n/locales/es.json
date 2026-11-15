@@ -385,7 +385,7 @@
       "simulation": "Simulación",
       "unavailable": "No disponible ahora"
     },
-    "routes": "Comparador de rutas sobre pendiente medida (+ luz solar)",
+    "routes": "Comparador de rutas sobre pendiente medida: perfiles rover y astronauta, trayectos reales de Perseverance, conocimiento del terreno",
     "minerals": "Detecciones minerales (CRISM, OMEGA, THEMIS)",
     "hud": "Visor HUD del casco (vista de entrenamiento)",
     "samples": "Sitios de manejo de muestras con imágenes CacheCam"
@@ -406,7 +406,8 @@
     "weightA": "Ruta de menor pendiente: evitar pendiente",
     "kinds": {
       "shortest": "Más corta",
-      "lowSlope": "Menor pendiente"
+      "lowSlope": "Menor pendiente",
+      "actual": "Trayecto real"
     },
     "length": "Distancia",
     "gainLoss": "Subida / bajada",
@@ -446,6 +447,47 @@
       "tight": "Justo: solo quedan {{left}} de luz para ida y vuelta de unos {{walk}}. Sal antes o acorta la caminata.",
       "night": "Ahora es de noche en A. Usa los controles de tiempo para planear la siguiente ventana de luz.",
       "note": "Posición del Sol con Mars24; amanecer/atardecer geométricos — no considera sombras del terreno, refracción ni crepúsculo. Ida y vuelta = 2 × la ruta más larga, al ritmo de la heurística terrestre."
+    },
+    "profileLabel": "Quién recorre la ruta",
+    "profiles": {
+      "rover": "🤖 Rover (tipo Perseverance)",
+      "astronaut": "👩‍🚀 Astronauta (EVA futura)"
+    },
+    "introRover": "Hoy Marte lo exploran robots. Compara dos trayectos entre A y B sobre el terreno actual: el más corto y el de pendientes más suaves, con los límites publicados de Perseverance. Los valores salen de los datos de elevación; los límites son supuestos que puedes editar.",
+    "assumptionsRover": "Por defecto 24° = el límite de inclinación que fijó el equipo de Perseverance de la NASA en 2026. La pendiente del terreno en esta malla solo aproxima la inclinación del rover: las rocas bajo una sola rueda la aumentan.",
+    "driveTime": "Tiempo de manejo a velocidad máxima (152 m/h)",
+    "roverPower": "Perseverance funciona con energía nuclear (MMRTG), así que la luz del día no lo limita como a los rovers solares Spirit y Opportunity o a un astronauta en EVA. Cambia a Astronauta para ver el presupuesto de luz.",
+    "disclaimerRover": "Prototipo de apoyo a decisiones. Los trayectos reales los planean ingenieros de la NASA con imágenes desde el suelo y AutoNav a bordo; esto no es un plan de manejo.",
+    "know": {
+      "title": "¿Qué tan bien conocemos este terreno?",
+      "ground": "el rover pasó a ≤ {{m}} m",
+      "orbital": "DEM orbital de 20 m",
+      "coarse": "solo datos orbitales gruesos",
+      "loading": "Cargando el recorrido de Perseverance…",
+      "note": "Visitado por el rover = a 50 m o menos del recorrido publicado de Perseverance (NASA MMGIS). DEM de 20 m = elevación estéreo CTX. Grueso = solo MOLA: ahí las pendientes se suavizan. El terreno que ningún robot ha cruzado es el menos conocido.",
+      "unvisited": "El {{pct}}% de la ruta más corta cruza terreno por el que ningún rover ha pasado. Puede verse suave y aun así ocultar arena blanda o rocas: ahí hay que revisar imágenes orbitales antes de confiar en la ruta."
+    },
+    "sand": {
+      "title": "Lo que un mapa de pendientes no ve",
+      "spirit": "Arena suelta. En 2009 Spirit entró en un terreno llamado “Troy” (cráter Gusev) que parecía normal: una costra delgada ocultaba arena blanda, sus ruedas la rompieron y nunca salió. Su última señal llegó en marzo de 2010. Un mapa de pendientes muestra ese tipo de terreno como suave.",
+      "source": "Spirit: historia de la misión, NASA. Los riesgos de arena blanda requieren imágenes (HiRISE) y otros datos como la inercia térmica, que MARS OS aún no usa para calcular rutas."
+    },
+    "drive": {
+      "title": "Comparar con un trayecto real de Perseverance",
+      "intro": "Carga el camino que Perseverance recorrió de verdad entre dos soles (recorrido publicado por la NASA). A y B se colocan en su inicio y fin, y el trayecto real se mide con las mismas reglas que las rutas calculadas.",
+      "presets": {
+        "first": "Primeros trayectos (soles 13–100)",
+        "rapid": "Traslado rápido (soles 380–420)"
+      },
+      "from": "Del sol",
+      "to": "al sol",
+      "load": "Cargar trayecto",
+      "none": "No hay trayecto para ese rango de soles. Prueba soles en los que el rover se movió.",
+      "loaded": "Soles {{from}}–{{to}}: {{n}} segmentos de manejo, {{len}} de camino publicado ({{a}} → {{b}}).",
+      "insightTitle": "Trayecto real vs calculado (soles {{from}}–{{to}})",
+      "insight": "Perseverance recorrió {{real}}; la ruta calculada más corta mide {{short}} ({{extra}}% de diferencia). Tramo más empinado en esta malla: trayecto real {{realMax}}°, más corta {{shortMax}}°, baja pendiente {{lowMax}}°.",
+      "why": "Por qué difieren: los planificadores del rover también evitan peligros que un mapa de pendientes no muestra (ondulaciones de arena, rocas, riesgo de dañar ruedas), se detienen en objetivos científicos y manejan donde las imágenes desde el suelo confirman que es seguro. Un camino real más largo no es peor.",
+      "basis": "Los tres medidos en la misma malla y el terreno actual. Sin IA."
     }
   },
   "minerals": {
@@ -467,7 +509,7 @@
   "hud2": {
     "toggle": "Visor HUD",
     "toggleHint": "Visor HUD del casco (vista de entrenamiento)",
-    "openFromRoutes": "Recorrerla en el visor HUD",
+    "openFromRoutes": "Seguirla en el HUD del visor",
     "elev": "Elev",
     "slope": "Pendiente",
     "lts": "Hora solar",

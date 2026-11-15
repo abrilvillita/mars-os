@@ -37,7 +37,10 @@ export async function computeRoutes(reason: 'user' | 'terrain') {
       const trivial = changeNote.deltas.every((d) => Math.abs(d.lengthM) < 1 && Math.abs(d.maxSlopeDeg) < 0.05) && !changeNote.addedPatchIds.length && !changeNote.removedPatchIds.length;
       if (trivial) changeNote = useRoutes.getState().changeNote;
     }
-    useRoutes.getState().set({ result, status: result.ok ? 'done' : 'error', changeNote });
+    // a real Perseverance drive between A and B? measure it with the same rules and grid
+    const rd = useRoutes.getState().realDrive;
+    const actualRoute = rd && result.ok ? os.routes.measure(rd.path, result.cellM, st.assumptions) : null;
+    useRoutes.getState().set({ result, status: result.ok ? 'done' : 'error', changeNote, actualRoute });
   } catch {
     if (id === runId) useRoutes.getState().set({ status: 'error' });
   }
@@ -50,6 +53,10 @@ export function RouteController() {
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
+    // A or B moved away from the loaded real drive → it no longer applies
+    const rd = useRoutes.getState().realDrive;
+    const same = (p: { lat: number; lon: number } | null, q: { lat: number; lon: number }) => !!p && Math.abs(p.lat - q.lat) < 1e-7 && Math.abs(p.lon - q.lon) < 1e-7;
+    if (rd && !(same(start, rd.start) && same(end, rd.end))) useRoutes.getState().set({ realDrive: null, actualRoute: null });
     if (start && end) computeRoutes('user');
   }, [start, end, assumptions]);
 

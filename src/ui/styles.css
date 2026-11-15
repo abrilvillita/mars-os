@@ -345,3 +345,20 @@ body.presentation .attribution, body.presentation .demo-banner { display: none !
 .hv-badge { position: absolute; left: 50%; bottom: 72px; transform: translateX(-50%); font-size: 10px; letter-spacing: .12em; opacity: .75; white-space: nowrap; }
 body.visor-on .controls-hint { display: none; }
 .sol-chips { display: flex; flex-wrap: wrap; gap: 4px; } .sol-chips .chip { cursor: pointer; background: rgba(255, 199, 51, .08); border-color: #ffc73366; font-family: var(--mono); }
+
+/* ── rover mode: profile, real drive, terrain knowledge, slope blind spots ── */
+.segmented.profile-seg { grid-template-columns: repeat(2, 1fr); margin-bottom: 6px; }
+.real-drive summary { cursor: pointer; font-weight: 700; }
+.sol-range { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 6px; }
+.sol-range label { display: flex; gap: 4px; align-items: center; font-size: 12px; color: var(--muted); }
+.sol-range input { width: 64px; }
+.route-table th { white-space: normal; }
+.knowledge .know-row { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2px; margin: 6px 0; }
+.know-bar { display: flex; height: 10px; border-radius: 5px; overflow: hidden; background: rgba(255, 255, 255, 0.06); }
+.know-bar span { display: block; height: 100%; }
+.kb-ground { background: #5ce1ff; }
+.kb-orbital { background: #5fd39a; }
+.kb-coarse { background: #ffc046; }
+.know-legend { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 4px; color: var(--muted); }
+.know-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; vertical-align: -1px; }
+.card.sand { border-color: #ffc04666; background: #ffc0460d; }

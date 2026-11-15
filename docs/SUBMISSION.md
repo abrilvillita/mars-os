@@ -44,12 +44,16 @@ Everything runs online. The app is served by GitHub Pages and its backend (Gemin
   - Raw photos for each sol.
   - MEDA surface weather, with its date.
   - A cited radiation reference value (MSL RAD).
-- **Marswalk route comparator.**
+- **Route comparator for rovers and crews.**
+  - Today Mars is explored by robots, so the default profile is a Perseverance-class rover: its slope limit is the 24° tilt limit NASA's Perseverance team set in 2026, and drive time is a lower bound at its 152 m/h top speed. An astronaut profile keeps the walking time and daylight budget.
+  - **Real drive vs computed.** Load the path Perseverance really drove between two sols (NASA's published traverse). It is measured with the same rules as the computed routes. On sols 380–420 the rover drove 5.73 km; the shortest computed route is 2.99 km. The app explains why they differ (sand ripples, rocks, science stops, ground imagery) and does not claim either is better.
+  - **How well do we know this ground?** Each route is split into ground a rover drove within 50 m of, ground covered by the 20 m orbital DEM, and ground with only coarse data. In the sols 380–420 case, 88% of the shortest route crosses ground no rover has driven.
+  - **What a slope map cannot see.** Next to every result: loose sand under a crust, the hazard that trapped Spirit at Troy in 2009, and rocks smaller than the grid.
   - Pick A and B. MARS OS computes the shortest route and the low-slope route on the measured slope of the 20 m CTX DEM, applied to the current terrain, including approved edits.
   - It compares length, maximum and mean slope, climb, steep sections, the share of the route on coarse data, and walking time (an Earth heuristic, labelled as such).
   - It gives a rule-based recommendation.
   - When the terrain changes, for example when a new obstacle is approved, the routes are recalculated and the app explains which edit changed them. In our test, the low-slope route detoured 71 m around an approved +30 m obstacle.
-  - Slope limits are editable planning assumptions, not validated EVA rules.
+  - Slope limits are editable planning assumptions, not validated EVA rules or a rover drive plan.
 - **Inside the sample tubes.** Gold markers show where Perseverance handled samples, on the 75 sols with CacheCam images. One click shows the raw CacheCam photos looking down into the tube, so a crew can see what the rover collected and where.
 - **Resources and minerals.**
   - Orbital detections of carbonates, clays, silica, sulfates and chlorides (Ehlmann & Edwards 2014), and of hydrous minerals (Carter et al. 2013), served by NASA Mars Trek. All 6,220 points are downloaded completely.

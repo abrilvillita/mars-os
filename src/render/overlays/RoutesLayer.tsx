@@ -11,11 +11,12 @@ import { latLonToXYZ } from '../../core/geo/mars';
 import { useRoutes } from '../../state/routeStore';
 import { useUI } from '../../state/uiStore';
 
-const COLORS = { shortest: 0xff8a4c, lowSlope: 0xb18cff } as const;
+const COLORS = { shortest: 0xff8a4c, lowSlope: 0xb18cff, actual: 0xf2f2f2 } as const;
 
 export function RoutesLayer() {
   const os = getMarsOS();
   const result = useRoutes((s) => s.result);
+  const actual = useRoutes((s) => s.actualRoute);
   const start = useRoutes((s) => s.start);
   const end = useRoutes((s) => s.end);
   const ex = useUI((s) => s.exaggeration);
@@ -30,7 +31,7 @@ export function RoutesLayer() {
     if (!result?.ok) return null;
     const g = new THREE.Group();
     const tmp = [0, 0, 0];
-    for (const r of result.routes) {
+    for (const r of actual ? [...result.routes, actual] : result.routes) {
       const arr: number[] = [];
       for (const p of r.points) {
         // drape on the rendered terrain (+ a few metres so it is never hidden)
@@ -47,7 +48,7 @@ export function RoutesLayer() {
       g.add(line);
     }
     return g;
-  }, [result, ex, origin, os]);
+  }, [result, actual, ex, origin, os]);
 
   const ref = useRef<THREE.Group | null>(null);
   ref.current = group;
