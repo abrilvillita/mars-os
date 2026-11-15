@@ -14,7 +14,7 @@ export interface RigState {
 
 export const renderBridge = {
   globe: null as Globe | null,
-  rig: { lat: 18.4, lon: 77.5, distance: 14000, heading: 0, tilt: 0 } as RigState,
+  rig: { lat: 5, lon: -40, distance: 14000, heading: 0, tilt: 0 } as RigState,
   /** Simulation clock (ms since epoch). Advanced by the TimeDriver inside the canvas. */
   clock: { epochMs: Date.now() },
   /** Project lat/lon/height to screen pixels; set by the scene. null if not visible. */

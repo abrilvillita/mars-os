@@ -15,13 +15,21 @@
     "label": "Idioma"
   },
   "nav": {
-    "planet": "Planeta",
+    "planet": "Planeta completo",
     "jezero": "Cráter Jezero",
     "hirise": "Zona HiRISE",
     "landing": "Sitio de aterrizaje",
     "ground": "Vista a ras de suelo",
     "goTo": "Ir a",
-    "groundHint": "La vista más baja que permiten las imágenes de aquí: altura de caminata solo donde hay HiRISE de 25 cm"
+    "groundHint": "La vista más baja que permiten las imágenes de aquí: altura de caminata solo donde hay HiRISE de 25 cm",
+    "olympus": "Olympus Mons",
+    "valles": "Valles Marineris",
+    "hellas": "Hellas Planitia",
+    "northPole": "Casquete polar norte",
+    "southPole": "Casquete polar sur",
+    "gale": "Cráter Gale",
+    "groupPlaces": "Lugares",
+    "groupExplorers": "Robots en Marte"
   },
   "time": {
     "utc": "UTC",
@@ -89,7 +97,9 @@
     "explorers": "Exploradores de Marte (todos los robots de NASA en la superficie)",
     "explorersHint": "Sitios de aterrizaje de NASA; el recorrido de Curiosity (amarillo) y los vuelos de Ingenuity (verde) se cargan en vivo. Haz clic en un nombre.",
     "ice": "Evidencia de hielo de agua",
-    "iceHint": "Cráteres recientes que dejaron hielo de agua al descubierto (Dundas et al. 2014) y glaciares cubiertos de escombros (1,309 formas glaciares), de NASA Mars Trek."
+    "iceHint": "Cráteres recientes que dejaron hielo de agua al descubierto (Dundas et al. 2014) y glaciares cubiertos de escombros (1,309 formas glaciares), de NASA Mars Trek.",
+    "zones": "Elipses de aterrizaje y Zonas de Exploración humana",
+    "zonesHint": "Elipses de aterrizaje reales (Perseverance, InSight) y las Zonas de Exploración de 100 km que NASA reunió para las primeras misiones humanas."
   },
   "view": {
     "title": "Vista",
@@ -130,7 +140,8 @@
     "environment": "Entorno",
     "photos": "Fotos",
     "routes": "Rutas",
-    "explorers": "Exploradores"
+    "explorers": "Exploradores",
+    "landing": "Aterrizaje"
   },
   "inspect": {
     "cursor": "Cursor",
@@ -456,8 +467,8 @@
     },
     "profileLabel": "Quién recorre la ruta",
     "profiles": {
-      "rover": "🤖 Rover (tipo Perseverance)",
-      "astronaut": "👩‍🚀 Astronauta (EVA futura)"
+      "rover": "Rover (tipo Perseverance)",
+      "astronaut": "Astronauta (EVA futura)"
     },
     "introRover": "Hoy Marte lo exploran robots. Compara dos trayectos entre A y B sobre el terreno actual: el más corto y el de pendientes más suaves, con los límites publicados de Perseverance. Los valores salen de los datos de elevación; los límites son supuestos que puedes editar.",
     "assumptionsRover": "Por defecto 24° = el límite de inclinación que fijó el equipo de Perseverance de la NASA en 2026. La pendiente del terreno en esta malla solo aproxima la inclinación del rover: las rocas bajo una sola rueda la aumentan.",
@@ -638,5 +649,152 @@
     "go": "ir ↗",
     "loading": "Cargando evidencia de hielo…",
     "note": "Cráteres con hielo: impactos recientes cuyo hielo brillante se confirmó desde órbita (HiRISE, CRISM; Dundas et al. 2014): hielo a cerca de un metro de la superficie. Formas glaciares: hielo bajo una capa de escombros. El agua es el primer recurso que necesita una tripulación: para beber, producir oxígeno y combustible. Posiciones publicadas, no un mapa de profundidad del hielo."
+  },
+  "landing": {
+    "showOnMap": "Mostrar zonas y elipses en el mapa",
+    "allZones": "← Todas las Zonas de Exploración",
+    "pinHint": "Fija cualquier punto del mapa (clic en el terreno) para revisar su potencial como sitio de aterrizaje, o elige una Zona de Exploración abajo.",
+    "ellipses": "Elipses de aterrizaje reales",
+    "ellipsesNote": "Polígonos de NASA Mars Trek. Ejes y área calculados por MARS OS a partir de cada polígono. La entrada tiene incertidumbre, así que la nave aterrizará en algún punto dentro de la elipse: todo su interior debe ser seguro.",
+    "zones": "Zonas de Exploración para misiones humanas ({{n}})",
+    "zonesIntro": "Regiones candidatas propuestas en el taller de NASA de 2015 sobre sitios de aterrizaje para las primeras misiones humanas. Cada Zona de Exploración es un área de {{r}} km de radio que debe incluir un sitio de aterrizaje, uno para el hábitat y regiones de interés científico y de recursos.",
+    "zonesSource": "Fuente: NASA First Landing Site / Exploration Zone Workshop for Human Missions to the Surface of Mars (2015), vía NASA Mars Trek (servicio EZMars, áreas de 100 km).",
+    "how": {
+      "title": "Cómo se elige un sitio de aterrizaje",
+      "elev": {
+        "t": "Baja elevación.",
+        "d": "Más aire sobre terreno bajo da al escudo térmico y al paracaídas más tiempo para frenar la nave; todos los sitios de aterrizaje de NASA en MARS OS están por debajo del nivel de referencia del planeta."
+      },
+      "lat": {
+        "t": "Latitud.",
+        "d": "Cerca del ecuador la energía solar es mayor y las noches más suaves; las misiones que buscan hielo, como Phoenix, van a latitudes altas."
+      },
+      "ellipse": {
+        "t": "Elipse de aterrizaje.",
+        "d": "El área donde la nave aterrizará con alta probabilidad. Se redujo de unos 130 × 27 km para InSight a pocos km para Perseverance, que además esquivó peligros con Navegación Relativa al Terreno."
+      },
+      "surface": {
+        "t": "Superficie segura.",
+        "d": "Pendientes suaves y pocas rocas grandes dentro de la elipse, y suelo firme para el módulo y el rover."
+      },
+      "science": {
+        "t": "Ciencia.",
+        "d": "El sitio debe responder la pregunta de la misión: Jezero por su antiguo delta de lago, Gale por su montaña en capas."
+      },
+      "resources": {
+        "t": "Recursos para tripulaciones.",
+        "d": "Para humanos, tener hielo de agua y minerales útiles al alcance importa tanto como la seguridad: eso muestran las Zonas de Exploración y la capa de hielo."
+      }
+    },
+    "check": {
+      "pinned": "Revisión de sitio de aterrizaje: punto fijado",
+      "elev": "Elevación",
+      "elevWhy": "(más baja = más aire para frenar)",
+      "lat": "Latitud",
+      "latWhy": "(energía y temperatura)",
+      "slope": "Pendiente regional (±2.5 km)",
+      "slopeWhy": "(datos locales {{res}}/px; las rocas requieren HiRISE)",
+      "minerals": "Detecciones de minerales a 100 km o menos",
+      "robot": "Robot más cercano",
+      "zone": "Zona de Exploración más cercana",
+      "note": "Valores medidos y derivados para comparar sitios candidatos, no una certificación. Fuentes: elevación MOLA (NASA PDS), servicios de hielo y minerales de Mars Trek, posiciones de NASA MMGIS y Mars Trek."
+    }
+  },
+  "tour": {
+    "label": "Recorrido guiado",
+    "button": "Tour",
+    "skip": "Saltar recorrido",
+    "next": "Siguiente",
+    "back": "Atrás",
+    "finish": "Empezar a explorar",
+    "steps": {
+      "welcome": {
+        "title": "Bienvenido a MARS OS",
+        "text": "Un atlas 3D vivo de Marte construido con datos de NASA. Todo lo que ves tiene una fuente que puedes abrir, y los valores modelados están marcados como tales. Este breve recorrido muestra las partes principales; puedes saltarlo cuando quieras."
+      },
+      "layers": {
+        "title": "Capas del mapa",
+        "text": "El panel izquierdo tiene los mapas: imágenes y elevación de los orbitadores, capas de alta resolución, datos de misiones y recursos. Cada capa tiene una “i” con su fuente y resolución."
+      },
+      "explorers": {
+        "title": "Todos los robots en Marte",
+        "text": "La pestaña Exploradores reúne a todos los robots de NASA que llegaron a la superficie, con su foto, historia, hallazgos, instrumentos, paradas de expedición y distancias entre ellos. Los recorridos de Curiosity y Perseverance se cargan en vivo desde NASA."
+      },
+      "resources": {
+        "title": "Recursos para explorar",
+        "text": "Evidencia de hielo de agua (cráteres que lo expusieron, glaciares enterrados), detecciones de minerales desde órbita y las muestras de roca de Perseverance. Fija un punto y el inspector te dice qué tan lejos está el hielo más cercano."
+      },
+      "landing": {
+        "title": "Dónde aterrizar",
+        "text": "La pestaña Aterrizaje explica cómo se elige un sitio, muestra elipses de aterrizaje reales y las Zonas de Exploración que NASA reunió para las primeras misiones humanas, y revisa con datos cualquier punto que fijes."
+      },
+      "inspect": {
+        "title": "Inspecciona cualquier punto",
+        "text": "Haz clic en el terreno para fijarlo: elevación con su producto de origen, minerales y hielo cercanos, la celda editable del terreno y la procedencia de cada valor."
+      },
+      "routes": {
+        "title": "Planea una ruta",
+        "text": "Compara la ruta más corta y la más suave para un rover o un astronauta, carga un trayecto real de Perseverance, mira qué tan bien se conoce cada tramo y descarga una ficha de la ruta con sus datos y límites."
+      },
+      "ai": {
+        "title": "IA con aprobación humana",
+        "text": "Gemini analiza la evidencia de una celda del terreno y puede proponer una corrección con sus razones y fuentes. Nada cambia el mapa hasta que una persona lo aprueba."
+      },
+      "history": {
+        "title": "Historial del mapa",
+        "text": "Cada cambio aprobado es una versión: compara versiones, viaja atrás en el tiempo y restaura cualquier estado anterior del terreno."
+      },
+      "hud": {
+        "title": "HUD del visor",
+        "text": "El botón Visor HUD da una vista de entrenamiento en primera persona: brújula, pendiente bajo los pies, hora solar local y, cerca de una parada real de un rover, las fotos que tomó ahí."
+      }
+    }
+  },
+  "risk": {
+    "title": "Análisis de riesgos de la ruta",
+    "sandInside": "Arena: la ruta cruza el campo de dunas cartografiado {{id}}. La arena suelta es el peligro que atrapó a Spirit: evítalo o revísalo con HiRISE.",
+    "sandNear": "Arena: hay un campo de dunas cartografiado a {{d}} de la ruta. Revisa sus bordes por arena acumulada.",
+    "sandNone": "Arena: no hay campos de dunas cartografiados a menos de {{d}} (la base de datos registra campos, no ondulaciones pequeñas ni manchas de arena).",
+    "slope": "Pendiente: tramo más empinado {{max}}°; el {{share}}% de la ruta supera el límite de precaución ({{c}}°).",
+    "slopeOk": "Pendiente: tramo más empinado {{max}}°, dentro del límite de precaución.",
+    "res": "Resolución de datos: el {{share}}% de la ruta solo tiene elevación gruesa (hasta {{coarse}}/px): ahí las pendientes se suavizan.",
+    "resOk": "Resolución de datos: toda la ruta está sobre el modelo de elevación de 20 m o mejor.",
+    "rocks": "Obstáculos visibles: rocas y escarpes pequeños quedan por debajo de la malla; las imágenes HiRISE de 25 cm cubren el {{share}}% de la ruta.",
+    "rocksHirise": "Obstáculos visibles: las imágenes HiRISE de 25 cm cubren la ruta: acércate para revisar rocas antes de usarla.",
+    "unknown": "Conocimiento del terreno: el {{share}}% de la ruta nunca lo ha cruzado un rover.",
+    "known": "Conocimiento del terreno: el {{share}}% de la ruta está a 50 m o menos de donde pasó un rover.",
+    "loadingDunes": "Cargando la base de datos de dunas…",
+    "note": "Fuentes: Mars Global Digital Dune Database (NASA Mars Trek), los productos de elevación de la ruta, cobertura HiRISE, recorrido de Perseverance (NASA MMGIS). Verde = sin problemas en estos datos; ámbar = revisar; rojo = peligro en los datos."
+  },
+  "why": {
+    "title": "¿Por qué MARS OS recomienda esta ruta?",
+    "used": "Datos usados",
+    "elev": "Elevación: {{a}} ({{ra}}/px) en A y {{b}} ({{rb}}/px) en B, muestreada en una malla de {{cell}} m que nunca es más fina que los datos.",
+    "edits": "Ediciones de terreno aprobadas en la zona: {{n}} (cada una está en la pestaña Historial).",
+    "rule": "Regla: {{profile}}; intransitable por encima de {{max}}°, precaución por encima de {{caution}}°, peso de pendiente {{w}} para la ruta suave. Reglas fijas, sin IA.",
+    "traverse": "Por dónde han pasado los rovers (recorrido de Perseverance, NASA MMGIS), para mostrar qué tan conocido es cada tramo.",
+    "dunes": "Campos de dunas cartografiados (Mars Global Digital Dune Database) para el aviso de arena.",
+    "missing": "Datos que MARS OS no tiene aquí",
+    "miss": {
+      "rocks": "Abundancia de rocas y obstáculos más pequeños que la malla: solo se ven en imágenes HiRISE, no se usan en el cálculo.",
+      "soil": "Resistencia del suelo e inercia térmica (qué tan blando es el terreno): aún no se usan.",
+      "fresh": "Imágenes más recientes que los productos listados: las dunas y el polvo se mueven.",
+      "weather": "Clima y tormentas de polvo el día del recorrido."
+    },
+    "note": "La recomendación compara solo pendientes medidas. Quien planea debe revisar lo que falta antes de usar la ruta."
+  },
+  "sheet": {
+    "download": "Descargar ficha de la ruta",
+    "title": "Ficha de la ruta",
+    "generated": "Generada",
+    "points": "Puntos",
+    "realDrive": "Comparada con el trayecto real de Perseverance, soles {{from}}–{{to}}.",
+    "results": "Resultados",
+    "assumptions": "Supuestos",
+    "data": "Datos usados",
+    "elev": "Producto de elevación en A: {{layer}} ({{res}}/px)",
+    "edits": "Ediciones de terreno aprobadas en la zona: {{n}} ({{ids}})",
+    "limits": "Limitaciones",
+    "sources": "Fuentes oficiales"
   }
 }

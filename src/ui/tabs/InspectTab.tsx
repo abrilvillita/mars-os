@@ -167,13 +167,13 @@ export function InspectTab() {
         <>
           <div className={`pin-head ${locked ? 'locked' : ''}`}>
             <div className="row">
-              <span className="tag pin-tag">📍 {t('inspect.pinned')}{locked && ` · ${t('inspect.locked')}`}</span>
+              <span className="tag pin-tag">{t('inspect.pinned')}{locked && ` · ${t('inspect.locked')}`}</span>
               <span className="small muted">{new Date(pin.pinnedAt).toLocaleTimeString()}</span>
             </div>
             <div className="mono big">{formatLat(pin.lat, 5)} {formatLon(pin.lon, 5)}</div>
             <div className="actions">
               <button className={locked ? 'on' : ''} onClick={() => set({ pinLocked: !locked, repinArmed: false })} aria-pressed={locked}>
-                {locked ? `🔒 ${t('inspect.unlock')}` : `🔓 ${t('inspect.lock')}`}
+                {locked ? `${t('inspect.unlock')}` : `${t('inspect.lock')}`}
               </button>
               <button className={armed ? 'on' : ''} onClick={() => set({ repinArmed: !armed })}>{armed ? t('inspect.armed') : t('inspect.repick')}</button>
               <button onClick={() => fly({ lat: pin.lat, lon: pin.lon, distance: Math.min(cam.distance, 30) })}>{t('nav.goTo')}</button>

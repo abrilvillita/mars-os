@@ -105,7 +105,7 @@ export function SampleDetail({ n }: { n: number }) {
   return (
     <div className="photos">
       <div className="card sample-card" style={{ borderTopColor: SAMPLE_COLORS[g] }}>
-        <div className="card-title">🧪 {s.name} <span className="muted small">· {t('samples.no', { n: s.n })}</span> <ProvBadge kind="measured" /></div>
+        <div className="card-title">{s.name} <span className="muted small">· {t('samples.no', { n: s.n })}</span> <ProvBadge kind="measured" /></div>
         <div className="small"><span className="swatch" style={{ background: SAMPLE_COLORS[g] }} /> {t(`samples.groups.${g}`)}{s.rockType && s.rockType !== 'n/a' && (g === 'special' || g === 'regolith') ? ` · ${s.rockType}` : ''}</div>
         <div className="kv"><span className="k">{t('samples.type')}</span><span className="v">{s.type ?? '—'}{s.height && s.height !== 'n/a' ? ` · ${s.height}` : ''}</span></div>
         <div className="kv"><span className="k">{t('samples.sealed')}</span><span className="v">{s.solSealed !== null ? `sol ${s.solSealed} · ${s.dateSealed ?? ''}` : t('samples.notSealed')}</span></div>

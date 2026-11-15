@@ -23,8 +23,8 @@ import { useBackendStatus } from '../FeatureStatus';
 function OriginBadge({ p }: { p: ChangeProposalT }) {
   const { t } = useTranslation();
   if (p.origin.kind === 'ai')
-    return <span className="origin origin-ai">🤖 {t('ai.originAI')} · {p.origin.id}{p.origin.model ? ` (${p.origin.model})` : ''}</span>;
-  return <span className="origin origin-human">👤 {t('ai.originHuman')} · {p.origin.id}</span>;
+    return <span className="origin origin-ai">{t('ai.originAI')} · {p.origin.id}{p.origin.model ? ` (${p.origin.model})` : ''}</span>;
+  return <span className="origin origin-human">{t('ai.originHuman')} · {p.origin.id}</span>;
 }
 
 function ProposalCard({ p }: { p: ChangeProposalT }) {
@@ -158,7 +158,7 @@ function GeminiPanel() {
 
   return (
     <div className="card gemini">
-      <div className="card-title">🤖 {t('ai.gemini.title')}</div>
+      <div className="card-title">{t('ai.gemini.title')}</div>
       {status.backend === null && <p className="small muted">{t('env.loading')}</p>}
       {status.backend === false && <p className="err-box">{t('ai.gemini.noBackend')}</p>}
       {status.backend && !status.ai?.configured && <p className="warn-box">{t('ai.gemini.notConfigured')}</p>}

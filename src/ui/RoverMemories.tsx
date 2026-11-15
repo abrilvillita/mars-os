@@ -57,7 +57,7 @@ export function RoverMemories() {
   if (!near) return null;
   return (
     <div className="rover-memories">
-      <div className="rm-title">📸 {t('memories.title', { rover: near.w.mission === 'msl' ? 'Curiosity' : 'Perseverance', sol: near.w.sol, d: fmtM(near.d) })}</div>
+      <div className="rm-title">{t('memories.title', { rover: near.w.mission === 'msl' ? 'Curiosity' : 'Perseverance', sol: near.w.sol, d: fmtM(near.d) })}</div>
       <div className="rm-strip">
         {!imgs && <span className="muted small">{t('photos.loading')}</span>}
         {imgs?.map((im) => (

@@ -5,7 +5,7 @@
 import { create } from 'zustand';
 
 export type DisplayMode = 'imagery' | 'hypsometric' | 'slope' | 'edits';
-export type RightTab = 'inspect' | 'routes' | 'nodes' | 'ai' | 'history' | 'environment' | 'photos' | 'explorers';
+export type RightTab = 'inspect' | 'routes' | 'nodes' | 'ai' | 'history' | 'environment' | 'photos' | 'explorers' | 'landing';
 
 export interface LayerViewState {
   on: boolean;
@@ -49,7 +49,7 @@ export interface WaypointSelection {
 interface UIState {
   baseLayerId: string;
   overlays: Record<string, LayerViewState>;
-  vectors: { traverse: boolean; placesTraverse: boolean; waypoints: boolean; regions: boolean; graticule: boolean; minerals: boolean; crism: boolean; samples: boolean; explorers: boolean; ice: boolean };
+  vectors: { traverse: boolean; placesTraverse: boolean; waypoints: boolean; regions: boolean; graticule: boolean; minerals: boolean; crism: boolean; samples: boolean; explorers: boolean; ice: boolean; zones: boolean };
   displayMode: DisplayMode;
   realLighting: boolean;
   /** Helmet visor HUD overlay (training view). */
@@ -87,6 +87,8 @@ interface UIState {
   explorerId: string | null;
   /** Selected expedition stop (index in expeditions.json). */
   stopIdx: number | null;
+  /** Selected human Exploration Zone (index in expeditions.json). */
+  zoneIdx: number | null;
 
   flyTo: (CameraTarget & { nonce: number }) | null;
   camera: { lat: number; lon: number; distance: number; altitudeKm: number; tilt: number; heading: number };
@@ -103,7 +105,7 @@ export const useUI = create<UIState>((set) => ({
     'layer.jezero.hirise': { on: true, opacity: 1 },
     'layer.geology.sim3292': { on: false, opacity: 0.55 },
   },
-  vectors: { traverse: true, placesTraverse: false, waypoints: true, regions: true, graticule: false, minerals: false, crism: false, samples: true, explorers: true, ice: false },
+  vectors: { traverse: true, placesTraverse: false, waypoints: true, regions: true, graticule: false, minerals: false, crism: false, samples: true, explorers: true, ice: false, zones: false },
   displayMode: 'imagery',
   realLighting: true,
   hud: false,
@@ -133,9 +135,10 @@ export const useUI = create<UIState>((set) => ({
   sampleN: null,
   explorerId: null,
   stopIdx: null,
+  zoneIdx: null,
 
   flyTo: null,
-  camera: { lat: 18.4, lon: 77.5, distance: 12000, altitudeKm: 12000, tilt: 0, heading: 0 },
+  camera: { lat: 5, lon: -40, distance: 12000, altitudeKm: 12000, tilt: 0, heading: 0 },
 
   set: (p) => set(p),
   setOverlay: (id, p) => set((s) => ({ overlays: { ...s.overlays, [id]: { ...(s.overlays[id] ?? { on: false, opacity: 1 }), ...p } } })),

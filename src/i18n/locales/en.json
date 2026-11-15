@@ -15,13 +15,21 @@
     "label": "Language"
   },
   "nav": {
-    "planet": "Planet",
-    "jezero": "Jezero Crater",
+    "planet": "Whole planet",
+    "jezero": "Jezero crater",
     "hirise": "HiRISE zone",
     "landing": "Landing site",
     "ground": "Ground view",
     "goTo": "Go to",
-    "groundHint": "Lowest view the imagery here supports: walking height only where HiRISE 25 cm exists"
+    "groundHint": "Lowest view the imagery here supports: walking height only where HiRISE 25 cm exists",
+    "olympus": "Olympus Mons",
+    "valles": "Valles Marineris",
+    "hellas": "Hellas Planitia",
+    "northPole": "North polar cap",
+    "southPole": "South polar cap",
+    "gale": "Gale crater",
+    "groupPlaces": "Places",
+    "groupExplorers": "Robots on Mars"
   },
   "time": {
     "utc": "UTC",
@@ -89,7 +97,9 @@
     "explorers": "Mars explorers (every NASA surface robot)",
     "explorersHint": "Landing sites from NASA; Curiosity’s drive (yellow) and Ingenuity’s flights (green) loaded live. Click a name.",
     "ice": "Water ice evidence",
-    "iceHint": "Fresh craters that exposed water ice (Dundas et al. 2014) and debris-covered glaciers (1,309 glacier-like forms), from NASA Mars Trek."
+    "iceHint": "Fresh craters that exposed water ice (Dundas et al. 2014) and debris-covered glaciers (1,309 glacier-like forms), from NASA Mars Trek.",
+    "zones": "Landing ellipses and human Exploration Zones",
+    "zonesHint": "Real landing ellipses (Perseverance, InSight) and the 100 km Exploration Zones NASA collected for the first human missions."
   },
   "view": {
     "title": "View",
@@ -130,7 +140,8 @@
     "environment": "Environment",
     "photos": "Photos",
     "routes": "Routes",
-    "explorers": "Explorers"
+    "explorers": "Explorers",
+    "landing": "Landing"
   },
   "inspect": {
     "cursor": "Cursor",
@@ -456,8 +467,8 @@
     },
     "profileLabel": "Who travels the route",
     "profiles": {
-      "rover": "🤖 Rover (Perseverance-class)",
-      "astronaut": "👩‍🚀 Astronaut (future EVA)"
+      "rover": "Rover (Perseverance-class)",
+      "astronaut": "Astronaut (future EVA)"
     },
     "introRover": "Today Mars is explored by robots. Compare two drives between A and B on the current terrain: the shortest and the one with gentlest slopes, using Perseverance’s published limits. Values come from elevation data; limits are assumptions you can edit.",
     "assumptionsRover": "Default 24° = the tilt limit NASA’s Perseverance team set in 2026. Terrain slope on this grid is only a proxy for rover tilt: rocks under single wheels add more.",
@@ -638,5 +649,152 @@
     "go": "go ↗",
     "loading": "Loading water-ice evidence…",
     "note": "Icy craters: fresh impacts whose bright ice was confirmed from orbit (HiRISE, CRISM; Dundas et al. 2014) — ice within about a metre of the surface. Glacier-like forms: ice under a debris cover. Water is the first resource a crew needs: drinking, oxygen and rocket propellant. Published positions, not an ice-depth map."
+  },
+  "landing": {
+    "showOnMap": "Show zones and ellipses on the map",
+    "allZones": "← All Exploration Zones",
+    "pinHint": "Pin any point on the map (click the terrain) to run a landing site check, or choose an Exploration Zone below.",
+    "ellipses": "Real landing ellipses",
+    "ellipsesNote": "Polygons from NASA Mars Trek. Axes and area computed by MARS OS from each polygon. Entry has uncertainties, so the spacecraft is predicted to land somewhere inside the ellipse: everything inside must be safe.",
+    "zones": "Exploration Zones for human missions ({{n}})",
+    "zonesIntro": "Candidate regions proposed at NASA’s 2015 workshop on landing sites for the first human missions. Each Exploration Zone is a {{r}} km radius area that must hold a landing site, a habitat site and regions of interest for science and resources.",
+    "zonesSource": "Source: NASA First Landing Site / Exploration Zone Workshop for Human Missions to the Surface of Mars (2015), via NASA Mars Trek (EZMars service, 100 km buffers).",
+    "how": {
+      "title": "How a landing site is chosen",
+      "elev": {
+        "t": "Low elevation.",
+        "d": "More air above low ground gives the heat shield and parachute more time to slow the spacecraft; every NASA landing site in MARS OS lies below the planet’s reference level."
+      },
+      "lat": {
+        "t": "Latitude.",
+        "d": "Near the equator, solar power is stronger and nights are milder; missions that look for ice, like Phoenix, go to high latitudes."
+      },
+      "ellipse": {
+        "t": "Landing ellipse.",
+        "d": "The area where the spacecraft will land with high probability. It shrank from about 130 × 27 km for InSight to a few km for Perseverance, which also steered away from hazards with Terrain-Relative Navigation."
+      },
+      "surface": {
+        "t": "Safe surface.",
+        "d": "Gentle slopes and few large rocks inside the ellipse, and ground firm enough for the lander and the rover."
+      },
+      "science": {
+        "t": "Science.",
+        "d": "The site must answer the mission’s question: Jezero for its ancient lake delta, Gale for its layered mountain."
+      },
+      "resources": {
+        "t": "Resources for crews.",
+        "d": "For humans, water ice and useful minerals within reach matter as much as safety: that is what the Exploration Zones and the ice layer show."
+      }
+    },
+    "check": {
+      "pinned": "Landing site check: pinned point",
+      "elev": "Elevation",
+      "elevWhy": "(lower = more air to brake)",
+      "lat": "Latitude",
+      "latWhy": "(power and temperature)",
+      "slope": "Regional slope (±2.5 km)",
+      "slopeWhy": "(local data {{res}}/px; rocks need HiRISE)",
+      "minerals": "Mineral detections within 100 km",
+      "robot": "Nearest robot",
+      "zone": "Nearest Exploration Zone",
+      "note": "Measured and derived values to compare candidate sites, not a certification. Sources: MOLA elevation (NASA PDS), Mars Trek ice and mineral services, NASA MMGIS and Mars Trek positions."
+    }
+  },
+  "tour": {
+    "label": "Guided tour",
+    "button": "Tour",
+    "skip": "Skip tour",
+    "next": "Next",
+    "back": "Back",
+    "finish": "Start exploring",
+    "steps": {
+      "welcome": {
+        "title": "Welcome to MARS OS",
+        "text": "A living 3D atlas of Mars built on NASA data. Everything you see has a source you can open, and modelled values are labelled as such. This short tour shows the main parts; you can skip it any time."
+      },
+      "layers": {
+        "title": "Map layers",
+        "text": "The left panel holds the maps: base imagery and elevation from orbiters, high-resolution overlays, mission data and resources. Each layer has an “i” with its source and resolution."
+      },
+      "explorers": {
+        "title": "Every robot on Mars",
+        "text": "The Explorers tab lists every NASA robot that reached the surface, with its photo, story, findings, instruments, expedition stops and distances between them. Curiosity’s and Perseverance’s drives load live from NASA."
+      },
+      "resources": {
+        "title": "Resources for explorers",
+        "text": "Water ice evidence (craters that exposed ice, buried glaciers), orbital mineral detections and Perseverance’s rock samples. Pin a point and the inspector tells you how far the nearest ice is."
+      },
+      "landing": {
+        "title": "Where to land",
+        "text": "The Landing tab explains how a site is chosen, shows real landing ellipses and the Exploration Zones NASA collected for the first human missions, and runs a factual check for any point you pin."
+      },
+      "inspect": {
+        "title": "Inspect any point",
+        "text": "Click the terrain to pin it: elevation with its source product, nearby minerals and ice, the editable terrain cell and the provenance of every value."
+      },
+      "routes": {
+        "title": "Plan a route",
+        "text": "Compare the shortest and the gentlest route for a rover or an astronaut, load a real Perseverance drive, see how well each stretch is known and download a route sheet with its data and limits."
+      },
+      "ai": {
+        "title": "AI with human approval",
+        "text": "Gemini analyses the evidence of a terrain cell and may propose a correction with its reasons and sources. Nothing changes the map until a person approves it."
+      },
+      "history": {
+        "title": "History of the map",
+        "text": "Every approved change is a version: compare versions, travel back in time and restore any earlier state of the terrain."
+      },
+      "hud": {
+        "title": "Visor HUD",
+        "text": "The Visor HUD button gives a first-person training view: compass, slope underfoot, local solar time and, near a real rover stop, the photos the rover took there."
+      }
+    }
+  },
+  "risk": {
+    "title": "Route risk analysis",
+    "sandInside": "Sand: the route crosses mapped dune field {{id}}. Loose sand is the hazard that trapped Spirit: avoid or inspect with HiRISE.",
+    "sandNear": "Sand: a mapped dune field is {{d}} from the route. Check the edges for drifted sand.",
+    "sandNone": "Sand: no mapped dune field within {{d}} (the database maps fields, not small ripples or sand patches).",
+    "slope": "Slope: steepest section {{max}}°; {{share}}% of the route is steeper than the caution limit ({{c}}°).",
+    "slopeOk": "Slope: steepest section {{max}}°, within the caution limit.",
+    "res": "Data resolution: {{share}}% of the route only has coarse elevation (up to {{coarse}}/px): slopes there are smoothed.",
+    "resOk": "Data resolution: the whole route is on the 20 m elevation model or finer.",
+    "rocks": "Visible obstacles: rocks and small scarps are below the grid; HiRISE 25 cm imagery covers {{share}}% of the route.",
+    "rocksHirise": "Visible obstacles: HiRISE 25 cm imagery covers the route: zoom in to check rocks before relying on it.",
+    "unknown": "Ground knowledge: {{share}}% of the route has never been crossed by a rover.",
+    "known": "Ground knowledge: {{share}}% of the route is within 50 m of where a rover drove.",
+    "loadingDunes": "Loading the dune database…",
+    "note": "Sources: Mars Global Digital Dune Database (NASA Mars Trek), the route’s elevation products, HiRISE coverage, Perseverance traverse (NASA MMGIS). Green = no issue found in these data; amber = check; red = hazard in the data."
+  },
+  "why": {
+    "title": "Why does MARS OS recommend this route?",
+    "used": "Data used",
+    "elev": "Elevation: {{a}} ({{ra}}/px) at A and {{b}} ({{rb}}/px) at B, sampled on a {{cell}} m grid that is never finer than the data.",
+    "edits": "Approved terrain edits in the area: {{n}} (each one is in the History tab).",
+    "rule": "Rule: {{profile}}; impassable above {{max}}°, caution above {{caution}}°, slope weight {{w}} for the low-slope route. Fixed rules, no AI.",
+    "traverse": "Where rovers have driven (Perseverance traverse, NASA MMGIS), to show how well each stretch is known.",
+    "dunes": "Mapped dune fields (Mars Global Digital Dune Database) for the sand warning.",
+    "missing": "Data MARS OS does not have here",
+    "miss": {
+      "rocks": "Rock abundance and obstacles smaller than the grid: only visible in HiRISE images, not used in the calculation.",
+      "soil": "Soil strength and thermal inertia (how soft the ground is): not used yet.",
+      "fresh": "Images newer than the products listed: dunes and dust can move.",
+      "weather": "Weather and dust storms on the day of the traverse."
+    },
+    "note": "The recommendation compares measured slopes only. A planner should check the missing items before using the route."
+  },
+  "sheet": {
+    "download": "Download route sheet",
+    "title": "Route sheet",
+    "generated": "Generated",
+    "points": "Points",
+    "realDrive": "Compared with Perseverance’s real drive, sols {{from}}–{{to}}.",
+    "results": "Results",
+    "assumptions": "Assumptions",
+    "data": "Data used",
+    "elev": "Elevation product at A: {{layer}} ({{res}}/px)",
+    "edits": "Approved terrain edits in the area: {{n}} ({{ids}})",
+    "limits": "Limitations",
+    "sources": "Official sources"
   }
 }

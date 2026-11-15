@@ -17,6 +17,7 @@ import { useRoutes } from '../../state/routeStore';
 import { useUI } from '../../state/uiStore';
 import { ProvBadge, fmtM } from '../common';
 import { computeRoutes } from '../RouteController';
+import { RouteRiskCard, WhyRoute, downloadRouteSheet } from '../RouteRisk';
 
 export const ROUTE_COLORS = { shortest: '#ff8a4c', lowSlope: '#b18cff', actual: '#f2f2f2' } as const;
 
@@ -143,7 +144,7 @@ function DaylightBudget({ result }: { result: RouteResult }) {
   const fmtH = (h: number) => `${Math.floor(h)} h ${Math.round((h % 1) * 60)} min`;
   return (
     <div className={`card daylight ${d.isDay ? (enough ? 'ok' : 'tight') : 'night'}`}>
-      <div className="card-title">☀ {t('routes.daylight.title')} <ProvBadge kind="modeled" /></div>
+      <div className="card-title">{t('routes.daylight.title')} <ProvBadge kind="modeled" /></div>
       <div className="kv"><span className="k">{t('routes.daylight.local')}</span><span className="v mono">{formatHours(d.ltstH)} · {t('routes.daylight.sunElev')} {d.sunElevDeg.toFixed(0)}°</span></div>
       {d.sunsetH !== null && d.sunriseH !== null && (
         <div className="kv"><span className="k">{t('routes.daylight.window')}</span><span className="v mono">{formatHours(d.sunriseH)} → {formatHours(d.sunsetH)}</span></div>
@@ -189,7 +190,7 @@ function KnowledgeBars({ routes, idx }: { routes: Route[]; idx: TrackIndex | nul
   const pct = (x: number) => `${Math.round(x * 100)}%`;
   return (
     <div className="card knowledge">
-      <div className="card-title">🔭 {t('routes.know.title')} <ProvBadge kind="derived" /></div>
+      <div className="card-title">{t('routes.know.title')} <ProvBadge kind="derived" /></div>
       {routes.map((r) => {
         const k = knowledgeFor(r, idx);
         return (
@@ -230,7 +231,7 @@ function DriveInsight({ actual, routes }: { actual: Route; routes: Route[] }) {
   const a = actual.stats;
   return (
     <div className="card rec">
-      <div className="card-title">🤖 {t('routes.drive.insightTitle', { from: rd.fromSol, to: rd.toSol })}</div>
+      <div className="card-title">{t('routes.drive.insightTitle', { from: rd.fromSol, to: rd.toSol })}</div>
       <p>{t('routes.drive.insight', { real: fmtM(a.lengthM), short: fmtM(sh.lengthM), extra: Math.round(((a.lengthM - sh.lengthM) / Math.max(1, sh.lengthM)) * 100), realMax: a.maxSlopeDeg.toFixed(1), shortMax: sh.maxSlopeDeg.toFixed(1), lowMax: lo.maxSlopeDeg.toFixed(1) })}</p>
       <p className="small">{t('routes.drive.why')}</p>
       <p className="small muted">{t('routes.drive.basis')}</p>
@@ -243,7 +244,7 @@ function SlopeBlindSpots({ cell }: { cell: number }) {
   const { t } = useTranslation();
   return (
     <div className="card sand">
-      <div className="card-title">🛞 {t('routes.sand.title')}</div>
+      <div className="card-title">{t('routes.sand.title')}</div>
       <p className="small">{t('routes.sand.spirit')}</p>
       <p className="small">{t('routes.rocks', { cell })}</p>
       <p className="note">{t('routes.sand.source')}</p>
@@ -269,7 +270,7 @@ function RealDriveCard() {
   };
   return (
     <details className="card real-drive" open={!!rd}>
-      <summary>🛞 {t('routes.drive.title')} <ProvBadge kind="measured" /></summary>
+      <summary>{t('routes.drive.title')} <ProvBadge kind="measured" /></summary>
       <p className="small muted">{t('routes.drive.intro')}</p>
       <div className="actions">
         {DRIVE_PRESETS.map((p) => (
@@ -379,8 +380,11 @@ export function RoutesTab() {
           <Profile routes={shown} />
           {r.actualRoute && <DriveInsight actual={r.actualRoute} routes={res.routes} />}
           <Recommendation result={res} />
+          <RouteRiskCard result={res} idx={idx} />
+          <WhyRoute result={res} />
           <KnowledgeBars routes={shown} idx={idx} />
           <SlopeBlindSpots cell={Math.round(res.cellM)} />
+          <button onClick={() => downloadRouteSheet(res, idx, t as never)}>{t('sheet.download')}</button>
           {r.profile === 'astronaut' ? <DaylightBudget result={res} /> : <p className="small muted">{t('routes.roverPower')}</p>}
           <button className="primary" onClick={() => { useUI.getState().set({ hud: true, panelsOpen: { left: false, right: false } }); fly({ lat: res.start.lat, lon: res.start.lon, distance: 0.025, tilt: 82 }); }}>{t('hud2.openFromRoutes')}</button>
           <button onClick={() => fly({ lat: (res.start.lat + res.end.lat) / 2, lon: (res.start.lon + res.end.lon) / 2, distance: Math.max(1.5, (res.bbox.north - res.bbox.south) * 59.3 * 1.6), tilt: 40 })}>{t('nav.goTo')}</button>

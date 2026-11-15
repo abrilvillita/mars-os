@@ -413,3 +413,23 @@ body.visor-on .controls-hint { display: none; }
 .stop-label { pointer-events: auto; cursor: pointer; background: rgba(10, 10, 14, 0.8); border: 1px solid #ffb36b88; color: #fff; padding: 1px 6px; border-radius: 8px; font-size: 11px; white-space: nowrap; font-family: inherit; }
 .stop-label.hw { border-color: #9cc7ff88; font-size: 10px; color: #cfe2ff; }
 .stop-label.sel { background: #ff8a4c; }
+
+/* ── landing zones ── */
+.zone-label { pointer-events: auto; cursor: pointer; background: rgba(8, 18, 28, 0.78); border: 1px solid #7fd1ff88; color: #d9f1ff; padding: 1px 6px; border-radius: 8px; font-size: 10.5px; white-space: nowrap; font-family: inherit; max-width: 150px; overflow: hidden; text-overflow: ellipsis; }
+.zone-label.sel { background: #7fd1ff; color: #08121c; }
+.landing summary { cursor: pointer; font-weight: 700; }
+/* ── guided tour ── */
+.tour { position: fixed; z-index: 60; left: 50%; bottom: 96px; transform: translateX(-50%); width: min(460px, calc(100vw - 32px)); background: var(--panel-solid); border: 1px solid var(--line-strong); border-radius: 14px; padding: 16px 18px; box-shadow: 0 20px 60px #000a; }
+.tour h3 { margin: 4px 0 6px; font-size: 17px; }
+.tour p { margin: 0 0 10px; line-height: 1.5; }
+.tour-head { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--muted); }
+.tour-dots { display: flex; gap: 6px; margin: 4px 0 10px; }
+.tour-dots span { width: 7px; height: 7px; border-radius: 50%; background: var(--line-strong); cursor: pointer; }
+.tour-dots span.on { background: var(--accent); }
+
+/* ── route risk ── */
+.risk ul { margin: 2px 0 8px; padding-left: 18px; }
+.risk li { margin: 2px 0; font-size: 12px; }
+.risk li.risk-ok::marker { color: #5fd39a; } .risk li.risk-warn::marker { color: #ffc046; } .risk li.risk-high::marker { color: #ff6b6b; }
+.risk li.risk-high { color: #ffb0b0; }
+.why summary { cursor: pointer; font-weight: 700; }

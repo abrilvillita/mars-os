@@ -96,7 +96,7 @@ export function SamplesLayer() {
       )}
       {sel && selPos && (
         <Html position={[selPos[0], selPos[1], selPos[2]]} center zIndexRange={[8, 0]} style={{ pointerEvents: 'none' }}>
-          <div className="sample-label">🧪 {sel.name}</div>
+          <div className="sample-label">{sel.name}</div>
         </Html>
       )}
     </>

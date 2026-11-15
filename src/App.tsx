@@ -11,6 +11,7 @@ import './ui/styles.css';
 import { FeatureStatus } from './ui/FeatureStatus';
 import { RouteController } from './ui/RouteController';
 import { HelmetHud } from './ui/HelmetHud';
+import { Tour, useTour } from './ui/Tour';
 import { DEMO_MODE } from './state/mode';
 import { API_BASE } from './api/apiBase';
 import { applyDeepLink } from './state/deepLink';
@@ -23,6 +24,7 @@ export default function App() {
   const [state, setState] = useState<'loading' | 'ready' | 'error'>('loading');
   const [error, setError] = useState('');
   const [about, setAbout] = useState(false);
+  const tour = useTour();
   // panels start right below the top bar, whatever its real height (zoom, fonts, language)
   const appRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -87,7 +89,8 @@ export default function App() {
       <MarsScene />
       <RouteController />
       <HelmetHud />
-      <TopBar onAbout={() => setAbout(true)} />
+      <TopBar onAbout={() => setAbout(true)} onTour={() => tour.setOpen(true)} />
+      {tour.open && <Tour onClose={() => tour.setOpen(false)} />}
       <LeftPanel />
       <RightPanel />
       <Hud />

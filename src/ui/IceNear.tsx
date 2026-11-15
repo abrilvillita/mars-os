@@ -22,7 +22,7 @@ export function IceNear({ lat, lon }: { lat: number; lon: number }) {
   const n = nearestIce(lat, lon);
   return (
     <div className="card">
-      <div className="card-title">🧊 {t('ice.title')} <ProvBadge kind="derived" /></div>
+      <div className="card-title">{t('ice.title')} <ProvBadge kind="derived" /></div>
       {(['icyCrater', 'glacier'] as const).map((k) => {
         const b = n[k];
         if (!b) return null;
