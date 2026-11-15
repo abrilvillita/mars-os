@@ -42,6 +42,13 @@ export function HistoryTab() {
           <button onClick={() => os.history.view(null)}>{t('history.backToHead')}</button>
         </div>
       )}
+      <details className="card" open={versions.length <= 1}>
+        <summary>{t('history.how.title')}</summary>
+        <ol className="findings small">
+          {(['one', 'two', 'three', 'four'] as const).map((k) => <li key={k}>{t(`history.how.${k}`)}</li>)}
+        </ol>
+        {versions.length <= 1 && <p className="small">{t('history.how.empty')} <a href={`${import.meta.env.BASE_URL}?demo`}>{t('history.how.demo')}</a></p>}
+      </details>
       <p className="small muted">{t('history.restoreHint')}</p>
       <ol className="timeline">
         {versions.map((v) => {

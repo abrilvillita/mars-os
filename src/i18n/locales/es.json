@@ -322,7 +322,16 @@
       "system": "Sistema"
     },
     "importError": "Registro de cambios inválido:",
-    "compare": "Comparar con la actual"
+    "compare": "Comparar con la actual",
+    "how": {
+      "title": "Cómo funciona el historial",
+      "one": "El terreno parte de los datos de elevación de NASA (versión 1).",
+      "two": "Una persona o Gemini propone un cambio local, con evidencia y fuentes (pestaña IA).",
+      "three": "Solo cuando una persona lo aprueba, el cambio se vuelve una nueva versión aquí, con su autor y motivo.",
+      "four": "Puedes comparar versiones, ver el mapa como era y restaurar cualquier versión anterior: nunca se borra nada.",
+      "empty": "Todavía no hay cambios aprobados en este mapa, así que el historial solo tiene la versión original. Para verlo funcionar con ediciones de ejemplo, abre el entorno de demostración (almacenamiento separado):",
+      "demo": "abrir demo"
+    }
   },
   "env": {
     "title": "Entorno",
@@ -796,5 +805,23 @@
     "edits": "Ediciones de terreno aprobadas en la zona: {{n}} ({{ids}})",
     "limits": "Limitaciones",
     "sources": "Fuentes oficiales"
+  },
+  "rems": {
+    "title": "Mediciones de Curiosity: toda la misión",
+    "intro": "{{n}} soles de resúmenes diarios de la estación meteorológica de Curiosity (REMS) en el cráter Gale, de {{from}} a {{to}}.",
+    "pressure": "Presión del aire",
+    "maxT": "Temperatura máxima del aire",
+    "minT": "Temperatura mínima del aire",
+    "note": "La presión sube y baja cada año marciano porque parte de la atmósfera de CO2 se congela en los casquetes polares en invierno y regresa en primavera. Valores diarios de divulgación de REMS (Centro de Astrobiología, CSIC-INTA / NASA); datos científicos en el NASA PDS."
+  },
+  "watch": {
+    "title": "Lo nuevo en Marte desde tu última visita",
+    "intro": "MARS OS lee los datos en vivo de los rovers de NASA cada vez que se abre.",
+    "lastVisit": "Última visita: {{date}}.",
+    "latest": "último sol {{sol}}",
+    "new": "+{{n}} soles nuevos",
+    "noNew": "sin soles nuevos",
+    "analyse": "Revisar este lugar con Gemini →",
+    "note": "Gemini solo se ejecuta cuando lo pides: cada análisis usa la cuota compartida, y cualquier cambio que proponga necesita la aprobación de una persona antes de tocar el mapa."
   }
 }

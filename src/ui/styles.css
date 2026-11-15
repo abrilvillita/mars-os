@@ -433,3 +433,11 @@ body.visor-on .controls-hint { display: none; }
 .risk li.risk-ok::marker { color: #5fd39a; } .risk li.risk-warn::marker { color: #ffc046; } .risk li.risk-high::marker { color: #ff6b6b; }
 .risk li.risk-high { color: #ffb0b0; }
 .why summary { cursor: pointer; font-weight: 700; }
+
+.rems { margin: 6px 0 10px; }
+.rems svg { width: 100%; height: auto; background: rgba(255,255,255,.02); border: 1px solid var(--line); border-radius: 6px; }
+.rems .axis { font-size: 7px; fill: var(--muted); }
+
+.watch-row { padding: 4px 0; border-top: 1px solid var(--line); }
+.new-tag { color: #5fd39a; margin-left: 4px; }
+.history details summary { cursor: pointer; font-weight: 700; }

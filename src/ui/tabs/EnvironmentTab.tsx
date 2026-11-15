@@ -6,6 +6,7 @@ import { fetchWeather, type WeatherSol } from '../../core/live/m20';
 import { pickText } from '../../i18n';
 import { useUI } from '../../state/uiStore';
 import { KV, ProvBadge, Section, Toggle, fmtM } from '../common';
+import { RemsChart } from '../RemsChart';
 
 export function EnvironmentTab() {
   const { t, i18n } = useTranslation();
@@ -25,18 +26,6 @@ export function EnvironmentTab() {
 
   return (
     <div className="env">
-      <Section title={t('env.scene')}>
-        <Toggle checked={env.dustStorm} onChange={(v) => set({ env: { ...env, dustStorm: v } })} label={<>{t('env.storm')} <ProvBadge kind="synthetic" /></>} hint={t('env.stormHint')} />
-        {env.dustStorm && (
-          <>
-            <label className="field-label">{t('env.intensity')} <b>{Math.round(env.stormIntensity * 100)}%</b></label>
-            <input type="range" min={0.1} max={1} step={0.05} value={env.stormIntensity} onChange={(e) => set({ env: { ...env, stormIntensity: +e.target.value } })} />
-          </>
-        )}
-        <Toggle checked={env.atmosphere} onChange={(v) => set({ env: { ...env, atmosphere: v } })} label={t('env.atmosphere')} />
-        <Toggle checked={env.moons} onChange={(v) => set({ env: { ...env, moons: v } })} label={t('env.moons')} hint={t('env.moonNote')} />
-        <Toggle checked={env.stars} onChange={(v) => set({ env: { ...env, stars: v } })} label={t('env.stars')} />
-      </Section>
 
       <Section title={t('env.weather')}>
         {werr && <p className="err-box">{t('env.error')}</p>}
@@ -65,6 +54,10 @@ export function EnvironmentTab() {
         )}
       </Section>
 
+      <Section title={t('rems.title')}>
+        <RemsChart />
+      </Section>
+
       <Section title={t('env.radiation')}>
         {refs.map((r) => {
           const src = os.catalog.source(r.sourceIds[0]);
@@ -86,6 +79,18 @@ export function EnvironmentTab() {
         <div className="big mono">≈ {pModel.toFixed(0)} Pa</div>
         <ProvBadge kind="modeled" />
         <p className="note">{t('env.pressureModelNote')}</p>
+      </Section>
+      <Section title={t('env.scene')} defaultOpen={false}>
+        <Toggle checked={env.dustStorm} onChange={(v) => set({ env: { ...env, dustStorm: v } })} label={<>{t('env.storm')} <ProvBadge kind="synthetic" /></>} hint={t('env.stormHint')} />
+        {env.dustStorm && (
+          <>
+            <label className="field-label">{t('env.intensity')} <b>{Math.round(env.stormIntensity * 100)}%</b></label>
+            <input type="range" min={0.1} max={1} step={0.05} value={env.stormIntensity} onChange={(e) => set({ env: { ...env, stormIntensity: +e.target.value } })} />
+          </>
+        )}
+        <Toggle checked={env.atmosphere} onChange={(v) => set({ env: { ...env, atmosphere: v } })} label={t('env.atmosphere')} />
+        <Toggle checked={env.moons} onChange={(v) => set({ env: { ...env, moons: v } })} label={t('env.moons')} hint={t('env.moonNote')} />
+        <Toggle checked={env.stars} onChange={(v) => set({ env: { ...env, stars: v } })} label={t('env.stars')} />
       </Section>
     </div>
   );

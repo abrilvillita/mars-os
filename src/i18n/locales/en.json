@@ -322,7 +322,16 @@
       "system": "System"
     },
     "importError": "Invalid change log:",
-    "compare": "Compare with current"
+    "compare": "Compare with current",
+    "how": {
+      "title": "How the history works",
+      "one": "The terrain starts from NASA elevation data (version 1).",
+      "two": "A person or Gemini proposes a local change, with evidence and sources (AI tab).",
+      "three": "Only when a person approves it does the change become a new version here, with its author and reason.",
+      "four": "You can compare versions, view the map as it was, and restore any earlier version: nothing is ever deleted.",
+      "empty": "There are no approved changes on this map yet, so the history has only the original version. To see how it works with example edits, open the demo sandbox (separate storage):",
+      "demo": "open demo"
+    }
   },
   "env": {
     "title": "Environment",
@@ -796,5 +805,23 @@
     "edits": "Approved terrain edits in the area: {{n}} ({{ids}})",
     "limits": "Limitations",
     "sources": "Official sources"
+  },
+  "rems": {
+    "title": "Curiosity measurements: the whole mission",
+    "intro": "{{n}} sols of daily summaries from Curiosity’s weather station (REMS) in Gale crater, {{from}} to {{to}}.",
+    "pressure": "Air pressure",
+    "maxT": "Maximum air temperature",
+    "minT": "Minimum air temperature",
+    "note": "The pressure rises and falls every Martian year because part of the CO2 atmosphere freezes onto the polar caps in winter and returns in spring. Daily outreach values from REMS (Centro de Astrobiología, CSIC-INTA / NASA); science data in the NASA PDS."
+  },
+  "watch": {
+    "title": "New on Mars since your last visit",
+    "intro": "MARS OS reads NASA’s live rover feeds every time it opens.",
+    "lastVisit": "Last visit: {{date}}.",
+    "latest": "latest sol {{sol}}",
+    "new": "+{{n}} new sols",
+    "noNew": "no new sols",
+    "analyse": "Check this place with Gemini →",
+    "note": "Gemini runs only when you ask: each analysis uses the shared quota, and any change it proposes still needs a person’s approval before it touches the map."
   }
 }

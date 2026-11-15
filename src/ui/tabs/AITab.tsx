@@ -19,6 +19,7 @@ import { api } from '../../api/apiBase';
 import { useUI } from '../../state/uiStore';
 import { ProvBadge } from '../common';
 import { useBackendStatus } from '../FeatureStatus';
+import { DataWatch } from '../DataWatch';
 
 function OriginBadge({ p }: { p: ChangeProposalT }) {
   const { t } = useTranslation();
@@ -240,6 +241,7 @@ export function AITab() {
   return (
     <div className="ai">
       <p className="ok-box small">{t('ai.humanApproval')}</p>
+      <DataWatch />
       <GeminiPanel />
       {DEMO_MODE && <DemoEngine />}
       <div className="row">
