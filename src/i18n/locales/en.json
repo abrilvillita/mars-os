@@ -78,7 +78,12 @@
     "elevation": "Elevation model",
     "traverseHint": "MMGIS map, to sol 2022 (cyan)",
     "placesTraverse": "Archival traverse — PDS PLACES R16",
-    "placesHint": "Official localized positions, sols 14–1897 (green). Historical track, not a route recommendation."
+    "placesHint": "Official localized positions, sols 14–1897 (green). Historical track, not a route recommendation.",
+    "resources": "Resources & minerals",
+    "minerals": "Mineral detections (orbital spectroscopy)",
+    "mineralsHint": "Ehlmann & Edwards 2014; Carter et al. 2013. Points mark published detections, not abundance or ore.",
+    "crism": "CRISM observations at Human Exploration sites",
+    "crismHint": "Footprints of full-resolution CRISM targets (NASA PDS), with product links."
   },
   "view": {
     "title": "View",
@@ -377,7 +382,10 @@
       "config": "Needs configuration",
       "simulation": "Simulation",
       "unavailable": "Unavailable now"
-    }
+    },
+    "routes": "Route comparator on measured slope (+ daylight budget)",
+    "minerals": "Mineral detections (CRISM, OMEGA, THEMIS)",
+    "hud": "Helmet visor HUD (training view)"
   },
   "routes": {
     "intro": "Compare two walking routes between A and B on the current terrain: the shortest one and the one with gentlest slopes. Values come from the elevation data; limits are your planning assumptions.",
@@ -425,6 +433,53 @@
       "no_path": "No walkable route under the current assumptions (max {{max}}°). Raise the limit or move A/B.",
       "too_far": "A and B are more than 25 km apart: choose closer points.",
       "same_point": "A and B are too close together."
+    },
+    "daylight": {
+      "title": "Daylight budget at A",
+      "local": "Local true solar time",
+      "sunElev": "Sun",
+      "window": "Daylight (geometric)",
+      "ok": "Enough light: {{left}} of daylight left for a round trip of about {{walk}}.",
+      "tight": "Tight: only {{left}} of daylight left for a round trip of about {{walk}}. Start earlier or shorten the walk.",
+      "night": "It is night at A now. Use the time controls to plan for the next daylight window.",
+      "note": "Mars24 sun position; geometric sunrise/sunset — ignores terrain shadows, refraction and twilight. Round trip = 2 × the longer route, at the Earth-heuristic pace."
     }
+  },
+  "minerals": {
+    "carbonate": "Carbonates",
+    "phyllosilicate": "Phyllosilicates (clays)",
+    "silica": "Silica",
+    "sulfate": "Sulfates",
+    "chloride": "Chlorides",
+    "hydrous": "Hydrous (CRISM/OMEGA)",
+    "title": "Mineral detections within 25 km",
+    "none": "No published detection within 25 km.",
+    "loading": "Loading mineral detections…",
+    "note": "Orbital detections at published positions (often rounded): evidence that water-altered minerals exist nearby, not a resource estimate.",
+    "crismHere": "Inside a CRISM targeted observation",
+    "open": "Open product (NASA ODE)",
+    "hydrousCrism": "Hydrous — CRISM",
+    "hydrousOmega": "Hydrous — OMEGA"
+  },
+  "hud2": {
+    "toggle": "Visor HUD",
+    "toggleHint": "Helmet visor HUD (training view)",
+    "openFromRoutes": "Walk it in the visor HUD",
+    "elev": "Elev",
+    "slope": "Slope",
+    "lts": "LTST",
+    "sun": "Sun",
+    "daylight": "Daylight left ≈ {{h}} h",
+    "night": "Night",
+    "data": "Terrain data {{res}}/px — rocks not resolved",
+    "route": "LOW-SLOPE ROUTE",
+    "toGo": "To go",
+    "next": "Next guide point {{d}}",
+    "steep": "Steep section {{deg}}° in {{d}}",
+    "walk": "▶ Walk the route",
+    "pause": "❚❚ Pause",
+    "restart": "↺ From A",
+    "noRoute": "No route: compare routes in the Routes tab.",
+    "badge": "TRAINING HUD · computed from MARS OS data · not flight software"
   }
 }

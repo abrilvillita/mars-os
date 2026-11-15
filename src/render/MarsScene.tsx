@@ -11,6 +11,7 @@ import { RoverLayer } from './overlays/RoverLayer';
 import { LocationMarkers } from './overlays/LocationMarkers';
 import { PlacesTraverse } from './overlays/PlacesTraverse';
 import { RoutesLayer } from './overlays/RoutesLayer';
+import { MineralsLayer } from './overlays/MineralsLayer';
 import { DustStorm } from './scene/DustStorm';
 import { Atmosphere, Moons, SkyAndHaze, SkyDome, StarField, SunGlare, TimeDriver } from './scene/Environment';
 import { renderBridge } from './bridge';
@@ -51,6 +52,7 @@ export function MarsScene() {
       <RoverLayer />
       <PlacesTraverse />
       <RoutesLayer />
+      <MineralsLayer />
       <NodeGrid />
       <RegionLabels />
       <LocationMarkers />

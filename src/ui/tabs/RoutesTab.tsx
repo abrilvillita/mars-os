@@ -6,6 +6,8 @@
 import { useTranslation } from 'react-i18next';
 import { getMarsOS } from '../../api/MarsOS';
 import { formatLat, formatLon } from '../../core/geo/mars';
+import { daylightAt } from '../../core/time/daylight';
+import { formatHours, marsTime } from '../../core/time/marsTime';
 import type { Route, RouteResult } from '../../core/routes/RoutePlanner';
 import { roverData } from '../../render/overlays/RoverLayer';
 import { useRoutes } from '../../state/routeStore';
@@ -93,6 +95,33 @@ export function RouteCard({ r }: { r: Route }) {
       <div className="kv"><span className="k">{t('routes.caution')}</span><span className="v">{(s.cautionShare * 100).toFixed(0)}%</span></div>
       <div className="kv"><span className="k">{t('routes.dataLimited')}</span><span className={`v ${s.dataLimitedShare > 0 ? 'warn' : ''}`}>{(s.dataLimitedShare * 100).toFixed(0)}%</span></div>
       <div className="kv"><span className="k">{t('routes.time')}</span><span className="v">~{hours ? `${hours} h ` : ''}{mins} min <ProvBadge kind="modeled" /></span></div>
+    </div>
+  );
+}
+
+/** Daylight budget at A (Mars24) vs walking time of each route. */
+function DaylightBudget({ result }: { result: RouteResult }) {
+  const { t } = useTranslation();
+  const epochMs = useUI((s) => s.time.epochMs);
+  const d = daylightAt(marsTime(new Date(epochMs)), result.start.lat, result.start.lon);
+  const longest = Math.max(...result.routes.map((r) => r.stats.toblerHours));
+  const enough = d.isDay && d.remainingEarthH >= longest * 2; // walk there and back
+  const fmtH = (h: number) => `${Math.floor(h)} h ${Math.round((h % 1) * 60)} min`;
+  return (
+    <div className={`card daylight ${d.isDay ? (enough ? 'ok' : 'tight') : 'night'}`}>
+      <div className="card-title">☀ {t('routes.daylight.title')} <ProvBadge kind="modeled" /></div>
+      <div className="kv"><span className="k">{t('routes.daylight.local')}</span><span className="v mono">{formatHours(d.ltstH)} · {t('routes.daylight.sunElev')} {d.sunElevDeg.toFixed(0)}°</span></div>
+      {d.sunsetH !== null && d.sunriseH !== null && (
+        <div className="kv"><span className="k">{t('routes.daylight.window')}</span><span className="v mono">{formatHours(d.sunriseH)} → {formatHours(d.sunsetH)}</span></div>
+      )}
+      <p className="small" style={{ margin: '4px 0 0' }}>
+        {!d.isDay
+          ? t('routes.daylight.night')
+          : enough
+            ? t('routes.daylight.ok', { left: fmtH(d.remainingEarthH), walk: fmtH(longest * 2) })
+            : t('routes.daylight.tight', { left: fmtH(d.remainingEarthH), walk: fmtH(longest * 2) })}
+      </p>
+      <p className="note">{t('routes.daylight.note')}</p>
     </div>
   );
 }
@@ -198,6 +227,8 @@ export function RoutesTab() {
           <div className="field-label">{t('routes.profile')}</div>
           <Profile result={res} />
           <Recommendation result={res} />
+          <DaylightBudget result={res} />
+          <button className="primary" onClick={() => { useUI.getState().set({ hud: true, panelsOpen: { left: false, right: false } }); fly({ lat: res.start.lat, lon: res.start.lon, distance: 0.025, tilt: 82 }); }}>{t('hud2.openFromRoutes')}</button>
           <button onClick={() => fly({ lat: (res.start.lat + res.end.lat) / 2, lon: (res.start.lon + res.end.lon) / 2, distance: Math.max(1.5, (res.bbox.north - res.bbox.south) * 59.3 * 1.6), tilt: 40 })}>{t('nav.goTo')}</button>
           <p className="small muted">{t('routes.basis', { cell: Math.round(res.cellM), w: res.gridSize[0], h: res.gridSize[1] })} <ProvBadge kind="derived" /></p>
         </>

@@ -78,7 +78,12 @@
     "elevation": "Modelo de elevación",
     "traverseHint": "Mapa MMGIS, hasta el sol 2022 (cian)",
     "placesTraverse": "Recorrido de archivo — PDS PLACES R16",
-    "placesHint": "Posiciones oficiales localizadas, soles 14–1897 (verde). Trayecto histórico, no una ruta recomendada."
+    "placesHint": "Posiciones oficiales localizadas, soles 14–1897 (verde). Trayecto histórico, no una ruta recomendada.",
+    "resources": "Recursos y minerales",
+    "minerals": "Detecciones minerales (espectroscopía orbital)",
+    "mineralsHint": "Ehlmann y Edwards 2014; Carter et al. 2013. Los puntos marcan detecciones publicadas, no abundancia ni yacimientos.",
+    "crism": "Observaciones CRISM en sitios de exploración humana",
+    "crismHint": "Huellas de observaciones CRISM de resolución completa (NASA PDS), con enlace al producto."
   },
   "view": {
     "title": "Vista",
@@ -377,7 +382,10 @@
       "config": "Requiere configuración",
       "simulation": "Simulación",
       "unavailable": "No disponible ahora"
-    }
+    },
+    "routes": "Comparador de rutas sobre pendiente medida (+ luz solar)",
+    "minerals": "Detecciones minerales (CRISM, OMEGA, THEMIS)",
+    "hud": "Visor HUD del casco (vista de entrenamiento)"
   },
   "routes": {
     "intro": "Compara dos rutas a pie entre A y B sobre el terreno actual: la más corta y la de pendientes más suaves. Los valores salen de los datos de elevación; los límites son tus supuestos de planificación.",
@@ -425,6 +433,53 @@
       "no_path": "No hay ruta transitable con los supuestos actuales (máx. {{max}}°). Sube el límite o mueve A/B.",
       "too_far": "A y B están a más de 25 km: elige puntos más cercanos.",
       "same_point": "A y B están demasiado cerca."
+    },
+    "daylight": {
+      "title": "Presupuesto de luz solar en A",
+      "local": "Hora solar verdadera local",
+      "sunElev": "Sol",
+      "window": "Luz del día (geométrica)",
+      "ok": "Luz suficiente: quedan {{left}} de luz para ida y vuelta de unos {{walk}}.",
+      "tight": "Justo: solo quedan {{left}} de luz para ida y vuelta de unos {{walk}}. Sal antes o acorta la caminata.",
+      "night": "Ahora es de noche en A. Usa los controles de tiempo para planear la siguiente ventana de luz.",
+      "note": "Posición del Sol con Mars24; amanecer/atardecer geométricos — no considera sombras del terreno, refracción ni crepúsculo. Ida y vuelta = 2 × la ruta más larga, al ritmo de la heurística terrestre."
     }
+  },
+  "minerals": {
+    "carbonate": "Carbonatos",
+    "phyllosilicate": "Filosilicatos (arcillas)",
+    "silica": "Sílice",
+    "sulfate": "Sulfatos",
+    "chloride": "Cloruros",
+    "hydrous": "Hidratados (CRISM/OMEGA)",
+    "title": "Detecciones minerales a menos de 25 km",
+    "none": "No hay detecciones publicadas a menos de 25 km.",
+    "loading": "Cargando detecciones minerales…",
+    "note": "Detecciones orbitales en posiciones publicadas (a menudo redondeadas): indican que hay minerales alterados por agua cerca, no una estimación de recursos.",
+    "crismHere": "Dentro de una observación dirigida de CRISM",
+    "open": "Abrir producto (NASA ODE)",
+    "hydrousCrism": "Hidratados — CRISM",
+    "hydrousOmega": "Hidratados — OMEGA"
+  },
+  "hud2": {
+    "toggle": "Visor HUD",
+    "toggleHint": "Visor HUD del casco (vista de entrenamiento)",
+    "openFromRoutes": "Recorrerla en el visor HUD",
+    "elev": "Elev",
+    "slope": "Pendiente",
+    "lts": "Hora solar",
+    "sun": "Sol",
+    "daylight": "Luz restante ≈ {{h}} h",
+    "night": "Noche",
+    "data": "Datos del terreno {{res}}/px — no resuelven rocas",
+    "route": "RUTA DE MENOR PENDIENTE",
+    "toGo": "Falta",
+    "next": "Siguiente punto guía {{d}}",
+    "steep": "Tramo empinado {{deg}}° en {{d}}",
+    "walk": "▶ Recorrer la ruta",
+    "pause": "❚❚ Pausa",
+    "restart": "↺ Desde A",
+    "noRoute": "Sin ruta: compara rutas en la pestaña Rutas.",
+    "badge": "HUD DE ENTRENAMIENTO · calculado con datos de MARS OS · no es software de vuelo"
   }
 }

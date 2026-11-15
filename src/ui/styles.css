@@ -321,3 +321,26 @@ body.presentation .attribution, body.presentation .demo-banner { display: none !
 .route-table td { padding: 4px; border-bottom: 1px solid var(--line); }
 .route-table td.k { color: var(--muted); }
 .route-table td.strong { font-weight: 700; color: var(--text); }
+.mineral-counts { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 4px; }
+
+.daylight.ok { border-color: #5fd39a55; } .daylight.tight { border-color: #ffc04688; background: #ffc04612; } .daylight.night { border-color: #6b8cff66; background: #2a3a8a1a; }
+
+/* ── helmet visor HUD ── */
+.hud-btn.on { background: #5ce1ff33 !important; border-color: #5ce1ffaa !important; color: #c9f6ff; }
+.hud-visor { position: absolute; inset: 0; z-index: 14; pointer-events: none; color: #c9f6ff; font-size: 13px; text-shadow: 0 0 6px #0bf8, 0 1px 2px #000;
+  background: radial-gradient(ellipse 75% 70% at 50% 50%, transparent 62%, rgba(10, 40, 60, .35) 85%, rgba(0, 10, 20, .75) 100%); }
+.hud-visor button { pointer-events: auto; background: rgba(10, 60, 80, .55); border: 1px solid #5ce1ff88; color: #e6fbff; border-radius: 8px; padding: 5px 10px; cursor: pointer; margin-top: 6px; margin-right: 6px; }
+.hud-visor .warn { color: #ffd27a; }
+.hv-tape { position: absolute; top: calc(var(--top-offset, 70px) + 6px); left: 50%; transform: translateX(-50%); width: min(560px, 70vw); height: 34px; border-bottom: 1px solid #5ce1ff66; }
+.hv-tape span { position: absolute; bottom: 4px; transform: translateX(-50%); font-family: var(--mono); font-size: 11px; opacity: .8; }
+.hv-tape span.card { font-size: 14px; font-weight: 700; opacity: 1; }
+.hv-caret { left: 50% !important; bottom: -22px !important; font-size: 12px !important; color: #fff; }
+.hv-reticle { position: absolute; left: 50%; top: 50%; width: 46px; height: 46px; margin: -23px 0 0 -23px; border: 1.5px solid #5ce1ffaa; border-radius: 50%; }
+.hv-reticle::after { content: ''; position: absolute; left: 50%; top: 50%; width: 4px; height: 4px; margin: -2px 0 0 -2px; background: #5ce1ff; border-radius: 50%; }
+.hv-guide { position: absolute; left: 50%; top: calc(50% - 120px); transform-origin: 50% 120px; }
+.hv-arrow { font-size: 26px; color: #b18cff; text-shadow: 0 0 10px #b18cff; }
+.hv-left, .hv-right { position: absolute; bottom: 92px; display: grid; gap: 3px; padding: 10px 12px; border: 1px solid #5ce1ff55; border-radius: 10px; background: rgba(5, 25, 35, .45); backdrop-filter: blur(3px); max-width: 38vw; }
+.hv-left { left: 24px; } .hv-right { right: 24px; text-align: right; }
+.hv-title { font-weight: 800; letter-spacing: .12em; font-size: 11px; color: #b18cff; }
+.hv-badge { position: absolute; left: 50%; bottom: 72px; transform: translateX(-50%); font-size: 10px; letter-spacing: .12em; opacity: .75; white-space: nowrap; }
+body.visor-on .controls-hint { display: none; }

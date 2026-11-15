@@ -415,6 +415,69 @@
       "provenance": "derived",
       "synthetic": false,
       "notes": "PDS4 product label identifies this exact product and version 16.0. Positions are rover localizations; planetocentric latitude and east-positive longitude in degrees, elevation in meters relative to product datum. The generated GeoJSON contains only ROVER rows, grouped by sol and ordered by SCLK; 33,370 position records across 523 sols, 14–1897, reduced to per-sol polylines. It is a historical rover track, not a recommended human route. Release 16 omits ROVER,n,0 rows from best_interp.csv; use SITE,n for position and telemetry.csv for orientation where required. Release notes show an inconsistent start-year text (2022) while the product label and bundle landing page say 2021; catalog uses the product-label timestamps."
+    },
+    {
+      "id": "src.ehlmann-edwards-2014",
+      "title": "Mineralogy of the Martian Surface",
+      "kind": "publication",
+      "agency": null,
+      "mission": null,
+      "instrument": "CRISM, OMEGA, THEMIS",
+      "productId": null,
+      "datasetId": null,
+      "doi": "10.1146/annurev-earth-060313-055024",
+      "url": "https://doi.org/10.1146/annurev-earth-060313-055024",
+      "landingPage": "https://trek.nasa.gov/mars/",
+      "citation": "Ehlmann, B. L., & Edwards, C. S. (2014). Mineralogy of the Martian Surface. Annual Review of Earth and Planetary Sciences, 42, 291–315.",
+      "license": null,
+      "acquisition": null,
+      "publishedAt": "2014",
+      "accessedAt": "2026-11-14",
+      "provenance": "derived",
+      "synthetic": false,
+      "notes": "Served by NASA Mars Trek as ArcGIS service Aquieous_Mineral_Distribution_Options_clon0 (4,572 point detections; downloaded completely by object-id batches)."
+    },
+    {
+      "id": "src.carter-2013",
+      "title": "Hydrous minerals on Mars as seen by the CRISM and OMEGA imaging spectrometers: Updated global view",
+      "kind": "publication",
+      "agency": null,
+      "mission": "Mars Reconnaissance Orbiter; Mars Express",
+      "instrument": "CRISM, OMEGA",
+      "productId": null,
+      "datasetId": null,
+      "doi": "10.1029/2012JE004145",
+      "url": "https://doi.org/10.1029/2012JE004145",
+      "landingPage": "https://trek.nasa.gov/mars/",
+      "citation": "Carter, J., Poulet, F., Bibring, J.-P., Mangold, N., & Murchie, S. (2013). JGR Planets, 118(4), 831–858.",
+      "license": null,
+      "acquisition": null,
+      "publishedAt": "2013",
+      "accessedAt": "2026-11-14",
+      "provenance": "derived",
+      "synthetic": false,
+      "notes": "Served by NASA Mars Trek as ArcGIS service Hydrous_Mineral_Detections_OMEGA_CRISM_clon0 (1,648 point detections)."
+    },
+    {
+      "id": "src.pds.crism.mtrdr.humex",
+      "title": "MRO CRISM MTRDR targeted observations at Human Exploration (HumEx) sites",
+      "kind": "dataset",
+      "agency": "NASA PDS Geosciences Node (via Mars Trek)",
+      "mission": "Mars Reconnaissance Orbiter",
+      "instrument": "CRISM",
+      "productId": null,
+      "datasetId": "MRO-M-CRISM-5-RDR-MPTARGETED-V1.0",
+      "doi": null,
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/mars_mro_crism_mtrdr_c0a_humex_frt_sites/MapServer",
+      "landingPage": "https://ode.rsl.wustl.edu/mars/",
+      "citation": "CRISM Science Team, MRO CRISM Map-projected Targeted Reduced Data Records (MTRDR), NASA PDS.",
+      "license": "NASA PDS public data",
+      "acquisition": null,
+      "publishedAt": null,
+      "accessedAt": "2026-11-14",
+      "provenance": "derived",
+      "synthetic": false,
+      "notes": "42 footprints; each links to its product page on the PDS Orbital Data Explorer."
     }
   ],
   "layers": [
@@ -1205,6 +1268,123 @@
       "synthetic": false,
       "defaultOpacity": 1,
       "notes": "Generated from rows with frame=ROVER, grouped by sol, ordered by SCLK, consecutive duplicates removed (data team, verified independently: 33,370 ROVER rows; 531 sols, of which 8 — sols 0, 13, 43, 1055, 1154, 1195, 1699, 1830 — have a single distinct position and cannot form a line, leaving 523 per-sol lines, sols 14–1897). Historical rover track, not a human route, safety map or guidance product. PLACES R16 omits ROVER,n,0 rows from best_interp.csv (use SITE,n). SHA-256 of the GeoJSON: 67c1bf67b95c4f53a169fd1526653f21ec419c9e22eb5da18ad1efd8cbdb170d."
+    },
+    {
+      "id": "layer.minerals.aqueous",
+      "name": "Aqueous Mineral Distribution (Ehlmann & Edwards 2014)",
+      "label": {
+        "en": "Aqueous minerals",
+        "es": "Minerales acuosos"
+      },
+      "kind": "mineralogy",
+      "sourceIds": [
+        "src.ehlmann-edwards-2014"
+      ],
+      "access": {
+        "protocol": "json_api",
+        "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Aquieous_Mineral_Distribution_Options_clon0/MapServer/0"
+      },
+      "valueEncoding": {
+        "type": "categorical",
+        "legendUrl": null
+      },
+      "resolution": {
+        "metersPerPixel": null
+      },
+      "coverage": {
+        "global": true,
+        "bbox": {
+          "west": -180,
+          "south": -66,
+          "east": 180,
+          "north": 82
+        }
+      },
+      "temporal": null,
+      "uncertainty": null,
+      "attribution": "Aqueous Mineral Distribution (Ehlmann & Edwards 2014)",
+      "provenance": "derived",
+      "synthetic": false,
+      "defaultOpacity": 1,
+      "notes": "Point detections at published (often rounded) positions; not abundance maps."
+    },
+    {
+      "id": "layer.minerals.hydrous",
+      "name": "Hydrous Mineral Detections (OMEGA, CRISM)",
+      "label": {
+        "en": "Hydrous mineral detections",
+        "es": "Detecciones de minerales hidratados"
+      },
+      "kind": "mineralogy",
+      "sourceIds": [
+        "src.carter-2013"
+      ],
+      "access": {
+        "protocol": "json_api",
+        "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Hydrous_Mineral_Detections_OMEGA_CRISM_clon0/MapServer/0"
+      },
+      "valueEncoding": {
+        "type": "categorical",
+        "legendUrl": null
+      },
+      "resolution": {
+        "metersPerPixel": null
+      },
+      "coverage": {
+        "global": true,
+        "bbox": {
+          "west": -180,
+          "south": -66,
+          "east": 180,
+          "north": 82
+        }
+      },
+      "temporal": null,
+      "uncertainty": null,
+      "attribution": "Hydrous Mineral Detections (OMEGA, CRISM)",
+      "provenance": "derived",
+      "synthetic": false,
+      "defaultOpacity": 1,
+      "notes": "Point detections at published (often rounded) positions; not abundance maps."
+    },
+    {
+      "id": "layer.crism.humex",
+      "name": "MRO CRISM MTRDR HumEx targeted observations",
+      "label": {
+        "en": "CRISM observations at HumEx sites",
+        "es": "Observaciones CRISM en sitios HumEx"
+      },
+      "kind": "mineralogy",
+      "sourceIds": [
+        "src.pds.crism.mtrdr.humex"
+      ],
+      "access": {
+        "protocol": "json_api",
+        "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/mars_mro_crism_mtrdr_c0a_humex_frt_sites/MapServer/0"
+      },
+      "valueEncoding": {
+        "type": "categorical",
+        "legendUrl": null
+      },
+      "resolution": {
+        "metersPerPixel": null
+      },
+      "coverage": {
+        "global": false,
+        "bbox": {
+          "west": -167.364,
+          "south": -49.005,
+          "east": 176.068,
+          "north": 40.228
+        }
+      },
+      "temporal": null,
+      "uncertainty": null,
+      "attribution": "MRO CRISM MTRDR HumEx targeted observations",
+      "provenance": "derived",
+      "synthetic": false,
+      "defaultOpacity": 1,
+      "notes": "Footprint polygons of CRISM full-resolution targeted observations; each record carries the PDS product id."
     }
   ],
   "regions": [
@@ -1246,7 +1426,10 @@
         "layer.m20.traverse",
         "layer.m20.waypoints",
         "layer.elevation.ctx.jezero",
-        "layer.m20.places.r16.traverse"
+        "layer.m20.places.r16.traverse",
+        "layer.minerals.aqueous",
+        "layer.minerals.hydrous",
+        "layer.crism.humex"
       ],
       "sourceIds": [
         "src.trek.nomenclature.jezero",

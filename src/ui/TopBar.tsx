@@ -39,6 +39,7 @@ export function TopBar({ onAbout }: { onAbout: () => void }) {
   const set = useUI((s) => s.set);
   const fly = useUI((s) => s.requestFlyTo);
   const cam = useUI((s) => s.camera);
+  const hud = useUI((s) => s.hud);
   const [open, setOpen] = useState(false);
   const mt = marsTime(new Date(time.epochMs));
   const sol = missionSol(mt, PERSEVERANCE.landingUTC, PERSEVERANCE.lonEast);
@@ -76,6 +77,7 @@ export function TopBar({ onAbout }: { onAbout: () => void }) {
           <option key={k} value={k}>{t(`nav.${k}`)}</option>
         ))}
       </select>
+      <button className={`hud-btn ${hud ? 'on' : ''}`} aria-pressed={hud} title={t('hud2.toggleHint')} onClick={() => set({ hud: !hud, panelsOpen: hud ? { left: true, right: true } : { left: false, right: false } })}>{t('hud2.toggle')}</button>
       <button className="accent ground-btn" title={t('nav.groundHint')} onClick={() => fly(groundViewFor(cam.lat, cam.lon))}>{t('nav.ground')}</button>
 
       <div className="clock">

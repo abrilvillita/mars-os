@@ -146,6 +146,21 @@ export function LeftPanel() {
             <Toggle checked={s.vectors.waypoints} onChange={(v) => s.set({ vectors: { ...s.vectors, waypoints: v } })} label={t('layers.waypoints')} />
             <Toggle checked={s.vectors.regions} onChange={(v) => s.set({ vectors: { ...s.vectors, regions: v } })} label={t('layers.regions')} />
           </Section>
+          <Section title={t('layers.resources')}>
+            <Toggle checked={s.vectors.minerals} onChange={(v) => s.set({ vectors: { ...s.vectors, minerals: v } })} label={t('layers.minerals')} hint={t('layers.mineralsHint')} />
+            {s.vectors.minerals && (
+              <div className="legend chips">
+                <span className="chip"><span className="swatch" style={{ background: 'rgb(51,204,0)' }} /> {t('minerals.carbonate')}</span>
+                <span className="chip"><span className="swatch" style={{ background: 'rgb(0,153,255)' }} /> {t('minerals.phyllosilicate')}</span>
+                <span className="chip"><span className="swatch" style={{ background: 'rgb(153,0,204)' }} /> {t('minerals.silica')}</span>
+                <span className="chip"><span className="swatch" style={{ background: 'rgb(255,102,153)' }} /> {t('minerals.sulfate')}</span>
+                <span className="chip"><span className="swatch" style={{ background: 'rgb(255,255,0)' }} /> {t('minerals.chloride')}</span>
+                <span className="chip"><span className="swatch" style={{ background: 'rgb(255,0,0)' }} /> {t('minerals.hydrousCrism')}</span>
+                <span className="chip"><span className="swatch" style={{ background: 'rgb(220,240,255)' }} /> {t('minerals.hydrousOmega')}</span>
+              </div>
+            )}
+            <Toggle checked={s.vectors.crism} onChange={(v) => s.set({ vectors: { ...s.vectors, crism: v } })} label={t('layers.crism')} hint={t('layers.crismHint')} />
+          </Section>
           <Section title={t('view.title')}>
             <div className="field-label">{t('view.mode')}</div>
             <Segmented<DisplayMode>

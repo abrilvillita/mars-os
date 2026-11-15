@@ -47,9 +47,11 @@ export interface WaypointSelection {
 interface UIState {
   baseLayerId: string;
   overlays: Record<string, LayerViewState>;
-  vectors: { traverse: boolean; placesTraverse: boolean; waypoints: boolean; regions: boolean; graticule: boolean };
+  vectors: { traverse: boolean; placesTraverse: boolean; waypoints: boolean; regions: boolean; graticule: boolean; minerals: boolean; crism: boolean };
   displayMode: DisplayMode;
   realLighting: boolean;
+  /** Helmet visor HUD overlay (training view). */
+  hud: boolean;
   exaggeration: number;
   forceOffline: boolean;
   tileStatus: { offline: boolean; failures: number };
@@ -92,9 +94,10 @@ export const useUI = create<UIState>((set) => ({
     'layer.jezero.hirise': { on: true, opacity: 1 },
     'layer.geology.sim3292': { on: false, opacity: 0.55 },
   },
-  vectors: { traverse: true, placesTraverse: false, waypoints: true, regions: true, graticule: false },
+  vectors: { traverse: true, placesTraverse: false, waypoints: true, regions: true, graticule: false, minerals: false, crism: false },
   displayMode: 'imagery',
   realLighting: true,
+  hud: false,
   exaggeration: 3,
   forceOffline: false,
   tileStatus: { offline: false, failures: 0 },

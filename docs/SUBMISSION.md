@@ -50,6 +50,12 @@ Everything runs online. The app is served by GitHub Pages and its backend (Gemin
   - It gives a rule-based recommendation.
   - When the terrain changes, for example when a new obstacle is approved, the routes are recalculated and the app explains which edit changed them. In our test, the low-slope route detoured 71 m around an approved +30 m obstacle.
   - Slope limits are editable planning assumptions, not validated EVA rules.
+- **Resources and minerals.**
+  - Orbital detections of carbonates, clays, silica, sulfates and chlorides (Ehlmann & Edwards 2014), and of hydrous minerals (Carter et al. 2013), served by NASA Mars Trek. All 6,220 points are downloaded completely.
+  - CRISM observation footprints at Human Exploration sites, each linked to its PDS product.
+  - The inspector lists the detections within 25 km of any pinned point.
+- **Daylight budget.** The real Sun position (Mars24) gives the local solar time, sunrise and sunset, and the daylight left compared with the walk time. Our sunrise and sunset at Jezero match NASA MEDA's published times within 10 seconds.
+- **Helmet visor HUD.** A first-person training view inspired by the challenge's helmet-display idea: compass, slope underfoot, local time, daylight left and route guidance with steep-section warnings. It can walk the route automatically.
 - **A persistent inspector.** Clicking the terrain pins coordinates, elevation (with source product and resolution), the editable cell and nearest node, and the provenance of the imagery.
 - **An editable terrain with a safety net.**
   - The planet is divided into quadtree cells with permanent IDs; each cell has a grid of nodes.
