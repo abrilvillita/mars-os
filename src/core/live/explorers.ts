@@ -17,6 +17,8 @@ export interface Explorer {
   precision: string;
   drivenKm?: number;
   live?: 'msl' | 'm20' | 'heli';
+  /** Historic traverse on NASA Mars Trek (ArcGIS polyline). */
+  trekPath?: string;
   coordSource: string;
   photo: { id: string; title: string; src: string } | null;
 }
@@ -34,9 +36,11 @@ export const explorersState: {
   list: Explorer[];
   msl: LivePath | null;
   heli: LivePath | null;
+  /** Historic traverses (Spirit, Opportunity) by explorer id. */
+  paths: Record<string, LivePath>;
   loading: Promise<void> | null;
   listeners: Set<() => void>;
-} = { list: [], msl: null, heli: null, loading: null, listeners: new Set() };
+} = { list: [], msl: null, heli: null, paths: {}, loading: null, listeners: new Set() };
 
 const notify = () => explorersState.listeners.forEach((l) => l());
 
@@ -78,6 +82,22 @@ async function loadHeli(): Promise<LivePath> {
   };
 }
 
+async function loadTrekPath(service: string): Promise<LivePath> {
+  const j = await fetch(`https://trek.nasa.gov/mars/trekarcgis/rest/services/${service}/MapServer/0/query?where=1%3D1&returnGeometry=true&f=geojson`).then((r) => r.json());
+  const points: { lat: number; lon: number }[] = [];
+  for (const f of j.features ?? []) {
+    const g = f.geometry;
+    const lines: number[][][] = g?.type === 'LineString' ? [g.coordinates] : g?.type === 'MultiLineString' ? g.coordinates : [];
+    for (const l of lines) for (const [lon, lat] of l) {
+      const p = points[points.length - 1];
+      if (p && distanceM(p.lat, p.lon, lat, lon) < 5) continue;
+      points.push({ lat, lon: lon > 180 ? lon - 360 : lon });
+    }
+  }
+  const last = points[points.length - 1];
+  return { points, km: null, last: last ? { ...last, sol: -1 } : null };
+}
+
 export function ensureExplorers(baseUrl: string): Promise<void> {
   if (!explorersState.loading) {
     explorersState.loading = fetch(baseUrl + 'data/explorers.json')
@@ -88,6 +108,7 @@ export function ensureExplorers(baseUrl: string): Promise<void> {
         // live feeds load independently; a failure leaves the fixed landing site
         loadMsl().then((m) => ((explorersState.msl = m), notify())).catch(() => {});
         loadHeli().then((h) => ((explorersState.heli = h), notify())).catch(() => {});
+        for (const e of j.explorers) if (e.trekPath) loadTrekPath(e.trekPath).then((p) => ((explorersState.paths[e.id] = p), notify())).catch(() => {});
       })
       .catch(() => {
         explorersState.loading = null;
@@ -101,6 +122,7 @@ export function currentPosition(e: Explorer, m20Last: { lat: number; lon: number
   if (e.live === 'msl' && explorersState.msl?.last) return explorersState.msl.last;
   if (e.live === 'heli' && explorersState.heli?.last) return explorersState.heli.last;
   if (e.live === 'm20' && m20Last) return m20Last;
+  if (e.trekPath && explorersState.paths[e.id]?.last) return explorersState.paths[e.id].last!;
   return { lat: e.lat, lon: e.lon };
 }
 

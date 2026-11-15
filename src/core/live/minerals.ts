@@ -22,7 +22,7 @@ export const MINERAL_SERVICES = {
  * Complete download: these services cap responses at 1000 records and do not support paging,
  * so we fetch ALL object ids first (no cap) and then the features in batches of ids.
  */
-async function getAllFeatures(layer: string): Promise<{ features: { properties: Record<string, unknown>; geometry: { type: string; coordinates: unknown } }[]; expected: number }> {
+export async function getAllFeatures(layer: string): Promise<{ features: { properties: Record<string, unknown>; geometry: { type: string; coordinates: unknown } }[]; expected: number }> {
   const idsRes = await fetch(`${layer}/query?where=1%3D1&returnIdsOnly=true&f=json`);
   if (!idsRes.ok) throw new Error(`HTTP ${idsRes.status}`);
   const ids: number[] = (await idsRes.json()).objectIds ?? [];

@@ -57,6 +57,7 @@ Everything runs online. The app is served by GitHub Pages and its backend (Gemin
 - **Perseverance's rock samples.** All 30 named samples from NASA's sample table (for example Montdenier, Comet Geyser, Sapphire Canyon) appear on the map where the rover sealed them, coloured by rock group. Each one shows its NASA photo, rock type, size, whether it is in the Three Forks depot or aboard the rover, and the CacheCam images looking down into its tube.
 - **Mars explorers.** Every NASA robot that reached the surface, from Viking 1 to Ingenuity, with its NASA photo, its story (including how Spirit got stuck at Troy), distance driven and the distance to every other explorer. Curiosity's full drive and Ingenuity's 72 flights load live from NASA. NASA sends each robot to a different place, so together they map Mars from the ground; an orbiters panel shows which spacecraft produced each layer of the map.
 - **"Perseverance was here."** Walking near a real rover stop in the visor HUD shows the photos the rover took there.
+- **Water ice, the first resource.** 22 fresh craters whose exposed ice was confirmed from orbit (Dundas et al. 2014) and 1,309 debris-covered glacier-like forms, from NASA Mars Trek. Pin any point and the inspector gives the distance to the nearest evidence of each kind: from the Perseverance landing site, 554 km to a glacier-like form and 2,384 km to an icy crater.
 - **Resources and minerals.**
   - Orbital detections of carbonates, clays, silica, sulfates and chlorides (Ehlmann & Edwards 2014), and of hydrous minerals (Carter et al. 2013), served by NASA Mars Trek. All 6,220 points are downloaded completely.
   - CRISM observation footprints at Human Exploration sites, each linked to its PDS product.
@@ -109,6 +110,9 @@ We used AI tools openly, and every AI-generated result was reviewed by the team:
 | Ingenuity flight waypoints (MMGIS) | Mars 2020 | https://mars.nasa.gov/mmgis-maps/M20/Layers/json/m20_heli_waypoints.json |
 | Landing sites (Viking, Pathfinder, Spirit, Opportunity, Phoenix, InSight) | NSSDCA / NASA | https://nssdc.gsfc.nasa.gov/planetary/marsland.html |
 | Explorer photos | NASA Image and Video Library | https://images.nasa.gov/ |
+| Icy impact sites (Dundas et al. 2014) | NASA Mars Trek | https://trek.nasa.gov/mars/trekarcgis/rest/services/RSLs_Gullies_New_IcyCraters_clon0/MapServer |
+| Glacier-like forms | NASA Mars Trek | https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer |
+| Spirit and Opportunity traverses | NASA Mars Trek | https://trek.nasa.gov/mars/trekarcgis/rest/services/spirit_path/MapServer |
 | MEDA surface weather | Mars 2020, MEDA | NASA/JPL feed |
 | RAD surface dose-equivalent rate (reference value) | Mars Science Laboratory, RAD | Hassler et al. 2014, Science, doi:10.1126/science.1244797 |
 

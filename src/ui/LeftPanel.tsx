@@ -163,6 +163,13 @@ export function LeftPanel() {
                 <span className="chip"><span className="swatch" style={{ background: 'rgb(220,240,255)' }} /> {t('minerals.hydrousOmega')}</span>
               </div>
             )}
+            <Toggle checked={s.vectors.ice} onChange={(v) => s.set({ vectors: { ...s.vectors, ice: v } })} label={t('layers.ice')} hint={t('layers.iceHint')} />
+            {s.vectors.ice && (
+              <div className="legend chips">
+                <span className="chip"><span className="swatch" style={{ background: '#3ff0ff' }} /> {t('ice.icyCrater')}</span>
+                <span className="chip"><span className="swatch" style={{ background: '#a9c8ff' }} /> {t('ice.glacier')}</span>
+              </div>
+            )}
             <Toggle checked={s.vectors.crism} onChange={(v) => s.set({ vectors: { ...s.vectors, crism: v } })} label={t('layers.crism')} hint={t('layers.crismHint')} />
           </Section>
           <Section title={t('view.title')}>

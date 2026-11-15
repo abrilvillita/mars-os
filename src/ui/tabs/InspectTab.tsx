@@ -16,6 +16,7 @@ import { renderBridge } from '../../render/bridge';
 import { useUI, type PinnedLocation } from '../../state/uiStore';
 import { KV, ProvBadge, fmtM } from '../common';
 import { MineralsNear } from '../MineralsNear';
+import { IceNear } from '../IceNear';
 
 function nearestNode(cell: string, N: number, lat: number, lon: number) {
   const t = parseCellId(cell);
@@ -116,6 +117,7 @@ function PinnedDetails({ p }: { p: PinnedLocation }) {
       )}
 
       <MineralsNear lat={p.lat} lon={p.lon} />
+      <IceNear lat={p.lat} lon={p.lon} />
 
       <div className="card">
         <KV k={t('inspect.regions')}>{regions.length ? regions.map((r) => pickText(r.label, i18n.language).text).join(' › ') : t('inspect.none')}</KV>

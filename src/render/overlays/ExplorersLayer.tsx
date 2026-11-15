@@ -117,6 +117,7 @@ export function ExplorersLayer() {
     <>
       {st.list.map((e) => <Label key={e.id} e={e} />)}
       {st.msl && <PathLine points={st.msl.points} color={0xffd23f} width={2.5} maxDist={2500} />}
+      {Object.entries(st.paths).map(([id, p]) => <PathLine key={id} points={p.points} color={0xffa94d} width={2.2} maxDist={2500} />)}
       {st.heli && <PathLine points={st.heli.points} color={0x9cff6b} width={1.8} maxDist={300} />}
     </>
   );

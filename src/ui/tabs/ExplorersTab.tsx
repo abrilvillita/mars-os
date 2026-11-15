@@ -62,11 +62,11 @@ function Detail({ e, list }: { e: Explorer; list: Explorer[] }) {
         <div className="card-title">{KIND_ICON[e.kind]} {e.name} <span className={`status ${e.ended ? 'ended' : 'active'}`}>{e.ended ? t('explorers.ended') : t('explorers.activeNow')}</span></div>
         <div className="small">{t(`explorers.kinds.${e.kind}`)} · {e.agency} · {years(e, t)}</div>
         <p className="small">{t(`explorers.stories.${e.id}`)}</p>
-        <div className="kv"><span className="k">{e.live ? t(e.ended ? 'explorers.finalPos' : 'explorers.lastPos') : t('explorers.landing')}</span><span className="v mono">{formatLat(here.lat, 3)} {formatLon(here.lon, 3)}</span></div>
+        <div className="kv"><span className="k">{e.live ? t(e.ended ? 'explorers.finalPos' : 'explorers.lastPos') : e.trekPath && st.paths[e.id] ? t('explorers.finalPathEnd') : t('explorers.landing')}</span><span className="v mono">{formatLat(here.lat, 3)} {formatLon(here.lon, 3)}</span></div>
         {km !== null && (
           <div className="kv"><span className="k">{e.kind === 'helicopter' ? t('explorers.flown', { n: live?.count ?? '' }) : t('explorers.driven')}</span><span className="v"><b>{km.toFixed(2)} km</b> {live || e.live === 'm20' ? <ProvBadge kind="measured" /> : null}</span></div>
         )}
-        <p className="note">{t('explorers.coordSource')}: <a href={e.coordSource} target="_blank" rel="noreferrer">{new URL(e.coordSource).hostname}</a> · {e.live ? t('explorers.liveFeed') : `${t('explorers.precision')} ${e.precision}`}</p>
+        <p className="note">{t('explorers.coordSource')}: <a href={e.coordSource} target="_blank" rel="noreferrer">{new URL(e.coordSource).hostname}</a> · {e.live ? t('explorers.liveFeed') : `${t('explorers.precision')} ${e.precision}`}{e.trekPath && st.paths[e.id] ? <> · {t('explorers.pathSource')}: <a href={`https://trek.nasa.gov/mars/trekarcgis/rest/services/${e.trekPath}/MapServer`} target='_blank' rel='noreferrer'>NASA Mars Trek</a></> : null}</p>
         <div className="actions">
           <button className="primary" onClick={() => fly({ lat: here.lat, lon: here.lon, distance: e.live ? 3 : 40, tilt: 45 })}>{t('explorers.fly')}</button>
           {e.id === 'perseverance' && <button onClick={() => useUI.getState().set({ rightTab: 'routes' })}>{t('explorers.compareDrive')}</button>}

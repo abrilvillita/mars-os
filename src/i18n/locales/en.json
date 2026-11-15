@@ -87,7 +87,9 @@
     "samples": "Perseverance rock samples",
     "samplesHint": "The 30 named samples from NASA’s sample table, placed where the rover sealed them. Colour = rock group.",
     "explorers": "Mars explorers (every NASA surface robot)",
-    "explorersHint": "Landing sites from NASA; Curiosity’s drive (yellow) and Ingenuity’s flights (green) loaded live. Click a name."
+    "explorersHint": "Landing sites from NASA; Curiosity’s drive (yellow) and Ingenuity’s flights (green) loaded live. Click a name.",
+    "ice": "Water ice evidence",
+    "iceHint": "Fresh craters that exposed water ice (Dundas et al. 2014) and debris-covered glaciers (1,309 glacier-like forms), from NASA Mars Trek."
   },
   "view": {
     "title": "View",
@@ -612,10 +614,20 @@
     },
     "finalPos": "Final reported position",
     "liveFeed": "live NASA MMGIS feed",
-    "fly": "Fly there"
+    "fly": "Fly there",
+    "finalPathEnd": "Final position (end of NASA traverse)",
+    "pathSource": "traverse and final position"
   },
   "memories": {
     "title": "Perseverance was here · sol {{sol}} · {{d}} away",
     "note": "Raw photos from the rover at this stop · NASA/JPL-Caltech · click for more"
+  },
+  "ice": {
+    "title": "Nearest water-ice evidence",
+    "icyCrater": "Crater that exposed ice",
+    "glacier": "Glacier-like form",
+    "go": "go ↗",
+    "loading": "Loading water-ice evidence…",
+    "note": "Icy craters: fresh impacts whose bright ice was confirmed from orbit (HiRISE, CRISM; Dundas et al. 2014) — ice within about a metre of the surface. Glacier-like forms: ice under a debris cover. Water is the first resource a crew needs: drinking, oxygen and rocket propellant. Published positions, not an ice-depth map."
   }
 }

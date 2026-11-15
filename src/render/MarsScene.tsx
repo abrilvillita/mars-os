@@ -12,6 +12,7 @@ import { LocationMarkers } from './overlays/LocationMarkers';
 import { PlacesTraverse } from './overlays/PlacesTraverse';
 import { RoutesLayer } from './overlays/RoutesLayer';
 import { MineralsLayer } from './overlays/MineralsLayer';
+import { IceLayer } from './overlays/IceLayer';
 import { SamplesLayer } from './overlays/SamplesLayer';
 import { ExplorersLayer } from './overlays/ExplorersLayer';
 import { DustStorm } from './scene/DustStorm';
@@ -55,6 +56,7 @@ export function MarsScene() {
       <PlacesTraverse />
       <RoutesLayer />
       <MineralsLayer />
+      <IceLayer />
       <SamplesLayer />
       <ExplorersLayer />
       <NodeGrid />

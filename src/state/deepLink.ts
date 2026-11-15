@@ -54,6 +54,7 @@ export function applyDeepLink(search = window.location.search) {
     st.set({ pick: { lat: pin[0], lon: pin[1], distanceKm: 0, cellId: id, cellZoom: st.cellZoom, pinnedAt: Date.now() }, selectedCellId: id });
   }
   if (q.get('places') === '1') st.set({ vectors: { ...useUI.getState().vectors, placesTraverse: true } });
+  if (q.get('ice') === '1') st.set({ vectors: { ...useUI.getState().vectors, ice: true } });
   if (q.get('minerals') === '1') st.set({ vectors: { ...useUI.getState().vectors, minerals: true, crism: true } });
   if (q.get('panels') === '0') st.set({ panelsOpen: { left: false, right: false } });
   if (q.get('ui') === '0') document.body.classList.add('presentation');
