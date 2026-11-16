@@ -16,7 +16,7 @@
 | Tiempo | Lugar | Toma | Narración (EN) | Subtítulo / traducción |
 |---|---|---|---|---|
 | **0:00–0:02** | A | Los dos a cámara | "Hi! We're Abril and Jorge — team MARS OS." | “¡Hola! Somos Abril y Jorge, del equipo MARS OS.” |
-| **0:02–0:05** | A → B | Corte con *whip-pan* (giro rápido de cámara) a la pantalla: el planeta girando con las etiquetas de los 10 robots | "Our challenge: an Interplanetary Survival Guide — a map of Mars." | “Nuestro reto: una Guía de Supervivencia Interplanetaria, un mapa de Marte.” |
+| **0:02–0:05** | A → B | Corte con *whip-pan* (giro rápido de cámara) a la pantalla: el planeta girando con las etiquetas de los 10 robots | "Our challenge: a map that helps a human explorer plan a safe Marswalk on Mars." | “Nuestro reto: un mapa que ayude a un explorador humano a planear una caminata segura en Marte.” |
 | **0:05–0:10** | B | **Vuelo** desde la órbita hasta el suelo de Jezero (*Go to* → Jezero, luego *Ground view*). Texto grande: **MARS OS — the survival map of Mars** | "This is MARS OS: the survival map of Mars, built on NASA data." | “Esto es MARS OS: el mapa de supervivencia de Marte, hecho con datos de NASA.” |
 | **0:10–0:13** | B | Exploradores → Spirit: ficha con foto, Troy y su recorrido | "Every robot's real path, photos and findings…" | “El recorrido real, las fotos y los hallazgos de cada robot…” |
 | **0:13–0:16** | B | Capa de hielo y pestaña Aterrizaje: Zonas de Exploración y elipses | "…where the water ice is, and where humans could land…" | “…dónde está el hielo de agua y dónde podrían aterrizar humanos…” |
