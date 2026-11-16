@@ -464,3 +464,7 @@ body.visor-on .controls-hint { display: none; }
 td.better { color: #5fd39a; }
 .mission-label { background: rgba(10,10,14,.85); border: 1px solid #5fd39a; color: #fff; padding: 1px 8px; border-radius: 8px; font-size: 11px; font-weight: 700; letter-spacing: .06em; transform: translateY(-14px); white-space: nowrap; }
 .mission-label.m-a { border-color: #ff8a4c; } .mission-label.m-b { border-color: #b18cff; }
+
+/* narrow screens and embeds: the clock gives way completely instead of overlapping the buttons */
+@media (max-width: 1000px) { .clock-main { display: none; } }
+@media (max-width: 860px) { .clock > select { display: none; } .hud-btn { display: none; } }

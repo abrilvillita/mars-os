@@ -12,6 +12,8 @@
  *   &ui=0                         (presentation mode: only the planet, no interface)
  *   &hud=1                        (helmet visor HUD; with &route=… it guides along the low-slope route)
  *   &mission=lat,lon[,crew|rover|base]&q=…  (Mission Lab with a site placed and an optional question)
+ *   &spin=4                       (presentation: globe turns 4°/s until the first user input)
+ *   &autodrive=1                  (with &route or &drive: starts the 3D drive simulation)
  *   &sample=25                   (opens Perseverance sample No. 25 with its NASA photo and CacheCam views)
  *   &walk=1                       (with &hud=1&route=…: walks the route automatically)
  *   &route=lat,lon;lat,lon        (compares routes A → B; opens the Routes tab)
@@ -38,6 +40,16 @@ export function applyDeepLink(search = window.location.search) {
       heading: ((num(q.get('heading')) ?? 0) % 360 + 360) % 360,
     });
   }
+  const spin = num(q.get('spin'));
+  if (spin !== null) renderBridge.autoSpin = Math.max(-20, Math.min(20, spin));
+  if (q.get('autodrive') === '1') {
+    const unsub = useRoutes.subscribe((s) => {
+      if (s.result?.ok && (!s.realDrive || s.actualRoute)) {
+        unsub();
+        setTimeout(() => useRoutes.getState().set({ driving: true }), 1500);
+      }
+    });
+  }
   const time = q.get('time');
   if (time && !isNaN(Date.parse(time))) {
     renderBridge.clock.epochMs = Date.parse(time);
@@ -59,6 +71,7 @@ export function applyDeepLink(search = window.location.search) {
   if (q.get('ice') === '1') st.set({ vectors: { ...useUI.getState().vectors, ice: true } });
   if (q.get('minerals') === '1') st.set({ vectors: { ...useUI.getState().vectors, minerals: true, crism: true } });
   if (q.get('panels') === '0') st.set({ panelsOpen: { left: false, right: false } });
+  if (q.get('left') === '0') st.set({ panelsOpen: { ...useUI.getState().panelsOpen, left: false } });
   if (q.get('ui') === '0') document.body.classList.add('presentation');
   const mis = q.get('mission')?.split(',');
   if (mis && mis.length >= 2 && isFinite(+mis[0]) && isFinite(+mis[1])) {

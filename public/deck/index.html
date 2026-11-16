@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MARS OS — NASA Space Apps 2026 demo deck</title>
-<meta name="description" content="MARS OS: a living, evidence-based atlas of Mars. Team MARS OS — Interplanetary Survival Guide: Martian Map." />
+<meta name="description" content="MARS OS: the survival map of Mars, built on NASA data. Team MARS OS — Interplanetary Survival Guide: Martian Map." />
 <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -63,6 +63,21 @@
     .slide { display: block !important; position: relative; width: 1600px; height: 900px; font-size: 18.4px; page-break-after: always; break-after: page; }
     .nav { display: none; }
   }
+  /* live MARS OS embedded in slides (loaded only on the active slide) */
+  .live { position: relative; overflow: hidden; border-radius: .8em; border: 1px solid var(--line); box-shadow: 0 1.2em 3em rgba(0,0,0,.5); background: #000; }
+  .live.full { position: absolute; inset: 0; border: 0; border-radius: 0; box-shadow: none; }
+  .live > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .live > iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .live .badge { position: absolute; left: .8em; top: .8em; z-index: 2; font-size: .9em; font-weight: 700; letter-spacing: .08em; background: rgba(7,8,12,.8); color: var(--ok); border: 1px solid var(--ok); border-radius: 99px; padding: .15em .7em; pointer-events: none; }
+  .live.full .badge { left: auto; right: 2em; top: 1.6em; }
+  .q { display: grid; grid-template-columns: auto 1fr; gap: .25em .7em; align-items: baseline; font-size: 1.45em; margin: .3em 0; }
+  .q b { color: var(--accent); font-size: 1.1em; }
+  .side { display: flex; flex-direction: column; gap: .7em; min-height: 0; }
+  .side ul li { font-size: 1.3em; }
+  .nums { display: grid; grid-template-columns: repeat(3, 1fr); gap: .8em; }
+  .nums .big { font-size: 2.4em; }
+  .shade-l2 { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(7,8,12,.95) 0%, rgba(7,8,12,.82) 40%, rgba(7,8,12,0) 70%); }
+  @media print { .live > iframe, .live .badge { display: none; } }
 </style>
 </head>
 <body>
@@ -70,151 +85,142 @@
 
   <!-- 1 · TITLE -->
   <section class="slide">
-    <img class="bgimg" src="img/hero2.png" alt="MARS OS showing a 3D Mars globe built from NASA Viking imagery" style="transform: translateX(24%)" />
-    <div class="shade-l"></div>
-    <div class="pad" style="justify-content:center; max-width: 52%">
+    <div class="live full" style="left:34%" data-src="../?ui=0&spin=3&lat=8&lon=-55&dist=11500&tilt=0"><img src="img/hero2.png" alt="MARS OS 3D globe built from NASA Viking imagery" /><span class="badge">LIVE APP</span></div>
+    <div class="shade-l2"></div>
+    <div class="pad" style="justify-content:center; max-width: 54%; pointer-events:none">
       <div class="kicker">NASA Space Apps Challenge 2026 · Interplanetary Survival Guide: Martian Map</div>
       <h1>MARS OS</h1>
-      <p style="font-size:2em; margin:.4em 0 1.2em; color: var(--ink); font-weight:600">A living, evidence-based atlas of Mars, from orbit down to boot level.</p>
-      <div class="card" style="font-size:1.05em">
+      <p style="font-size:2.1em; margin:.4em 0 1.1em; color: var(--ink); font-weight:600">The survival map of Mars, built on NASA data.</p>
+      <div class="card" style="font-size:1.05em; pointer-events:auto">
         <p style="margin:0"><b>Team:</b> MARS OS</p>
         <p style="margin:.2em 0 0"><b>Members:</b> Abril Miranda Villa Márquez · Jorge Emilio Cornejo Murra</p>
       </div>
-      <p class="muted" style="margin-top:1.2em">Live app: <a href="https://abrilvilla.dev/mars-os/">abrilvilla.dev/mars-os</a> · Code: <a href="https://github.com/abrilvillita/mars-os">github.com/abrilvillita/mars-os</a></p>
+      <p class="muted" style="margin-top:1.1em; pointer-events:auto">Live app: <a href="https://abrilvilla.dev/mars-os/" target="_blank">abrilvilla.dev/mars-os</a> · Code: <a href="https://github.com/abrilvillita/mars-os" target="_blank">github.com/abrilvillita/mars-os</a></p>
     </div>
   </section>
 
   <!-- 2 · CHALLENGE -->
   <section class="slide">
-    <div class="crop"><img src="img/ground2.png" alt="Ground-level view inside Jezero Crater from HiRISE imagery and the CTX elevation model" /></div>
-    <div class="shade-l"></div>
-    <div class="pad" style="justify-content:center; max-width: 55%">
-      <div class="kicker">The challenge</div>
-      <h2>Astronauts will walk where <em>no map is detailed enough</em> yet.</h2>
-      <ul>
-        <li>NASA's Mars data is rich but scattered across missions, resolutions and formats.</li>
-        <li>Today's tools (Mars Trek, USGS maps) are built for regional views, not a single Marswalk.</li>
-        <li>Maps are static, but new observations keep arriving from orbiters, rovers and crews.</li>
-        <li>For safety, a crew must know what is <b>measured</b>, what is <b>derived</b> and what is only <b>assumed</b>.</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- 3 · SOLUTION -->
-  <section class="slide">
     <div class="pad">
-      <div class="kicker">Our solution</div>
-      <h2>One 3D Mars that <em>shows its evidence</em> for every point.</h2>
-      <div class="cols">
-        <ul style="font-size:.86em">
-          <li><b>Orbit to boot level</b>: rotate 360°, tilt to the horizon, fly to Jezero, the HiRISE zone or the landing site.</li>
-          <li><b>Helmet visor HUD</b>: a first-person training view with compass, slope underfoot, local solar time, daylight left and route guidance. It can walk the route on its own.</li>
-          <li><b>Layers</b>: visible color, elevation, day/night thermal infrared, geology, plus HiRISE 25 cm and CTX 6 m imagery.</li>
-          <li><b>Pinned inspector</b>: elevation with its source product and resolution, the editable cell and node, local solar time and Sun elevation.</li>
-          <li><b>Honest detail</b>: nodes finer than the data are flagged <i>interpolated</i>; magnified imagery says so.</li>
-          <li><b>Mission context</b>: Perseverance's real traverse, raw photos for each sol, <b>CacheCam views inside its sample tubes</b> at 75 sample-handling sites, MEDA weather and a RAD radiation reference.</li>
-        </ul>
-        <div style="display:grid; grid-template-columns: 1.35fr 1fr; gap: 3%; min-height:0">
-          <div class="shotbox"><img src="img/hud.png" alt="Helmet visor HUD walking the low-slope route: compass, guidance arrow, slope, local solar time and daylight left" style="width:100%; height:100%; object-fit:cover; object-position:50% 0; transform:scale(1.25); transform-origin:50% 8%" /></div>
-          <img class="shot" src="img/jezero.png" alt="Pinned location inspector showing provenance" style="object-position: 100% 30%" />
+      <div class="kicker">The challenge</div>
+      <h2>A survival guide for Mars needs a map that <em>answers five questions</em>.</h2>
+      <div class="cols" style="grid-template-columns: 1fr 1.15fr">
+        <div class="side">
+          <div class="q"><b>1</b><span>Where can we land?</span></div>
+          <div class="q"><b>2</b><span>Where is the water, and what resources are there?</span></div>
+          <div class="q"><b>3</b><span>What is dangerous?</span></div>
+          <div class="q"><b>4</b><span>How do we move safely?</span></div>
+          <div class="q"><b>5</b><span>What does a mission need to stay alive?</span></div>
+          <p style="margin-top:.6em">Robots explore Mars today. NASA sent each one to a different place, so <b>each saw only a few kilometres</b>. Orbiters mapped the whole planet. That knowledge is spread across dozens of datasets and pages.</p>
         </div>
+        <div class="live" data-src="../?ui=0&spin=2&lat=2&lon=110&dist=13000&tilt=0"><img src="img/hypso2.png" alt="Mars globe with the labels of every NASA robot on the surface" /><span class="badge">LIVE · 10 NASA ROBOTS</span></div>
       </div>
     </div>
   </section>
 
-  <!-- 4 · NASA DATA -->
+  <!-- 3 · EVERY ROBOT -->
   <section class="slide">
     <div class="pad">
-      <div class="kicker">NASA-powered data</div>
-      <h2>NASA and USGS products, <em>each labelled with its source</em>.</h2>
-      <table class="data" style="font-size:1.05em">
-        <tr><th>Data</th><th>Mission / instrument</th><th>Resolution</th><th>Use</th></tr>
-        <tr><td><b>HiRISE · CTX mosaics</b> (Jezero)</td><td>Mars Reconnaissance Orbiter</td><td>25 cm · 6 m</td><td>Walking-scale imagery</td></tr>
-        <tr><td><b>CTX DEM mosaic</b> (Jezero)</td><td>MRO CTX · USGS/PDS</td><td>20 m</td><td>Terrain, slope, nodes</td></tr>
-        <tr><td><b>MOLA MEGDR</b> elevation</td><td>Mars Global Surveyor</td><td>14.8 km → 463 m, on demand anywhere</td><td>Global relief</td></tr>
-        <tr><td><b>Viking MDIM 2.1 · MOLA hillshade</b></td><td>Viking Orbiter · MGS</td><td>232 m · 463 m</td><td>Global context</td></tr>
-        <tr><td><b>THEMIS-IR day / night</b></td><td>2001 Mars Odyssey</td><td>100 m</td><td>Heat and thermal inertia</td></tr>
-        <tr><td><b>Geologic Map of Mars</b> (SIM 3292)</td><td>USGS</td><td>1:20,000,000</td><td>Geologic units</td></tr>
-        <tr><td><b>Traverse · PLACES R16 · raw images · CacheCam · MEDA</b></td><td>Mars 2020 Perseverance</td><td>per sol</td><td>Ground truth, photos, weather</td></tr>
-        <tr><td><b>RAD dose-equivalent rate</b> (reference)</td><td>Mars Science Laboratory</td><td>0.64 ± 0.12 mSv/day</td><td>Radiation context</td></tr>
-        <tr><td><b>Mineral detections</b> (CRISM, OMEGA, THEMIS)</td><td>MRO · Mars Express · Odyssey</td><td>6,220 points, complete download</td><td>Water-altered minerals near you</td></tr>
-      </table>
-      <p class="muted" style="margin-top:.4em; font-size:1.15em">Of the 36 carbonate detections in the global compilation, 10 lie around Jezero, and the inspector lists them near any pinned point.</p>
-      <p class="muted" style="margin-top:.3em; font-size:1.15em">Cross-check: at Perseverance's first stop, the CTX DEM gives <b class="mono" style="color:var(--ink)">−2567.4 m</b> and MOLA <b class="mono" style="color:var(--ink)">−2568 m</b>; the rover reported <b class="mono" style="color:var(--ink)">−2569.9 m</b>.</p>
-    </div>
-  </section>
-
-  <!-- 5 · PLAN A MARSWALK -->
-  <section class="slide">
-    <div class="pad">
-      <div class="kicker">Plan a rover drive or a Marswalk</div>
-      <h2>Two routes, real slopes, and <em>a clear reason to choose</em>.</h2>
-      <div class="cols" style="grid-template-columns: 1.3fr 1fr">
-        <div class="shotbox"><img src="img/routes.png" alt="Shortest route (orange) crossing a small crater rim and low-slope route (violet) going around it, near the Perseverance landing site" style="width:100%; height:100%; object-fit:cover; object-position:48% 30%; transform:scale(1.55); transform-origin:48% 40%" /></div>
-        <div style="display:flex; flex-direction:column; gap:.9em; min-height:0">
-          <table style="font-size:1.12em">
-            <tr><th>Landing site → sol 400 stop</th><th style="color:#ff8a4c">Shortest</th><th style="color:#b18cff">Low-slope</th></tr>
-            <tr><td>Length</td><td>1.37 km</td><td>1.37 km</td></tr>
-            <tr><td>Max slope</td><td><b>11.6°</b></td><td><b>4.6°</b></td></tr>
-            <tr><td>Climb</td><td>+38 m</td><td>+24 m</td></tr>
-          </table>
-          <ul style="font-size:.74em">
-            <li>A* on the <b>measured slope</b> of the 20 m CTX DEM, applied to the current terrain, including approved edits.</li>
-            <li><b>What if?</b> When a person approves a new +30 m obstacle on the path, the low-slope route <b>re-routes by +71 m</b> and explains which edit caused it.</li>
-            <li><b>Robots first.</b> The rover profile uses Perseverance's 24° tilt limit (NASA, 2026). Load a <b>real drive</b>: on sols 380–420 it drove 5.73 km where the shortest route is 2.99 km, and <b>88% of that shortest route crosses ground no rover has driven</b>.</li>
-            <li><b>What a slope map can't see</b>: soft sand, the trap that ended Spirit in 2009. MARS OS says so next to every route.</li>
-            <li><b>Daylight budget</b> for crews (Mars24): our sunrise and sunset at Jezero match NASA MEDA within 10 s.</li>
+      <div class="kicker">What robots already learned</div>
+      <h2>Every NASA robot on Mars, <em>on one map</em>.</h2>
+      <div class="cols" style="grid-template-columns: 1.45fr 1fr">
+        <div class="live" data-src="../?explorer=opportunity&left=0&lat=-2.2&lon=-5.4&dist=45&tilt=35"><img src="img/jezero.png" alt="Explorers tab showing Opportunity with its photo, story and findings" /><span class="badge">LIVE · TRY IT</span></div>
+        <div class="side">
+          <ul>
+            <li><b>10 robots</b>, Viking 1 to Ingenuity: photos, findings, instruments, NASA videos and the <b>sounds of Mars</b>.</li>
+            <li><b>Real paths</b>: Spirit, Opportunity, Curiosity, Perseverance, Ingenuity's 72 flights; <b>66 expedition stops</b> with NASA text and images.</li>
+            <li>Curiosity's and Perseverance's drives and <b>raw photos per stop</b> load live; on the ground the visor shows <b>"Perseverance was here"</b>.</li>
+            <li><b>Validated:</b> landing coordinates checked against hardware seen by HiRISE; we corrected Pathfinder by 21.6 km and InSight by 16.3 km.</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 6 · AI + VALIDATION -->
+  <!-- 4 · WATER, RESOURCES, LANDING -->
   <section class="slide">
     <div class="pad">
-      <div class="kicker">Architecture &amp; validation</div>
-      <h2>AI that must <em>cite the data</em>, and a person who decides.</h2>
-      <div class="flow">
-        <div class="step"><b>1 · Evidence pack</b>Built by our server from catalogued products: 81 nodes from each DEM, product differences, rover elevations.</div><div class="arrow">→</div>
-        <div class="step"><b>2 · Google Gemini</b>Reviews only the pack and answers in a fixed JSON schema (Zod-validated).</div><div class="arrow">→</div>
-        <div class="step"><b>3 · Re-check</b>Rejects claims citing missing data, a change larger than the measured discrepancy, or false precision.</div><div class="arrow">→</div>
-        <div class="step"><b>4 · Pending</b>Confidence computed by rules, never by the AI. A human approves.</div>
-      </div>
-      <div class="cols" style="grid-template-columns: 1fr 1fr; flex:none">
-        <div class="card stat">
-          <span>Live test at the landing site (public site → Render → Gemini)</span>
-          <div style="display:flex; gap:2.2em; align-items:end; margin:.3em 0">
-            <div><div class="big">13 m</div><span>max CTX vs MOLA</span></div>
-            <div><div class="big">~2 m</div><span>rover vs DEMs</span></div>
-            <div><div class="big">0</div><span>changes proposed (correct)</span></div>
+      <div class="kicker">Questions 1 &amp; 2 · Landing and resources</div>
+      <h2>Where to land, and <em>where the water is</em>.</h2>
+      <div class="cols" style="grid-template-columns: 1fr 1.45fr">
+        <div class="side">
+          <div class="nums">
+            <div class="stat"><div class="big">22</div><span>craters that exposed water ice</span></div>
+            <div class="stat"><div class="big">1,309</div><span>buried glaciers</span></div>
+            <div class="stat"><div class="big">51</div><span>NASA Exploration Zones for humans</span></div>
           </div>
+          <ul>
+            <li>6,220 orbital <b>mineral detections</b> and Perseverance's <b>30 named rock samples</b>.</li>
+            <li><b>Landing tab</b>: how sites are chosen and real landing ellipses (InSight computed 129.6 × 27.0 km; NASA: 130 × 27 km).</li>
+            <li>Pin any point for a <b>landing check</b>: elevation, latitude, slope, nearest ice, minerals, nearest robot and zone.</li>
+          </ul>
         </div>
-        <div class="card">
-          <p style="margin:0 0 .5em; font-size:1.2em"><span class="tag t-ok">Verified data</span> imagery, elevation, rover data, Mars time, AI analysis</p>
-          <p style="margin:0 0 .5em; font-size:1.2em"><span class="tag t-cfg">Setup</span> backend + Gemini key on Render (done)</p>
-          <p style="margin:0; font-size:1.2em"><span class="tag t-sim">Simulation</span> dust storm, moon phase, demo AI engine (always labelled)</p>
-        </div>
+        <div class="live" data-src="../?ice=1&zones=1&tab=landing&left=0&lat=38&lon=165&dist=6500&tilt=0"><img src="img/hypso2.png" alt="Water-ice evidence and Exploration Zones on the globe" /><span class="badge">LIVE · ICE + ZONES</span></div>
       </div>
-      <p class="muted" style="font-size:1.15em; margin-top:.8em">Stack: React · TypeScript · Three.js · Zod data contract · i18next (English/Spanish) · Node backend (PDS range proxy + Gemini) · GitHub Pages + Render</p>
     </div>
   </section>
 
-  <!-- 7 · IMPACT -->
+  <!-- 5 · ROUTES & HAZARDS -->
   <section class="slide">
-    <img class="bgimg" src="img/hero2.png" alt="" style="transform: translateX(26%); opacity:.75" />
-    <div class="shade-l"></div>
-    <div class="pad" style="justify-content:center; max-width: 60%">
-      <div class="kicker">Impact &amp; future</div>
-      <h2>A map that <em>learns with every mission</em>, and stays honest.</h2>
-      <ul>
-        <li><b>Crews</b> plan a Marswalk with the best data available at each spot, and they can see its limits.</li>
-        <li><b>Science teams</b> merge new observations as reviewed, reversible proposals.</li>
-        <li><b>Next</b>: HiRISE 1 m terrain models, route planning on the same API, and surface robots that send new observations back as proposals.</li>
-      </ul>
-      <p style="margin-top:1.4em; font-size:1.6em; color:var(--ink)">Try it: <a href="https://abrilvilla.dev/mars-os/">abrilvilla.dev/mars-os</a></p>
-      <p class="muted" style="font-size:1.05em; margin-top:1.4em">AI disclosure: code written with Claude (Anthropic), data research with ChatGPT (OpenAI), and in-app analysis by the Google Gemini API, all reviewed by the team. Every image is a screenshot of MARS OS showing NASA/USGS data. No AI-generated imagery.</p>
+    <div class="pad">
+      <div class="kicker">Questions 3 &amp; 4 · Hazards and moving</div>
+      <h2>Routes on measured slopes, with <em>the hazards spelled out</em>.</h2>
+      <div class="cols" style="grid-template-columns: 1.45fr 1fr">
+        <div class="live" data-src="../?drive=380,420&tab=routes&autodrive=1&left=0"><img src="img/routes.png" alt="Route comparison and 3D rover driving Perseverance's real drive" /><span class="badge">LIVE · 3D ROVER DRIVING</span></div>
+        <div class="side">
+          <ul>
+            <li>Shortest vs. gentlest route for a <b>rover</b> (Perseverance's 24° tilt limit, NASA 2026) or an <b>astronaut</b>.</li>
+            <li>Compare with a <b>real Perseverance drive</b>: sols 380–420, 5.73 km driven vs. 2.99 km shortest; <b>88% of that shortest route</b> crosses ground no rover has touched.</li>
+            <li><b>Risk analysis</b>: dune fields (the sand that trapped Spirit), slope, data resolution, HiRISE coverage.</li>
+            <li><b>Why this route</b>: data used and data missing. Downloadable <b>route sheet</b> with sources.</li>
+          </ul>
+        </div>
+      </div>
     </div>
+  </section>
+
+  <!-- 6 · MISSION LAB + AI -->
+  <section class="slide">
+    <div class="pad">
+      <div class="kicker">Question 5 · Survival needs</div>
+      <h2>Mission Lab: send your own mission, <em>see what it needs</em>.</h2>
+      <div class="cols" style="grid-template-columns: 1fr 1.45fr">
+        <div class="side">
+          <ul>
+            <li>Drop a <b>crew, rover or base</b> anywhere, even against the map's advice.</li>
+            <li><b>Oxygen</b> (NASA BVAD), <b>energy</b> (sunlight by latitude, season and dust), <b>light time to Earth</b> and solar conjunction (JPL orbits), <b>radiation</b> (MSL RAD), water, <b>EVA range</b> on the map.</li>
+            <li>Compare two base sites side by side.</li>
+            <li><b>Gemini</b> judges whether the mission answers its question, using <b>only those facts</b>. Its answers are validated and labelled; nothing changes the map without <b>human approval</b>.</li>
+          </ul>
+        </div>
+        <div class="live" data-src="../?mission=46.33,176.9,base&left=0&lat=46.33&lon=176.9&dist=22&tilt=45&q=Can%20a%20crew%20reach%20water%20ice%20from%20this%20base%3F"><img src="img/hud.png" alt="Mission Lab with a base camp on an icy crater" /><span class="badge">LIVE · MISSION LAB</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · NASA DATA, VALIDITY, FUTURE -->
+  <section class="slide">
+    <div class="pad">
+      <div class="kicker">Built on open NASA data</div>
+      <h2>Every number has a source, so <em>future crews can trust the map</em>.</h2>
+      <div class="cols" style="grid-template-columns: 1.2fr 1fr">
+        <table class="data">
+          <tr><th>NASA data and partners</th><th>Used for</th></tr>
+          <tr><td><b>Mars Trek</b>: Viking, MOLA, THEMIS, CTX, HiRISE</td><td>Globe, ice, minerals, dunes, zones</td></tr>
+          <tr><td><b>PDS</b>: MOLA MEGDR, PLACES, CRISM</td><td>Elevation, rover positions</td></tr>
+          <tr><td><b>MMGIS + raw-image APIs</b></td><td>Live drives and photos</td></tr>
+          <tr><td><b>MEDA &amp; REMS</b> (NASA, CAB Spain), <b>MSL RAD</b></td><td>Weather, radiation</td></tr>
+          <tr><td><b>ESA</b> Mars Express OMEGA · <b>USGS</b> maps</td><td>Minerals, geology</td></tr>
+          <tr><td><b>NASA Image &amp; Video Library</b> · Mars24 · JPL orbits</td><td>Photos, sounds, time, comms</td></tr>
+        </table>
+        <div class="side">
+          <div class="card"><p style="margin:0"><b style="color:var(--ok)">Checked against NASA:</b> MOLA vs. rover elevation (−2568 vs. −2569.9 m) · sunrise vs. MEDA (±10 s) · Earth–Mars distance at the 2025 opposition (0.644 vs. 0.642 AU).</p></div>
+          <p style="font-size:1.6em; color: var(--ink); font-weight:600; margin:.2em 0">Robots explore Mars today. MARS OS turns what they learned into a map for the crews who will follow.</p>
+          <p class="muted" style="font-size:1.05em">AI use: Claude (code), ChatGPT (data research), Gemini (in-app reviewer, human-approved). No AI-generated images, video or audio.</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>Team MARS OS · Abril Miranda Villa Márquez · Jorge Emilio Cornejo Murra</span><a href="https://abrilvilla.dev/mars-os/" target="_blank">abrilvilla.dev/mars-os</a></div>
   </section>
 
 </main>
@@ -224,11 +230,26 @@
 <script>
   const slides = [...document.querySelectorAll('.slide')];
   let i = Math.max(0, Math.min(slides.length - 1, (parseInt(location.hash.slice(1)) || 1) - 1));
+  // embed the live app only on the visible slide (one 3D view at a time)
+  const live = (k) => {
+    slides.forEach((s, n) => s.querySelectorAll('.live').forEach((box) => {
+      const f = box.querySelector('iframe');
+      if (n === k && !f) {
+        const ifr = document.createElement('iframe');
+        ifr.src = box.dataset.src;
+        ifr.title = 'MARS OS live';
+        ifr.loading = 'eager';
+        ifr.allow = 'fullscreen';
+        box.appendChild(ifr);
+      } else if (n !== k && f) f.remove();
+    }));
+  };
   const show = (n) => {
     i = Math.max(0, Math.min(slides.length - 1, n));
     slides.forEach((s, k) => s.classList.toggle('active', k === i));
     document.getElementById('count').textContent = (i + 1) + ' / ' + slides.length;
     history.replaceState(null, '', '#' + (i + 1));
+    if (!window.matchMedia('print').matches && !/static/.test(location.search)) live(i);
   };
   document.getElementById('prev').onclick = () => show(i - 1);
   document.getElementById('next').onclick = () => show(i + 1);

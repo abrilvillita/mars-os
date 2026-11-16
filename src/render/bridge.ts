@@ -17,6 +17,8 @@ export const renderBridge = {
   rig: { lat: 5, lon: -40, distance: 14000, heading: 0, tilt: 0 } as RigState,
   /** Simulation clock (ms since epoch). Advanced by the TimeDriver inside the canvas. */
   clock: { epochMs: Date.now() },
+  /** Presentation mode (&spin=…): degrees of longitude per second; stops on first user input. */
+  autoSpin: 0,
   /** Project lat/lon/height to screen pixels; set by the scene. null if not visible. */
   project: null as null | ((lat: number, lon: number, h_m: number) => { x: number; y: number } | null),
   describeAt(lat: number, lon: number) {

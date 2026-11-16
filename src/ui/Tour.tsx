@@ -35,7 +35,7 @@ export function useTour() {
     }
     const deep = new URLSearchParams(window.location.search);
     // shared views (deep links) open directly on what was shared
-    const shared = ['lat', 'route', 'drive', 'sample', 'explorer', 'hud', 'ui'].some((k) => deep.has(k));
+    const shared = ['lat', 'route', 'drive', 'sample', 'explorer', 'hud', 'ui', 'mission', 'spin', 'tab', 'ice', 'zones', 'embed'].some((k) => deep.has(k));
     if (!seen && !shared) setOpen(true);
   }, []);
   return { open, setOpen };

@@ -86,6 +86,9 @@ export function CameraRig() {
       if (before !== rig.distance) fly.current = null;
     };
 
+    const stopSpin = () => (renderBridge.autoSpin = 0);
+    el.addEventListener('pointerdown', stopSpin);
+    el.addEventListener('wheel', stopSpin);
     const onDown = (e: PointerEvent) => {
       el.setPointerCapture(e.pointerId);
       pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
@@ -158,6 +161,7 @@ export function CameraRig() {
     const os = getMarsOS();
     const r = rig as unknown as { _zoom?: (f: number) => void; _pan?: (x: number, y: number) => void; _rotate?: (x: number, y: number) => void };
     const k = keys.current;
+    if (renderBridge.autoSpin && !fly.current) rig.lon = ((rig.lon + renderBridge.autoSpin * dt + 540) % 360) - 180;
     if (k.size && r._pan && r._zoom && r._rotate) {
       const s = 420 * dt;
       if (k.has('w') || k.has('arrowup')) r._pan(0, s);
