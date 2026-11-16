@@ -1,3 +1,5 @@
+<p align="center"><img src="docs/brand/logo-wide.png" alt="MARS OS — the survival map of Mars" width="640"></p>
+
 # MARS OS — the survival map of Mars, built on NASA data
 
 **NASA Space Apps Challenge 2026 · Challenge: _Interplanetary Survival Guide: Martian Map_**
