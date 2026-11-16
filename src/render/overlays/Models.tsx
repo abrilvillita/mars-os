@@ -18,7 +18,8 @@ const mat = {
   panel: new THREE.MeshStandardMaterial({ color: '#1d2f5c', roughness: 0.3, metalness: 0.5 }),
   suit: new THREE.MeshStandardMaterial({ color: '#f4f2ee', roughness: 0.7 }),
   visor: new THREE.MeshStandardMaterial({ color: '#d8a64a', roughness: 0.15, metalness: 0.9 }),
-  hab: new THREE.MeshStandardMaterial({ color: '#d9d4cb', roughness: 0.7 }),
+  hab: new THREE.MeshStandardMaterial({ color: '#f4f1ea', roughness: 0.5, emissive: '#3a3a3a' }),
+beacon: new THREE.MeshStandardMaterial({ color: '#5fd39a', emissive: '#5fd39a', emissiveIntensity: 1.2 }),
 };
 
 /** Orient a group on the surface: +Y = local up, heading rotates about up (0 = north). */
@@ -52,10 +53,20 @@ export function useSurfaceFrame(lat: number, lon: number, headingDeg: number, li
   }, [lat, lon, headingDeg, lift, ex, os, rev]); // eslint-disable-line react-hooks/exhaustive-deps
 }
 
-export function SurfaceObject({ lat, lon, heading = 0, scale = 1, children }: { lat: number; lon: number; heading?: number; scale?: number; children: ReactNode }) {
+/**
+ * Real scale up close; when the camera is farther than `viewM` metres the model grows so it keeps
+ * the size it has from that distance (otherwise a 3 m rover or 40 m base vanishes from orbit).
+ */
+export function SurfaceObject({ lat, lon, heading = 0, scale = 1, viewM = 250, children }: { lat: number; lon: number; heading?: number; scale?: number; viewM?: number; children: ReactNode }) {
   const { pos, q } = useSurfaceFrame(lat, lon, heading);
+  const g = useRef<THREE.Group>(null);
+  useFrame(({ camera }) => {
+    if (!g.current) return;
+    const d = camera.position.distanceTo(pos); // km
+    g.current.scale.setScalar(scale * M * Math.max(1, (d * 1000) / viewM));
+  });
   return (
-    <group position={pos} quaternion={q} scale={scale * M}>
+    <group ref={g} position={pos} quaternion={q} scale={scale * M}>
       {children}
     </group>
   );
@@ -109,6 +120,9 @@ export function BaseShape() {
       <mesh material={mat.panel} position={[-12, 1.2, -6]} rotation={[-0.4, 0, 0]}><boxGeometry args={[10, 0.1, 4]} /></mesh>
       <mesh material={mat.panel} position={[-12, 1.2, 0]} rotation={[-0.4, 0, 0]}><boxGeometry args={[10, 0.1, 4]} /></mesh>
       <mesh material={mat.dark} position={[4, 0.05, -16]}><cylinderGeometry args={[7, 7, 0.1, 32]} /></mesh>
+      <mesh material={mat.body} position={[0, 9, 0]}><cylinderGeometry args={[0.25, 0.25, 6, 8]} /></mesh>
+      <mesh material={mat.beacon} position={[0, 12.5, 0]}><sphereGeometry args={[1, 12, 8]} /></mesh>
+      <mesh material={mat.dark} position={[0, 0.3, 0]}><torusGeometry args={[6.3, 0.35, 8, 32]} /></mesh>
     </group>
   );
 }

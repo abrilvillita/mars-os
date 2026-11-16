@@ -23,7 +23,7 @@ export class GeminiError extends Error {
 }
 
 let cachedModels: { key: string; models: string[]; at: number } | null = null;
-const CALL_TIMEOUT_MS = 40_000;
+const CALL_TIMEOUT_MS = 22_000;
 
 export async function listModels(apiKey: string): Promise<string[]> {
   const res = await fetch(`${API}/models?pageSize=200`, { headers: { 'x-goog-api-key': apiKey } });
@@ -58,7 +58,7 @@ const isTransient = (e: unknown) => e instanceof GeminiError && (e.status === 50
  * times out. Returns which model actually answered and every attempt made (shown to the user).
  */
 export async function analyzeWithFailover(apiKey: string, wanted: string | undefined, pack: unknown) {
-  const models = (await candidateModels(apiKey, wanted)).slice(0, 6);
+  const models = (await candidateModels(apiKey, wanted)).slice(0, 4);
   const attempts: { model: string; error: string }[] = [];
   for (const model of models) {
     try {

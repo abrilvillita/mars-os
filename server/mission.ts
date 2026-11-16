@@ -46,10 +46,10 @@ async function callModel(apiKey: string, model: string, payload: unknown) {
   const call = async (withSchema: boolean) => {
     try {
       return await fetch(`${API}/models/${encodeURIComponent(model)}:generateContent`, {
-        method: 'POST', headers: { 'content-type': 'application/json', 'x-goog-api-key': apiKey }, body: JSON.stringify(body(withSchema)), signal: AbortSignal.timeout(40_000),
+        method: 'POST', headers: { 'content-type': 'application/json', 'x-goog-api-key': apiKey }, body: JSON.stringify(body(withSchema)), signal: AbortSignal.timeout(22_000),
       });
     } catch (e) {
-      throw new GeminiError(`${model} did not answer within 40 s (${(e as Error).name})`, 504);
+      throw new GeminiError(`${model} did not answer within 22 s (${(e as Error).name})`, 504);
     }
   };
   let res = await call(true);
@@ -73,7 +73,7 @@ async function callModel(apiKey: string, model: string, payload: unknown) {
 export async function reviewMission(apiKey: string, wanted: string | undefined, raw: unknown) {
   const input = MissionInput.safeParse(raw);
   if (!input.success) throw new GeminiError('Invalid mission request: ' + input.error.issues.slice(0, 3).map((i) => `${i.path.join('.')}: ${i.message}`).join('; '), 400);
-  const models = (await candidateModels(apiKey, wanted)).slice(0, 6);
+  const models = (await candidateModels(apiKey, wanted)).slice(0, 4);
   const attempts: string[] = [];
   for (const model of models) {
     try {

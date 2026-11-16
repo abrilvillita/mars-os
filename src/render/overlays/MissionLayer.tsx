@@ -49,7 +49,7 @@ function Label({ lat, lon, text, cls }: { lat: number; lon: number; text: string
 /** Rover models where Spirit, Opportunity, Curiosity and Perseverance are (or stopped). */
 function RoverModels() {
   const st = useExplorers();
-  const near = useUI((s) => s.camera.distance < 8);
+  const near = useUI((s) => s.camera.distance < 400);
   if (!near) return null;
   const last = m20Last();
   return (
