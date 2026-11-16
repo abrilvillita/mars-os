@@ -57,9 +57,12 @@ function RoverModels() {
       {st.list.filter((e) => e.kind === 'rover' && e.id !== 'pathfinder').map((e) => {
         const p = currentPosition(e, last);
         return (
-          <SurfaceObject key={e.id} lat={p.lat} lon={p.lon} heading={0} scale={1}>
-            <RoverShape />
-          </SurfaceObject>
+          <group key={e.id}>
+            <SurfaceObject lat={p.lat} lon={p.lon} heading={0} scale={1} viewM={120}>
+              <RoverShape />
+            </SurfaceObject>
+            <Label lat={p.lat} lon={p.lon} text={e.name} cls="m-rover" />
+          </group>
         );
       })}
     </>
@@ -80,7 +83,7 @@ export function MissionLayer() {
       <DriveSim />
       {site && (
         <>
-          <SurfaceObject lat={site.lat} lon={site.lon} heading={30}>
+          <SurfaceObject lat={site.lat} lon={site.lon} heading={30} viewM={120}>
             {inputs.kind === 'rover' ? <RoverShape /> : inputs.kind === 'base' ? <BaseShape /> : <AstronautShape />}
           </SurfaceObject>
           {inputs.kind !== 'rover' && r > 0 && <Ring lat={site.lat} lon={site.lon} rKm={r} color="#5fd39a" />}
