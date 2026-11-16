@@ -751,8 +751,8 @@
         "text": "Click the terrain to pin it: elevation with its source product, nearby minerals and ice, the editable terrain cell and the provenance of every value."
       },
       "routes": {
-        "title": "Plan a route",
-        "text": "Compare the shortest and the gentlest route for a rover or an astronaut, load a real Perseverance drive, see how well each stretch is known and download a route sheet with its data and limits."
+        "title": "Plan a route, watch it driven",
+        "text": "Compare the shortest and the gentlest route for a rover or an astronaut, load a real Perseverance drive and watch a 3D rover drive it. Each route shows its risks, how well the ground is known and a downloadable route sheet."
       },
       "ai": {
         "title": "AI with human approval",
@@ -764,11 +764,15 @@
       },
       "hud": {
         "title": "Visor HUD",
-        "text": "The Visor HUD button gives a first-person training view: compass, slope underfoot, local solar time and, near a real rover stop, the photos the rover took there."
+        "text": "A first-person training view in the helmet visor: compass, slope underfoot, local solar time and, near a real rover stop, the photos the rover took there. Here: Perseverance’s landing site."
       },
       "mission": {
         "title": "Mission Lab: your own mission",
-        "text": "Send a crew, a rover or a base camp anywhere, even where MARS OS would not recommend. It calculates oxygen, energy, communication with Earth, radiation, water and EVA range, compares two sites and asks Gemini whether the mission answers its question."
+        "text": "Here a base camp sits on a crater that exposed water ice. Send a crew, a rover or a base anywhere: MARS OS calculates oxygen, energy, light time to Earth, radiation, water and EVA range, compares two sites and asks Gemini whether the mission answers its question."
+      },
+      "rovers3d": {
+        "title": "Robots where they really are",
+        "text": "Get close to the ground and each rover appears as a 3D model where it is today, or where its mission ended: Perseverance in Jezero, Curiosity in Gale, Spirit at Troy, Opportunity in Perseverance Valley."
       }
     }
   },

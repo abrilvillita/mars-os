@@ -751,8 +751,8 @@
         "text": "Haz clic en el terreno para fijarlo: elevación con su producto de origen, minerales y hielo cercanos, la celda editable del terreno y la procedencia de cada valor."
       },
       "routes": {
-        "title": "Planea una ruta",
-        "text": "Compara la ruta más corta y la más suave para un rover o un astronauta, carga un trayecto real de Perseverance, mira qué tan bien se conoce cada tramo y descarga una ficha de la ruta con sus datos y límites."
+        "title": "Planea una ruta y mírala recorrer",
+        "text": "Compara la ruta más corta y la más suave para un rover o un astronauta, carga un trayecto real de Perseverance y mira a un rover 3D recorrerlo. Cada ruta muestra sus riesgos, qué tan conocido es el terreno y una ficha descargable."
       },
       "ai": {
         "title": "IA con aprobación humana",
@@ -764,11 +764,15 @@
       },
       "hud": {
         "title": "HUD del visor",
-        "text": "El botón Visor HUD da una vista de entrenamiento en primera persona: brújula, pendiente bajo los pies, hora solar local y, cerca de una parada real de un rover, las fotos que tomó ahí."
+        "text": "Vista de entrenamiento en primera persona en el visor del casco: brújula, pendiente bajo los pies, hora solar local y, cerca de una parada real de un rover, las fotos que tomó ahí. Aquí: el sitio de aterrizaje de Perseverance."
       },
       "mission": {
         "title": "Laboratorio de misión: tu propia misión",
-        "text": "Envía una tripulación, un rover o un campamento base a cualquier lugar, incluso donde MARS OS no lo recomendaría. Calcula oxígeno, energía, comunicación con la Tierra, radiación, agua y alcance de EVA, compara dos sitios y le pregunta a Gemini si la misión responde su pregunta."
+        "text": "Aquí hay un campamento base sobre un cráter que dejó hielo de agua al descubierto. Envía una tripulación, un rover o una base a cualquier lugar: MARS OS calcula oxígeno, energía, tiempo de luz a la Tierra, radiación, agua y alcance de la EVA, compara dos sitios y le pregunta a Gemini si la misión responde su pregunta."
+      },
+      "rovers3d": {
+        "title": "Los robots donde realmente están",
+        "text": "Acércate al suelo y cada rover aparece como modelo 3D donde está hoy, o donde terminó su misión: Perseverance en Jezero, Curiosity en Gale, Spirit en Troy, Opportunity en Perseverance Valley."
       }
     }
   },
