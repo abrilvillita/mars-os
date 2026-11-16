@@ -43,7 +43,7 @@ a { color: var(--cyan); }
 .brand strong { display: block; letter-spacing: 0.22em; font-size: 14px; }
 .brand small { color: var(--muted); font-size: 11px; }
 .destinations { display: flex; gap: 4px; flex-wrap: nowrap; }
-.dest-menu { display: none; }
+.dest-menu { display: inline-block; max-width: 210px; }
 .ground-btn { white-space: nowrap; }
 .topbar button, .panel button, .modal button { background: rgba(255, 255, 255, 0.06); border: 1px solid var(--line); border-radius: 8px; padding: 5px 10px; cursor: pointer; transition: background 0.15s, border-color 0.15s; }
 .topbar button:hover, .panel button:hover { background: rgba(255, 255, 255, 0.12); border-color: var(--line-strong); }

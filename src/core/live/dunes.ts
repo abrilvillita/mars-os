@@ -71,8 +71,10 @@ export function duneAt(lat: number, lon: number) {
         }
       }
     }
-    // cheap pre-filter: skip fields far away by bounding box
-    if (Math.abs(lat - (s + n) / 2) > 15) continue;
+    // cheap pre-filter: skip a field when even its bounding box cannot beat the best distance so far
+    const cLat = (s + n) / 2, cLon = (w + e) / 2;
+    const half = distanceM(s, w, n, e) / 2;
+    if (distanceM(lat, lon, cLat, cLon) - half > best) continue;
     for (const r of f.rings) for (let k = 0; k < r.length; k += 2) {
       const d = distanceM(lat, lon, r[k][1], r[k][0]);
       if (d < best) { best = d; nearest = f; }

@@ -57,6 +57,8 @@ export function Tour({ onClose }: { onClose: () => void }) {
   }, [i]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const close = () => {
+    const st = useUI.getState();
+    st.set({ panelsOpen: { left: true, right: true } });
     try {
       localStorage.setItem(KEY, 'done');
     } catch {
