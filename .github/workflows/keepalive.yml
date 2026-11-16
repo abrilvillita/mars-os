@@ -1,0 +1,13 @@
+# Keeps the free Render backend awake during judging (Render free web services sleep after
+# ~15 min idle). Pings the health endpoint every 10 minutes; one always-on service fits in the
+# free monthly hours.
+name: Keep backend awake
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl -fsS --max-time 90 https://mars-os-api.onrender.com/api/health || true
