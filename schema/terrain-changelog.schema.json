@@ -322,6 +322,30 @@
             "minimum": 0,
             "maximum": 1
           },
+          "confidenceBasis": {
+            "description": "How confidence was computed (e.g. rule-based from data agreement — never self-reported by an AI)",
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "en": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "en"
+                ],
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "description": "Translations keyed by BCP-47 language code. \"en\" is required."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "risk": {
             "type": "string",
             "enum": [

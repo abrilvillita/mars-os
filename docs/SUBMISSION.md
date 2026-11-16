@@ -1,6 +1,6 @@
-# NASA Space Apps 2026: submission draft (English)
+# NASA Space Apps 2026: project page text (copy and paste)
 
-> Fill in every `[TODO]` before pasting into the Project page. All content on the Project page must be in English. Every statement below can be checked against `docs/STATUS.md`. Don't add claims that aren't there.
+> Every field of the Space Apps "Project" form is below, in order. All text is in English, as the rules require. Every claim can be checked in `docs/STATUS.md` and in the live app.
 
 **Challenge:** Interplanetary Survival Guide: Martian Map
 **Team name:** MARS OS
@@ -10,132 +10,114 @@
 
 ## Project Name
 
-**MARS OS: a living, evidence-based atlas of Mars**
+MARS OS: the survival map of Mars, built on NASA data
 
-## High-Level Project Summary
+## Summary (50–200 words; 1,500 characters max)
 
-MARS OS is an interactive 3D Mars that combines data from several NASA missions on one surface you can explore. An astronaut or planner can fly from orbit down to boot level, layer optical, thermal, geologic and elevation data, follow Perseverance's real traverse in Jezero Crater, and open the rover's raw photos from each stop. Its distinctive feature is that the map can change without ever being falsified. Each region has a stable ID and an editable grid of nodes. Proposed terrain changes, whether from people or from an AI that cross-checks independent datasets, are validated against the data, kept pending until a person approves them, and recorded in a reversible version history. Every value on screen states its source and resolution, so a crew always knows what is measured, what is derived, and what is simulated.
+MARS OS is a living 3D atlas of Mars that answers the questions a survival guide must answer: where can we land, where is the water, what is dangerous, how do we move, and what does a mission need to stay alive? It brings data from 20+ NASA missions and datasets onto one globe you can fly from orbit to boot level. Every NASA robot that reached the surface is on the map with its real path, stops, photos, findings and sounds. Water-ice evidence, minerals, dune fields and NASA's candidate Exploration Zones for human missions show resources and hazards. Routes for rovers and astronauts are compared on measured slopes, with risk warnings and a downloadable route sheet. In the Mission Lab, anyone can drop a crew, rover or base anywhere and see oxygen, energy, Earth light time, radiation and EVA range, then ask Gemini whether the mission answers its question. Every number shows its source, and nothing changes the map without human approval. Robots explore Mars today; MARS OS turns what they learned into a map future crews can trust.
 
-## Link to Project Demo
+## Project Demonstration (one public link)
 
+Use ONE of these (both are public, no login):
 - Slide deck (7 slides, English): https://abrilvilla.dev/mars-os/deck/
-- PDF version: https://abrilvilla.dev/mars-os/deck/MARS_OS_demo_deck.pdf
+- or your 30-second video (YouTube "Unlisted" or "Public", or Google Drive "Anyone with the link"), with English subtitles if you speak Spanish.
 
-## Link to Final Project
+## Project (public link)
 
-- Live app (no login): https://abrilvilla.dev/mars-os/
-- Source code: https://github.com/abrilvillita/mars-os
+https://abrilvilla.dev/mars-os/
 
-Everything runs online. The app is served by GitHub Pages and its backend (Gemini analysis, on-demand 463 m elevation) runs on Render. The free tier sleeps when idle, so the first AI or elevation request may take about a minute while the server wakes up.
+(Source code: https://github.com/abrilvillita/mars-os — mention it inside Project Details.)
 
-## Detailed Project Description
+## Project Details
 
 **What it does**
-- **3D globe from orbit to the ground.**
-  - A level-of-detail globe streams NASA Mars Trek tiles: the Viking color mosaic, the MOLA hillshade, THEMIS day and night infrared, the USGS global geologic map, and, in Jezero, CTX at 6 m and HiRISE at 25 cm.
-  - You can rotate 360°, tilt to the horizon and fly between destinations.
-  - The Sun's position, and therefore day and night, follows the real date (Mars24 algorithm).
-- **Multi-resolution elevation, loaded on demand.**
-  - Global MOLA elevation and a 20 m CTX DEM of Jezero. Their values at Perseverance's first stop are −2567.4 m and −2568 m; the rover reported −2569.9 m.
-  - Anywhere else on Mars, 463 m MOLA tiles are fetched through our backend.
-  - The finest data available is always used and labelled. A node finer than the data is flagged as interpolated.
-- **Mission context.**
-  - The real Perseverance traverse and stops.
-  - Raw photos for each sol.
-  - MEDA surface weather, with its date.
-  - A cited radiation reference value (MSL RAD).
-- **Route comparator for rovers and crews.**
-  - Today Mars is explored by robots, so the default profile is a Perseverance-class rover: its slope limit is the 24° tilt limit NASA's Perseverance team set in 2026, and drive time is a lower bound at its 152 m/h top speed. An astronaut profile keeps the walking time and daylight budget.
-  - **Real drive vs computed.** Load the path Perseverance really drove between two sols (NASA's published traverse). It is measured with the same rules as the computed routes. On sols 380–420 the rover drove 5.73 km; the shortest computed route is 2.99 km. The app explains why they differ (sand ripples, rocks, science stops, ground imagery) and does not claim either is better.
-  - **How well do we know this ground?** Each route is split into ground a rover drove within 50 m of, ground covered by the 20 m orbital DEM, and ground with only coarse data. In the sols 380–420 case, 88% of the shortest route crosses ground no rover has driven.
-  - **What a slope map cannot see.** Next to every result: loose sand under a crust, the hazard that trapped Spirit at Troy in 2009, and rocks smaller than the grid.
-  - Pick A and B. MARS OS computes the shortest route and the low-slope route on the measured slope of the 20 m CTX DEM, applied to the current terrain, including approved edits.
-  - It compares length, maximum and mean slope, climb, steep sections, the share of the route on coarse data, and walking time (an Earth heuristic, labelled as such).
-  - It gives a rule-based recommendation.
-  - When the terrain changes, for example when a new obstacle is approved, the routes are recalculated and the app explains which edit changed them. In our test, the low-slope route detoured 71 m around an approved +30 m obstacle.
-  - Slope limits are editable planning assumptions, not validated EVA rules or a rover drive plan.
-- **Perseverance's rock samples.** All 30 named samples from NASA's sample table (for example Montdenier, Comet Geyser, Sapphire Canyon) appear on the map where the rover sealed them, coloured by rock group. Each one shows its NASA photo, rock type, size, whether it is in the Three Forks depot or aboard the rover, and the CacheCam images looking down into its tube.
-- **Mars explorers.** Every NASA robot that reached the surface, from Viking 1 to Ingenuity, with its NASA photo, its story (including how Spirit got stuck at Troy), distance driven and the distance to every other explorer. Curiosity's full drive and Ingenuity's 72 flights load live from NASA. NASA sends each robot to a different place, so together they map Mars from the ground; an orbiters panel shows which spacecraft produced each layer of the map.
-- **"Perseverance was here."** Walking near a real rover stop in the visor HUD shows the photos the rover took there.
-- **Mission Lab: your own mission.** Send a crew on EVA, a rover or a base camp anywhere on Mars, even against MARS OS’s advice. It computes oxygen (NASA BVAD 0.84 kg/person/day; MOXIE scale), energy (sunlight from latitude, season and dust; solar area vs MMRTG), communication with Earth (Earth–Mars distance, light time and solar conjunction from JPL orbital elements), radiation (MSL RAD vs NASA’s 600 mSv career limit), water-ice distance, dunes, slope and EVA range (drawn on the map); compares two base sites; and asks Gemini whether the mission answers its question, using only those facts. 3D rover, astronaut and base models, and a drive simulation that follows any route.
-- **Every robot, every expedition.** All NASA surface missions with their findings, instruments and official links, and 66 expedition stops (Eagle Crater, Victoria, Endeavour, Home Plate, Troy, Vera Rubin Ridge…) with NASA's descriptions and images. Positions are the hardware located on HiRISE images; we checked every landing coordinate against them (docs/COORDINATES.md: Pathfinder's and InSight's nominal coordinates were 21.6 km and 16.3 km off). Curiosity's 1,389 stops open its raw photos, and its "was here" appears in the visor HUD like Perseverance's.
-- **Where to land.** A Landing tab explains how sites are chosen, shows real landing ellipses (InSight computed at 129.6 × 27.0 km, matching NASA's 130 × 27 km) and the 51 Exploration Zones NASA collected for the first human missions, and runs a factual check for any point: elevation, latitude, regional slope, nearest ice, minerals within 100 km, nearest robot and zone.
-- **Route risk analysis and route sheet.** Warnings for mapped dune fields (Mars Global Digital Dune Database), steep sections, coarse data, HiRISE coverage and ground no rover has crossed; a "why this route" panel listing the data used and the data missing; and a downloadable route sheet with results, assumptions, limitations and official sources.
-- **Measurements.** Curiosity's REMS daily weather for 4,745 sols (2012–2026) as charts, showing the yearly pressure cycle, next to Perseverance's MEDA.
-- **What is new on Mars.** The AI tab reads NASA's live rover feeds on every visit, shows new sols since the last one and sends the newest rover position to Gemini on request.
-- **Water ice, the first resource.** 22 fresh craters whose exposed ice was confirmed from orbit (Dundas et al. 2014) and 1,309 debris-covered glacier-like forms, from NASA Mars Trek. Pin any point and the inspector gives the distance to the nearest evidence of each kind: from the Perseverance landing site, 554 km to a glacier-like form and 2,384 km to an icy crater.
-- **Resources and minerals.**
-  - Orbital detections of carbonates, clays, silica, sulfates and chlorides (Ehlmann & Edwards 2014), and of hydrous minerals (Carter et al. 2013), served by NASA Mars Trek. All 6,220 points are downloaded completely.
-  - CRISM observation footprints at Human Exploration sites, each linked to its PDS product.
-  - The inspector lists the detections within 25 km of any pinned point.
-- **Daylight budget.** The real Sun position (Mars24) gives the local solar time, sunrise and sunset, and the daylight left compared with the walk time. Our sunrise and sunset at Jezero match NASA MEDA's published times within 10 seconds.
-- **Helmet visor HUD.** A first-person training view inspired by the challenge's helmet-display idea: compass, slope underfoot, local time, daylight left and route guidance with steep-section warnings. It can walk the route automatically.
-- **A persistent inspector.** Clicking the terrain pins coordinates, elevation (with source product and resolution), the editable cell and nearest node, and the provenance of the imagery.
-- **An editable terrain with a safety net.**
-  - The planet is divided into quadtree cells with permanent IDs; each cell has a grid of nodes.
-  - Changes are localized geometry patches that carry evidence, confidence and risk. Only the affected tiles are rebuilt.
-  - Every change goes through an append-only history: view the past, restore the whole planet or a single cell, and export or import the history as JSON.
-- **AI that cites its evidence (optional).**
-  - The backend builds an evidence pack for the selected cell from catalogued data: node elevations from every product, differences between products, and rover-reported elevations.
-  - Google Gemini reviews the pack and answers in a schema-validated JSON format.
-  - Each claim is re-checked. Drafts that cite non-existent data, exceed the measured discrepancy or claim precision the data cannot support are rejected.
-  - Confidence is computed by rules, never self-reported by the AI, and a person must approve every change.
-  - In our test at the landing site, Gemini found that the CTX and MOLA products agree within about 13 m and that the rover elevations agree within about 2 m. It correctly proposed no change.
 
-**Why it matters.** Mars maps today are static and built for regional views. Crews will need a map that improves as new observations arrive, without losing track of where each number came from. MARS OS shows how that can work, and it keeps measured, derived, AI-proposed and simulated information visibly separate. That separation is a safety requirement.
+MARS OS is a survival guide in map form. It helps a planner or a future crew answer five questions with real data:
 
-**Limits we state openly.** 20 m and 463 m elevation do not resolve rocks; nothing in MARS OS is a safety clearance. The dust storm is a labelled visual simulation, and the phase of Phobos and Deimos is illustrative.
+1. **Where can we land?** The Landing tab explains how landing sites are chosen, shows real landing ellipses (InSight's computes to 129.6 × 27.0 km from the NASA polygon; NASA states 130 × 27 km) and the 51 Exploration Zones NASA collected for the first human missions. Pin any point to get a factual check: elevation, latitude, slope, nearest ice, minerals, nearest robot and nearest zone.
+2. **Where is the water and what resources exist?** Craters that exposed water ice (Dundas et al. 2014) and 1,309 buried glaciers, 6,220 orbital mineral detections, and Perseverance's 30 named rock samples with NASA photos and the camera views inside each tube.
+3. **What is dangerous?** Mapped dune fields (the sand that trapped Spirit), steep slopes, low-resolution data and ground no rover has ever crossed are flagged on every route.
+4. **How do we move?** Shortest vs. gentlest route for a rover (Perseverance's 24° tilt limit) or an astronaut, on measured slopes. You can load a real Perseverance drive and compare it, read "why this route" (data used and data missing), simulate the drive with a 3D rover and download a route sheet with sources.
+5. **What does a mission need?** The Mission Lab: drop a crew, rover or base anywhere, even against MARS OS's advice. It computes oxygen (NASA BVAD), energy (sunlight by latitude, season and dust; solar area vs. MMRTGs), communication with Earth (distance, light time and solar conjunction from JPL orbital elements), radiation (MSL RAD vs. NASA's career limit), water distance and EVA range. It compares two base sites and asks Gemini whether the mission answers its question, using only those facts.
 
-**Technology.** React, TypeScript, Three.js / React Three Fiber, Zod (data contract and validation), i18next (English and Spanish), and a Node backend (HTTP Range proxy for PDS elevation data, Gemini REST API).
+**Every robot, every expedition.** All NASA surface missions from Viking 1 to Ingenuity, with photos, findings, instruments, official links, NASA videos and Mars sounds, 66 expedition stops with NASA descriptions, Curiosity's and Perseverance's full drives and raw photos per stop (loaded live), and 3D rover models where each rover is today. Near a real stop, the visor HUD shows "Perseverance was here" with the photos the rover took there.
 
-**Future work.** HiRISE 1 m DTMs where available, route planning on top of the same API, and integration with surface robots that send new observations back as proposals.
+**A map that can change without being falsified.** Every region has a stable ID and an editable grid. A person or Gemini can propose a terrain correction with evidence; it is validated, kept pending until a person approves it, and stored in a reversible version history.
 
-## Use of Super Intelligence (SI) / AI disclosure
+**How it works**
+- Front end: React, TypeScript, Three.js / React Three Fiber, a quadtree level-of-detail globe streaming NASA Mars Trek tiles, multi-resolution elevation (MOLA 463 m–1.85 km global, CTX 20 m at Jezero), Mars24 sun position.
+- Live NASA feeds: MMGIS traverses (Perseverance, Curiosity, Ingenuity), raw-image APIs, MEDA and REMS weather, Mars Trek ArcGIS services, NASA Image and Video Library.
+- Backend (Node.js on Render): Gemini API with schema-validated answers, rate limits and no silent fallback; on-demand MOLA elevation.
+- Data contract in Zod with JSON Schemas, bilingual interface (English and Spanish).
 
-We used AI tools openly, and every AI-generated result was reviewed by the team:
-- **Claude (Anthropic)** generated most of the source code (viewer, backend, data contract, documentation) under the team's direction. The team defined the concept, made the design decisions, and reviewed and tested the results.
-- **ChatGPT (OpenAI)** helped research NASA and USGS data sources. It assembled a candidate data catalog and downloaded the CTX DEM; we verified it by SHA-256 and against its PDS4 label.
-- **Google Gemini API** is part of the product: an optional in-app reviewer of elevation consistency. Its output is schema-validated and checked against the data, and it can only create proposals that a person must approve.
-- No AI-generated images, video or audio are used. All imagery comes from NASA and USGS.
+**Why it is valid**
+We checked our numbers against NASA: landing coordinates against hardware located in HiRISE images (we corrected Pathfinder by 21.6 km and InSight by 16.3 km), MOLA vs. rover elevation at Jezero (−2568 m vs. −2569.9 m), our sunrise/sunset vs. MEDA (within 10 s), our Earth–Mars model vs. the 2025 opposition (0.644 vs. 0.642 AU). Every value is labelled measured, derived or modelled, with its source.
 
-## NASA Data
+**Impact**
+Robots explore Mars today, and each one was sent to a different place. MARS OS joins what they learned with what orbiters mapped, so students, planners and future crews can see where Mars is known, where it is not, and what a mission there would need.
 
-| Data | Mission / instrument | Provider / link |
-|---|---|---|
-| Viking MDIM 2.1 global color mosaic | Viking Orbiter, VIS | NASA Mars Trek WMTS, https://trek.nasa.gov/mars/ |
-| MOLA global color hillshade | Mars Global Surveyor, MOLA | NASA Mars Trek |
-| MOLA MEGDR elevation (4, 32, 128 px/°) | Mars Global Surveyor, MOLA | NASA PDS Geosciences Node, MGS-M-MOLA-5-MEGDR-L3-V1.0 |
-| THEMIS-IR day and night global mosaics (100 m) | 2001 Mars Odyssey, THEMIS | NASA Mars Trek |
-| HiRISE Jezero controlled mosaic (25 cm) | Mars Reconnaissance Orbiter, HiRISE | NASA Mars Trek |
-| CTX Jezero controlled mosaic (6 m) | Mars Reconnaissance Orbiter, CTX | NASA Mars Trek |
-| Mars 2020 Science Investigation CTX DEM Mosaic (20 m) | Mars Reconnaissance Orbiter, CTX | USGS / NASA PDS, urn:nasa:pds:mars2020_ctx_basemap_2021 |
-| Perseverance traverse and waypoints | Mars 2020 | NASA/JPL MMGIS location map |
-| Perseverance raw images, including CacheCam (Sample Caching System Camera) | Mars 2020 | https://mars.nasa.gov/mars2020/multimedia/raw-images/ |
-| Mars Rock Samples table | Mars 2020 | https://science.nasa.gov/mission/mars-2020-perseverance/mars-rock-samples/ |
-| Curiosity traverse and waypoints (MMGIS) | MSL | https://mars.nasa.gov/mmgis-maps/MSL/Layers/json/MSL_traverse.json |
-| Ingenuity flight waypoints (MMGIS) | Mars 2020 | https://mars.nasa.gov/mmgis-maps/M20/Layers/json/m20_heli_waypoints.json |
-| Landing sites (Viking, Pathfinder, Spirit, Opportunity, Phoenix, InSight) | NSSDCA / NASA | https://nssdc.gsfc.nasa.gov/planetary/marsland.html |
-| Explorer photos, videos and Mars sounds | NASA Image and Video Library | https://images.nasa.gov/ |
-| Icy impact sites (Dundas et al. 2014) | NASA Mars Trek | https://trek.nasa.gov/mars/trekarcgis/rest/services/RSLs_Gullies_New_IcyCraters_clon0/MapServer |
-| Glacier-like forms | NASA Mars Trek | https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer |
-| Spirit and Opportunity traverses | NASA Mars Trek | https://trek.nasa.gov/mars/trekarcgis/rest/services/spirit_path/MapServer |
-| MEDA surface weather | Mars 2020, MEDA | NASA/JPL feed |
-| RAD surface dose-equivalent rate (reference value) | Mars Science Laboratory, RAD | Hassler et al. 2014, Science, doi:10.1126/science.1244797 |
-
-## Space Agency Partner Data and Other References
-
-- USGS Astrogeology: Geologic Map of Mars, SIM 3292 (Tanaka et al. 2014, doi:10.3133/sim3292); Astropedia product page for the CTX DEM.
-- Allison, M. & McEwen, M. (2000). *A post-Pathfinder evaluation of areocentric solar coordinates…* Planetary and Space Science 48 (Mars24 time algorithm).
-- IAU/USGS Gazetteer of Planetary Nomenclature (Jezero).
-- MEDA is developed with Centro de Astrobiología (CAB, CSIC-INTA, Spain).
-- Software: React, Three.js, React Three Fiber, drei, Zod, i18next, zustand, Turf, Vite.
+**Links**
+- Live app: https://abrilvilla.dev/mars-os/
 - Source code: https://github.com/abrilvillita/mars-os
+- Demo deck: https://abrilvilla.dev/mars-os/deck/
 
-## Pre-submission checklist
+## Use of Super Intelligence (SI)
 
-- [ ] Repository and/or app link is public and opens without login (test in a private window)
-- [ ] Demo link is public; ≤ 7 slides (including title) or ≤ 30 s with English subtitles
-- [ ] Demo includes the team name, the members' names and the challenge name
-- [ ] All Project-page text is in English
-- [ ] No images or likeness of anyone under 18
-- [ ] Terms checkbox and "Confirm All Work is Original" checked, then **Submit for Judging** (saving ≠ submitting) before **Sun 15 Nov 2026, 11:59 p.m.**
+Tick the options for **code** and for **text/data** (research and writing). Do not tick images, video or audio: the project uses none generated by AI.
+
+Text to paste if the form asks for details:
+
+> We used SI tools and say where in the project README. Claude (Anthropic) generated most of the source code and documentation under the team's direction; the team defined the concept and the challenge approach, made the design decisions, and reviewed and tested the results. ChatGPT (OpenAI) helped research NASA/USGS data sources; every dataset was verified against its official source. Google Gemini is a feature of the app: it reviews terrain evidence and mission plans, its output is schema-validated and labelled as AI, and nothing it proposes changes the map without human approval. No AI-generated images, video or audio are used; all imagery, video and sound comes from NASA and USGS.
+
+## NASA Data (Link Text → Link URL)
+
+| Link Text | Link URL |
+|---|---|
+| NASA Mars Trek (Viking, MOLA, THEMIS, CTX, HiRISE mosaics and ArcGIS services) | https://trek.nasa.gov/mars/ |
+| MGS MOLA MEGDR elevation (NASA PDS Geosciences) | https://pds-geosciences.wustl.edu/missions/mgs/megdr.html |
+| Mars 2020 CTX DEM mosaic, Jezero 20 m | https://astrogeology.usgs.gov/search/map/mars_2020_science_investigation_ctx_dem_mosaic |
+| Perseverance location map and traverse (MMGIS) | https://science.nasa.gov/mission/mars-2020-perseverance/location-map/ |
+| Perseverance raw images | https://mars.nasa.gov/mars2020/multimedia/raw-images/ |
+| Perseverance MEDA weather | https://mars.nasa.gov/mars2020/weather/ |
+| Mars 2020 rock samples table | https://science.nasa.gov/mission/mars-2020-perseverance/mars-rock-samples/ |
+| Mars 2020 PLACES localization (PDS) | https://pds-geosciences.wustl.edu/missions/mars2020/places.htm |
+| Curiosity traverse (MMGIS) | https://mars.nasa.gov/mmgis-maps/MSL/Layers/json/MSL_traverse.json |
+| Curiosity raw images | https://mars.nasa.gov/msl/multimedia/raw-images/ |
+| Curiosity REMS weather | https://mars.nasa.gov/rss/api/?feed=weather&category=msl&feedtype=json |
+| Ingenuity flight log (MMGIS) | https://mars.nasa.gov/mmgis-maps/M20/Layers/json/m20_heli_waypoints.json |
+| Icy impact craters (Mars Trek) | https://trek.nasa.gov/mars/trekarcgis/rest/services/RSLs_Gullies_New_IcyCraters_clon0/MapServer |
+| Glacier-like forms (Mars Trek) | https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer |
+| Aqueous and hydrous mineral detections (Mars Trek) | https://trek.nasa.gov/mars/trekarcgis/rest/services/Aquieous_Mineral_Distribution_Options_clon0/MapServer |
+| Mars Global Digital Dune Database (Mars Trek) | https://trek.nasa.gov/mars/trekarcgis/rest/services/Dune_Field/MapServer |
+| Exploration Zones for human missions (Mars Trek) | https://trek.nasa.gov/mars/trekarcgis/rest/services/EZMars/MapServer |
+| CRISM observations (PDS Orbital Data Explorer) | https://ode.rsl.wustl.edu/mars/ |
+| NASA mission pages (Viking, Pathfinder, Spirit, Opportunity, Phoenix, Curiosity, InSight, Perseverance) | https://science.nasa.gov/mars/ |
+| NSSDCA Mars landing sites | https://nssdc.gsfc.nasa.gov/planetary/marsland.html |
+| NASA Image and Video Library (photos, videos, Mars sounds) | https://images.nasa.gov/ |
+| Mars24 sunclock algorithm (NASA GISS) | https://www.giss.nasa.gov/tools/mars24/ |
+| MSL RAD surface radiation (Hassler et al. 2014) | https://doi.org/10.1126/science.1244797 |
+| NASA Perseverance tilt limit update (2026) | https://science.nasa.gov/blog/tracks-along-the-longest-drive-on-another-world/ |
+
+## Space Agency Partner & Other Data (Link Text → Link URL)
+
+| Link Text | Link URL |
+|---|---|
+| ESA Mars Express OMEGA (hydrous minerals, Carter et al. 2013, via Mars Trek) | https://www.esa.int/Science_Exploration/Space_Science/Mars_Express |
+| Centro de Astrobiología (CAB, Spain): MEDA weather station on Perseverance (instrument page) | https://science.nasa.gov/mission/mars-2020-perseverance/science-instruments/ |
+| USGS Geologic Map of Mars SIM 3292 | https://pubs.usgs.gov/sim/3292/ |
+| USGS Jezero geologic map SIM 3464 | https://pubs.usgs.gov/publication/sim3464 |
+| IAU/USGS Gazetteer of Planetary Nomenclature | https://planetarynames.wr.usgs.gov/ |
+| JPL approximate planetary orbital elements | https://ssd.jpl.nasa.gov/planets/approx_pos.html |
+| Google Gemini API (in-app AI reviewer) | https://ai.google.dev/ |
+| Three.js | https://threejs.org/ |
+| React | https://react.dev/ |
+| React Three Fiber | https://github.com/pmndrs/react-three-fiber |
+| MARS OS source code (public repository) | https://github.com/abrilvillita/mars-os |
+
+## Before pressing Submit
+
+- [ ] Open both links in a private window: they must load without login.
+- [ ] Wake the backend first: https://mars-os-api.onrender.com/api/health
+- [ ] Demo: ≤ 7 slides or ≤ 30 s, English (or English subtitles), with team name, member names and challenge.
+- [ ] No images of anyone under 18.
+- [ ] Tick "Agree to Terms" and "Confirm All Work is Original", then **Submit for Judging** (saving is not submitting) before **Sun 15 Nov 2026, 11:59 p.m.** (team owner's local time).
