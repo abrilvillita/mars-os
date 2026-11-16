@@ -11,6 +11,7 @@ import { cellId, parseCellId, tileAt, tileBBox } from '../../core/geo/tiling';
 import { latLonToXYZ, xyzToLatLon, MARS_RADIUS_KM } from '../../core/geo/mars';
 import { useUI } from '../../state/uiStore';
 import { useRoutes } from '../../state/routeStore';
+import { useMission } from '../../state/missionStore';
 import { renderBridge } from '../bridge';
 import { Globe } from './Globe';
 import { MODE_INDEX } from './tileShader';
@@ -124,6 +125,13 @@ export function GlobeLayer() {
           st.set({ selectedNodeIds: sel });
           return;
         }
+      }
+      // 2b) Mission Lab waiting for a site?
+      const ms = useMission.getState();
+      if (ms.picking) {
+        const p = pick(e.clientX, e.clientY);
+        if (p) ms.set({ site: { lat: p.lat, lon: p.lon }, picking: false, ai: null });
+        return;
       }
       // 3) route comparator waiting for a point (A or B)?
       const rs = useRoutes.getState();

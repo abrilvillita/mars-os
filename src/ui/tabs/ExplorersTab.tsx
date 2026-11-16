@@ -47,6 +47,33 @@ function Photo({ e, big }: { e: Explorer; big?: boolean }) {
   );
 }
 
+function Media({ e }: { e: Explorer }) {
+  const { t } = useTranslation();
+  const [playing, setPlaying] = useState<string | null>(null);
+  if (!e.media?.length) return null;
+  return (
+    <div className="card">
+      <div className="card-title">{t('explorers.media')} <ProvBadge kind="measured" /></div>
+      <div className="media-list">
+        {e.media.map((m) => (
+          <div key={m.id} className="media-item">
+            {playing === m.id ? (
+              <video src={m.src} controls autoPlay playsInline poster={m.thumb ?? undefined} />
+            ) : (
+              <button className="media-thumb" onClick={() => setPlaying(m.id)} title={m.title}>
+                {m.thumb && <img src={m.thumb} alt="" loading="lazy" />}
+                <span className="play">▶</span>
+              </button>
+            )}
+            <div className="small">{m.title}</div>
+            <div className="note">{m.date} · NASA/JPL-Caltech · <a href={m.page} target="_blank" rel="noreferrer">NASA Image and Video Library</a></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function Science({ e }: { e: Explorer }) {
   const { t, i18n } = useTranslation();
   const sc = e.science;
@@ -150,6 +177,7 @@ function Detail({ e, list }: { e: Explorer; list: Explorer[] }) {
         </div>
       </div>
       <Science e={e} />
+      <Media e={e} />
       <Stops mission={e.id} />
       <div className="card">
         <div className="card-title">{t('explorers.distances', { name: e.name })} <ProvBadge kind="derived" /></div>

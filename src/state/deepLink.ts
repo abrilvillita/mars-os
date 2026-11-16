@@ -47,7 +47,7 @@ export function applyDeepLink(search = window.location.search) {
   const base = q.get('base');
   if (base && /^layer\.[a-z0-9._-]+$/.test(base)) st.set({ baseLayerId: base });
   const tab = q.get('tab') as RightTab | null;
-  if (tab && ['inspect', 'routes', 'nodes', 'ai', 'history', 'environment', 'photos', 'explorers', 'landing'].includes(tab)) st.set({ rightTab: tab });
+  if (tab && ['inspect', 'routes', 'nodes', 'ai', 'history', 'environment', 'photos', 'explorers', 'landing', 'mission'].includes(tab)) st.set({ rightTab: tab });
   const pin = q.get('pin')?.split(',').map(Number);
   if (pin && pin.length === 2 && pin.every(isFinite)) {
     const id = cellId(tileAt(pin[0], pin[1], st.cellZoom));

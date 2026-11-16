@@ -14,6 +14,7 @@ import { ensureMinerals, mineralData, mineralsNear } from '../../core/live/miner
 import { m20Last, useExplorers } from '../../render/overlays/ExplorersLayer';
 import { EZ_RADIUS_KM, selectZone } from '../../render/overlays/ZonesLayer';
 import { useUI } from '../../state/uiStore';
+import { useMission } from '../../state/missionStore';
 import { ProvBadge, fmtM } from '../common';
 
 const km = (m: number) => (m < 10_000 ? `${(m / 1000).toFixed(1)} km` : `${Math.round(m / 1000).toLocaleString()} km`);
@@ -92,6 +93,7 @@ export function LandingTab() {
           <SiteCheck lat={zone.lat} lon={zone.lon} title={zone.name} />
           <div className="actions">
             <button className="primary" onClick={() => fly({ lat: zone.lat, lon: zone.lon, distance: 900, tilt: 20 })}>{t('explorers.fly')}</button>
+            <button onClick={() => { useMission.getState().set({ site: { lat: zone.lat, lon: zone.lon }, inputs: { ...useMission.getState().inputs, kind: 'base' }, ai: null }); set({ rightTab: 'mission' }); }}>{t('landing.planBase')}</button>
             <button onClick={() => set({ zoneIdx: null })}>{t('landing.allZones')}</button>
           </div>
         </>

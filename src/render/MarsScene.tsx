@@ -16,6 +16,7 @@ import { IceLayer } from './overlays/IceLayer';
 import { SamplesLayer } from './overlays/SamplesLayer';
 import { ExplorersLayer } from './overlays/ExplorersLayer';
 import { ZonesLayer } from './overlays/ZonesLayer';
+import { MissionLayer } from './overlays/MissionLayer';
 import { DustStorm } from './scene/DustStorm';
 import { Atmosphere, Moons, SkyAndHaze, SkyDome, StarField, SunGlare, TimeDriver } from './scene/Environment';
 import { renderBridge } from './bridge';
@@ -61,6 +62,7 @@ export function MarsScene() {
       <SamplesLayer />
       <ExplorersLayer />
       <ZonesLayer />
+      <MissionLayer />
       <NodeGrid />
       <RegionLabels />
       <LocationMarkers />

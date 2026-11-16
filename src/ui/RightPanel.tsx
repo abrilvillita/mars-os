@@ -11,8 +11,9 @@ import { PhotosTab } from './tabs/PhotosTab';
 import { RoutesTab } from './tabs/RoutesTab';
 import { ExplorersTab } from './tabs/ExplorersTab';
 import { LandingTab } from './tabs/LandingTab';
+import { MissionTab } from './tabs/MissionTab';
 
-const TABS: RightTab[] = ['inspect', 'explorers', 'landing', 'routes', 'photos', 'environment', 'ai', 'history', 'nodes'];
+const TABS: RightTab[] = ['inspect', 'explorers', 'landing', 'mission', 'routes', 'photos', 'environment', 'ai', 'history', 'nodes'];
 
 export function RightPanel() {
   const { t } = useTranslation();
@@ -46,6 +47,7 @@ export function RightPanel() {
             {tab === 'photos' && <PhotosTab />}
             {tab === 'explorers' && <ExplorersTab />}
             {tab === 'landing' && <LandingTab />}
+            {tab === 'mission' && <MissionTab />}
           </div>
         </>
       )}

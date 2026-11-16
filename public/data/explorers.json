@@ -299,7 +299,27 @@
             "es": "Encontró moléculas orgánicas en rocas antiguas y mide radiación (RAD) y clima (REMS) cada sol: datos para futuras tripulaciones."
           }
         ]
-      }
+      },
+      "media": [
+        {
+          "id": "JPL-20240717-MSLf-0001-Curiosity_Explores_Gediz_Vallis_360_View_8k",
+          "title": "Curiosity Explores Gediz Vallis Channel 360",
+          "date": "2024-07-17",
+          "type": "video",
+          "src": "https://images-assets.nasa.gov/video/JPL-20240717-MSLf-0001-Curiosity_Explores_Gediz_Vallis_360_View_8k/JPL-20240717-MSLf-0001-Curiosity_Explores_Gediz_Vallis_360_View_8k~mobile.mp4",
+          "thumb": "https://images-assets.nasa.gov/video/JPL-20240717-MSLf-0001-Curiosity_Explores_Gediz_Vallis_360_View_8k/JPL-20240717-MSLf-0001-Curiosity_Explores_Gediz_Vallis_360_View_8k~thumb.jpg",
+          "page": "https://images.nasa.gov/details/JPL-20240717-MSLf-0001-Curiosity_Explores_Gediz_Vallis_360_View_8k"
+        },
+        {
+          "id": "JPL-20200303-MSLf-0001-Curiosity Rover Snaps Billion Pixel Panorama",
+          "title": "NASA’s Curiosity Mars Rover’s 1.8 Billion-Pixel Panorama",
+          "date": "2020-03-03",
+          "type": "video",
+          "src": "https://images-assets.nasa.gov/video/JPL-20200303-MSLf-0001-Curiosity%20Rover%20Snaps%20Billion%20Pixel%20Panorama/JPL-20200303-MSLf-0001-Curiosity%20Rover%20Snaps%20Billion%20Pixel%20Panorama~mobile.mp4",
+          "thumb": "https://images-assets.nasa.gov/video/JPL-20200303-MSLf-0001-Curiosity%20Rover%20Snaps%20Billion%20Pixel%20Panorama/JPL-20200303-MSLf-0001-Curiosity%20Rover%20Snaps%20Billion%20Pixel%20Panorama~thumb.jpg",
+          "page": "https://images.nasa.gov/details/JPL-20200303-MSLf-0001-Curiosity%20Rover%20Snaps%20Billion%20Pixel%20Panorama"
+        }
+      ]
     },
     {
       "id": "insight",
@@ -336,7 +356,18 @@
             "es": "Registró sismos marcianos durante cuatro años y los usó para mapear el interior del planeta: corteza, manto y núcleo."
           }
         ]
-      }
+      },
+      "media": [
+        {
+          "id": "JPL-20190423-INSIGHf-0001-First Likely Marsquake Heard by NASAs InSight",
+          "title": "First Likely Marsquake Heard by NASA's InSight",
+          "date": "2019-04-23",
+          "type": "video",
+          "src": "https://images-assets.nasa.gov/video/JPL-20190423-INSIGHf-0001-First%20Likely%20Marsquake%20Heard%20by%20NASAs%20InSight/JPL-20190423-INSIGHf-0001-First%20Likely%20Marsquake%20Heard%20by%20NASAs%20InSight~mobile.mp4",
+          "thumb": "https://images-assets.nasa.gov/video/JPL-20190423-INSIGHf-0001-First%20Likely%20Marsquake%20Heard%20by%20NASAs%20InSight/JPL-20190423-INSIGHf-0001-First%20Likely%20Marsquake%20Heard%20by%20NASAs%20InSight~thumb.jpg",
+          "page": "https://images.nasa.gov/details/JPL-20190423-INSIGHf-0001-First%20Likely%20Marsquake%20Heard%20by%20NASAs%20InSight"
+        }
+      ]
     },
     {
       "id": "perseverance",
@@ -376,7 +407,45 @@
             "es": "Recolectó 30 muestras con nombre; en 2025 la NASA llamó a los rasgos de la roca “Cheyava Falls” la posible biofirma más clara encontrada hasta ahora."
           }
         ]
-      }
+      },
+      "media": [
+        {
+          "id": "JPL-20210222-M2020f-0003a-M2020_Audio_A_002",
+          "title": "NASA’s Perseverance Rover Microphone Captures Sounds from Mars - A",
+          "date": "2021-02-22",
+          "type": "video",
+          "src": "https://images-assets.nasa.gov/video/JPL-20210222-M2020f-0003a-M2020_Audio_A_002/JPL-20210222-M2020f-0003a-M2020_Audio_A_002~mobile.mp4",
+          "thumb": "https://images-assets.nasa.gov/video/JPL-20210222-M2020f-0003a-M2020_Audio_A_002/JPL-20210222-M2020f-0003a-M2020_Audio_A_002~thumb.jpg",
+          "page": "https://images.nasa.gov/details/JPL-20210222-M2020f-0003a-M2020_Audio_A_002"
+        },
+        {
+          "id": "JPL-20220401-M2020f-0001-Puff Whir Zap New Sounds from Mars",
+          "title": "NASA’s Perseverance Rover Captures Puff, Whir, Zap Sounds from Mars",
+          "date": "2022-04-01",
+          "type": "video",
+          "src": "https://images-assets.nasa.gov/video/JPL-20220401-M2020f-0001-Puff%20Whir%20Zap%20New%20Sounds%20from%20Mars/JPL-20220401-M2020f-0001-Puff%20Whir%20Zap%20New%20Sounds%20from%20Mars~mobile.mp4",
+          "thumb": "https://images-assets.nasa.gov/video/JPL-20220401-M2020f-0001-Puff%20Whir%20Zap%20New%20Sounds%20from%20Mars/JPL-20220401-M2020f-0001-Puff%20Whir%20Zap%20New%20Sounds%20from%20Mars~thumb.jpg",
+          "page": "https://images.nasa.gov/details/JPL-20220401-M2020f-0001-Puff%20Whir%20Zap%20New%20Sounds%20from%20Mars"
+        },
+        {
+          "id": "JPL-20230516-M2020f-0002-Sounds of Mars NoVoiceOver",
+          "title": "How Do Sounds on Mars Differ from Sounds on Earth?",
+          "date": "2023-05-16",
+          "type": "video",
+          "src": "https://images-assets.nasa.gov/video/JPL-20230516-M2020f-0002-Sounds%20of%20Mars%20NoVoiceOver/JPL-20230516-M2020f-0002-Sounds%20of%20Mars%20NoVoiceOver~mobile.mp4",
+          "thumb": "https://images-assets.nasa.gov/video/JPL-20230516-M2020f-0002-Sounds%20of%20Mars%20NoVoiceOver/JPL-20230516-M2020f-0002-Sounds%20of%20Mars%20NoVoiceOver~thumb.jpg",
+          "page": "https://images.nasa.gov/details/JPL-20230516-M2020f-0002-Sounds%20of%20Mars%20NoVoiceOver"
+        },
+        {
+          "id": "JPL-20210222-M2020f-0001-Perseverance Rover’s Descent and Touchdown on Mars",
+          "title": "Perseverance Rover’s Descent and Touchdown on Mars: Onboard Camera Views",
+          "date": "2021-02-22",
+          "type": "video",
+          "src": "https://images-assets.nasa.gov/video/JPL-20210222-M2020f-0001-Perseverance%20Rover’s%20Descent%20and%20Touchdown%20on%20Mars/JPL-20210222-M2020f-0001-Perseverance%20Rover’s%20Descent%20and%20Touchdown%20on%20Mars~mobile.mp4",
+          "thumb": "https://images-assets.nasa.gov/video/JPL-20210222-M2020f-0001-Perseverance%20Rover’s%20Descent%20and%20Touchdown%20on%20Mars/JPL-20210222-M2020f-0001-Perseverance%20Rover’s%20Descent%20and%20Touchdown%20on%20Mars~thumb.jpg",
+          "page": "https://images.nasa.gov/details/JPL-20210222-M2020f-0001-Perseverance%20Rover%E2%80%99s%20Descent%20and%20Touchdown%20on%20Mars"
+        }
+      ]
     },
     {
       "id": "ingenuity",
@@ -407,7 +476,27 @@
             "es": "Primer vuelo propulsado y controlado en otro planeta, en abril de 2021, y 72 vuelos en total: también exploró el terreno por delante de Perseverance."
           }
         ]
-      }
+      },
+      "media": [
+        {
+          "id": "JPL-20210419-TECHf-0001-First Video of NASA’s Ingenuity Mars Helicopter in Flight",
+          "title": "First Video of NASA’s Ingenuity Mars Helicopter in Flight, Including Takeoff and Landing (High-Res)",
+          "date": "2021-04-19",
+          "type": "video",
+          "src": "https://images-assets.nasa.gov/video/JPL-20210419-TECHf-0001-First%20Video%20of%20NASA’s%20Ingenuity%20Mars%20Helicopter%20in%20Flight/JPL-20210419-TECHf-0001-First%20Video%20of%20NASA’s%20Ingenuity%20Mars%20Helicopter%20in%20Flight~mobile.mp4",
+          "thumb": "https://images-assets.nasa.gov/video/JPL-20210419-TECHf-0001-First%20Video%20of%20NASA’s%20Ingenuity%20Mars%20Helicopter%20in%20Flight/JPL-20210419-TECHf-0001-First%20Video%20of%20NASA’s%20Ingenuity%20Mars%20Helicopter%20in%20Flight~thumb.jpg",
+          "page": "https://images.nasa.gov/details/JPL-20210419-TECHf-0001-First%20Video%20of%20NASA%E2%80%99s%20Ingenuity%20Mars%20Helicopter%20in%20Flight"
+        },
+        {
+          "id": "JPL-20210425-TECHf-0001-Ingenuity Third Flight MastcamZ Video",
+          "title": "Perseverance Rover's Mastcam-Z Captures Ingenuity's Third FlightNASA’s Ingenuity Mars Helicopter takes off and lands in this video captured on April 25, 2021, by Mastcam-Z, an imager aboard NASA’s Perseverance Mars rover. As expected, the helicopter flew out of its field of vision while completing a flight plan that took it 164 feet (50 meters) downrange of the landing spot. Keep watching, the helicopter will return to stick the landing.   The Ingenuity Mars Helicopter was built by JPL, which also manages this technology demonstration project for NASA Headquarters. It is supported by NASA’s Science Mission Directorate, Aeronautics Research Mission Directorate, and Space Technology Mission Directorate. NASA’s Ames Research Center and Langley Research Center provided significant flight performance analysis and technical assistance during Ingenuity’s development.   A key objective for Perseverance’s mission on Mars is astrobiology, including the search for signs of ancient microbial life. The rover will characterize the planet’s geology and past climate, pave the way for human exploration of the Red Planet, and be the first mission to collect and cache Martian rock and regolith (broken rock and dust).   Subsequent NASA missions, in cooperation with ESA (European Space Agency), would send spacecraft to Mars to collect these sealed samples from the surface and return them to Earth for in-depth analysis.   The Mars 2020 Perseverance mission is part of NASA’s Moon to Mars exploration approach, which includes Artemis missions to the Moon that will help prepare for human exploration of the Red Planet. JPL, which is managed for NASA by Caltech in Pasadena, California, built and manages operations of the Perseverance rover.   For more about Perseverance: -mars.nasa.gov/mars2020/ -nasa.gov/perseverance   Credit: NASA/JPL-Caltech/ASU/MSSS",
+          "date": "2021-04-25",
+          "type": "video",
+          "src": "https://images-assets.nasa.gov/video/JPL-20210425-TECHf-0001-Ingenuity%20Third%20Flight%20MastcamZ%20Video/JPL-20210425-TECHf-0001-Ingenuity%20Third%20Flight%20MastcamZ%20Video~mobile.mp4",
+          "thumb": "https://images-assets.nasa.gov/video/JPL-20210425-TECHf-0001-Ingenuity%20Third%20Flight%20MastcamZ%20Video/JPL-20210425-TECHf-0001-Ingenuity%20Third%20Flight%20MastcamZ%20Video~thumb.jpg",
+          "page": "https://images.nasa.gov/details/JPL-20210425-TECHf-0001-Ingenuity%20Third%20Flight%20MastcamZ%20Video"
+        }
+      ]
     }
   ]
 }

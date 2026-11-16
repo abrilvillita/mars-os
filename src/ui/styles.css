@@ -395,7 +395,8 @@ body.visor-on .controls-hint { display: none; }
 .orbiter-row:first-of-type { border-top: none; }
 
 /* ── Perseverance was here (HUD) ── */
-.rover-memories { position: absolute; left: 24px; top: 74px; max-width: min(420px, calc(100vw - 32px)); background: rgba(6, 14, 20, 0.72); border: 1px solid #5ce1ff66; border-radius: 10px; padding: 8px; pointer-events: auto; color: #dff8ff; }
+.memories-col { position: absolute; left: 24px; top: 74px; display: grid; gap: 8px; max-width: min(420px, calc(100vw - 48px)); }
+.rover-memories { background: rgba(6, 14, 20, 0.72); border: 1px solid #5ce1ff66; border-radius: 10px; padding: 8px; pointer-events: auto; color: #dff8ff; }
 .rm-title { font-size: 12px; font-weight: 700; margin-bottom: 6px; }
 .rm-strip { display: flex; gap: 6px; }
 .rm-strip button { margin: 0 !important; padding: 0 !important; border: 1px solid #5ce1ff44; border-radius: 6px; overflow: hidden; background: none; cursor: pointer; }
@@ -441,3 +442,25 @@ body.visor-on .controls-hint { display: none; }
 .watch-row { padding: 4px 0; border-top: 1px solid var(--line); }
 .new-tag { color: #5fd39a; margin-left: 4px; }
 .history details summary { cursor: pointer; font-weight: 700; }
+
+.media-list { display: grid; gap: 10px; }
+.media-item video, .media-thumb { width: 100%; aspect-ratio: 16/9; border-radius: 6px; background: #000; display: block; }
+.media-thumb { position: relative; padding: 0; border: 1px solid var(--line); cursor: pointer; overflow: hidden; }
+.media-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.media-thumb .play { position: absolute; inset: 0; display: grid; place-items: center; font-size: 30px; color: #fff; text-shadow: 0 2px 8px #000; }
+
+.exp-row { display: grid; grid-template-columns: 110px minmax(0,1fr); gap: 8px; align-items: start; }
+.exp-row img { width: 110px; height: 80px; object-fit: cover; border-radius: 6px; }
+.exp-row p { margin: 0; color: #dff8ff; }
+
+/* ── Mission Lab ── */
+.mission-q { width: 100%; margin-top: 6px; resize: vertical; background: rgba(0,0,0,.25); border: 1px solid var(--line); border-radius: 8px; color: var(--text); padding: 6px 8px; font: inherit; }
+.num-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 6px 10px; margin: 6px 0; }
+.num-field { display: grid; gap: 2px; font-size: 12px; color: var(--muted); }
+.num-field input, .num-field select { width: 100%; }
+.mission details summary { cursor: pointer; font-weight: 700; }
+.verdict { display: inline-block; font-weight: 800; padding: 3px 10px; border-radius: 8px; margin: 8px 0 4px; }
+.v-yes { background: #5fd39a22; color: #5fd39a; } .v-partly { background: #ffc04622; color: #ffc046; } .v-no { background: #ff6b6b22; color: #ff8a8a; }
+td.better { color: #5fd39a; }
+.mission-label { background: rgba(10,10,14,.85); border: 1px solid #5fd39a; color: #fff; padding: 1px 8px; border-radius: 8px; font-size: 11px; font-weight: 700; letter-spacing: .06em; transform: translateY(-14px); white-space: nowrap; }
+.mission-label.m-a { border-color: #ff8a4c; } .mission-label.m-b { border-color: #b18cff; }

@@ -5,7 +5,7 @@
 import { create } from 'zustand';
 
 export type DisplayMode = 'imagery' | 'hypsometric' | 'slope' | 'edits';
-export type RightTab = 'inspect' | 'routes' | 'nodes' | 'ai' | 'history' | 'environment' | 'photos' | 'explorers' | 'landing';
+export type RightTab = 'inspect' | 'routes' | 'nodes' | 'ai' | 'history' | 'environment' | 'photos' | 'explorers' | 'landing' | 'mission';
 
 export interface LayerViewState {
   on: boolean;

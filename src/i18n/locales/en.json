@@ -141,7 +141,8 @@
     "photos": "Photos",
     "routes": "Routes",
     "explorers": "Explorers",
-    "landing": "Landing"
+    "landing": "Landing",
+    "mission": "Mission Lab"
   },
   "inspect": {
     "cursor": "Cursor",
@@ -645,11 +646,15 @@
     "stopsSource": "Stops, descriptions and images: NASA Mars Trek (positions located on HiRISE images).",
     "stopSource": "Description and image",
     "dataService": "position data service",
-    "backTo": "← Back to the mission"
+    "backTo": "← Back to the mission",
+    "media": "Videos and sounds from Mars"
   },
   "memories": {
     "title": "{{rover}} was here · sol {{sol}} · {{d}} away",
-    "note": "Raw photos from the rover at this stop · NASA/JPL-Caltech · click for more"
+    "note": "Raw photos from the rover at this stop · NASA/JPL-Caltech · click for more",
+    "stop": "{{rover}} was here · {{name}} · {{d}} away",
+    "drove": "{{rover}} drove here",
+    "trekNote": "Expedition stop and image: NASA Mars Trek (HiRISE-located)."
   },
   "ice": {
     "title": "Nearest water-ice evidence",
@@ -707,7 +712,8 @@
       "robot": "Nearest robot",
       "zone": "Nearest Exploration Zone",
       "note": "Measured and derived values to compare candidate sites, not a certification. Sources: MOLA elevation (NASA PDS), Mars Trek ice and mineral services, NASA MMGIS and Mars Trek positions."
-    }
+    },
+    "planBase": "Plan a base camp here"
   },
   "tour": {
     "label": "Guided tour",
@@ -823,5 +829,109 @@
     "noNew": "no new sols",
     "analyse": "Check this place with Gemini →",
     "note": "Gemini runs only when you ask: each analysis uses the shared quota, and any change it proposes still needs a person’s approval before it touches the map."
+  },
+  "mission": {
+    "intro": "Send your own mission anywhere on Mars: a crew on EVA, a rover or a base camp. MARS OS does not stop you. It calculates what that place means for oxygen, energy, communication with Earth, radiation, water and terrain, and can ask Gemini whether the mission answers its question.",
+    "kinds": {
+      "crew": "Crew on EVA",
+      "rover": "Rover",
+      "base": "Base camp"
+    },
+    "site": "Where",
+    "noSite": "No site yet: place it on the map, use the pinned point, or send an Exploration Zone from the Landing tab.",
+    "place": "Place on the map",
+    "see": "See it up close",
+    "questionPh": "Mission question (e.g. “Can a crew reach water ice and ancient lake sediments from here?”)",
+    "defaultQuestion": "Can a {{kind}} work safely here and do useful exploration?",
+    "assumptions": "Mission assumptions",
+    "assumptionsNote": "Editable planning assumptions, not validated mission rules. Constants: crew O2 0.84 kg/person/day (NASA BVAD); MOXIE about 12 g O2/h (NASA); MMRTG about 110 W (NASA); surface radiation 0.64 mSv/day (MSL RAD, Hassler et al. 2014); NASA career limit 600 mSv (NASA-STD-3001).",
+    "in": {
+      "crew": "Crew",
+      "days": "Surface stay",
+      "eva": "EVA duration",
+      "reserve": "Safety reserve",
+      "walk": "Suited walking speed",
+      "power": "Base power demand",
+      "tau": "Dust optical depth τ",
+      "eff": "Solar panel efficiency",
+      "roverPower": "Rover power",
+      "solar": "Solar panels",
+      "panel": "Panel area"
+    },
+    "what": "What happens here",
+    "terrain": "Site and terrain",
+    "pressure": "Air pressure",
+    "dunes": "Mapped dune field",
+    "insideDune": "inside a dune field",
+    "f": {
+      "pressure": "Air pressure about {{p}} Pa, far below the {{a}} Pa Armstrong limit: a person needs a pressure suit at all times outside.",
+      "dune": "The site is inside mapped dune field {{id}}: loose sand can trap wheels (Spirit, 2009) and makes footing and landing harder.",
+      "duneNear": "A mapped dune field is {{d}} away.",
+      "slopeRover": "Regional slope {{s}}° is above the 24° rover tilt limit.",
+      "slope": "Regional slope {{s}}°: rough ground for walking, driving and landing.",
+      "sun": "Average sunlight at the surface is only about {{w}} W/m²: solar power is weak here (latitude, season or dust).",
+      "conj": "Solar conjunction during the mission: about {{n}} days without reliable contact with Earth, starting on day {{first}}.",
+      "rad": "Surface radiation alone uses {{p}}% of NASA’s career limit.",
+      "iceInRange": "A crater that exposed water ice is within the EVA range.",
+      "iceFar": "Nearest water-ice evidence is {{d}} away: water must be carried, mined from minerals or reached by vehicle.",
+      "polar": "High latitude: long polar nights and very cold winters."
+    },
+    "o2": {
+      "title": "Oxygen",
+      "perDay": "Crew need per day",
+      "total": "Total for {{n}} sols",
+      "moxie": "MOXIE-sized units running non-stop",
+      "note": "0.84 kg O2 per person per day (NASA BVAD). MOXIE made oxygen from the Martian air at up to about 12 g per hour (NASA); a crew would need much larger systems: this shows the scale."
+    },
+    "energy": {
+      "title": "Energy",
+      "toa": "Daily sunlight above the atmosphere",
+      "surface": "Daily sunlight at the surface (τ = {{tau}})",
+      "area": "Solar panel area for {{kw}} kW",
+      "rtg": "MMRTG-sized generators for the same power",
+      "roverSolar": "Solar rover energy per sol ({{m2}} m² panels)",
+      "note": "Computed from latitude, season and Sun distance (Mars24) with a rough dust attenuation e^−τ that ignores diffuse light. Dust storms can push τ above 4 (this is how Opportunity lost power in 2018)."
+    },
+    "comms": {
+      "title": "Communication with Earth",
+      "dist": "Earth–Mars distance now",
+      "light": "One-way light time",
+      "round": "{{m}} min round trip",
+      "conj": "Solar conjunction in the mission window",
+      "conjYes": "{{n}} days (from day {{first}})",
+      "conjNo": "none",
+      "note": "Computed from JPL approximate orbital elements at the date in the clock. Near solar conjunction (Sun within about 3° of Mars) missions pause commanding; relay orbiters carry most of the data."
+    },
+    "rad": {
+      "title": "Radiation",
+      "surface": "Surface dose for {{n}} sols",
+      "limit": "of NASA career limit",
+      "note": "Measured rate 0.64 ± 0.12 mSv/day at Gale (MSL RAD, Hassler et al. 2014). The trip to Mars adds about 1.8 mSv per day of cruise (MSL RAD, Zeitlin et al. 2013). Shielding with regolith lowers the surface dose."
+    },
+    "eva": {
+      "title": "EVA range from here",
+      "radius": "Out-and-back radius",
+      "minerals": "Mineral detections within the radius",
+      "stops": "Robot expedition stops within the radius",
+      "note": "Radius = walking speed × EVA time × (1 − reserve) ÷ 2, on flat ground. Slopes, rocks and suit limits reduce it; the green ring on the map shows it."
+    },
+    "ai": {
+      "title": "Does this mission answer its question?",
+      "ask": "Ask Gemini",
+      "error": "Gemini could not answer:",
+      "v": {
+        "yes": "Yes, with these facts",
+        "partly": "Partly",
+        "no": "Not with these facts"
+      },
+      "risks": "Risks",
+      "suggestions": "Suggestions",
+      "note": "Gemini only saw the facts and assumptions above. Planning aid, not a safety certification."
+    },
+    "saveA": "Save as site A",
+    "saveB": "Save as site B",
+    "compare": "Compare two sites",
+    "compareNote": "Bold = the better value for each row by a simple rule (lower, gentler, closer to ice, more minerals, more sunlight). Which site is “best” depends on the mission question.",
+    "sources": "Sources: MOLA elevation (NASA PDS), Mars Trek ice, mineral and dune services, NASA Mars Trek and MMGIS positions, Mars24 sun geometry, JPL orbital elements, NASA BVAD, MSL RAD, NASA-STD-3001."
   }
 }

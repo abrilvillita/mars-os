@@ -141,7 +141,8 @@
     "photos": "Fotos",
     "routes": "Rutas",
     "explorers": "Exploradores",
-    "landing": "Aterrizaje"
+    "landing": "Aterrizaje",
+    "mission": "Laboratorio de misión"
   },
   "inspect": {
     "cursor": "Cursor",
@@ -645,11 +646,15 @@
     "stopsSource": "Paradas, descripciones e imágenes: NASA Mars Trek (posiciones ubicadas en imágenes HiRISE).",
     "stopSource": "Descripción e imagen",
     "dataService": "servicio de datos de posición",
-    "backTo": "← Volver a la misión"
+    "backTo": "← Volver a la misión",
+    "media": "Videos y sonidos de Marte"
   },
   "memories": {
     "title": "{{rover}} estuvo aquí · sol {{sol}} · a {{d}}",
-    "note": "Fotos crudas del rover en esta parada · NASA/JPL-Caltech · clic para ver más"
+    "note": "Fotos crudas del rover en esta parada · NASA/JPL-Caltech · clic para ver más",
+    "stop": "{{rover}} estuvo aquí · {{name}} · a {{d}}",
+    "drove": "{{rover}} pasó por aquí",
+    "trekNote": "Parada e imagen: NASA Mars Trek (ubicada en HiRISE)."
   },
   "ice": {
     "title": "Evidencia de hielo de agua más cercana",
@@ -707,7 +712,8 @@
       "robot": "Robot más cercano",
       "zone": "Zona de Exploración más cercana",
       "note": "Valores medidos y derivados para comparar sitios candidatos, no una certificación. Fuentes: elevación MOLA (NASA PDS), servicios de hielo y minerales de Mars Trek, posiciones de NASA MMGIS y Mars Trek."
-    }
+    },
+    "planBase": "Planear un campamento base aquí"
   },
   "tour": {
     "label": "Recorrido guiado",
@@ -823,5 +829,109 @@
     "noNew": "sin soles nuevos",
     "analyse": "Revisar este lugar con Gemini →",
     "note": "Gemini solo se ejecuta cuando lo pides: cada análisis usa la cuota compartida, y cualquier cambio que proponga necesita la aprobación de una persona antes de tocar el mapa."
+  },
+  "mission": {
+    "intro": "Envía tu propia misión a cualquier lugar de Marte: una tripulación en EVA, un rover o un campamento base. MARS OS no te detiene: calcula qué significa ese lugar para el oxígeno, la energía, la comunicación con la Tierra, la radiación, el agua y el terreno, y puede preguntarle a Gemini si la misión responde su pregunta.",
+    "kinds": {
+      "crew": "Tripulación en EVA",
+      "rover": "Rover",
+      "base": "Campamento base"
+    },
+    "site": "Dónde",
+    "noSite": "Aún no hay sitio: colócalo en el mapa, usa el punto fijado o envía una Zona de Exploración desde la pestaña Aterrizaje.",
+    "place": "Colocar en el mapa",
+    "see": "Verlo de cerca",
+    "questionPh": "Pregunta de la misión (p. ej. “¿Puede una tripulación llegar a hielo de agua y a sedimentos de lago antiguo desde aquí?”)",
+    "defaultQuestion": "¿Puede un/a {{kind}} trabajar aquí de forma segura y explorar algo útil?",
+    "assumptions": "Supuestos de la misión",
+    "assumptionsNote": "Supuestos de planificación editables, no reglas de misión validadas. Constantes: O2 de la tripulación 0.84 kg/persona/día (NASA BVAD); MOXIE unos 12 g de O2/h (NASA); MMRTG unos 110 W (NASA); radiación en superficie 0.64 mSv/día (MSL RAD, Hassler et al. 2014); límite de carrera de NASA 600 mSv (NASA-STD-3001).",
+    "in": {
+      "crew": "Tripulación",
+      "days": "Estancia en superficie",
+      "eva": "Duración de la EVA",
+      "reserve": "Reserva de seguridad",
+      "walk": "Velocidad caminando con traje",
+      "power": "Demanda de energía de la base",
+      "tau": "Opacidad del polvo τ",
+      "eff": "Eficiencia de paneles solares",
+      "roverPower": "Energía del rover",
+      "solar": "Paneles solares",
+      "panel": "Área de paneles"
+    },
+    "what": "Qué pasa aquí",
+    "terrain": "Sitio y terreno",
+    "pressure": "Presión del aire",
+    "dunes": "Campo de dunas cartografiado",
+    "insideDune": "dentro de un campo de dunas",
+    "f": {
+      "pressure": "Presión del aire de unos {{p}} Pa, muy por debajo del límite de Armstrong ({{a}} Pa): una persona necesita traje presurizado siempre que esté afuera.",
+      "dune": "El sitio está dentro del campo de dunas {{id}}: la arena suelta puede atrapar ruedas (Spirit, 2009) y dificulta caminar y aterrizar.",
+      "duneNear": "Hay un campo de dunas cartografiado a {{d}}.",
+      "slopeRover": "La pendiente regional de {{s}}° supera el límite de inclinación de 24° del rover.",
+      "slope": "Pendiente regional de {{s}}°: terreno difícil para caminar, manejar y aterrizar.",
+      "sun": "La luz solar promedio en la superficie es de solo unos {{w}} W/m²: la energía solar es débil aquí (latitud, estación o polvo).",
+      "conj": "Conjunción solar durante la misión: unos {{n}} días sin contacto confiable con la Tierra, desde el día {{first}}.",
+      "rad": "Solo la radiación en superficie usa el {{p}}% del límite de carrera de NASA.",
+      "iceInRange": "Hay un cráter que expuso hielo de agua dentro del alcance de la EVA.",
+      "iceFar": "La evidencia de hielo más cercana está a {{d}}: el agua debe llevarse, extraerse de minerales o alcanzarse con vehículo.",
+      "polar": "Latitud alta: noches polares largas e inviernos muy fríos."
+    },
+    "o2": {
+      "title": "Oxígeno",
+      "perDay": "Necesidad de la tripulación por día",
+      "total": "Total para {{n}} soles",
+      "moxie": "Unidades tamaño MOXIE funcionando sin parar",
+      "note": "0.84 kg de O2 por persona por día (NASA BVAD). MOXIE produjo oxígeno del aire marciano a hasta unos 12 g por hora (NASA); una tripulación necesitaría sistemas mucho más grandes: esto muestra la escala."
+    },
+    "energy": {
+      "title": "Energía",
+      "toa": "Luz solar diaria sobre la atmósfera",
+      "surface": "Luz solar diaria en la superficie (τ = {{tau}})",
+      "area": "Área de paneles solares para {{kw}} kW",
+      "rtg": "Generadores tamaño MMRTG para la misma energía",
+      "roverSolar": "Energía de un rover solar por sol ({{m2}} m² de paneles)",
+      "note": "Calculado con la latitud, la estación y la distancia al Sol (Mars24), con una atenuación aproximada por polvo e^−τ que ignora la luz difusa. Las tormentas de polvo pueden llevar τ por encima de 4 (así perdió energía Opportunity en 2018)."
+    },
+    "comms": {
+      "title": "Comunicación con la Tierra",
+      "dist": "Distancia Tierra–Marte ahora",
+      "light": "Tiempo de luz de ida",
+      "round": "{{m}} min ida y vuelta",
+      "conj": "Conjunción solar en la ventana de la misión",
+      "conjYes": "{{n}} días (desde el día {{first}})",
+      "conjNo": "ninguna",
+      "note": "Calculado con elementos orbitales aproximados de JPL en la fecha del reloj. Cerca de la conjunción solar (Sol a menos de unos 3° de Marte) las misiones pausan los comandos; los orbitadores de retransmisión llevan la mayoría de los datos."
+    },
+    "rad": {
+      "title": "Radiación",
+      "surface": "Dosis en superficie para {{n}} soles",
+      "limit": "del límite de carrera de NASA",
+      "note": "Tasa medida de 0.64 ± 0.12 mSv/día en Gale (MSL RAD, Hassler et al. 2014). El viaje a Marte suma unos 1.8 mSv por día de crucero (MSL RAD, Zeitlin et al. 2013). Blindarse con regolito reduce la dosis en superficie."
+    },
+    "eva": {
+      "title": "Alcance de la EVA desde aquí",
+      "radius": "Radio de ida y vuelta",
+      "minerals": "Detecciones de minerales dentro del radio",
+      "stops": "Paradas de expediciones robóticas dentro del radio",
+      "note": "Radio = velocidad × duración de la EVA × (1 − reserva) ÷ 2, en terreno plano. Pendientes, rocas y límites del traje lo reducen; el anillo verde en el mapa lo muestra."
+    },
+    "ai": {
+      "title": "¿Responde esta misión su pregunta?",
+      "ask": "Preguntar a Gemini",
+      "error": "Gemini no pudo responder:",
+      "v": {
+        "yes": "Sí, con estos datos",
+        "partly": "En parte",
+        "no": "No con estos datos"
+      },
+      "risks": "Riesgos",
+      "suggestions": "Sugerencias",
+      "note": "Gemini solo vio los datos y supuestos de arriba. Apoyo de planificación, no una certificación de seguridad."
+    },
+    "saveA": "Guardar como sitio A",
+    "saveB": "Guardar como sitio B",
+    "compare": "Comparar dos sitios",
+    "compareNote": "Negritas = el mejor valor de cada fila con una regla simple (más bajo, más suave, más cerca del hielo, más minerales, más sol). Cuál sitio es “mejor” depende de la pregunta de la misión.",
+    "sources": "Fuentes: elevación MOLA (NASA PDS), servicios de hielo, minerales y dunas de Mars Trek, posiciones de NASA Mars Trek y MMGIS, geometría solar Mars24, elementos orbitales de JPL, NASA BVAD, MSL RAD, NASA-STD-3001."
   }
 }

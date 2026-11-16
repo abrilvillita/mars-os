@@ -23,6 +23,7 @@ export interface Explorer {
   photo: { id: string; title: string; src: string } | null;
   science?: { page: string; instruments: string[]; findings: { en: string; es: string }[] };
   nominal?: { lat: number; lon: number; source: string };
+  media?: { id: string; title: string; date: string; type: string; src: string; thumb: string | null; page: string }[];
 }
 
 export interface LivePath {

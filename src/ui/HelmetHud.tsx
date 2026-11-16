@@ -17,7 +17,7 @@ import { renderBridge } from '../render/bridge';
 import { useRoutes } from '../state/routeStore';
 import { useUI } from '../state/uiStore';
 import { fmtM } from './common';
-import { RoverMemories } from './RoverMemories';
+import { ExpeditionMemory, RoverMemories } from './RoverMemories';
 
 function bearingDeg(lat1: number, lon1: number, lat2: number, lon2: number) {
   const p1 = lat1 * DEG, p2 = lat2 * DEG, dl = (lon2 - lon1) * DEG;
@@ -167,7 +167,10 @@ export function HelmetHud() {
           <div className="muted">{t('hud2.noRoute')}</div>
         )}
       </div>
-      <RoverMemories />
+      <div className="memories-col">
+        <RoverMemories />
+        <ExpeditionMemory />
+      </div>
       <div className="hv-badge">{t('hud2.badge')}</div>
     </div>
   );

@@ -5,6 +5,7 @@
  *   GET  /api/elevation/mola128?lat0&lon0 → 256×256 int16 LE crop (MOLA 128 ppd, cached)
  *   GET  /api/ai/status                  → { configured, model | null, error | null }
  *   POST /api/ai/analyze { cellId, clientEdits? } → AIAnalyzeResponse (Gemini, validated)
+ *   POST /api/ai/mission { question, kind, site, assumptions, facts } → mission verdict (Gemini, validated)
  *
  * Secrets: GEMINI_API_KEY is read from the environment or `.env.local` (git-ignored).
  * It is never sent to the browser or logged.
@@ -22,6 +23,7 @@ import { ElevationService } from '../src/core/elevation/ElevationService';
 import { loadWaypoints, type Waypoint } from '../src/core/live/m20';
 import { buildEvidencePack, draftsToProposals } from './evidence';
 import { analyzeWithFailover, chooseModel, GeminiError } from './gemini';
+import { reviewMission } from './mission';
 import { getMola128Crop } from './mola128';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -166,6 +168,17 @@ const server = createServer(async (req, res) => {
           discrepancies: pack.discrepancies.map(({ pair, count, meanDiff_m, rms_m, maxAbs_m }) => ({ pair, count, meanDiff_m, rms_m, maxAbs_m })),
         },
       };
+      return json(res, 200, out);
+    }
+
+    if (url.pathname === '/api/ai/mission' && req.method === 'POST') {
+      if (!apiKey()) return json(res, 503, { ok: false, error: 'GEMINI_API_KEY is not set on the server' });
+      const today = new Date().toISOString().slice(0, 10);
+      if (aiToday.day !== today) aiToday = { day: today, count: 0 };
+      if (aiToday.count >= AI_GLOBAL_PER_DAY) return json(res, 429, { ok: false, error: 'Daily AI limit of this public demo reached (protects the free Gemini quota). Try again tomorrow.' });
+      if (!allow('ai:' + ip, AI_PER_IP_PER_HOUR, 3600_000)) return json(res, 429, { ok: false, error: `Limit of ${AI_PER_IP_PER_HOUR} AI requests per hour per visitor reached.` });
+      aiToday.count++;
+      const out = await reviewMission(apiKey(), process.env.GEMINI_MODEL, await readBody(req, 16_000));
       return json(res, 200, out);
     }
 
