@@ -468,3 +468,7 @@ td.better { color: #5fd39a; }
 /* narrow screens and embeds: the clock gives way completely instead of overlapping the buttons */
 @media (max-width: 1000px) { .clock-main { display: none; } }
 @media (max-width: 860px) { .clock > select { display: none; } .hud-btn { display: none; } }
+
+/* tour card in the corner so the 3D scene it points at stays visible */
+.tour { left: 16px; bottom: 84px; transform: none; width: min(380px, calc(100vw - 32px)); padding: 12px 14px; }
+.tour h3 { font-size: 15px; } .tour p { font-size: 12.5px; }
