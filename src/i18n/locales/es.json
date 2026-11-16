@@ -515,7 +515,10 @@
       "insight": "Perseverance recorrió {{real}}; la ruta calculada más corta mide {{short}} ({{extra}}% de diferencia). Tramo más empinado en esta malla: trayecto real {{realMax}}°, más corta {{shortMax}}°, baja pendiente {{lowMax}}°.",
       "why": "Por qué difieren: los planificadores del rover también evitan peligros que un mapa de pendientes no muestra (ondulaciones de arena, rocas, riesgo de dañar ruedas), se detienen en objetivos científicos y manejan donde las imágenes desde el suelo confirman que es seguro. Un camino real más largo no es peor.",
       "basis": "Los tres medidos en la misma malla y el terreno actual. Sin IA."
-    }
+    },
+    "simRover": "Simular el trayecto (rover 3D)",
+    "simWalk": "Simular la caminata (astronauta 3D)",
+    "stopSim": "Detener simulación"
   },
   "minerals": {
     "carbonate": "Carbonatos",
@@ -762,6 +765,10 @@
       "hud": {
         "title": "HUD del visor",
         "text": "El botón Visor HUD da una vista de entrenamiento en primera persona: brújula, pendiente bajo los pies, hora solar local y, cerca de una parada real de un rover, las fotos que tomó ahí."
+      },
+      "mission": {
+        "title": "Laboratorio de misión: tu propia misión",
+        "text": "Envía una tripulación, un rover o un campamento base a cualquier lugar, incluso donde MARS OS no lo recomendaría. Calcula oxígeno, energía, comunicación con la Tierra, radiación, agua y alcance de EVA, compara dos sitios y le pregunta a Gemini si la misión responde su pregunta."
       }
     }
   },

@@ -19,7 +19,8 @@
     "data:ctx": "node scripts/build-ctx-pyramid.mjs",
     "data:cachecam": "node scripts/build-cachecam-index.mjs",
     "data:samples": "node scripts/build-samples.mjs",
-    "data:expeditions": "node scripts/build-expeditions.mjs"
+    "data:expeditions": "node scripts/build-expeditions.mjs",
+    "data:media": "node scripts/build-media.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.9",

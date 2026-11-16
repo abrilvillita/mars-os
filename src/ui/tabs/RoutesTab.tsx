@@ -386,6 +386,7 @@ export function RoutesTab() {
           <SlopeBlindSpots cell={Math.round(res.cellM)} />
           <button onClick={() => downloadRouteSheet(res, idx, t as never)}>{t('sheet.download')}</button>
           {r.profile === 'astronaut' ? <DaylightBudget result={res} /> : <p className="small muted">{t('routes.roverPower')}</p>}
+          <button className="primary" onClick={() => { const on = !r.driving; r.set({ driving: on }); if (on) useUI.getState().set({ panelsOpen: { ...useUI.getState().panelsOpen, left: false } }); }}>{r.driving ? t('routes.stopSim') : t(r.profile === 'rover' ? 'routes.simRover' : 'routes.simWalk')}</button>
           <button className="primary" onClick={() => { useUI.getState().set({ hud: true, panelsOpen: { left: false, right: false } }); fly({ lat: res.start.lat, lon: res.start.lon, distance: 0.025, tilt: 82 }); }}>{t('hud2.openFromRoutes')}</button>
           <button onClick={() => fly({ lat: (res.start.lat + res.end.lat) / 2, lon: (res.start.lon + res.end.lon) / 2, distance: Math.max(1.5, (res.bbox.north - res.bbox.south) * 59.3 * 1.6), tilt: 40 })}>{t('nav.goTo')}</button>
           <p className="small muted">{t('routes.basis', { cell: Math.round(res.cellM), w: res.gridSize[0], h: res.gridSize[1] })} <ProvBadge kind="derived" /></p>

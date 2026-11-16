@@ -14,6 +14,7 @@ import { useMission } from '../../state/missionStore';
 import { useUI } from '../../state/uiStore';
 import { m20Last, useExplorers } from './ExplorersLayer';
 import { AstronautShape, BaseShape, RoverShape, SurfaceObject } from './Models';
+import { DriveSim } from './DriveSim';
 
 function Ring({ lat, lon, rKm, color }: { lat: number; lon: number; rKm: number; color: string }) {
   const os = getMarsOS();
@@ -76,6 +77,7 @@ export function MissionLayer() {
     <>
       <hemisphereLight args={['#fff4e6', '#5a3a2a', 0.6]} />
       {explorersOn && <RoverModels />}
+      <DriveSim />
       {site && (
         <>
           <SurfaceObject lat={site.lat} lon={site.lon} heading={30}>

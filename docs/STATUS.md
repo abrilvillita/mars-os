@@ -25,6 +25,9 @@ Last updated: 2026-11-14 (v0.2.0). The same list is shown live in the app under 
 | **Route risk + route sheet** | Dune-field, slope, resolution, HiRISE and ground-knowledge warnings; why-this-route; downloadable HTML sheet | Mars Global Digital Dune Database via Mars Trek (547 fields) |
 | **Curiosity REMS charts** | 4,745 sols of daily min/max temperature and pressure | Live REMS feed; seasonal pressure cycle visible |
 | **Guided tour** | Skippable 10-step tour on first visit and from the Tour button | — |
+| **Mission Lab** | Crew/rover/base anywhere: O2, energy, comms, radiation, ice, dunes, EVA range, two-site comparison, Gemini mission review (POST /api/ai/mission) | Earth–Mars model checked: 2025 opposition 0.644 AU (actual 0.642), Jan 2026 conjunction 0.9°; Gemini review tested (icy-crater site: verdict yes, facts quoted) |
+| **3D models and drive simulation** | Procedural rover/astronaut/base at real scale; rover models at each rover’s current/final position; animated drive along routes | Visual check at Perseverance’s last stop |
+| **Videos and sounds** | 9 NASA videos incl. Perseverance microphone sounds, Ingenuity first flight, InSight first marsquake | NASA Image and Video Library, all URLs 200 |
 | **"Perseverance was here" (HUD)** | Walking on the ground within 150 m of a real rover stop shows that stop's raw photos in the visor | Raw-images API, same source as the Photos tab |
 | Proposals, approval and history | Pending → Approved/Applied, or Rejected / Reverted. Append-only versions, time travel, restore, export/import | API test |
 | Perseverance | Traverse and waypoints (MMGIS), raw photos per sol, MEDA weather (dated; latest 2024-04-27) | Live endpoints |

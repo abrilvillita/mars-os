@@ -515,7 +515,10 @@
       "insight": "Perseverance drove {{real}}; the shortest computed route is {{short}} ({{extra}}% difference). Steepest section on this grid: real drive {{realMax}}°, shortest {{shortMax}}°, low-slope {{lowMax}}°.",
       "why": "Why they differ: rover planners also avoid hazards a slope map cannot show (sand ripples, rocks, wheel damage risk), stop at science targets, and drive where images from the ground confirm it is safe. A longer real path is not a worse one.",
       "basis": "All three measured on the same grid and current terrain. No AI involved."
-    }
+    },
+    "simRover": "Simulate the drive (3D rover)",
+    "simWalk": "Simulate the walk (3D astronaut)",
+    "stopSim": "Stop simulation"
   },
   "minerals": {
     "carbonate": "Carbonates",
@@ -762,6 +765,10 @@
       "hud": {
         "title": "Visor HUD",
         "text": "The Visor HUD button gives a first-person training view: compass, slope underfoot, local solar time and, near a real rover stop, the photos the rover took there."
+      },
+      "mission": {
+        "title": "Mission Lab: your own mission",
+        "text": "Send a crew, a rover or a base camp anywhere, even where MARS OS would not recommend. It calculates oxygen, energy, communication with Earth, radiation, water and EVA range, compares two sites and asks Gemini whether the mission answers its question."
       }
     }
   },

@@ -3,7 +3,7 @@
  * a suited astronaut and a base habitat. Illustrative shapes, not engineering models.
  */
 import { useFrame } from '@react-three/fiber';
-import { useMemo, useRef, type ReactNode } from 'react';
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import * as THREE from 'three';
 import { getMarsOS } from '../../api/MarsOS';
 import { latLonToXYZ } from '../../core/geo/mars';
@@ -25,6 +25,19 @@ const mat = {
 export function useSurfaceFrame(lat: number, lon: number, headingDeg: number, lift = 0) {
   const os = getMarsOS();
   const ex = useUI((s) => s.exaggeration);
+  // re-read the ground height when finer elevation tiles arrive (otherwise the model can end up buried)
+  const [rev, setRev] = useState(0);
+  useEffect(() => {
+    let t: ReturnType<typeof setTimeout> | null = null;
+    const off = os.on('terrain:changed', () => {
+      if (t) clearTimeout(t);
+      t = setTimeout(() => setRev((r) => r + 1), 300);
+    });
+    return () => {
+      off();
+      if (t) clearTimeout(t);
+    };
+  }, [os]);
   return useMemo(() => {
     const h = os.ready ? os.terrainModel.height(lat, lon) : 0;
     const p = latLonToXYZ(lat, lon, h * ex + lift);
@@ -36,7 +49,7 @@ export function useSurfaceFrame(lat: number, lon: number, headingDeg: number, li
     const q = new THREE.Quaternion().setFromRotationMatrix(m);
     q.multiply(new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), -headingDeg * (Math.PI / 180)));
     return { pos, q };
-  }, [lat, lon, headingDeg, lift, ex, os]);
+  }, [lat, lon, headingDeg, lift, ex, os, rev]); // eslint-disable-line react-hooks/exhaustive-deps
 }
 
 export function SurfaceObject({ lat, lon, heading = 0, scale = 1, children }: { lat: number; lon: number; heading?: number; scale?: number; children: ReactNode }) {

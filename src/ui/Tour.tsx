@@ -14,6 +14,7 @@ const STEPS: Step[] = [
   { key: 'explorers', tab: 'explorers', right: true, vectors: { explorers: true }, fly: { lat: 0, lon: 100, distance: 13000, tilt: 0 } },
   { key: 'resources', left: true, vectors: { ice: true }, fly: { lat: 40, lon: 150, distance: 7000, tilt: 0 } },
   { key: 'landing', tab: 'landing', right: true, vectors: { zones: true }, fly: { lat: 10, lon: -40, distance: 13000, tilt: 0 } },
+  { key: 'mission', tab: 'mission', right: true, fly: { lat: 46.33, lon: 176.9, distance: 900, tilt: 20 } },
   { key: 'inspect', tab: 'inspect', right: true, fly: { lat: 18.44, lon: 77.45, distance: 30, tilt: 30 } },
   { key: 'routes', tab: 'routes', right: true, fly: { lat: 18.452, lon: 77.443, distance: 4, tilt: 45 } },
   { key: 'ai', tab: 'ai', right: true },

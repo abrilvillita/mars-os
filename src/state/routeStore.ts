@@ -24,6 +24,8 @@ interface RouteState {
   realDrive: RealDrive | null;
   /** That drive measured with the same rules as the computed routes. */
   actualRoute: Route | null;
+  /** Drive simulation running (rover/astronaut model follows the route). */
+  driving: boolean;
   set: (p: Partial<RouteState>) => void;
 }
 
@@ -38,5 +40,6 @@ export const useRoutes = create<RouteState>((set) => ({
   changeNote: null,
   realDrive: null,
   actualRoute: null,
+  driving: false,
   set: (p) => set(p),
 }));
